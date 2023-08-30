@@ -1,4 +1,4 @@
-import MainPageBody from "../organisms/MainPageBody";
+import MainPageBody from "../organisms/mainPageBody/MainPageBody";
 
 export default function PostPage() {
     return (
