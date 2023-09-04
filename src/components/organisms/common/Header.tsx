@@ -1,4 +1,4 @@
-import NavBar from "@/components/molecules/navBar/NavBar";
+import NavBar from "@/components/molecules/NavBar";
 
 export default function Header() {
     return (
