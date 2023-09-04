@@ -58,6 +58,19 @@ export const PostTitle = styled(Link)<PostBoxes>`
     color: #000;
 `; 
 
+interface LinkHistory {
+    backgroundColor?: string;
+}
+
+export const PostBox = styled.div<LinkHistory>`
+    margin-right: auto;
+    background-color: ${(props)=>props.backgroundColor};
+    padding: 5px;
+    width: 440px;
+    text-decoration: none;
+    color: #000;
+`
+
 //검색 form
 export const SearchForm = styled.form`
     width: 550px;
