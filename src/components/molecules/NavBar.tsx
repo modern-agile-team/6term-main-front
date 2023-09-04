@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function NavBar() {
+export default function NavBar() :JSX.Element {
     return (
         <div>
             <Link href="/">HOME</Link>
