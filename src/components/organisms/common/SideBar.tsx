@@ -1,5 +1,8 @@
-export default function SideBar() {
-    return (
-        <div>사이드 바</div>
-    );
-};
+
+const SideBar = () => {
+	return (
+    <div>SideBar</div> 
+  )
+}
+
+export default SideBar;

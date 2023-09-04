@@ -1,10 +1,14 @@
-import NavBar from "../../molecules/NavBar";
+import NavBar from "@/components/molecules/NavBar"
+// import HeaderAlarm from "@/components/molecules/headerelements/HeaderAlarm";
+import HeaderNav from "@/components/molecules/headerelements/HeaderNav";
 
-export default function Header() {
-    return (
-        <div>
-            <NavBar />
-            <div>헤더입니다.</div>
-        </div>
-    );
-};
+const Header = () => {
+	return (
+		<div>
+			<NavBar />
+			<HeaderNav />
+		</div>
+	)
+}
+
+export default Header;
