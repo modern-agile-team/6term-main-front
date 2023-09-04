@@ -55,15 +55,6 @@ import * as S from "./styled";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { UserPostsAtom } from "@/recoil/atoms/UserPostsAtom";
-// export interface BoardInfo {
-//     isData : {
-//         id: number;
-//         title: string;
-//         mainText: string;
-//         img: string;
-//         name: string;
-//     }
-// }
 
 const PostBoard = () : JSX.Element => {
     const router = useRouter();
