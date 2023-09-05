@@ -7,12 +7,12 @@ const SearchBox = () => {
     }
 
     return (
-        <S.PostContainer>
+        <S.SearchContainer>
             <S.SearchForm onSubmit={onSubmitHandler}>
                 <S.SearchInput type="text" placeholder="검색어 입력" />
                 <S.SearchButton>검색</S.SearchButton>
             </S.SearchForm>
-        </S.PostContainer>
+        </S.SearchContainer>
     );
 }
 

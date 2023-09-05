@@ -19,7 +19,7 @@ const Footer = () => {
 		<FooterBoard>
 			<a href="#" onClick={openNewTab}>
 				<img
-					src="ModernAgile.png"
+					src="/ModernAgile.png"
 					alt="모던 애자일"
 					style={{ width: "50px", height: "auto" }}
 				/>

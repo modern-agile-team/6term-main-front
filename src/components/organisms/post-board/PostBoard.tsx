@@ -65,27 +65,33 @@ const PostBoard = () : JSX.Element => {
     }
 
     return (
-        <>
+        <S.postBoardUnit>
             <div>
                 <div style={{
                     display:"flex",
-                    width: 550,
-                    paddingRight: 10,
-                    paddingLeft: 10,
+                    width: 1000,
+                    //s.flexBox사용하도록
                 }}>
                     <S.PostBoardTitle>게시판 이름</S.PostBoardTitle>
+                    <SearchBox />
                     <S.CreatePostButton onClick={handleCreateButton}>글쓰기</S.CreatePostButton>
                 </div>
-                {isData.map((data)=>{
-                    return (
-                        <div key={data.id }>
-                            <PostBox {...data}/>
-                        </div>
-                    )
-                })} 
+                <div style={{
+                    width: 1000,
+                    display:"flex",
+                    flexDirection:"row",
+                    flexWrap: "wrap",
+                }}>
+                    {isData.map((data)=>{
+                        return (
+                            <div key={data.id }>
+                                <PostBox {...data}/>
+                            </div>
+                        )
+                    })} 
+                </div>
             </div>
-            <SearchBox />
-        </>
+        </S.postBoardUnit>
     );
 };
 
