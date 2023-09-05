@@ -2,7 +2,7 @@ import React from "react"
 import { styled } from "styled-components"
 
 const FooterBoard = styled.div`
-  /* position: fixed; */
+  position: relative;
 	display: flex;
 	align-items: center;
   justify-content: center;
@@ -10,6 +10,10 @@ const FooterBoard = styled.div`
 	bottom: 0%;
 	width: 100%;
 	background-color: #D9D9D9;
+	margin-inline-end: 0px;
+	margin-inline-start: 0px;
+	/* padding-inline-end: 15px;
+	padding-inline-start: 15px; */
 `
 const FooterText = styled.div`
 	font-size: 14px;
