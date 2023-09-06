@@ -95,15 +95,13 @@ const PostBox = (isData : BoardInfo['isData']) : JSX.Element => {
                         },
                     }}> 
                     <S.FlexBox flexType="column">
-                        <S.ThumbnailImg />
+                        <S.ThumbnailImg backgroundColor="#f99"/>
                         <S.FontBox fontWeight="bold" fontSize={18}>
                             {isData.title.slice(0, 20)}
                         </S.FontBox>
-                        <div style={{
-                            flexWrap:"wrap",
-                        }}>
+                        <S.FontBox>
                             {isData.mainText.slice(0, 20)} . . .
-                        </div>
+                        </S.FontBox>
                     </S.FlexBox>
                 </S.PostTitle>
                 <S.FlexBox flexType="row" margin="auto">
