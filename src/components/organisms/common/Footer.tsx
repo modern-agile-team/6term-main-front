@@ -2,18 +2,18 @@ import React from "react"
 import { styled } from "styled-components"
 
 const FooterBoard = styled.div`
-  position: relative;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	display: flex;
+	margin: auto;
+	padding: 8px;
 	align-items: center;
   justify-content: center;
 	flex-direction: column;
-	bottom: 0%;
 	width: 100%;
 	background-color: #D9D9D9;
-	margin-inline-end: 0px;
-	margin-inline-start: 0px;
-	/* padding-inline-end: 15px;
-	padding-inline-start: 15px; */
 `
 const FooterText = styled.div`
 	font-size: 14px;
