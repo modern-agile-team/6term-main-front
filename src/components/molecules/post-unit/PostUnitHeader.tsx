@@ -5,9 +5,9 @@ const PostUnitHeader = () => {
     const router = useRouter();
 
     return (
-        <S.FlexBox flexType="row">
+        <S.FlexBox direction="row">
           <div>
-            <S.UnitWriterImg src={router.query.img} alt="profile"></S.UnitWriterImg>
+            <S.UnitWriterImg src={router.query.img as string} alt="profile"></S.UnitWriterImg>
             <div>{router.query.name}</div>
           </div>
           <S.UnitTitle>{router.query.title}</S.UnitTitle>

@@ -14,24 +14,24 @@ export const PostContainer = styled.div`
 
 
 interface ColumnAndRow {
-    flexType?: string;
+    direction?: string;
     width?: number;
     margin?: string | number;
     borderTop?: string;
 }
 /**
 ==== common styled ====
-* @params : flexType="column" | "row": string
+* @params : direction="column" | "row": string
 * @params : width="width":number 
 * @params : margin="auto"
 *
-* @returns : flexType="column" | "row"
+* @returns : direction="column" | "row"
 * @returns : width={number}px
 * @returns : margin-top="auto" 
 */
 export const FlexBox = styled.div<ColumnAndRow>`
     display: flex;
-    flex-direction: ${(props) => props.flexType === "column" ? "column" : "row"};
+    flex-direction: ${(props) => props.direction === "column" ? "column" : "row"};
     width: ${(props) => props.width}px;
     margin-top: ${(props) => props.margin};
 `;

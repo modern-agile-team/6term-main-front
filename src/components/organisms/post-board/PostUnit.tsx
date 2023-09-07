@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import * as S from "./styled";
 import PostUnitHeader from "@/components/molecules/post-unit/PostUnitHeader";
+import PostUnitBody from "@/components/molecules/post-unit/PostUnitBody";
 
 const PostUnit = () => {
   const router = useRouter();
@@ -9,13 +10,7 @@ const PostUnit = () => {
     <S.UnitContainer>
       <div>
         <PostUnitHeader />
-        <S.MainTextContainer>
-          <img style={{
-            width: 300,
-            height: 250,
-          }} src={router.query.thumbnail} alt="2"></img>
-          <div>{router.query.mainText}</div>
-        </S.MainTextContainer>
+        <PostUnitBody />
       </div>
     </S.UnitContainer>
   )

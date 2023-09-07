@@ -2,7 +2,6 @@ import { useCallback, useState, useEffect } from "react";
 import * as S from "./styled"
 import Modal from "./Modal";
 import UserSmaple from "./UserSample";
-import { useRouter } from "next/router";
 interface BoardInfo {
     isData : {
         id: number;
@@ -17,33 +16,36 @@ interface BoardInfo {
 
 const PostBox = (isData : BoardInfo['isData']) : JSX.Element => {
     const [isOpenModal, setOpenModal] = useState<boolean>(false);
+    const [boardTitle, setBoardTitle ] = useState<string>("");
 
     const onClickToggleModal = useCallback(() => {
     setOpenModal(!isOpenModal);
     }, [isOpenModal]);
 
-    const changeBoard = (num : number) : string=> {
-        let boardTitle = "";
-        switch (num) {
+    const changeBoard = () => {
+        switch (isData.board) {
             case 1:
-                boardTitle = "[자유]";
+                setBoardTitle("[자유]");
                 break;
             case 2:
-                boardTitle = "[멘토멘티]";
+                setBoardTitle("[멘토멘티]");
                 break;
             case 3:
-                boardTitle = "[만남]";
+                setBoardTitle("[만남]");
                 break;
             case 4:
-                boardTitle = "[장터]";
+                setBoardTitle("[장터]");
                 break;
         }
-        return boardTitle;
     }
+
+    useEffect(()=>{
+        changeBoard();
+    })
 
     return (
         <S.PostContainer>
-            <S.FlexBox flexType="column">
+            <S.FlexBox direction="column">
                 <S.PostTitle href={{
                         pathname: `/post/unit/[id]`,
                         query: { 
@@ -56,7 +58,7 @@ const PostBox = (isData : BoardInfo['isData']) : JSX.Element => {
                             thumbnail: isData.thumbnailImg,
                         },
                     }}> 
-                    <S.FlexBox flexType="column">
+                    <S.FlexBox direction="column">
                         <S.ThumbnailImg backgroundColor="#f99"/>
                         <S.FontBox fontWeight="bold" fontSize={18}>
                             {isData.title.slice(0, 20)}
@@ -66,7 +68,7 @@ const PostBox = (isData : BoardInfo['isData']) : JSX.Element => {
                         </S.FontBox>
                     </S.FlexBox>
                 </S.PostTitle>
-                <S.FlexBox flexType="row" margin="auto">
+                <S.FlexBox direction="row" margin="auto">
                     {isOpenModal && (
                         <Modal onClickToggleModal={onClickToggleModal}>
                             <UserSmaple name={isData.name} img={isData.img}/>
@@ -79,8 +81,7 @@ const PostBox = (isData : BoardInfo['isData']) : JSX.Element => {
                         {isData.name}
                     </div>
                     <S.BoardList>
-                        {/* {()=>{changeBoard(isData.board)}} */}
-                        게시판이름
+                        {boardTitle}
                     </S.BoardList>
                 </S.FlexBox>
             </S.FlexBox>

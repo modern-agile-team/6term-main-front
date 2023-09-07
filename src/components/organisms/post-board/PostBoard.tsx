@@ -7,13 +7,11 @@ import { UnitPostAtom, UserPostsAtom } from "@/recoil/atoms/UserPostsAtom";
 
 const PostBoard = () : JSX.Element => {
     const router = useRouter();
-    const [isData, setIsDate ] = useRecoilState(UserPostsAtom);
+    const [ isData, setIsDate ] = useRecoilState(UserPostsAtom);
     
     const handleCreateButton = () : void => {
         router.push("/post/create");
     }
-
-    // let testArr = isData.filter((data) => data.board === 2)
 
     return (
         <S.postBoardUnit>
@@ -33,22 +31,20 @@ const PostBoard = () : JSX.Element => {
                     flexDirection:"row",
                     flexWrap: "wrap",
                 }}>
-                    {isData.map((data)=>{
+                    {/* {isData.filter((data)=>data.board === 3).map((data)=>{
                         return (
                             <div key={data.id }>
                                 <PostBox {...data}/>
                             </div>
                         )
-                    })} 
-                    {/* {
-                        testArr.map((data)=>{
-                            return (
-                                <div key={data.id}>
-                                    <PostBox {...data} />
-                                </div>
-                            )
-                        })
-                    } */}
+                    })} */}
+                    {isData.map((data)=>{
+                        return (
+                            <div key={data.id}>
+                                <PostBox {...data} />     
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </S.postBoardUnit>

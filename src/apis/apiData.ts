@@ -23,6 +23,7 @@ export const db2 = [ //게시판 unit
             title: "게시글 제목",
             mainText: "본문 전체 글",
             img: "프로필 사진 url",
+            thumbnail: "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/UVBJZL3RXAB36BDSHVM3MW2WNY.jpg",
             name: "이재진",
             board: 3, //게시판 번호
         },
