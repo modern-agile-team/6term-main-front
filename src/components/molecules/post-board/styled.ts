@@ -43,6 +43,12 @@ export const ProfileImg = styled.img`
     max-height: 20px;
 `;
 
+/**게시판 이름 */
+export const BoardList = styled.div`
+    margin-left: auto;
+    margin-right: 10px;
+`
+
 interface PostBoxes {
     backgroundColor?: string;
 }
