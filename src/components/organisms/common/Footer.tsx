@@ -2,7 +2,7 @@ import React from "react"
 import { styled } from "styled-components"
 
 const FooterBoard = styled.div`
-	position: fixed;
+	position: relative;
 	bottom: 0;
 	left: 0;
 	right: 0;
