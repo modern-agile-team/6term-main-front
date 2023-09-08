@@ -39,7 +39,7 @@ const NavData = [
   { id: 'menu01', name: '전체 게시판', path: '/' },
   { id: 'menu02', name: '자유 게시판', path: '/postboards/FreeBoard' },
   { id: 'menu03', name: '멘토멘티 게시판', path: '/postboards/MenmenBoard' },
-  { id: 'menu04', name: '만남 게시판', path: '/postboards/MeetingBoard' },
+  { id: 'menu04', name: '만남 게시판', path: '/postboards/meeting' },
   { id: 'menu05', name: '장터 게시판', path: '/postboards/MarketBoard' },
 ];
 
