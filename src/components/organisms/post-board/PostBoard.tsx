@@ -3,7 +3,7 @@ import SearchBox from "@/components/molecules/post-board/SearchBox";
 import { useRouter } from "next/router";
 import * as S from "./styled";
 import { useRecoilState } from "recoil";
-import { UnitPostAtom, UserPostsAtom } from "@/recoil/atoms/UserPostsAtom";
+import { UserPostsAtom } from "@/recoil/atoms/UserPostsAtom";
 
 const PostBoard = () : JSX.Element => {
     const router = useRouter();

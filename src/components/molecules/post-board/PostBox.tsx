@@ -50,12 +50,6 @@ const PostBox = (isData : BoardInfo['isData']) : JSX.Element => {
                         pathname: `/post/unit/[id]`,
                         query: { 
                             id : isData.id,
-                            name : isData.name,
-                            title: isData.title,
-                            mainText: isData.mainText,
-                            img: isData.img,
-                            board: isData.board,
-                            thumbnail: isData.thumbnailImg,
                         },
                     }}> 
                     <S.FlexBox direction="column">

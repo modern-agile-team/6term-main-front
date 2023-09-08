@@ -1,7 +1,12 @@
 import { useRouter } from "next/router";
 import * as S from "./styled";
 
-const PostUnitBody = () => {
+interface UnitInfo {
+  thumbnailImg: string;
+  mainText: string;
+}
+
+const PostUnitBody = ({thumbnailImg, mainText} : UnitInfo) => {
     const router = useRouter();
 
     return (
@@ -9,8 +14,8 @@ const PostUnitBody = () => {
           <img style={{
             width: 300,
             height: 250,
-          }} src={typeof router.query.thumbnail === "string" ? router.query.thumbnail : undefined} alt="2"></img>
-          <div>{router.query.mainText}</div>
+          }} src={typeof thumbnailImg === "string" ? thumbnailImg : undefined} alt="2"></img>
+          <div>{mainText}</div>
         </S.MainTextContainer>
     );
 }
