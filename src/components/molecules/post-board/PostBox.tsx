@@ -1,54 +1,7 @@
-// import { BoardInfo } from "@/components/organisms/post-board/PostBoard";
-// import { useCallback, useState } from "react";
-// import * as S from "./styled"
-// import Modal from "./Modal";
-// import UserSmaple from "./UserSample";
-
-// const PostBox = (isData : BoardInfo['isData']) : JSX.Element => {
-//     const [isOpenModal, setOpenModal] = useState<boolean>(false);
-
-//     const onClickToggleModal = useCallback(() => {
-//     setOpenModal(!isOpenModal);
-//     }, [isOpenModal]);
-
-//     return (
-//         <S.PostContainer>
-//             <S.FlexBox flexType="column" width={55}>
-//                 {isOpenModal && (
-//                     <Modal onClickToggleModal={onClickToggleModal}>
-//                         <UserSmaple name={isData.name} img={isData.img}/>
-//                     </Modal>
-//                 )}
-//                 <S.DialogButton onClick={onClickToggleModal}>
-//                     <S.ProfileImg src={isData.img} alt="프로필 사진"/>
-//                 </S.DialogButton>
-//                 <div>{isData.name}</div>
-//             </S.FlexBox>
-//             <S.FlexBox flexType="column" width={470}>
-//                 <S.PostTitle backgroundColor="#fff" href={{
-//                     pathname: `/post/title/[id]`,
-//                     query: { id : isData.id },
-//                 }}>
-//                     {isData.title.slice(0, 20)} . . .
-//                 </S.PostTitle>
-//                 <S.PostTitle href={{
-//                     pathname: `/post/title/[id]`,
-//                     query: { id : isData.id },
-//                 }}>
-//                     {isData.mainText.slice(0, 20)} . . .
-//                 </S.PostTitle>
-//             </S.FlexBox>
-//         </S.PostContainer>
-//     );
-// }
-
-// export default PostBox;
-
 import { useCallback, useState, useEffect } from "react";
 import * as S from "./styled"
 import Modal from "./Modal";
 import UserSmaple from "./UserSample";
-import { useRouter } from "next/router";
 interface BoardInfo {
     isData : {
         id: number;
@@ -56,47 +9,75 @@ interface BoardInfo {
         mainText: string;
         img: string;
         name: string;
+        thumbnailImg?: string;
+        board: number;
     }
 }
 
 const PostBox = (isData : BoardInfo['isData']) : JSX.Element => {
     const [isOpenModal, setOpenModal] = useState<boolean>(false);
+    const [boardTitle, setBoardTitle ] = useState<string>("");
 
     const onClickToggleModal = useCallback(() => {
     setOpenModal(!isOpenModal);
     }, [isOpenModal]);
 
+    const changeBoard = () => {
+        switch (isData.board) {
+            case 1:
+                setBoardTitle("[자유]");
+                break;
+            case 2:
+                setBoardTitle("[멘토멘티]");
+                break;
+            case 3:
+                setBoardTitle("[만남]");
+                break;
+            case 4:
+                setBoardTitle("[장터]");
+                break;
+        }
+    }
+
+    useEffect(()=>{
+        changeBoard();
+    })
+
     return (
         <S.PostContainer>
-            <S.FlexBox flexType="column" width={55}>
-                {isOpenModal && (
-                    <Modal onClickToggleModal={onClickToggleModal}>
-                        <UserSmaple name={isData.name} img={isData.img}/>
-                    </Modal>
-                )}
-                <S.DialogButton onClick={onClickToggleModal}>
-                    <S.ProfileImg src={isData.img} alt="프로필 사진"/>
-                </S.DialogButton>
-                <div>{isData.name}</div>
-            </S.FlexBox>
-            <S.FlexBox flexType="column" width={470}>
+            <S.FlexBox direction="column">
                 <S.PostTitle href={{
                         pathname: `/post/unit/[id]`,
                         query: { 
                             id : isData.id,
-                            name : isData.name,
-                            title: isData.title,
-                            mainText: isData.mainText,
-                            img: isData.img,
                         },
-                    }}>
-                        <S.PostBox backgroundColor="#fff">
-                        {isData.title.slice(0, 20)} . . .
-                        </S.PostBox>
-                        <S.PostBox >
-                        {isData.mainText.slice(0, 20)} . . .
-                        </S.PostBox>
+                    }}> 
+                    <S.FlexBox direction="column">
+                        <S.ThumbnailImg backgroundColor="#f99"/>
+                        <S.FontBox fontWeight="bold" fontSize={18}>
+                            {isData.title.slice(0, 20)}
+                        </S.FontBox>
+                        <S.FontBox>
+                            {isData.mainText.slice(0, 20)} . . .
+                        </S.FontBox>
+                    </S.FlexBox>
                 </S.PostTitle>
+                <S.FlexBox direction="row" margin="auto">
+                    {isOpenModal && (
+                        <Modal onClickToggleModal={onClickToggleModal}>
+                            <UserSmaple name={isData.name} img={isData.img}/>
+                        </Modal>
+                    )}
+                    <S.DialogButton onClick={onClickToggleModal}>
+                        <S.ProfileImg src={isData.img} alt="프로필 사진"/>
+                    </S.DialogButton>
+                    <div>
+                        {isData.name}
+                    </div>
+                    <S.BoardList>
+                        {boardTitle}
+                    </S.BoardList>
+                </S.FlexBox>
             </S.FlexBox>
         </S.PostContainer>
     );

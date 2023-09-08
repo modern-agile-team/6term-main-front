@@ -1,12 +1,9 @@
-import PostUnit from "@/components/organisms/post-board/PostUnit";
-import { useRouter } from "next/router";
+import PostUnitTemplate from "@/components/templates/PostUnitTemplate";
 
 const PostTitle = () => {
-  const router = useRouter();
-  
   return (
     <>
-      <PostUnit />
+      <PostUnitTemplate />
     </>
   )
 }
