@@ -73,7 +73,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 1,
+        id: 10,
         title: "adsfasdfasdfasfasfasfasfsdasdf",
         mainText: "1번 째 글안녕하ㅔ요 저는 이재진입니다. adsfasfdsdaffffffffffffffffffffffffdfasdfasdfasfasdfasfasfasdf",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg", 
@@ -81,7 +81,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 2,
+        id: 11,
         title: "제목입니다.",
         mainText: "2번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg", 
@@ -89,7 +89,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 3,
+        id: 12,
         title: "3333",
         mainText: "3번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -97,7 +97,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 4,
+        id: 13,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -105,7 +105,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 5,
+        id: 14,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -113,7 +113,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 6,
+        id: 15,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -121,7 +121,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 7,
+        id: 16,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -129,7 +129,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 8,
+        id: 17,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -137,7 +137,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 9,
+        id: 18,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -145,7 +145,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 1,
+        id: 19,
         title: "adsfasdfasdfasfasfasfasfsdasdf",
         mainText: "1번 째 글안녕하ㅔ요 저는 이재진입니다. adsfasfdsdaffffffffffffffffffffffffdfasdfasdfasfasdfasfasfasdf",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg", 
@@ -153,7 +153,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 2,
+        id: 20,
         title: "제목입니다.",
         mainText: "2번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg", 
@@ -161,7 +161,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 3,
+        id: 21,
         title: "3333",
         mainText: "3번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -169,7 +169,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 4,
+        id: 22,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -177,7 +177,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 5,
+        id: 23,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
@@ -185,7 +185,7 @@ export const db = [
         board: 4,
     },
     {
-        id: 6,
+        id: 24,
         title: "4444",
         mainText: "4번 째 글",
         img: "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg",
