@@ -56,3 +56,37 @@ export const FlexBox = styled.div<ColumnAndRow>`
     width: ${(props) => props.width}px;
     margin-top: ${(props) => props.margin};
 `;
+
+/** PostComment.styled */
+
+export const CommentContainer = styled.div`
+    margin-top: 25px;
+`
+
+export const CreateCommentBox = styled.div`
+    box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 25%);
+    padding: 10px;
+    height : auto;
+    border-radius: 5px;
+`;
+
+export const CommentInputBox = styled.textarea`
+    width: 745px;
+    height: 80px;
+    padding-top : 10px;
+    border: 1px solid rgb(9, 9, 9, 25%);
+    outline: none;
+`;
+
+export const CreateCommentButton = styled.button`
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    width: 70px;
+    &:hover{
+        background-color: #E7F7FF;
+        transition: all ease 0.3s;
+    }
+    margin:10px;
+    border-radius: 5px;
+`

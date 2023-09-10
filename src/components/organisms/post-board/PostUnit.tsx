@@ -4,7 +4,7 @@ import PostUnitBody from "@/components/molecules/post-unit/PostUnitBody";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { UnitPostAtom } from "@/recoil/atoms/UserPostsAtom";
-import { useState, useEffect } from "react";
+import PostCreateComment from "@/components/molecules/post-unit/PostComments";
 
 
 const PostUnit = () => {
@@ -17,6 +17,7 @@ const PostUnit = () => {
       <div>
         <PostUnitHeader {...getUnitInfo[router.query.id]}/>
         <PostUnitBody {...getUnitInfo[router.query.id]} />
+        <PostCreateComment />
       </div>
     </S.UnitContainer>
   )
