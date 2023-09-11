@@ -1,21 +1,54 @@
-import * as S from "./styled";
+import {useState} from 'react';
+import {BsArrowReturnRight} from 'react-icons/bs';
+import * as S from './styled';
+import UserIcon from '@/components/common/UserIcon';
 
-const PostCreateComment = () => {
-    return (
-        <S.CommentContainer>
-            <div>댓글 작성</div>
-            <S.CreateCommentBox>
-                <S.FlexBox>
-                    <div>프로필사진</div>
-                    <div>이름</div>
-                </S.FlexBox>
-                <S.FlexBox>
-                    <S.CommentInputBox placeholder="댓글을 작성해 보세요."></S.CommentInputBox>
-                    <S.CreateCommentButton>등록</S.CreateCommentButton>
-                </S.FlexBox>
-            </S.CreateCommentBox>
-        </S.CommentContainer>
-    );
+type ReplyType = {userName: string, comment: string};
+interface CommentInfo {
+  commentData: {
+    postId: number,
+    comment: string,
+    reply?: ReplyType[],
+    userName: string,
+  };
 }
 
-export default PostCreateComment;
+const PostComments = (commentData: CommentInfo['commentData']) => {
+  const [isShowOptions, setShowOptions] = useState(false);
+
+  return (
+    <S.CommentContainer>
+      <S.ComponentHeader>댓글</S.ComponentHeader>
+      <S.CreateCommentBox>
+        <S.FlexBox>
+          <UserIcon />
+          <div>{commentData.userName}</div>
+        </S.FlexBox>
+        <S.FlexBox>
+          <S.CommentArea>{commentData.comment}.</S.CommentArea>
+          <S.ComboBox onClick={() => setShowOptions(prev => !prev)}>
+            <S.SelectOptions show={isShowOptions}>
+              <S.Option>삭제</S.Option>
+              <S.Option>수정</S.Option>
+            </S.SelectOptions>
+          </S.ComboBox>
+        </S.FlexBox>
+        {commentData.reply !== undefined &&
+          commentData.reply.map(data => {
+            return (
+              <>
+                <S.FlexBox side="0px 0px 0px 18px">
+                  <BsArrowReturnRight />
+                  <UserIcon />
+                  <div>{data.userName}</div>
+                  <S.Comment>{data.comment}</S.Comment>
+                </S.FlexBox>
+              </>
+            );
+          })}
+      </S.CreateCommentBox>
+    </S.CommentContainer>
+  );
+};
+
+export default PostComments;
