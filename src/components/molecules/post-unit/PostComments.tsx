@@ -3,10 +3,11 @@ import {BsArrowReturnRight} from 'react-icons/bs';
 import * as S from './styled';
 import UserIcon from '@/components/common/UserIcon';
 
-type ReplyType = {userName: string, comment: string};
+type ReplyType = {userName: string, comment: string, replyId: number};
 interface CommentInfo {
   commentData: {
     postId: number,
+    commentId: number,
     comment: string,
     reply?: ReplyType[],
     userName: string,

@@ -9,14 +9,13 @@ import PostComments from "@/components/molecules/post-unit/PostComments";
 import { useEffect, useState } from "react";
 import { db3 } from "@/apis/apiData";
 
+type ReplyType = {userName: string, comment: string, replyId: number};
 interface Info {
-  postId: number;
-  comment: string;
-  reply?: {
-    userName: string;
+    postId: number;
+    commentId: number;
     comment: string;
-  }[];
-  userName: string;
+    reply?: ReplyType[];
+    userName: string;
 }
 
 const PostUnit = () => {
@@ -30,17 +29,13 @@ const PostUnit = () => {
     setUnitComment(db3);
   },[]);
 
-  useEffect(()=>{
-    console.log(getUnitComment)
-  })
-
   return (
     <S.UnitContainer>
       <div>
         <PostUnitHeader {...getUnitInfo[unitId]}/>
         <PostUnitBody {...getUnitInfo[unitId]} />
         <PostCreateComment />
-        {getUnitComment.filter((data)=>data.postId === unitId).map((data, idx)=>{
+        {getUnitComment.filter((data)=>data.postId == unitId).map((data, idx)=>{
           return (
             <div key={idx}>
               <PostComments {...data}/>
