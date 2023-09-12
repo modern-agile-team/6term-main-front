@@ -110,6 +110,7 @@ export const CommentArea = styled.div`
 
 export const Comment = styled.div`
   width: 570px;
+  padding: 5px 0px 0px 15px;
 `;
 //**콤보박스 컨테이너 */
 export const ComboBox = styled.ul`
@@ -155,4 +156,28 @@ export const Option = styled.li`
   &:hover {
     background-color: #ddd;
   }
+`;
+
+interface Size {
+  size?: number;
+}
+/**
+ * @param : size={number}
+ *
+ */
+export const ShowUserName =
+  styled.div <
+  Size >
+  `
+  padding: 5px 0px 0px 8px;
+  font-size: ${props => props.size}px;
+  font-weight: bold;
+`;
+
+export const DivisionLine = styled.div`
+  border-top: 1px solid #000;
+  margin: 10px;
+  width: 750px;
+  height: auto;
+  left: 0px;
 `;

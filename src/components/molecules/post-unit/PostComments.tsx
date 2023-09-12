@@ -23,7 +23,7 @@ const PostComments = (commentData: CommentInfo['commentData']) => {
       <S.CreateCommentBox>
         <S.FlexBox>
           <UserIcon />
-          <div>{commentData.userName}</div>
+          <S.ShowUserName size={20}>{commentData.userName}</S.ShowUserName>
         </S.FlexBox>
         <S.FlexBox>
           <S.CommentArea>{commentData.comment}.</S.CommentArea>
@@ -34,19 +34,27 @@ const PostComments = (commentData: CommentInfo['commentData']) => {
             </S.SelectOptions>
           </S.ComboBox>
         </S.FlexBox>
-        {commentData.reply !== undefined &&
+        <S.DivisionLine />
+        {commentData.reply !== undefined ? (
           commentData.reply.map(data => {
             return (
               <>
                 <S.FlexBox side="0px 0px 0px 18px">
                   <BsArrowReturnRight />
                   <UserIcon />
-                  <div>{data.userName}</div>
+                  <S.ShowUserName size={18}>{data.userName}</S.ShowUserName>
                   <S.Comment>{data.comment}</S.Comment>
                 </S.FlexBox>
               </>
             );
-          })}
+          })
+        ) : (
+          <S.FlexBox side="0px 0px 0px 18px">
+            <BsArrowReturnRight />
+            <UserIcon />
+            <S.ShowUserName>로그인이 필요합니다.</S.ShowUserName>
+          </S.FlexBox>
+        )}
       </S.CreateCommentBox>
     </S.CommentContainer>
   );
