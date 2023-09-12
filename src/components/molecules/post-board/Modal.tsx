@@ -1,5 +1,5 @@
-import React, { PropsWithChildren } from "react";
-import styled from "styled-components";
+import React, { PropsWithChildren } from 'react';
+import styled from 'styled-components';
 
 interface ModalDefaultType {
   onClickToggleModal: () => void;
@@ -26,17 +26,15 @@ function Modal({
 }
 
 const ModalContainer = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  position: absolute;
 `;
 
 const DialogBox = styled.dialog`
-  /* width: 800px;
-  height: 400px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,8 +47,8 @@ const DialogBox = styled.dialog`
 `;
 
 const Backdrop = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 10000px;
+  height: 10000px;
   position: fixed;
   top: 0;
   z-index: 9999;

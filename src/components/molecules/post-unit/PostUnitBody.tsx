@@ -1,4 +1,4 @@
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import * as S from './styled';
 
 interface UnitInfo {
@@ -6,7 +6,7 @@ interface UnitInfo {
   mainText: string;
 }
 
-const PostUnitBody = ({thumbnailImg, mainText}: UnitInfo) => {
+const PostUnitBody = ({ thumbnailImg, mainText }: UnitInfo) => {
   const router = useRouter();
 
   return (
@@ -17,9 +17,8 @@ const PostUnitBody = ({thumbnailImg, mainText}: UnitInfo) => {
           height: 250,
         }}
         src={typeof thumbnailImg === 'string' ? thumbnailImg : undefined}
-        alt="2"
-      ></img>
-      <div>{mainText}</div>
+        alt="섬네일 이미지"></img>
+      <S.TextOutPut>{mainText}</S.TextOutPut>
     </S.MainTextContainer>
   );
 };

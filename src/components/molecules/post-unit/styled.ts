@@ -37,6 +37,11 @@ export const MainTextContainer = styled.div`
   padding: 25px;
 `;
 
+export const TextOutPut = styled.div`
+  width: 800px;
+  height: auto;
+`;
+
 interface ColumnAndRow {
   direction?: string;
   side?: string;
@@ -47,14 +52,11 @@ interface ColumnAndRow {
  * @returns : direction="column" | "row"
  * @returns : side="0px 0px 0px 0px" | "0px"
  */
-export const FlexBox =
-  styled.div <
-  ColumnAndRow >
-  `
-    display: flex;
-    flex-direction: ${props =>
-      props.direction === 'column' ? 'column' : 'row'};
-    padding: ${props => props.side};
+export const FlexBox = styled.div<ColumnAndRow>`
+  display: flex;
+  flex-direction: ${(props) =>
+    props.direction === 'column' ? 'column' : 'row'};
+  padding: ${(props) => props.side};
 `;
 
 /** PostComments.tsx */
@@ -130,22 +132,19 @@ interface Show {
   show: boolean;
 }
 //**콤보박스 눌렀을 때 옵션 보여주는 CSS */
-export const SelectOptions =
-  styled.ul <
-  Show >
-  `
-    position: absolute;
-    list-style: none;
-    top: 20px;
-    width: 100px;
-    padding: 0px;
-    overflow: hidden;
-    text-align: center;
-    height: 60px;
-    max-height: ${props => (props.show ? 'none' : '0')};
-    border-radius: 8px;
-    background-color: #f0f0f0;
-    color: #000; 
+export const SelectOptions = styled.ul<Show>`
+  position: absolute;
+  list-style: none;
+  top: 20px;
+  width: 100px;
+  padding: 0px;
+  overflow: hidden;
+  text-align: center;
+  height: 60px;
+  max-height: ${(props) => (props.show ? 'none' : '0')};
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  color: #000;
 `;
 
 //**콤보박스 내부 요소 */
@@ -165,17 +164,15 @@ interface Size {
  * @param : size={number}
  *
  */
-export const ShowUserName =
-  styled.div <
-  Size >
-  `
+export const ShowUserName = styled.div<Size>`
   padding: 5px 0px 0px 8px;
-  font-size: ${props => props.size}px;
+  font-size: ${(props) => props.size}px;
   font-weight: bold;
 `;
 
+/**구분선 css */
 export const DivisionLine = styled.div`
-  border-top: 1px solid #000;
+  border-top: 1px solid rgba(0, 0, 0, 25%);
   margin: 10px;
   width: 750px;
   height: auto;

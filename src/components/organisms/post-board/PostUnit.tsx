@@ -34,7 +34,9 @@ const PostUnit = () => {
       <div>
         <PostUnitHeader {...getUnitInfo[unitId]}/>
         <PostUnitBody {...getUnitInfo[unitId]} />
+        <S.DivisionLine />
         <PostCreateComment />
+        <S.DivisionLine />
         {getUnitComment.filter((data)=>data.postId == unitId).map((data, idx)=>{
           return (
             <div key={idx}>

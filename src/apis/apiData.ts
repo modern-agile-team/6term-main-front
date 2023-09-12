@@ -5,7 +5,7 @@ export const db2 =
     1: {
       title: 'adsfasdfasdfasfasfasfasfsdasdf',
       mainText:
-        '1번 째 글안녕하ㅔ요 저는 이재진입니다. adsfasfdsdaffffffffffffffffffffffffdfasdfasdfasfasdfasfasfasdf',
+        '1번 째 글안녕하ㅔ요 저는 이재진입니다. adsfasfdsdafffffffffffffffoajdfasoidfjawoifjewoifjewoifjwoifjewoifjweoifjwoifjoweifjwaeofjawofjwoidofijafoiajfoiajfoasjfasoidfjffffffffffdfasdfasdfasfasdfasfasfasdf',
       img: 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg',
       name: '이재진',
       board: 3,

@@ -16,6 +16,12 @@ interface CommentInfo {
 
 const PostComments = (commentData: CommentInfo['commentData']) => {
   const [isShowOptions, setShowOptions] = useState(false);
+  const [isCheckToken, setCheckToken] = useState(false);
+
+  const checkToken = () => {
+    const token = window.localStorage.get('accessToken');
+    token !== undefined ? setCheckToken(true) : setCheckToken(false);
+  };
 
   return (
     <S.CommentContainer>
@@ -51,8 +57,17 @@ const PostComments = (commentData: CommentInfo['commentData']) => {
         ) : (
           <S.FlexBox side="0px 0px 0px 18px">
             <BsArrowReturnRight />
-            <UserIcon />
-            <S.ShowUserName>로그인이 필요합니다.</S.ShowUserName>
+            <S.ShowUserName>
+              {isCheckToken ? (
+                <S.FlexBox>
+                  <UserIcon />
+                  <div>댓글을 입력해 주세요.</div>
+                  <button>등록</button>
+                </S.FlexBox>
+              ) : (
+                <div>로그인이 필요합니다.</div>
+              )}
+            </S.ShowUserName>
           </S.FlexBox>
         )}
       </S.CreateCommentBox>
