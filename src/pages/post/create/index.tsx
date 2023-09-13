@@ -1,11 +1,11 @@
-import PostCreateTemplate from '@/components/templates/post-create-temp/PostCreateTemplate';
+import PostCreateTemplate from "@/components/templates/PostCreateTemplate";
 
-const CreatePost = (): JSX.Element => {
-  return (
-    <>
-      <PostCreateTemplate />
-    </>
-  );
-};
+const CreatePost = () : JSX.Element=> {
+    return (
+        <>
+            <PostCreateTemplate />
+        </>
+    );
+}
 
 export default CreatePost;

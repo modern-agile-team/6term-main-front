@@ -1,12 +1,14 @@
-import PostTemplate from '../templates/post-temp/PostTemplate';
+import PostTemplate from "../templates/PostTemplate";
 
-const AllPost = () => {
-  return (
-    <div>
-      {/* 전체 게시판 */}
-      <PostTemplate />
-    </div>
-  );
+const AllPost= () => {
+    
+
+    return (
+        <div>
+            {/* 전체 게시판 */}
+            <PostTemplate /> 
+        </div>
+    );
 };
 
 export default AllPost;

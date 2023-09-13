@@ -55,7 +55,7 @@ const AlarmIcon = styled.button`
   border: none;
   font-size: 24px;
   &:hover {
-    color: #749bc2;
+    color: #749BC2;
   }
 `;
 
@@ -99,26 +99,21 @@ const HeaderNav = (): JSX.Element => {
           }}>
             {NavData.map((menu) => {
               return (
-                <li
-                  key={menu.id}
-                  style={{
-                    display: 'inline',
-                    marginRight: '70px',
-                  }}>
+                <li key={menu.id} style={{
+                  display: 'inline', marginRight: '70px'
+                }}>
                   <Link legacyBehavior href={menu.path}>
-                    <a
-                      style={{
-                        fontSize: '20px',
-                        fontWeight:
-                          menu.path === router.pathname ? 'bolder' : 'bold',
-                        textDecoration: 'none',
-                        color: menu.path === router.pathname ? 'gray' : 'black',
-                      }}>
+                    <a style={{
+                      fontSize: '20px',
+                      fontWeight: menu.path === router.pathname ? 'bolder' : 'bold',
+                      textDecoration: 'none',
+                      color: menu.path === router.pathname ? 'gray' : 'black',
+                    }}>
                       {menu.name}
                     </a>
                   </Link>
                 </li>
-              );
+              )
             })}
           </ul>
         </nav>
@@ -133,7 +128,7 @@ const HeaderNav = (): JSX.Element => {
         </AlarmIcon>
       </HeaderNavBox>
     </HeaderContainer>
-  );
+  )
 };
 
 export default HeaderNav;
