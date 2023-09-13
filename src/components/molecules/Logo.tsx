@@ -1,6 +1,5 @@
-import React from "react"
-import Link from "next/link";
-
+import React from 'react';
+import Link from 'next/link';
 
 const Logo = () => {
   return (
@@ -8,7 +7,7 @@ const Logo = () => {
       <img
         src="/logo.png"
         alt="로고"
-        style={{ width: "80px", height: "auto" }}
+        style={{ width: '80px', height: 'auto' }}
       />
     </Link>
   );
