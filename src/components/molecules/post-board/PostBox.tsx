@@ -82,7 +82,7 @@ const PostBox = (isData: BoardInfo['isData']): JSX.Element => {
             </Modal>
           )}
           <S.DialogButton onClick={onClickToggleModal}>
-            <CgProfile className="cgProfile" />
+            <CgProfile />
           </S.DialogButton>
           <div>{isData.name}</div>
           <S.BoardList color={boardThumbnail}>{boardTitle}</S.BoardList>
