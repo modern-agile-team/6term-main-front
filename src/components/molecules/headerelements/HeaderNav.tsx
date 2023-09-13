@@ -1,8 +1,8 @@
-import Link from "next/link";
-import Logo from "../Logo";
-import { AiFillBell } from "react-icons/ai"
-import { useRouter } from "next/router";
-import { styled } from "styled-components";
+import Link from 'next/link';
+import Logo from '../Logo';
+import { AiFillBell } from 'react-icons/ai';
+import { useRouter } from 'next/router';
+import { styled } from 'styled-components';
 
 const HeaderContainer = styled.div`
   /* background-color: blanchedalmond; */
@@ -14,9 +14,7 @@ const HeaderContainer = styled.div`
   padding: 0px 20px;
 `;
 
-const LogoSpace = styled.div`
-  
-`
+const LogoSpace = styled.div``;
 
 const HeaderNavBox = styled.div`
   display: flex;
@@ -25,13 +23,13 @@ const HeaderNavBox = styled.div`
 
 const AlarmIcon = styled.button`
   margin-top: -10px;
-  color: #8ACDEF;
+  color: #8acdef;
   cursor: pointer;
   background: none;
   border: none;
   font-size: 24px;
   &:hover {
-    color: #749BC2;
+    color: #749bc2;
   }
 `;
 
@@ -53,24 +51,29 @@ const HeaderNav = (): JSX.Element => {
       </LogoSpace>
       <HeaderNavBox>
         <nav>
-          <ul style={{ width: '100%', margin: '-20px 0 0 0px'}}>
+          <ul style={{ width: '100%', margin: '-20px 0 0 0px' }}>
             {NavData.map((menu) => {
               return (
-                <li key={menu.id} style={{
-                  display: 'inline', marginRight: '70px'
-                }}>
+                <li
+                  key={menu.id}
+                  style={{
+                    display: 'inline',
+                    marginRight: '70px',
+                  }}>
                   <Link legacyBehavior href={menu.path}>
-                    <a style={{
-                      fontSize: '20px',
-                      fontWeight: menu.path === router.pathname ? 'bolder' : 'bold',
-                      textDecoration: 'none',
-                      color: menu.path === router.pathname ? 'gray' : 'black',
-                    }}>
+                    <a
+                      style={{
+                        fontSize: '20px',
+                        fontWeight:
+                          menu.path === router.pathname ? 'bolder' : 'bold',
+                        textDecoration: 'none',
+                        color: menu.path === router.pathname ? 'gray' : 'black',
+                      }}>
                       {menu.name}
                     </a>
                   </Link>
                 </li>
-              )
+              );
             })}
           </ul>
         </nav>
@@ -79,7 +82,7 @@ const HeaderNav = (): JSX.Element => {
         </AlarmIcon>
       </HeaderNavBox>
     </HeaderContainer>
-  )
+  );
 };
 
 export default HeaderNav;
