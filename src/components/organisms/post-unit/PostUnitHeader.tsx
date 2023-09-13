@@ -1,8 +1,5 @@
 import { useRouter } from 'next/router';
 import * as S from './styled';
-import { useRecoilState } from 'recoil';
-import { UnitPostAtom } from '@/recoil/atoms/UserPostsAtom';
-import { useState, useEffect } from 'react';
 
 interface UnitInfo {
   img: string;
@@ -12,7 +9,6 @@ interface UnitInfo {
 
 const PostUnitHeader = ({ img, name, title }: UnitInfo) => {
   const router = useRouter();
-  console.log(img, title, name);
   return (
     <S.FlexBox direction="row">
       <div>

@@ -1,6 +1,4 @@
 import PostBox from '@/components/molecules/post-board/PostBox';
-import SearchBox from '@/components/molecules/post-board/SearchBox';
-import { useRouter } from 'next/router';
 import * as S from './styled';
 import { useRecoilState } from 'recoil';
 import { UserPostsAtom } from '@/recoil/atoms/UserPostsAtom';
