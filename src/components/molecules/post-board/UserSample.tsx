@@ -1,17 +1,18 @@
-import * as S from "./styled";
+import * as S from './styled';
+import { CgProfile } from 'react-icons/cg';
 
 interface User {
-    name: string;
-    img: string;
+  name: string;
+  img: string;
 }
 
-const UserSmaple = ({name, img} : User) : JSX.Element => {
-    return (
-        <div>
-            <img src={img} alt="프로필 이미지"/>
-            <div>이름 : {name}</div>
-        </div>
-    )
-}
+const UserSmaple = ({ name, img }: User): JSX.Element => {
+  return (
+    <div>
+      <CgProfile />
+      <div>이름 : {name}</div>
+    </div>
+  );
+};
 
 export default UserSmaple;

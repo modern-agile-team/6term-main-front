@@ -7,7 +7,16 @@ export const UserPostsAtom = atom ({
     default: db, 
 });
 
-export const UnitPostAtom = atom ({
+type Db2Type = {
+    title: string,
+    mainText: string,
+    img: string, 
+    name: string,
+    board: number,
+    thumbnailImg?: string
+}
+
+export const UnitPostAtom = atom<Record<number, Db2Type>> ({
     key: "UnitPosts",
-    default: db2, 
+    default: db2,
 });
