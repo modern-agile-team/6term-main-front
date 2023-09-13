@@ -20,7 +20,7 @@ const FloatingBox = styled.div < FloatingBoxProps> `
   display: flex;
   flex-direction: column;
   top: ${(props) => props.position}px;
-  right: 50px;
+  right: 20px;
   /* border: 3px solid #9d9d9d; */
 `
 const FriendSearchIcon = styled.div`
