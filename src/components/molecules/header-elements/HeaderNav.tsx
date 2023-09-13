@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Logo from "../Logo";
-import LoginPopup from "../loginpopup/LoginPopup";
-import React, { useState } from "react";
-import { AiFillBell } from "react-icons/ai"
-import { useRouter } from "next/router";
-import { styled } from "styled-components";
+import Link from 'next/link';
+import Logo from '../Logo';
+import LoginPopup from '../login-popup/LoginPopup';
+import React, { useState } from 'react';
+import { AiFillBell } from 'react-icons/ai';
+import { useRouter } from 'next/router';
+import { styled } from 'styled-components';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
@@ -16,7 +16,7 @@ const HeaderContainer = styled.div`
   justify-content: center;
   display: flex;
   /* flex-wrap: wrap; */
-  
+
   padding: 0px 20px;
   z-index: 1000;
   transition: all 0.3s ease;
@@ -49,13 +49,13 @@ const LoginButton = styled.button`
 const AlarmIcon = styled.button`
   margin-top: -10px;
   /* margin-left: 5px; */
-  color: #8ACDEF;
+  color: #8acdef;
   cursor: pointer;
   background: none;
   border: none;
   font-size: 24px;
   &:hover {
-    color: #749BC2;
+    color: #749bc2;
   }
 `;
 
@@ -76,7 +76,7 @@ const HeaderNav = (): JSX.Element => {
   };
 
   const handlePopupYesClick = () => {
-    router.push("/login");
+    router.push('/login');
     setPopupOpen(false);
   };
 
@@ -91,44 +91,51 @@ const HeaderNav = (): JSX.Element => {
       </LogoSpace>
       <HeaderNavBox>
         <nav>
-          <ul style={{
-            width: '1000',
-            flexWrap: 'wrap',
-            flexDirection: 'row',
-            margin: '-20px 0 0 0px' // 수정 필요
-          }}>
+          <ul
+            style={{
+              width: '1000',
+              flexWrap: 'wrap',
+              flexDirection: 'row',
+              margin: '-20px 0 0 0px', // 수정 필요
+            }}>
             {NavData.map((menu) => {
               return (
-                <li key={menu.id} style={{
-                  display: 'inline', marginRight: '70px'
-                }}>
+                <li
+                  key={menu.id}
+                  style={{
+                    display: 'inline',
+                    marginRight: '70px',
+                  }}>
                   <Link legacyBehavior href={menu.path}>
-                    <a style={{
-                      fontSize: '20px',
-                      fontWeight: menu.path === router.pathname ? 'bolder' : 'bold',
-                      textDecoration: 'none',
-                      color: menu.path === router.pathname ? 'gray' : 'black',
-                    }}>
+                    <a
+                      style={{
+                        fontSize: '20px',
+                        fontWeight:
+                          menu.path === router.pathname ? 'bolder' : 'bold',
+                        textDecoration: 'none',
+                        color: menu.path === router.pathname ? 'gray' : 'black',
+                      }}>
                       {menu.name}
                     </a>
                   </Link>
                 </li>
-              )
+              );
             })}
           </ul>
         </nav>
-        <LoginButton onClick={handleLoginClick}>
-          Login
-        </LoginButton>
+        <LoginButton onClick={handleLoginClick}>Login</LoginButton>
         {isPopupOpen && (
-          <LoginPopup onYesClick={handlePopupYesClick} onNoClick={handlePopupNoClick} />
+          <LoginPopup
+            onYesClick={handlePopupYesClick}
+            onNoClick={handlePopupNoClick}
+          />
         )}
         <AlarmIcon>
           <AiFillBell />
         </AlarmIcon>
       </HeaderNavBox>
     </HeaderContainer>
-  )
+  );
 };
 
 export default HeaderNav;

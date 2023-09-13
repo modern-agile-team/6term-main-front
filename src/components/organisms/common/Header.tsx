@@ -1,14 +1,13 @@
-import NavBar from "@/components/molecules/NavBar"
-// import HeaderAlarm from "@/components/molecules/headerelements/HeaderAlarm";
-import HeaderNav from "@/components/molecules/headerelements/HeaderNav";
+import NavBar from '@/components/molecules/NavBar';
+import HeaderNav from '@/components/molecules/header-elements/HeaderNav';
 
 const Header = () => {
-	return (
-		<div>
-			<NavBar />
-			<HeaderNav />
-		</div>
-	)
-}
+  return (
+    <div>
+      <NavBar />
+      <HeaderNav />
+    </div>
+  );
+};
 
 export default Header;

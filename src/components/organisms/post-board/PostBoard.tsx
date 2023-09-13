@@ -1,54 +1,39 @@
-import PostBox from "@/components/molecules/post-board/PostBox";
-import SearchBox from "@/components/molecules/post-board/SearchBox";
-import { useRouter } from "next/router";
-import * as S from "./styled";
-import { useRecoilState } from "recoil";
-import { UserPostsAtom } from "@/recoil/atoms/UserPostsAtom";
+import PostBox from '@/components/molecules/post-board/PostBox';
+import SearchBox from '@/components/molecules/post-board/SearchBox';
+import { useRouter } from 'next/router';
+import * as S from './styled';
+import { useRecoilState } from 'recoil';
+import { UserPostsAtom } from '@/recoil/atoms/UserPostsAtom';
 
-const PostBoard = () : JSX.Element => {
-    const router = useRouter();
-    const [ isData, setIsDate ] = useRecoilState(UserPostsAtom);
-    
-    const handleCreateButton = () : void => {
-        router.push("/post/create");
-    }
+const PostBoard = (): JSX.Element => {
+  const [isData, setIsDate] = useRecoilState(UserPostsAtom);
 
-    return (
-        <S.postBoardUnit>
-            <div>
-                <div style={{
-                    display:"flex",
-                    width: 1000,
-                    //s.flexBox사용하도록
-                }}>
-                    <S.PostBoardTitle>게시판 이름</S.PostBoardTitle>
-                    <SearchBox />
-                    <S.CreatePostButton onClick={handleCreateButton}>글쓰기</S.CreatePostButton>
+  return (
+    <div
+      style={{
+        width: 1000,
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+      }}>
+      {/* {isData
+            .filter((data) => data.board === )
+            .map((data) => {
+              return (
+                <div key={data.id}>
+                  <PostBox {...data} />
                 </div>
-                <div style={{
-                    width: 1000,
-                    display:"flex",
-                    flexDirection:"row",
-                    flexWrap: "wrap",
-                }}>
-                    {/* {isData.filter((data)=>data.board === 3).map((data)=>{
-                        return (
-                            <div key={data.id }>
-                                <PostBox {...data}/>
-                            </div>
-                        )
-                    })} */}
-                    {isData.map((data)=>{
-                        return (
-                            <div key={data.id}>
-                                <PostBox {...data} />     
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-        </S.postBoardUnit>
-    );
+              );
+            })} */}
+      {isData.map((data) => {
+        return (
+          <div key={data.id}>
+            <PostBox {...data} />
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default PostBoard;
