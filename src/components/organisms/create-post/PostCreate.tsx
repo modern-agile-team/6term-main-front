@@ -1,37 +1,34 @@
+import * as S from "./styled";
+import { BsFillFileEarmarkImageFill } from "react-icons/bs" ;
 const PostCreate = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}>
+    <S.CreatPostContainer>
       <div>
+        <S.CreatePostTitle>
+          <S.FontSize>제목</S.FontSize>
+          <S.InputBox type="text" placeholder="제목입력"></S.InputBox>
+        </S.CreatePostTitle>
         <div>
-          <div>제목</div>
-          <input type="text" placeholder="제목입력"></input>
-        </div>
-        <div>
-          <div>
-            <div>본문</div>
+          <S.FlexBox direction="row" side="5px 0px 5px 0px">
+            <S.FontSize>본문</S.FontSize>
             <div>본문 네비바</div>
-          </div>
-          <input
-            size={100}
-            style={{ height: 100 }}
-            type="text"
-            placeholder="본문 입력"></input>
+          </S.FlexBox>
+          <S.CreatePostBody
+            placeholder="본문 입력"></S.CreatePostBody>
         </div>
         <div>
-          <div>사진</div>
-          <div>
-            <div>사진</div>
-            <div>사진 url들어올 곳</div>
-            <button>사진추가</button>
-          </div>
+          <S.FontSize>사진</S.FontSize>
+          <S.AddImageContainer>
+            <BsFillFileEarmarkImageFill size={24} />
+            <S.UrlUI>사진 url들어올 곳</S.UrlUI>
+            <S.ButtonUI>사진추가</S.ButtonUI>
+          </S.AddImageContainer>
         </div>
-        <div>올리기</div>
+        <S.FlexBox side="25px 0px 10px 0px">
+          <S.ButtonUI>올리기</S.ButtonUI>        
+        </S.FlexBox>
       </div>
-    </div>
+    </S.CreatPostContainer>
   );
 };
 
