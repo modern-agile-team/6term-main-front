@@ -1,5 +1,51 @@
-import * as S from "./styled";
-import { BsFillFileEarmarkImageFill } from "react-icons/bs" ;
+import * as S from './styled';
+import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+
+const QuillWrapper = dynamic(() => import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+
+const modules = {
+  toolbar: [
+    [{ header: '1' }, { header: '2' }, { font: [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
+    ['link'],
+    ['clean'],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};
+/*
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
+const formats = [
+  'header',
+  'font',
+  'size',
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'list',
+  'bullet',
+  'indent',
+  'link',
+];
+
 const PostCreate = () => {
   return (
     <S.CreatPostContainer>
@@ -11,10 +57,10 @@ const PostCreate = () => {
         <div>
           <S.FlexBox direction="row" side="5px 0px 5px 0px">
             <S.FontSize>본문</S.FontSize>
-            <div>본문 네비바</div>
           </S.FlexBox>
-          <S.CreatePostBody
-            placeholder="본문 입력"></S.CreatePostBody>
+          <S.CreatePostBody>
+            <QuillWrapper theme="snow" modules={modules} formats={formats} />
+          </S.CreatePostBody>
         </div>
         <div>
           <S.FontSize>사진</S.FontSize>
@@ -25,7 +71,7 @@ const PostCreate = () => {
           </S.AddImageContainer>
         </div>
         <S.FlexBox side="25px 0px 10px 0px">
-          <S.ButtonUI>올리기</S.ButtonUI>        
+          <S.ButtonUI>올리기</S.ButtonUI>
         </S.FlexBox>
       </div>
     </S.CreatPostContainer>
