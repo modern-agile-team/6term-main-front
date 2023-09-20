@@ -1,5 +1,11 @@
+import MeetingPost from '@/components/veiws/MeetingPost';
+
 const MeetingBoardPage = () => {
-  return <h2>만남 게시판</h2>;
+  return (
+    <div>
+      <MeetingPost />
+    </div>
+  );
 };
 
 export default MeetingBoardPage;

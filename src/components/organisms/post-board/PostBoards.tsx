@@ -2,8 +2,9 @@ import PostBox from '@/components/molecules/post-board/PostBox';
 import * as S from './styled';
 import { useRecoilState } from 'recoil';
 import { UserPostsAtom } from '@/recoil/atoms/UserPostsAtom';
+import { BoardNumber } from '@/components/veiws/FreePost';
 
-const PostBoard = (): JSX.Element => {
+const PostBoards = (props: BoardNumber): JSX.Element => {
   const [isData, setIsDate] = useRecoilState(UserPostsAtom);
 
   return (
@@ -14,15 +15,17 @@ const PostBoard = (): JSX.Element => {
         flexDirection: 'row',
         flexWrap: 'wrap',
       }}>
-      {isData.map((data) => {
-        return (
-          <div key={data.id}>
-            <PostBox {...data} />
-          </div>
-        );
-      })}
+      {isData
+        .filter((data) => data.board === props.number)
+        .map((data) => {
+          return (
+            <div key={data.id}>
+              <PostBox {...data} />
+            </div>
+          );
+        })}
     </div>
   );
 };
 
-export default PostBoard;
+export default PostBoards;

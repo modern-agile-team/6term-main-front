@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-/*postBoard */
+/** postBoard */
 export const PostBoardTitle = styled.div`
   font-size: 25px;
   width: 150px;
@@ -23,21 +23,13 @@ export const CreatePostButton = styled.button`
   }
 `;
 
-export const postBoardUnit = styled.div`
+/**PostBoardFooter.tsx */
+export const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
+  padding: 15px 0px 50px 0px;
 `;
 
-/* postUnit */
-export const UnitContainer = styled.div`
+export const FlexBox = styled.div`
   display: flex;
-  justify-content: center;
-  margin: 50px auto;
-`;
-
-export const DivisionLine = styled.div`
-  border-top: 1px solid rgba(0, 0, 0, 70%);
-  margin: 50px auto 0px auto;
-  width: 800px;
-  height: auto;
 `;

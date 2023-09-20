@@ -40,6 +40,7 @@ export const MainTextContainer = styled.div`
 export const TextOutPut = styled.div`
   width: 800px;
   height: auto;
+  overflow-wrap: break-word;
 `;
 
 interface ColumnAndRow {
