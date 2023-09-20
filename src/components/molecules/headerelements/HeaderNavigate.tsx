@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Logo from '../Logo';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
@@ -73,9 +73,9 @@ const HeaderNavigate = (): JSX.Element => {
   const router = useRouter();
   const [isModal, setModal] = useRecoilState(LoginModalAtom);
 
-  const handleLoginClick = () => {
-    setModal(true);
-  };
+  const handleLoginClick = useCallback(() => {
+    setModal(!isModal);
+  }, [isModal]);
 
   return (
     <HeaderContainer>

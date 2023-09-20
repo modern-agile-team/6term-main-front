@@ -11,7 +11,7 @@ export const ModalWrapper = styled.div`
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+  z-index: 10000;
   text-align: center;
 `;
 
@@ -33,7 +33,40 @@ export const ButtonContain = styled.div`
   justify-content: center;
 `;
 
+interface ColumnAndRow {
+  direction?: string;
+}
+/**
+==== common styled ====
+* @params : direction="column" | "row": string
+* @returns : direction="column" | "row"
+*/
+export const FlexBox = styled.div<ColumnAndRow>`
+  display: flex;
+  flex-direction: ${(props) =>
+    props.direction === 'column' ? 'column' : 'row'};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Backdrop = styled.div`
+  width: 10000px;
+  height: 10000px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.2);
+`;
+
 export const DivisionLine = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 50%);
   width: 180px;
+`;
+
+/**Provider.tsx */
+export const ProviderBox = styled.div`
+  width: 183px;
+  cursor: pointer;
+  margin: 3px 0px 3px 0px;
 `;
