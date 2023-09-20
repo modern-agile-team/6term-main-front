@@ -84,7 +84,7 @@ export const db = [
       '1번 째 글안녕하ㅔ요 저는 이재진입니다. adsfasfdsdaffffffffffffffffffffffffdfasdfasdfasfasdfasfasfasdf',
     img: 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg',
     name: '이재진',
-    board: 4,
+    board: 3,
   },
   {
     id: 11,
@@ -92,7 +92,7 @@ export const db = [
     mainText: '2번 째 글',
     img: 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg',
     name: '이자진',
-    board: 4,
+    board: 1,
   },
   {
     id: 12,
@@ -100,7 +100,7 @@ export const db = [
     mainText: '3번 째 글',
     img: 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg',
     name: '이죄진',
-    board: 4,
+    board: 1,
   },
   {
     id: 13,
@@ -108,7 +108,7 @@ export const db = [
     mainText: '4번 째 글',
     img: 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg',
     name: '이재줴',
-    board: 4,
+    board: 3,
   },
   {
     id: 14,
@@ -140,7 +140,7 @@ export const db = [
     mainText: '4번 째 글',
     img: 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg',
     name: '이재줴',
-    board: 4,
+    board: 1,
   },
   {
     id: 18,
@@ -148,7 +148,7 @@ export const db = [
     mainText: '4번 째 글',
     img: 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg',
     name: '이재줴',
-    board: 4,
+    board: 3,
   },
   {
     id: 19,

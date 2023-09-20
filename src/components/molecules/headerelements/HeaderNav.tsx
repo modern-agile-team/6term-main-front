@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Logo from "../Logo";
-import LoginPopup from "../loginpopup/LoginPopup";
-import React, { useState } from "react";
-import { AiFillBell } from "react-icons/ai"
-import { useRouter } from "next/router";
-import { styled } from "styled-components";
+import Link from 'next/link';
+import Logo from '../Logo';
+import LoginPopup from '../loginpopup/LoginPopup';
+import React, { useState } from 'react';
+import { AiFillBell } from 'react-icons/ai';
+import { useRouter } from 'next/router';
+import { styled } from 'styled-components';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
@@ -16,7 +16,7 @@ const HeaderContainer = styled.div`
   justify-content: center;
   display: flex;
   /* flex-wrap: wrap; */
-  
+
   padding: 0px 20px;
   z-index: 1000;
   transition: all 0.3s ease;
@@ -49,7 +49,7 @@ const LoginButton = styled.button`
 const AlarmIcon = styled.button`
   margin-top: -10px;
   /* margin-left: 5px; */
-  color: #8ACDEF;
+  color: #8acdef;
   cursor: pointer;
   background: none;
   border: none;
@@ -61,10 +61,10 @@ const AlarmIcon = styled.button`
 
 const NavData = [
   { id: 'menu01', name: '전체 게시판', path: '/' },
-  { id: 'menu02', name: '자유 게시판', path: '/postboards/FreeBoard' },
-  { id: 'menu03', name: '멘토멘티 게시판', path: '/postboards/MenmenBoard' },
+  { id: 'menu02', name: '자유 게시판', path: '/postboards/free' },
+  { id: 'menu03', name: '멘토멘티 게시판', path: '/postboards/menmen' },
   { id: 'menu04', name: '만남 게시판', path: '/postboards/meeting' },
-  { id: 'menu05', name: '장터 게시판', path: '/postboards/MarketBoard' },
+  { id: 'menu05', name: '장터 게시판', path: '/postboards/market' },
 ];
 
 const HeaderNav = (): JSX.Element => {
@@ -76,7 +76,7 @@ const HeaderNav = (): JSX.Element => {
   };
 
   const handlePopupYesClick = () => {
-    router.push("/login");
+    router.push('/login');
     setPopupOpen(false);
   };
 
@@ -91,12 +91,13 @@ const HeaderNav = (): JSX.Element => {
       </LogoSpace>
       <HeaderNavBox>
         <nav>
-          <ul style={{
-            width: '1000',
-            flexWrap: 'wrap',
-            flexDirection: 'row',
-            margin: '-20px 0 0 0px' // 수정 필요
-          }}>
+          <ul
+            style={{
+              width: '1000',
+              flexWrap: 'wrap',
+              flexDirection: 'row',
+              margin: '-20px 0 0 0px', // 수정 필요
+            }}>
             {NavData.map((menu) => {
               return (
                 <li
@@ -122,11 +123,12 @@ const HeaderNav = (): JSX.Element => {
             })}
           </ul>
         </nav>
-        <LoginButton onClick={handleLoginClick}>
-          Login
-        </LoginButton>
+        <LoginButton onClick={handleLoginClick}>Login</LoginButton>
         {isPopupOpen && (
-          <LoginPopup onYesClick={handlePopupYesClick} onNoClick={handlePopupNoClick} />
+          <LoginPopup
+            onYesClick={handlePopupYesClick}
+            onNoClick={handlePopupNoClick}
+          />
         )}
         <AlarmIcon>
           <AiFillBell />
