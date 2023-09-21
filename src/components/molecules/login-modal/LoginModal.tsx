@@ -27,7 +27,7 @@ const LoginModal = () => {
         <div>로그인</div>
         <S.FlexBox direction="column">
           <Naver />
-          <Facebook />
+          {/* <Facebook /> */}
           <Kakao />
         </S.FlexBox>
       </S.ModalWrapper>
