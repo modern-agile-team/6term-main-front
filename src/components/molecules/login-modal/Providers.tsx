@@ -8,8 +8,9 @@ dotenv.config();
 
 export const Naver = () => {
   const naverLogin = () => {
-    window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}&state=${process.env.NEXT_PUBLIC_NAVER_STATE}&redirect_uri=${process.env.NEXT_PUBLIC_NAVER_REDIRECT_URL}`;
+    window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_NAVER_REDIRECT_URL}&state=${process.env.NEXT_PUBLIC_NAVER_STATE}`;
   };
+
   return (
     <S.ProviderBox>
       <Image
@@ -23,7 +24,9 @@ export const Naver = () => {
 };
 
 export const Kakao = () => {
-  const kakaoLogin = () => {};
+  const kakaoLogin = () => {
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`;
+  };
   return (
     <S.ProviderBox>
       <Image src={kakaoImg} alt="카카오로그인" onClick={kakaoLogin} />
