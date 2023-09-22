@@ -3,7 +3,7 @@ import * as S from './styled';
 import Image from 'next/image';
 import logo from '../../../../public/Logo.png';
 import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModal';
+import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
 import { useRouter } from 'next/router';
 import { Naver, Kakao, Facebook } from './Providers';
 
