@@ -1,7 +1,10 @@
 import * as S from './styled';
+import { useState, useEffect } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import SelectBox from '@/components/molecules/post-board/SelectBox';
+import createPostApi from '@/apis/postApi/createPostApi';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -47,19 +50,52 @@ const formats = [
 ];
 
 const PostCreate = () => {
+  const [unitTitle, setUnitTitle] = useState<string>('');
+  const [quillText, setQuillText] = useState<string>('');
+  const [selectBoard, setSelectBoard] = useState<number>();
+
+  const handleChangeInput = (e: any) => {
+    setUnitTitle(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    const isData = {
+      head: unitTitle,
+      body: quillText,
+      main_category: 1,
+      sub_category: 2,
+    };
+    const data = await createPostApi(isData);
+    console.log(data);
+    alert('업로드');
+  };
+
   return (
     <S.CreatPostContainer>
       <div>
         <S.CreatePostTitle>
           <S.FontSize>제목</S.FontSize>
-          <S.InputBox type="text" placeholder="제목입력"></S.InputBox>
+          <S.InputBox
+            type="text"
+            value={unitTitle}
+            placeholder="제목입력"
+            onChange={handleChangeInput}></S.InputBox>
         </S.CreatePostTitle>
         <div>
           <S.FlexBox direction="row" side="5px 0px 5px 0px">
             <S.FontSize>본문</S.FontSize>
+            <SelectBox />
           </S.FlexBox>
           <S.CreatePostBody>
-            <QuillWrapper theme="snow" modules={modules} formats={formats} />
+            <QuillWrapper
+              value={quillText}
+              theme="snow"
+              modules={modules}
+              formats={formats}
+              placeholder="글을 작성해 주세요."
+              onChange={(e: any) => setQuillText(e)}
+              style={{ height: 400 }}
+            />
           </S.CreatePostBody>
         </div>
         <div>
@@ -71,7 +107,7 @@ const PostCreate = () => {
           </S.AddImageContainer>
         </div>
         <S.FlexBox side="25px 0px 10px 0px">
-          <S.ButtonUI>올리기</S.ButtonUI>
+          <S.ButtonUI onClick={handleSubmit}>올리기</S.ButtonUI>
         </S.FlexBox>
       </div>
     </S.CreatPostContainer>

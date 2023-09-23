@@ -45,7 +45,7 @@ export const FlexBox = styled.div<ColumnAndRow>`
 `;
 
 export const CreatePostBody = styled.div`
-  height: auto;
+  height: 440px;
   width: 780px;
   padding: 10px 10px 10px 10px;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 25%);
