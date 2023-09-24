@@ -5,6 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import SelectBox from '@/components/molecules/post-board/SelectBox';
 import createPostApi from '@/apis/postApi/createPostApi';
+import createPostImgApi from '@/apis/postApi/addImageApi';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -53,6 +54,7 @@ const PostCreate = () => {
   const [unitTitle, setUnitTitle] = useState<string>('');
   const [quillText, setQuillText] = useState<string>('');
   const [selectBoard, setSelectBoard] = useState<number>();
+  const [uploadImage, setUploadImage] = useState<FormData>();
 
   const handleChangeInput = (e: any) => {
     setUnitTitle(e.target.value);
@@ -67,7 +69,15 @@ const PostCreate = () => {
     };
     const data = await createPostApi(isData);
     console.log(data);
+    await createPostImgApi(uploadImage as FormData, data.data.id);
     alert('업로드');
+  };
+
+  const handleImageUpload = (e: any) => {
+    const file = e.target.files;
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploadImage(formData);
   };
 
   return (
@@ -84,6 +94,7 @@ const PostCreate = () => {
         <div>
           <S.FlexBox direction="row" side="5px 0px 5px 0px">
             <S.FontSize>본문</S.FontSize>
+            {/* 게시판 선택 */}
             <SelectBox />
           </S.FlexBox>
           <S.CreatePostBody>
@@ -102,8 +113,11 @@ const PostCreate = () => {
           <S.FontSize>사진</S.FontSize>
           <S.AddImageContainer>
             <BsFillFileEarmarkImageFill size={24} />
-            <S.UrlUI>사진 url들어올 곳</S.UrlUI>
-            <S.ButtonUI>사진추가</S.ButtonUI>
+            <S.ImageInput
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
           </S.AddImageContainer>
         </div>
         <S.FlexBox side="25px 0px 10px 0px">

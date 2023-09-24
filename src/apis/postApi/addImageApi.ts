@@ -5,7 +5,7 @@ type Post = {
   boardId: number;
 };
 
-const createPostImgApi = async ({ imageUri, boardId }: Post) => {
+const createPostImgApi = async (imageUri: FormData, boardId: number) => {
   await instance.post(`/boardimages/${boardId}`, {
     imageUri,
   });

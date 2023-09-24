@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { CgInsertBefore } from 'react-icons/cg';
+import styled from 'styled-components';
 
 const SelectBox = () => {
   const [getMain, setGetMain] = useState<number>();
@@ -8,9 +10,12 @@ const SelectBox = () => {
     setGetSub(e.target.value);
   };
 
+  useEffect(() => {
+    console.log(getMain);
+  }, [getMain]);
   return (
-    <>
-      <label>게시판 선택</label>
+    <SelectBoxContainer>
+      <label style={{ paddingRight: 10 }}>게시판 선택</label>
       <select value={getMain} onChange={handleSelector}>
         <option></option>
         <optgroup label="자유 게시판">
@@ -52,8 +57,12 @@ const SelectBox = () => {
           </option>
         </optgroup>
       </select>
-    </>
+    </SelectBoxContainer>
   );
 };
 
 export default SelectBox;
+
+const SelectBoxContainer = styled.div`
+  margin-left: auto;
+`;
