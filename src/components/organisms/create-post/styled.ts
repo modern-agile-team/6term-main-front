@@ -4,6 +4,7 @@ export const CreatPostContainer = styled.div`
   display: flex;
   justify-content: center;
   height: auto;
+  margin: 10px 0px 50px 0px;
 `;
 
 export const CreatePostTitle = styled.div`
@@ -45,7 +46,7 @@ export const FlexBox = styled.div<ColumnAndRow>`
 `;
 
 export const CreatePostBody = styled.div`
-  height: auto;
+  height: 440px;
   width: 780px;
   padding: 10px 10px 10px 10px;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 25%);
@@ -55,9 +56,9 @@ export const CreatePostBody = styled.div`
 
 export const AddImageContainer = styled.div`
   display: flex;
-  width: 790px;
+  width: 780px;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 25%);
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
 `;
 
@@ -66,11 +67,14 @@ export const ButtonUI = styled.button`
   border: none;
   cursor: pointer;
   background-color: #fff;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 25%);
+  padding: 5px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #e7f7ff;
+  }
 `;
 
-export const UrlUI = styled.div`
-  background-color: rgba(9, 9, 9, 25%);
-  width: 670px;
-  padding-left: 5px;
-  margin-left: 10px;
+export const ImageInput = styled.input`
+  padding-left: 15px;
 `;
