@@ -6,7 +6,9 @@ import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
 import LoginModal from '../login-modal/LoginModal';
 import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
+import { LoginModalAtom } from '@/recoil/atoms/LoginModal';
+import { NotificationModalAtom } from '@/recoil/atoms/NotificatioinModalAtom';
+import AlarmModal from '../notification/AlarmModal';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
@@ -63,19 +65,24 @@ const AlarmIcon = styled.button`
 
 const NavData = [
   { id: 'menu01', name: '전체 게시판', path: '/' },
-  { id: 'menu02', name: '자유 게시판', path: '/postboards/FreeBoard' },
-  { id: 'menu03', name: '멘토멘티 게시판', path: '/postboards/MenmenBoard' },
+  { id: 'menu02', name: '자유 게시판', path: '/postboards/free' },
+  { id: 'menu03', name: '멘토멘티 게시판', path: '/postboards/menmen' },
   { id: 'menu04', name: '만남 게시판', path: '/postboards/meeting' },
-  { id: 'menu05', name: '장터 게시판', path: '/postboards/MarketBoard' },
+  { id: 'menu05', name: '장터 게시판', path: '/postboards/market' },
 ];
 
 const HeaderNavigate = (): JSX.Element => {
   const router = useRouter();
-  const [isModal, setModal] = useRecoilState(LoginModalAtom);
+  const [isLoginModal, setIsLoginModal] = useRecoilState(LoginModalAtom);
+  const [isAlarmModal, setIsAlarmModal] = useRecoilState(NotificationModalAtom);
 
   const handleLoginClick = useCallback(() => {
-    setModal(!isModal);
-  }, [isModal]);
+    setIsLoginModal(!isLoginModal);
+  }, [isLoginModal]);
+
+  const handleAlarmClick = useCallback(() => {
+    setIsAlarmModal(!isAlarmModal);
+  }, [isAlarmModal]);
 
   return (
     <HeaderContainer>
@@ -117,10 +124,11 @@ const HeaderNavigate = (): JSX.Element => {
           </ul>
         </nav>
         <LoginButton onClick={handleLoginClick}>Login</LoginButton>
-        {isModal && <LoginModal />}
-        <AlarmIcon>
+        {isLoginModal && <LoginModal />}
+        <AlarmIcon onClick={handleAlarmClick}>
           <AiFillBell />
         </AlarmIcon>
+        {isAlarmModal && <AlarmModal />}
       </HeaderNavBox>
     </HeaderContainer>
   );
