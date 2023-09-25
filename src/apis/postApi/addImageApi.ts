@@ -4,10 +4,10 @@ const createPostImgApi = async (
   imageUri: FormData,
   boardId: number,
 ): Promise<any> => {
-  console.log(boardId);
-  console.log(imageUri);
-  await instance.post(`/boardimages/${boardId}`, {
-    imageUri,
+  await instance.post(`/boardimages/${boardId}`, imageUri, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
   });
 };
 

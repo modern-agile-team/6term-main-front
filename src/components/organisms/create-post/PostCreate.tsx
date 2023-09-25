@@ -55,7 +55,6 @@ const formats = [
 const PostCreate = () => {
   const [unitTitle, setUnitTitle] = useState<string>('');
   const [quillText, setQuillText] = useState<string>('');
-  const [selectBoard, setSelectBoard] = useState<number>();
   const [uploadImage, setUploadImage] = useState<FormData>();
   const [getBoard, setGetBoard] = useRecoilState(SelectBoard);
 
@@ -72,7 +71,6 @@ const PostCreate = () => {
       sub_category: getBoard.sub,
     };
     const data = await createPostApi(isData);
-    console.log(data);
     await createPostImgApi(uploadImage as FormData, data.data.id);
     alert('업로드');
   };
@@ -80,10 +78,15 @@ const PostCreate = () => {
   /**이미지 버튼 핸들링 */
   const handleImageUpload = (e: any) => {
     const file = e.target.files[0];
+    console.log(file);
     const formData = new FormData();
     formData.append('file', file);
     setUploadImage(formData);
   };
+
+  useEffect(() => {
+    console.log(quillText);
+  });
 
   return (
     <S.CreatPostContainer>
