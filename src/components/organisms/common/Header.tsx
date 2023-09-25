@@ -1,7 +1,7 @@
 import NavBar from '@/components/molecules/NavBar';
 // import HeaderAlarm from "@/components/molecules/headerelements/HeaderAlarm";
 import HeaderNav from '@/components/molecules/headerelements/HeaderNav';
-import HeaderNavigate from '@/components/molecules/Headerelements/HeaderNavigate';
+import HeaderNavigate from '@/components/molecules/headerelements/HeaderNavigate';
 
 const Header = () => {
   return (
