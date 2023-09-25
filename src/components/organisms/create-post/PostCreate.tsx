@@ -6,6 +6,8 @@ import dynamic from 'next/dynamic';
 import SelectBox from '@/components/molecules/post-board/SelectBox';
 import createPostApi from '@/apis/postApi/createPostApi';
 import createPostImgApi from '@/apis/postApi/addImageApi';
+import { useRecoilState } from 'recoil';
+import { SelectBoard } from '@/recoil/atoms/UserPostsAtom';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -55,17 +57,19 @@ const PostCreate = () => {
   const [quillText, setQuillText] = useState<string>('');
   const [selectBoard, setSelectBoard] = useState<number>();
   const [uploadImage, setUploadImage] = useState<FormData>();
+  const [getBoard, setGetBoard] = useRecoilState(SelectBoard);
 
   const handleChangeInput = (e: any) => {
     setUnitTitle(e.target.value);
   };
 
+  /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
     const isData = {
       head: unitTitle,
       body: quillText,
-      main_category: 1,
-      sub_category: 2,
+      main_category: getBoard.main,
+      sub_category: getBoard.sub,
     };
     const data = await createPostApi(isData);
     console.log(data);
@@ -73,10 +77,11 @@ const PostCreate = () => {
     alert('업로드');
   };
 
+  /**이미지 버튼 핸들링 */
   const handleImageUpload = (e: any) => {
-    const file = e.target.files;
+    const file = e.target.files[0];
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append('file', file);
     setUploadImage(formData);
   };
 

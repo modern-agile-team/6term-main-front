@@ -3,8 +3,8 @@ import instance from '../axiosInstance';
 type Post = {
   head: string;
   body: string;
-  main_category: number;
-  sub_category: number;
+  main_category: string;
+  sub_category: string;
 };
 
 const createPostApi = async ({
