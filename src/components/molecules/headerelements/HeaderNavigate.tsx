@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
 import LoginModal from '../login-modal/LoginModal';
 import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModal';
+import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
 import { NotificationModalAtom } from '@/recoil/atoms/NotificatioinModalAtom';
 import AlarmModal from '../notification/AlarmModal';
 
