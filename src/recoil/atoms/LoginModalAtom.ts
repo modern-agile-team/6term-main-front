@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
 export const LoginModalAtom = atom({
-  key: 'LoginModal',
+  key: 'loginModal',
   default: false,
 });

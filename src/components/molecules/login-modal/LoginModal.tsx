@@ -3,7 +3,7 @@ import * as S from './styled';
 import Image from 'next/image';
 import logo from '../../../../public/Logo.png';
 import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModal';
+import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
 import { useRouter } from 'next/router';
 import { Naver, Kakao, Facebook } from './Providers';
 
@@ -27,7 +27,7 @@ const LoginModal = () => {
         <div>로그인</div>
         <S.FlexBox direction="column">
           <Naver />
-          <Facebook />
+          {/* <Facebook /> */}
           <Kakao />
         </S.FlexBox>
       </S.ModalWrapper>
