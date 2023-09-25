@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
 import LoginModal from '../login-modal/LoginModal';
 import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModal';
+import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
