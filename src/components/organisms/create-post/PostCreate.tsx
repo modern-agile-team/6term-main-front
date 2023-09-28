@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import SelectBox from '@/components/molecules/post-board/SelectBox';
 import createPostApi from '@/apis/postApi/createPostApi';
 import createPostImgApi from '@/apis/postApi/addImageApi';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { SelectBoard } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 
@@ -57,7 +57,7 @@ const PostCreate = () => {
   const [unitTitle, setUnitTitle] = useState<string>('');
   const [quillText, setQuillText] = useState<string>('');
   const [uploadImage, setUploadImage] = useState<FormData>();
-  const [getBoard, setGetBoard] = useRecoilState(SelectBoard);
+  const getBoard = useRecoilValue(SelectBoard);
 
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
@@ -72,12 +72,12 @@ const PostCreate = () => {
       await createPostImgApi(uploadImage as FormData, data.data.id);
     }
     alert('업로드');
+    //router => 해당 글 로 페이지 이동
   };
 
   /**이미지 버튼 핸들링 */
   const handleImageUpload = (e: any) => {
     const file = e.target.files[0];
-    console.log(file);
     const formData = new FormData();
     formData.append('file', file);
     setUploadImage(formData);
