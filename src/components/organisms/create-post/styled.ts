@@ -59,6 +59,7 @@ export const AddImageContainer = styled.div`
   width: 780px;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 25%);
   padding: 10px;
+  margin: 5px 0px 5px 0px;
   border-radius: 5px;
 `;
 
