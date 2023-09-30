@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const CustomSelect = () => {
   const boardList = [
@@ -33,9 +33,13 @@ const CustomSelect = () => {
     setCurrentValue(innerText);
   };
 
+  const handleClose = () => {
+    setCheckShow(!isCheckShow);
+  };
+
   return (
     <>
-      <SelectBox onClick={() => setCheckShow((prev) => !prev)}>
+      <SelectBox onClick={() => setCheckShow(!isCheckShow)}>
         <Label>{currentValue}게시판</Label>
         <SelectOptions show={isCheckShow}>
           {boardList.map((list) => {
@@ -51,6 +55,16 @@ const CustomSelect = () => {
             );
           })}
         </SelectOptions>
+        {isCheckShow && (
+          <DropDown
+            onClick={(e: React.MouseEvent) => {
+              e.preventDefault();
+
+              if (isCheckShow) {
+                handleClose();
+              }
+            }}></DropDown>
+        )}
       </SelectBox>
     </>
   );
@@ -109,6 +123,17 @@ const Option = styled.div`
   &:hover {
     background-color: #595959;
   }
+`;
+
+const DropDown = styled.div`
+  background-color: rgba(f, f, f, 100%);
+  position: fixed;
+  z-index: -1;
+  left: 0px;
+  top: 0px;
+  width: 10000px;
+  height: 1000px;
+  cursor: auto;
 `;
 
 export default CustomSelect;

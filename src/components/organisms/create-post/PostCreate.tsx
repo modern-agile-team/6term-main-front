@@ -9,6 +9,7 @@ import createPostImgApi from '@/apis/postApi/addImageApi';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { SelectBoard } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
+import { SelectBoxDropDown } from '@/recoil/atoms/SelectBoxDropDown';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
