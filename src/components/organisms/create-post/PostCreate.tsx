@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import SelectBox from '@/components/molecules/post-board/SelectBox';
 import createPostApi from '@/apis/postApi/createPostApi';
 import createPostImgApi from '@/apis/postApi/addImageApi';
-import { useRecoilState } from 'recoil';
-import { SelectBoard } from '@/recoil/atoms/UserPostsAtom';
+import { useRecoilValue } from 'recoil';
+import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
+import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -53,15 +53,10 @@ const formats = [
 ];
 
 const PostCreate = () => {
-  const [unitTitle, setUnitTitle] = useState<string>('');
-  const [quillText, setQuillText] = useState<string>('');
-  const [selectBoard, setSelectBoard] = useState<number>();
-  const [uploadImage, setUploadImage] = useState<FormData>();
-  const [getBoard, setGetBoard] = useRecoilState(SelectBoard);
-
-  const handleChangeInput = (e: any) => {
-    setUnitTitle(e.target.value);
-  };
+  const [unitTitle, setUnitTitle] = useState<string>(''); //제목
+  const [quillText, setQuillText] = useState<string>(''); //본문
+  const [uploadImage, setUploadImage] = useState<FormData>(); //이미지
+  const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
 
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
@@ -72,9 +67,11 @@ const PostCreate = () => {
       sub_category: getBoard.sub,
     };
     const data = await createPostApi(isData);
-    console.log(data);
-    await createPostImgApi(uploadImage as FormData, data.data.id);
+    if (uploadImage !== undefined) {
+      await createPostImgApi(uploadImage as FormData, data.data.id);
+    }
     alert('업로드');
+    //router => 해당 글 로 페이지 이동
   };
 
   /**이미지 버튼 핸들링 */
@@ -94,13 +91,15 @@ const PostCreate = () => {
             type="text"
             value={unitTitle}
             placeholder="제목입력"
-            onChange={handleChangeInput}></S.InputBox>
+            onChange={(e: any) => {
+              setUnitTitle(e.target.value);
+            }}></S.InputBox>
         </S.CreatePostTitle>
         <div>
           <S.FlexBox direction="row" side="5px 0px 5px 0px">
             <S.FontSize>본문</S.FontSize>
             {/* 게시판 선택 */}
-            <SelectBox />
+            <CustomSelect />
           </S.FlexBox>
           <S.CreatePostBody>
             <QuillWrapper
@@ -116,6 +115,22 @@ const PostCreate = () => {
         </div>
         <div>
           <S.FontSize>사진</S.FontSize>
+          <S.AddImageContainer>
+            <BsFillFileEarmarkImageFill size={24} />
+            <S.ImageInput
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+          </S.AddImageContainer>
+          <S.AddImageContainer>
+            <BsFillFileEarmarkImageFill size={24} />
+            <S.ImageInput
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+          </S.AddImageContainer>
           <S.AddImageContainer>
             <BsFillFileEarmarkImageFill size={24} />
             <S.ImageInput

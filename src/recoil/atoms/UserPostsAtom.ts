@@ -21,7 +21,7 @@ export const UnitPostAtom = atom<Record<number, Db2Type>>({
   default: db2,
 });
 
-export const SelectBoard = atom({
+export const SelectBoardAtom = atom({
   key: 'selectBoard',
   default: {
     main: '',
