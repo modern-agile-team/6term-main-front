@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import createPostApi from '@/apis/postApi/createPostApi';
 import createPostImgApi from '@/apis/postApi/addImageApi';
 import { useRecoilValue } from 'recoil';
-import { SelectBoard } from '@/recoil/atoms/UserPostsAtom';
+import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
@@ -56,7 +56,7 @@ const PostCreate = () => {
   const [unitTitle, setUnitTitle] = useState<string>(''); //제목
   const [quillText, setQuillText] = useState<string>(''); //본문
   const [uploadImage, setUploadImage] = useState<FormData>(); //이미지
-  const getBoard = useRecoilValue(SelectBoard); //boardSelect
+  const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
 
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {

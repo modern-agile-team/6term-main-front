@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { SelectBoard } from '@/recoil/atoms/UserPostsAtom';
+import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 
 const CustomSelect = () => {
   const boardList = [
@@ -28,7 +28,7 @@ const CustomSelect = () => {
   ];
 
   const [isCheckShow, setCheckShow] = useState<boolean>(false);
-  const [getBoard, setBoard] = useRecoilState(SelectBoard);
+  const [getBoard, setBoard] = useRecoilState(SelectBoardAtom);
 
   /** 게시판 선택 시 */
   const handleOnChangeSelectValue = (e: any, mainSelect: string) => {
