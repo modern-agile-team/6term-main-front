@@ -55,7 +55,9 @@ const formats = [
 const PostCreate = () => {
   const [unitTitle, setUnitTitle] = useState<string>(''); //제목
   const [quillText, setQuillText] = useState<string>(''); //본문
-  const [uploadImage, setUploadImage] = useState<FormData>(); //이미지
+  const [uploadImage1, setUploadImage1] = useState<FormData>(); //이미지
+  const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
+  const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
   const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
 
   /**업로드 버튼 핸들링 */
@@ -67,19 +69,37 @@ const PostCreate = () => {
       sub_category: getBoard.sub,
     };
     const data = await createPostApi(isData);
-    if (uploadImage !== undefined) {
-      await createPostImgApi(uploadImage as FormData, data.data.id);
+    if (uploadImage1 !== undefined) {
+      await createPostImgApi(uploadImage1 as FormData, data.data.id);
+    }
+    if (uploadImage2 !== undefined) {
+      await createPostImgApi(uploadImage1 as FormData, data.data.id);
+    }
+    if (uploadImage3 !== undefined) {
+      await createPostImgApi(uploadImage1 as FormData, data.data.id);
     }
     alert('업로드');
     //router => 해당 글 로 페이지 이동
   };
 
   /**이미지 버튼 핸들링 */
-  const handleImageUpload = (e: any) => {
+  const handleImageUpload1 = (e: any) => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append('file', file);
-    setUploadImage(formData);
+    setUploadImage1(formData);
+  };
+  const handleImageUpload2 = (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    setUploadImage2(formData);
+  };
+  const handleImageUpload3 = (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    setUploadImage3(formData);
   };
 
   return (
@@ -96,7 +116,7 @@ const PostCreate = () => {
             }}></S.InputBox>
         </S.CreatePostTitle>
         <div>
-          <S.FlexBox direction="row" side="5px 0px 5px 0px">
+          <S.FlexBox direction="row">
             <S.FontSize>본문</S.FontSize>
             {/* 게시판 선택 */}
             <CustomSelect />
@@ -120,7 +140,7 @@ const PostCreate = () => {
             <S.ImageInput
               type="file"
               accept="image/*"
-              onChange={handleImageUpload}
+              onChange={handleImageUpload1}
             />
           </S.AddImageContainer>
           <S.AddImageContainer>
@@ -128,7 +148,7 @@ const PostCreate = () => {
             <S.ImageInput
               type="file"
               accept="image/*"
-              onChange={handleImageUpload}
+              onChange={handleImageUpload2}
             />
           </S.AddImageContainer>
           <S.AddImageContainer>
@@ -136,7 +156,7 @@ const PostCreate = () => {
             <S.ImageInput
               type="file"
               accept="image/*"
-              onChange={handleImageUpload}
+              onChange={handleImageUpload3}
             />
           </S.AddImageContainer>
         </div>
