@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { SelectBoard } from '@/recoil/atoms/UserPostsAtom';
 
 const CustomSelect = () => {
   const boardList = [
@@ -24,15 +26,23 @@ const CustomSelect = () => {
       sub: ['책', '중고', '자취방'],
     },
   ];
-  const [currentValue, setCurrentValue] = useState<string>('');
-  const [getMain, setMain] = useState<string>('');
-  const [isCheckShow, setCheckShow] = useState<boolean>(false);
 
-  const handleOnChangeSelectValue = (e: any) => {
+  const [isCheckShow, setCheckShow] = useState<boolean>(false);
+  const [getBoard, setBoard] = useRecoilState(SelectBoard);
+
+  /** 게시판 선택 시 */
+  const handleOnChangeSelectValue = (e: any, mainSelect: string) => {
     const { innerText } = e.target;
-    setCurrentValue(innerText);
+    setBoard((prev) => {
+      return {
+        ...prev,
+        main: mainSelect,
+        sub: innerText,
+      };
+    });
   };
 
+  /**외부 클릭 시 */
   const handleClose = () => {
     setCheckShow(!isCheckShow);
   };
@@ -40,15 +50,21 @@ const CustomSelect = () => {
   return (
     <>
       <SelectBox onClick={() => setCheckShow(!isCheckShow)}>
-        <Label>{currentValue}게시판</Label>
-        <SelectOptions show={isCheckShow}>
+        <Label>{getBoard.main}게시판</Label>
+        <SelectOptions show={`${isCheckShow}`}>
           {boardList.map((list) => {
             return (
               <div key={list.id}>
                 {list.main}게시판
-                {list.sub.map((sub) => {
+                {list.sub.map((sub, idx) => {
                   return (
-                    <Option onClick={handleOnChangeSelectValue}>{sub}</Option>
+                    <Option
+                      key={idx}
+                      onClick={() => {
+                        handleOnChangeSelectValue(event, list.main);
+                      }}>
+                      {sub}
+                    </Option>
                   );
                 })}
               </div>
@@ -98,7 +114,7 @@ const Label = styled.label`
 `;
 
 interface SO {
-  show: boolean;
+  show: string;
 }
 
 const SelectOptions = styled.div<SO>`
@@ -109,7 +125,7 @@ const SelectOptions = styled.div<SO>`
   width: 100%;
   overflow: hidden;
   height: auto;
-  max-height: ${(props) => (props.show ? 'none' : '0')};
+  max-height: ${(props) => (props.show === 'true' ? 'none' : '0')};
   padding: 0;
   border-radius: 8px;
   background-color: #222222;

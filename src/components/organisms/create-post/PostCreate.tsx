@@ -3,13 +3,11 @@ import { useState, useEffect } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import SelectBox from '@/components/molecules/post-board/SelectBox';
 import createPostApi from '@/apis/postApi/createPostApi';
 import createPostImgApi from '@/apis/postApi/addImageApi';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { SelectBoard } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
-import { SelectBoxDropDown } from '@/recoil/atoms/SelectBoxDropDown';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -55,10 +53,10 @@ const formats = [
 ];
 
 const PostCreate = () => {
-  const [unitTitle, setUnitTitle] = useState<string>('');
-  const [quillText, setQuillText] = useState<string>('');
-  const [uploadImage, setUploadImage] = useState<FormData>();
-  const getBoard = useRecoilValue(SelectBoard);
+  const [unitTitle, setUnitTitle] = useState<string>(''); //제목
+  const [quillText, setQuillText] = useState<string>(''); //본문
+  const [uploadImage, setUploadImage] = useState<FormData>(); //이미지
+  const getBoard = useRecoilValue(SelectBoard); //boardSelect
 
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
@@ -101,7 +99,6 @@ const PostCreate = () => {
           <S.FlexBox direction="row" side="5px 0px 5px 0px">
             <S.FontSize>본문</S.FontSize>
             {/* 게시판 선택 */}
-            {/* <SelectBox /> */}
             <CustomSelect />
           </S.FlexBox>
           <S.CreatePostBody>
