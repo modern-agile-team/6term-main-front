@@ -50,7 +50,7 @@ const CustomSelect = () => {
   return (
     <>
       <SelectBox onClick={() => setCheckShow(!isCheckShow)}>
-        <Label>{getBoard.main}게시판</Label>
+        <Label>{getBoard.sub}게시판</Label>
         <SelectOptions show={`${isCheckShow}`}>
           {boardList.map((list) => {
             return (
