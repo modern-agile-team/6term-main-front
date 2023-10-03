@@ -91,10 +91,10 @@ const SelectBox = styled.div`
   margin-left: auto;
   width: 200px;
   padding: 8px;
-  border-radius: 12px;
+  border-radius: 5px;
   background-color: #ffffff;
   align-self: center;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 25%);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 25%);
   cursor: pointer;
   z-index: 1;
   &::before {
@@ -102,7 +102,6 @@ const SelectBox = styled.div`
     position: absolute;
     top: 1px;
     right: 8px;
-    color: #49c181;
     font-size: 20px;
   }
 `;

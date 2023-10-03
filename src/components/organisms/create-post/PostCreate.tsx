@@ -1,5 +1,5 @@
 import * as S from './styled';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
@@ -8,6 +8,7 @@ import createPostImgApi from '@/apis/postApi/addImageApi';
 import { useRecoilValue } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
+import BOARDS from '@/apis/boards';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -68,15 +69,15 @@ const PostCreate = () => {
       main_category: getBoard.main,
       sub_category: getBoard.sub,
     };
-    const data = await createPostApi(isData);
+    const data = await BOARDS.createPost(isData);
     if (uploadImage1 !== undefined) {
-      await createPostImgApi(uploadImage1 as FormData, data.data.id);
+      await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
     }
     if (uploadImage2 !== undefined) {
-      await createPostImgApi(uploadImage1 as FormData, data.data.id);
+      await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
     }
     if (uploadImage3 !== undefined) {
-      await createPostImgApi(uploadImage1 as FormData, data.data.id);
+      await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
     }
     alert('업로드');
     //router => 해당 글 로 페이지 이동
