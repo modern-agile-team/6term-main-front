@@ -1,6 +1,7 @@
 import { getTokenKakao, getTokenNaver } from '@/apis/oauth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import * as S from './styled';
 
 interface Company {
   provider: string;
@@ -23,6 +24,7 @@ const SaveToken = ({ provider }: Company) => {
         'KaKaoRefreshToken',
         result_company.refresh_token,
       );
+      router.push('/');
     }
     if (provider === 'naver') {
       const result_company = await getTokenNaver(code as string);
@@ -43,9 +45,9 @@ const SaveToken = ({ provider }: Company) => {
   }, []);
 
   return (
-    <>
+    <S.Loading>
       <div>로딩중...</div>
-    </>
+    </S.Loading>
   );
 };
 
