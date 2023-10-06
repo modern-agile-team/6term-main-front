@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 import BOARDS from '@/apis/boards';
+import { useRouter } from 'next/router';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -60,27 +61,30 @@ const PostCreate = () => {
   const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
   const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
   const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
+  const router = useRouter();
 
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
-    const isData = {
-      head: unitTitle,
-      body: quillText,
-      main_category: getBoard.main,
-      sub_category: getBoard.sub,
-    };
-    const data = await BOARDS.createPost(isData);
-    if (uploadImage1 !== undefined) {
-      await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+    if (confirm('업로드하시겠습니까?')) {
+      const isData = {
+        head: unitTitle,
+        body: quillText,
+        main_category: getBoard.main,
+        sub_category: getBoard.sub,
+      };
+      const data = await BOARDS.createPost(isData);
+      if (uploadImage1 !== undefined) {
+        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+      }
+      if (uploadImage2 !== undefined) {
+        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+      }
+      if (uploadImage3 !== undefined) {
+        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+      }
+      //router => 해당 글 로 페이지 이동
+      router.push(`/post/unit/${data.data.id}`);
     }
-    if (uploadImage2 !== undefined) {
-      await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-    }
-    if (uploadImage3 !== undefined) {
-      await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-    }
-    alert('업로드');
-    //router => 해당 글 로 페이지 이동
   };
 
   /**이미지 버튼 핸들링 */
