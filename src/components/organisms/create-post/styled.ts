@@ -34,15 +34,14 @@ interface ColumnAndRow {
 }
 /**
  * @params : direction="column" | "row": string
- * @param : side="string"
  * @returns : direction="column" | "row"
- * @returns : side="0px 0px 0px 0px" | "0px"
  */
 export const FlexBox = styled.div<ColumnAndRow>`
   display: flex;
   flex-direction: ${(props) =>
     props.direction === 'column' ? 'column' : 'row'};
-  padding: ${(props) => props.side};
+  padding: 5px 0px 5px 0px;
+  margin: 5px 0px 5px 0px;
 `;
 
 export const CreatePostBody = styled.div`
@@ -59,7 +58,7 @@ export const AddImageContainer = styled.div`
   width: 780px;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 25%);
   padding: 10px;
-  margin: 5px 0px 5px 0px;
+  margin: 10px 0px 10px 0px;
   border-radius: 5px;
 `;
 
