@@ -89,8 +89,7 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg:
-      'https://cdn.crowdpic.net/list-thumb/thumb_l_5D3A1045CAB6DC7FBB3F1112BAF466D4.jpeg',
+    thumbnailImg: '',
   },
   {
     id: 6,
