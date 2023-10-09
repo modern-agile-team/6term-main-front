@@ -45,7 +45,6 @@ export const ProfileImg = styled.img`
 
 /**게시판 이름 */
 export const BoardList = styled.div<ThumbnailBg>`
-  margin-left: auto;
   margin-right: 10px;
   background-color: ${(props) => props.color};
   font-weight: bold;

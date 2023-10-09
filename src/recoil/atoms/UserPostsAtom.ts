@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 import { db } from '@/apis/dammyDate';
 import { db2 } from '@/apis/apiData';
+import { boardlist } from '@/apis/dummy';
 
 export const UserPostsAtom = atom({
   key: 'UserPosts',
@@ -27,4 +28,9 @@ export const SelectBoardAtom = atom({
     main: '',
     sub: '',
   },
+});
+
+export const TestSelectBoard = atom({
+  key: 'testBoard',
+  default: boardlist,
 });

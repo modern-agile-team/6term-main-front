@@ -55,9 +55,9 @@ const BOARDS = {
           },
         },
       );
-      return result;
+      return result.data;
     } catch (err) {
-      console.log(err);
+      return Promise.reject(err);
     }
   },
 };

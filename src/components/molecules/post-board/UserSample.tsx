@@ -3,7 +3,7 @@ import { CgProfile } from 'react-icons/cg';
 
 interface User {
   name: string;
-  img: string;
+  img?: string | undefined;
 }
 
 const UserSmaple = ({ name, img }: User): JSX.Element => {
