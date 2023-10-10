@@ -46,19 +46,12 @@ const BOARDS = {
 
   //게시글 리스트 api
   async getlistAll(): Promise<any> {
-    try {
-      const result: AxiosResponse = await instance.get(
-        `${BOARDS.path}/getall`,
-        {
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-        },
-      );
-      return result.data;
-    } catch (err) {
-      return Promise.reject(err);
-    }
+    const result: AxiosResponse = await instance.get(`${BOARDS.path}/getall`, {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    });
+    return result.data;
   },
 };
 

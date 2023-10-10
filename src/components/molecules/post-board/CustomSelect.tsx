@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 
@@ -31,12 +31,14 @@ const CustomSelect = () => {
   const [getBoard, setBoard] = useRecoilState(SelectBoardAtom);
 
   /** 게시판 선택 시 */
-  const handleOnChangeSelectValue = (e: any, mainSelect: string) => {
-    const { innerText } = e.target;
+  const handleOnChangeSelectValue = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement;
+    target.dataset.mainselect;
+    const { innerText } = target;
     setBoard((prev) => {
       return {
         ...prev,
-        main: mainSelect,
+        main: target.dataset.mainselect || '',
         sub: innerText,
       };
     });
@@ -59,10 +61,9 @@ const CustomSelect = () => {
                 {list.sub.map((sub, idx) => {
                   return (
                     <Option
+                      data-mainselect={list.main}
                       key={idx}
-                      onClick={() => {
-                        handleOnChangeSelectValue(event, list.main);
-                      }}>
+                      onClick={handleOnChangeSelectValue}>
                       {sub}
                     </Option>
                   );

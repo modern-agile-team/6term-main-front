@@ -2,7 +2,7 @@ export const boardlist = [
   {
     id: 1,
     head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
+    body: '<h1>안녕하세요</h1><p>저는 이재진입니다</p>',
     main_category: '자유',
     sub_category: '잡담',
     createAt: '2023-09-24T22:26:49.953Z',
@@ -15,13 +15,28 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg:
-      'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
+    boardImages: [
+      {
+        id: 11,
+        imageUrl:
+          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
+      },
+      {
+        id: 12,
+        imageUrl:
+          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
+      },
+      {
+        id: 13,
+        imageUrl:
+          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
+      },
+    ],
   },
   {
     id: 2,
     head: 'test15',
-    body: '<p>test15 2023.10.04 만남, 친구 게시판</p>',
+    body: '<p>test15 2023.10.04 만남, 친구 dfdfddfdfdfdfdfdffd게시판</p>',
     main_category: '자유',
     sub_category: '홍보',
     createAt: '2023-09-24T22:26:49.953Z',
@@ -34,8 +49,13 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg:
-      'https://cdn.aitimes.com/news/photo/202204/143854_149286_5624.png',
+    boardImages: [
+      {
+        id: 11,
+        imageUrl:
+          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
+      },
+    ],
   },
   {
     id: 3,
@@ -53,8 +73,13 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg:
-      'https://cdn.pixabay.com/photo/2023/05/05/21/00/cute-7973191_1280.jpg',
+    boardImages: [
+      {
+        id: 11,
+        imageUrl:
+          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
+      },
+    ],
   },
   {
     id: 4,
@@ -72,6 +97,7 @@ export const boardlist = [
         imageUrl: null,
       },
     },
+    boardImages: [],
   },
   {
     id: 5,
@@ -89,7 +115,7 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg: '',
+    boardImages: [],
   },
   {
     id: 6,
@@ -107,7 +133,7 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg: '',
+    boardImages: [],
   },
   {
     id: 6,
@@ -125,7 +151,7 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg: '',
+    boardImages: [],
   },
   {
     id: 6,
@@ -143,7 +169,7 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg: '',
+    boardImages: [],
   },
   {
     id: 6,
@@ -161,7 +187,7 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg: '',
+    boardImages: [],
   },
   {
     id: 6,
@@ -179,7 +205,7 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg: '',
+    boardImages: [],
   },
   {
     id: 6,
@@ -197,6 +223,6 @@ export const boardlist = [
         imageUrl: null,
       },
     },
-    thumbnailImg: '',
+    boardImages: [],
   },
 ];

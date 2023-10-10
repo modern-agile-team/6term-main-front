@@ -19,7 +19,12 @@ interface BoardInfo {
         imageUrl: string | null;
       };
     };
-    thumbnailImg?: string;
+    boardImages: [
+      {
+        id: number;
+        imageUrl: string;
+      },
+    ];
   };
 }
 
@@ -29,11 +34,6 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
   const [boardSubTitle, setBoardSubTitle] = useState<string>('');
   const [boardSubColor, setBoardSubColor] = useState<string>('');
   const [boardMainColor, setBoardMainColor] = useState<string>('');
-
-  const [value, setValue] = useState({
-    main: '',
-    sub: '',
-  });
 
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isOpenModal);
@@ -122,19 +122,20 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
             },
           }}>
           <S.FlexBox direction="column">
-            {isData.thumbnailImg === undefined ? (
+            {isData.boardImages.length === (0 as number) ? (
               <div>
                 <S.ThumbnailImg color="#f1f1f1" />
               </div>
             ) : (
               <div>
-                <S.ThumbnailImg img={isData.thumbnailImg}></S.ThumbnailImg>
+                <S.ThumbnailImg
+                  img={isData.boardImages[0].imageUrl}></S.ThumbnailImg>
               </div>
             )}
             <S.FontBox fontWeight="bold" fontSize={18}>
               {isData.head.slice(0, 20)}
             </S.FontBox>
-            <S.FontBox>{isData.body.slice(0, 20)} . . .</S.FontBox>
+            <S.Cardbody dangerouslySetInnerHTML={{ __html: isData.body }} />
           </S.FlexBox>
         </S.PostTitle>
         <S.FlexBox direction="row" margin="auto">
