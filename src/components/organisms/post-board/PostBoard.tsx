@@ -1,4 +1,3 @@
-import PostBox from '@/components/molecules/post-board/PostBox';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { TestSelectBoard } from '@/recoil/atoms/UserPostsAtom';
