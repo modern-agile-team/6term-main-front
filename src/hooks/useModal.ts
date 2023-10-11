@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 const useModal = () => {
-  const [isOpenModal, setOpenModal] = useRecoilState(ModalAtom);
+  const [isOpenModal, setOpenModal] = useState(false);
 
   const handleModal = useCallback(() => {
     setOpenModal(!isOpenModal);

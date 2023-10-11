@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil';
 import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
 import { NotificationModalAtom } from '@/recoil/atoms/NotificatioinModalAtom';
 import AlarmModal from '../notification/AlarmModal';
+import useModal from '@/hooks/useModal';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
@@ -76,6 +77,9 @@ const HeaderNavigate = (): JSX.Element => {
   const [isLoginModal, setIsLoginModal] = useRecoilState(LoginModalAtom);
   const [isAlarmModal, setIsAlarmModal] = useRecoilState(NotificationModalAtom);
 
+  const { isOpenModal: loginState, handleModal: loginHandle } = useModal();
+  const { isOpenModal: alarmState, handleModal: alarmHandle } = useModal();
+
   const handleLoginClick = useCallback(() => {
     setIsLoginModal(!isLoginModal);
   }, [isLoginModal]);
@@ -123,12 +127,12 @@ const HeaderNavigate = (): JSX.Element => {
             })}
           </ul>
         </nav>
-        <LoginButton onClick={handleLoginClick}>Login</LoginButton>
-        {isLoginModal && <LoginModal />}
-        <AlarmIcon onClick={handleAlarmClick}>
+        <LoginButton onClick={loginHandle}>Login</LoginButton>
+        {loginState && <LoginModal/>}
+        <AlarmIcon onClick={alarmHandle}>
           <AiFillBell />
         </AlarmIcon>
-        {isAlarmModal && <AlarmModal />}
+        {alarmState && <AlarmModal />}
       </HeaderNavBox>
     </HeaderContainer>
   );
