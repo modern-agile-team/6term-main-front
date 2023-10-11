@@ -1,14 +1,12 @@
 import PostBox from '@/components/molecules/post-board/PostBox';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { TestSelectBoard, UserPostsAtom } from '@/recoil/atoms/UserPostsAtom';
+import { TestSelectBoard } from '@/recoil/atoms/UserPostsAtom';
 import { PostListSelector } from '@/recoil/selectors/UserPostSelector';
 import UnitBox from '@/components/molecules/post-board/UnitBox';
-import useRecoilCacheRefresh from '@/hooks/useRecoilCaheRefresh';
 import BOARDS from '@/apis/boards';
 
 const PostBoard = (): JSX.Element => {
-  // const [isData, setIsDate] = useRecoilState(UserPostsAtom);
   // const getList = useRecoilValue(PostListSelector);
   const testBoard = useRecoilValue(TestSelectBoard);
 
@@ -32,13 +30,6 @@ const PostBoard = (): JSX.Element => {
           </div>
         );
       })}
-      {/* {isData.map((data) => {
-        return (
-          <div key={data.id}>
-            <PostBox {...data} />
-          </div>
-        );
-      })} */}
       {/* {getList !== undefined &&
         getList.map((data: any, idx: number) => {
           return (
