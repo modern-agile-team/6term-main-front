@@ -1,9 +1,9 @@
-import PostBox from '@/components/molecules/post-board/PostBox';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { TestSelectBoard } from '@/recoil/atoms/UserPostsAtom';
 import { PostListSelector } from '@/recoil/selectors/UserPostSelector';
 import UnitBox from '@/components/molecules/post-board/UnitBox';
+import useRecoilCacheRefresh from '@/hooks/useRecoilCaheRefresh';
 import BOARDS from '@/apis/boards';
 
 const PostBoard = (): JSX.Element => {
@@ -30,6 +30,7 @@ const PostBoard = (): JSX.Element => {
           </div>
         );
       })}
+
       {/* {getList !== undefined &&
         getList.map((data: any, idx: number) => {
           return (
