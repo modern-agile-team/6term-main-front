@@ -13,7 +13,7 @@ const AUTH = {
           'Content-Type': 'application/json',
         },
       });
-      return result;
+      return result.data;
     } catch (err) {
       console.log(err);
     }

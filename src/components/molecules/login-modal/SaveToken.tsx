@@ -14,12 +14,13 @@ const SaveToken = ({ provider }: Company) => {
     const code = new URL(window.location.href).searchParams.get('code');
 
     const result = await AUTH.getToken(provider, code as string);
-    return result;
+    localStorage.setItem('accessToken', result.accessToken);
+    localStorage.setItem('refreshToken', result.refreshToken);
   };
 
   useEffect(() => {
-    const a = getToken().then((res) => console.log(res));
-  });
+    getToken().then((res) => console.log(res));
+  }, []);
 
   return (
     <S.Loading>
