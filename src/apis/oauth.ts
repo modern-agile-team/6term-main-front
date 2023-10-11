@@ -5,7 +5,14 @@ const AUTH = {
   path: '/auth',
   async getToken(com: string, code: string): Promise<any> {
     try {
-      const result = await instance.post(`${AUTH.path}/${com}/login`, code);
+      const result = await instance.get(`${AUTH.path}/${com}/login`, {
+        params: {
+          code: code,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       return result;
     } catch (err) {
       console.log(err);
