@@ -43,6 +43,16 @@ const BOARDS = {
     );
     return result;
   },
+
+  //게시글 리스트 api
+  async getlistAll(): Promise<any> {
+    const result: AxiosResponse = await instance.get(`${BOARDS.path}/getall`, {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    });
+    return result.data;
+  },
 };
 
 export default BOARDS;
