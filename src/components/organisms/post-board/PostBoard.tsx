@@ -6,12 +6,12 @@ import UnitBox from '@/components/molecules/post-board/UnitBox';
 import BOARDS from '@/apis/boards';
 
 const PostBoard = (): JSX.Element => {
-  // const getList = useRecoilValue(PostListSelector);
-  const testBoard = useRecoilValue(TestSelectBoard);
+  const getList = useRecoilValue(PostListSelector);
+  // const testBoard = useRecoilValue(TestSelectBoard);
 
   useEffect(() => {
-    // console.log(getList);
-    console.log(testBoard);
+    console.log(getList);
+    // console.log(testBoard);
   }, []);
 
   return (
@@ -22,21 +22,21 @@ const PostBoard = (): JSX.Element => {
         flexDirection: 'row',
         flexWrap: 'wrap',
       }}>
-      {testBoard.map((data: any, idx: number) => {
+      {/* {testBoard.map((data: any, idx: number) => {
         return (
           <div key={idx}>
             <UnitBox {...data} />
           </div>
         );
-      })}
-      {/* {getList !== undefined &&
+      })} */}
+      {getList !== undefined &&
         getList.map((data: any, idx: number) => {
           return (
             <div key={idx}>
               <UnitBox {...data} />
             </div>
           );
-        })} */}
+        })}
     </div>
   );
 };
