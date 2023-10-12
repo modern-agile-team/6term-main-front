@@ -70,3 +70,12 @@ export const ProviderBox = styled.div`
   cursor: pointer;
   margin: 3px 0px 3px 0px;
 `;
+
+/**SaveToken.tsx */
+export const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  margin: 0px 0px 300px 0px;
+`;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as S from './styled';
 
 const PostBoardFooter = () => {
-    const [ pageNumber, setPageNumber ] = useState();
+  const [pageNumber, setPageNumber] = useState();
 
   return (
     <S.FooterContainer>

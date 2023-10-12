@@ -1,6 +1,6 @@
 import PostTemplate from '../templates/post-temp/PostTemplate';
 
-const AllPost = () => {
+const TotalPost = () => {
   return (
     <div>
       {/* 전체 게시판 */}
@@ -9,4 +9,4 @@ const AllPost = () => {
   );
 };
 
-export default AllPost;
+export default TotalPost;

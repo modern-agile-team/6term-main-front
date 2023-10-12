@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import Logo from '../Logo';
-import LoginPopup from '../loginpopup/LoginPopup';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
+import LoginModal from '../login-modal/LoginModal';
+import AlarmModal from '../notification/AlarmModal';
+import useModal from '@/hooks/useModal';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
@@ -67,22 +69,10 @@ const NavData = [
   { id: 'menu05', name: '장터 게시판', path: '/postboards/market' },
 ];
 
-const HeaderNav = (): JSX.Element => {
+const HeaderNavigate = (): JSX.Element => {
   const router = useRouter();
-  const [isPopupOpen, setPopupOpen] = useState(false);
-
-  const handleLoginClick = () => {
-    setPopupOpen(true);
-  };
-
-  const handlePopupYesClick = () => {
-    router.push('/login');
-    setPopupOpen(false);
-  };
-
-  const handlePopupNoClick = () => {
-    setPopupOpen(false);
-  };
+  const { isOpenModal: loginState, handleModal: loginHandle } = useModal();
+  const { isOpenModal: alarmState, handleModal: alarmHandle } = useModal();
 
   return (
     <HeaderContainer>
@@ -123,19 +113,15 @@ const HeaderNav = (): JSX.Element => {
             })}
           </ul>
         </nav>
-        <LoginButton onClick={handleLoginClick}>Login</LoginButton>
-        {isPopupOpen && (
-          <LoginPopup
-            onYesClick={handlePopupYesClick}
-            onNoClick={handlePopupNoClick}
-          />
-        )}
-        <AlarmIcon>
+        <LoginButton onClick={loginHandle}>Login</LoginButton>
+        {loginState && <LoginModal show={loginState} hide={loginHandle} />}
+        <AlarmIcon onClick={alarmHandle}>
           <AiFillBell />
         </AlarmIcon>
+        {alarmState && <AlarmModal show={alarmState} hide={alarmHandle} />}
       </HeaderNavBox>
     </HeaderContainer>
   );
 };
 
-export default HeaderNav;
+export default HeaderNavigate;

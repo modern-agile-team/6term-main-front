@@ -1,16 +1,31 @@
 import React from 'react';
 import * as S from './styled';
-import { useRecoilState } from 'recoil';
-import { ChatModalAtom } from '@/recoil/atoms/ChatModalAtom';
 
-const ChatModal = () => {
-  const [isCHatModal, setChatModal] = useRecoilState(ChatModalAtom);
+interface ModalType {
+  show: boolean;
+  hide: () => void;
+}
 
-  const handleCloseChat = () => {
-    setChatModal(!isCHatModal);
-  };
+const ChatModal = ({ show, hide }: ModalType) => {
+  return (
+    <div>
+      <S.ModalWrapper>
+        채팅 모달
+        <S.FlexBox>
+          <S.DivisionLine />
+        </S.FlexBox>
+      </S.ModalWrapper>
+      <S.Backdrop
+        onClick={(e: React.MouseEvent) => {
+          e.preventDefault();
 
-  return <div>채팅 모달</div>;
+          if (show) {
+            hide();
+          }
+        }}
+      />
+    </div>
+  );
 };
 
 export default ChatModal;

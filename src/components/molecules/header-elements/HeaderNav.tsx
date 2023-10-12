@@ -1,15 +1,10 @@
 import Link from 'next/link';
 import Logo from '../Logo';
-import React, { useCallback, useState } from 'react';
+import LoginPopup from '../login-popup/LoginPopup';
+import React, { useState } from 'react';
 import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
-import LoginModal from '../login-modal/LoginModal';
-import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
-import { NotificationModalAtom } from '@/recoil/atoms/NotificatioinModalAtom';
-import AlarmModal from '../notification/AlarmModal';
-import ChatModal from '../chat-modal/ChatModal';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
@@ -66,24 +61,28 @@ const AlarmIcon = styled.button`
 
 const NavData = [
   { id: 'menu01', name: '전체 게시판', path: '/' },
-  { id: 'menu02', name: '자유 게시판', path: '/postboards/free' },
-  { id: 'menu03', name: '멘토멘티 게시판', path: '/postboards/menmen' },
+  { id: 'menu02', name: '자유 게시판', path: '/postboards/FreeBoard' },
+  { id: 'menu03', name: '멘토멘티 게시판', path: '/postboards/MenmenBoard' },
   { id: 'menu04', name: '만남 게시판', path: '/postboards/meeting' },
-  { id: 'menu05', name: '장터 게시판', path: '/postboards/market' },
+  { id: 'menu05', name: '장터 게시판', path: '/postboards/MarketBoard' },
 ];
 
-const HeaderNavigate = (): JSX.Element => {
+const HeaderNav = (): JSX.Element => {
   const router = useRouter();
-  const [isLoginModal, setIsLoginModal] = useRecoilState(LoginModalAtom);
-  const [isAlarmModal, setIsAlarmModal] = useRecoilState(NotificationModalAtom);
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
-  const handleLoginClick = useCallback(() => {
-    setIsLoginModal(!isLoginModal);
-  }, [isLoginModal]);
+  const handleLoginClick = () => {
+    setPopupOpen(true);
+  };
 
-  const handleAlarmClick = useCallback(() => {
-    setIsAlarmModal(!isAlarmModal);
-  }, [isAlarmModal]);
+  const handlePopupYesClick = () => {
+    router.push('/login');
+    setPopupOpen(false);
+  };
+
+  const handlePopupNoClick = () => {
+    setPopupOpen(false);
+  };
 
   return (
     <HeaderContainer>
@@ -125,14 +124,18 @@ const HeaderNavigate = (): JSX.Element => {
           </ul>
         </nav>
         <LoginButton onClick={handleLoginClick}>Login</LoginButton>
-        {isLoginModal && <LoginModal />}
-        <AlarmIcon onClick={handleAlarmClick}>
+        {isPopupOpen && (
+          <LoginPopup
+            onYesClick={handlePopupYesClick}
+            onNoClick={handlePopupNoClick}
+          />
+        )}
+        <AlarmIcon>
           <AiFillBell />
         </AlarmIcon>
-        {isAlarmModal && <AlarmModal />}
       </HeaderNavBox>
     </HeaderContainer>
   );
 };
 
-export default HeaderNavigate;
+export default HeaderNav;

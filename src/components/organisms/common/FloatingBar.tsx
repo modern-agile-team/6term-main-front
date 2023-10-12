@@ -1,19 +1,22 @@
-import UserIcon from "@/components/common/UserIcon";
-import React, { useState, useEffect } from "react";
-import { styled } from "styled-components";
+import UserIcon from '@/components/common/UserIcon';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { styled } from 'styled-components';
 import {
   MdOutlineSearch,
   MdKeyboardArrowUp,
   MdKeyboardArrowDown,
-} from "react-icons/md";
-import { IoMdChatbubbles } from "react-icons/io";
-import Link from "next/link";
+} from 'react-icons/md';
+import { IoMdChatbubbles } from 'react-icons/io';
+import Link from 'next/link';
+import ChatModal from '@/components/molecules/chat-modal/ChatModal';
+import useModal from '@/hooks/useModal';
 
 interface FloatingBoxProps {
   position: number;
 }
 
-const FloatingBox = styled.div < FloatingBoxProps> `
+const FloatingBox = styled.div<FloatingBoxProps>`
   margin: 10px;
   position: absolute;
   align-items: center;
@@ -22,32 +25,35 @@ const FloatingBox = styled.div < FloatingBoxProps> `
   top: ${(props) => props.position}px;
   right: 50px;
   /* border: 3px solid #9d9d9d; */
-`
+`;
 const FriendSearchIcon = styled.div`
   font-size: 30px;
-  color: #91C8E4;
-`
+  color: #91c8e4;
+`;
 
 const ChatIcon = styled.div`
   font-size: 30px;
-  color: #91C8E4;
-`
+  color: #91c8e4;
+  cursor: pointer;
+`;
 const ScrollButotn = styled.div`
   font-size: 30px;
   cursor: pointer;
   opacity: 0.7;
-`
+`;
 
 const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 const scrollToBottom = () => {
   const windowHeight = window.innerHeight;
   const documentHeight = document.documentElement.scrollHeight;
-  window.scrollTo({
-    top: documentHeight - windowHeight,
-    behavior: "smooth",
+  const scrollDifference = documentHeight - window.scrollY - windowHeight;
+
+  window.scrollBy({
+    top: scrollDifference,
+    behavior: 'smooth',
   });
 };
 
@@ -63,14 +69,17 @@ const FloatingBar = () => {
       setFloatingPosition(200);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  const router = useRouter();
+  const { isOpenModal: chatState, handleModal: chatHandle } = useModal();
 
   return (
     <FloatingBox position={floatingPosition}>
@@ -87,20 +96,19 @@ const FloatingBar = () => {
         </a>
       </Link>
       <UserIcon />
-      <Link legacyBehavior href="/chatting">
-        <a>
-          <ChatIcon>
-            <IoMdChatbubbles />
-          </ChatIcon>
-        </a>
-      </Link>
+      <a>
+        <ChatIcon onClick={chatHandle}>
+          <IoMdChatbubbles />
+        </ChatIcon>
+        {chatState && <ChatModal show={chatState} hide={chatHandle} />}
+      </a>
       <a>
         <ScrollButotn>
           <MdKeyboardArrowDown onClick={scrollToBottom} />
         </ScrollButotn>
       </a>
     </FloatingBox>
-  )
-}
+  );
+};
 
 export default FloatingBar;
