@@ -5,10 +5,8 @@ import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
 import LoginModal from '../login-modal/LoginModal';
-import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
-import { NotificationModalAtom } from '@/recoil/atoms/NotificatioinModalAtom';
 import AlarmModal from '../notification/AlarmModal';
+import useModal from '@/hooks/useModal';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
@@ -73,16 +71,8 @@ const NavData = [
 
 const HeaderNavigate = (): JSX.Element => {
   const router = useRouter();
-  const [isLoginModal, setIsLoginModal] = useRecoilState(LoginModalAtom);
-  const [isAlarmModal, setIsAlarmModal] = useRecoilState(NotificationModalAtom);
-
-  const handleLoginClick = useCallback(() => {
-    setIsLoginModal(!isLoginModal);
-  }, [isLoginModal]);
-
-  const handleAlarmClick = useCallback(() => {
-    setIsAlarmModal(!isAlarmModal);
-  }, [isAlarmModal]);
+  const { isOpenModal: loginState, handleModal: loginHandle } = useModal();
+  const { isOpenModal: alarmState, handleModal: alarmHandle } = useModal();
 
   return (
     <HeaderContainer>
@@ -123,12 +113,12 @@ const HeaderNavigate = (): JSX.Element => {
             })}
           </ul>
         </nav>
-        <LoginButton onClick={handleLoginClick}>Login</LoginButton>
-        {isLoginModal && <LoginModal />}
-        <AlarmIcon onClick={handleAlarmClick}>
+        <LoginButton onClick={loginHandle}>Login</LoginButton>
+        {loginState && <LoginModal show={loginState} hide={loginHandle} />}
+        <AlarmIcon onClick={alarmHandle}>
           <AiFillBell />
         </AlarmIcon>
-        {isAlarmModal && <AlarmModal />}
+        {alarmState && <AlarmModal show={alarmState} hide={alarmHandle} />}
       </HeaderNavBox>
     </HeaderContainer>
   );

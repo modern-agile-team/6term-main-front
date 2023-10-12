@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { TestSelectBoard } from '@/recoil/atoms/UserPostsAtom';
 import { PostListSelector } from '@/recoil/selectors/UserPostSelector';
 import UnitBox from '@/components/molecules/post-board/UnitBox';
+import useRecoilCacheRefresh from '@/hooks/useRecoilCaheRefresh';
 import BOARDS from '@/apis/boards';
 
 const PostBoard = (): JSX.Element => {

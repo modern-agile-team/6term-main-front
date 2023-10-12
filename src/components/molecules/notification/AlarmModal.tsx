@@ -1,19 +1,17 @@
-import { NotificationModalAtom } from '@/recoil/atoms/NotificatioinModalAtom';
 import { useRecoilState } from 'recoil';
 import * as S from './styled';
 
-const AlarmModal = () => {
-  const [isAlarmModal, setIsAlarmModal] = useRecoilState(NotificationModalAtom);
+interface ModalType {
+  show: boolean;
+  hide: () => void;
+}
 
-  const handleCloseAlarm = () => {
-    setIsAlarmModal(!isAlarmModal);
-  };
-
+const AlarmModal = ({ show, hide }: ModalType) => {
   return (
     <div>
       <S.ModalWrapper>
         <S.FlexBox>
-          <S.CloseBtn onClick={handleCloseAlarm}>X</S.CloseBtn>
+          <S.CloseBtn onClick={hide}>X</S.CloseBtn>
         </S.FlexBox>
         <S.FlexBox>
           <button>&lt;</button>
@@ -26,8 +24,8 @@ const AlarmModal = () => {
         onClick={(e: React.MouseEvent) => {
           e.preventDefault();
 
-          if (isAlarmModal) {
-            handleCloseAlarm();
+          if (show) {
+            hide();
           }
         }}
       />
