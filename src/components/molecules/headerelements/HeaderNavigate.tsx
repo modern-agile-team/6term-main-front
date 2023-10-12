@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil';
 import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
 import { NotificationModalAtom } from '@/recoil/atoms/NotificatioinModalAtom';
 import AlarmModal from '../notification/AlarmModal';
+import ChatModal from '../chat-modal/ChatModal';
 
 // 전체 Header Container
 const HeaderContainer = styled.div`
