@@ -4,7 +4,7 @@ import styled from 'styled-components';
 /** 게시판 컨테이너 */
 export const PostContainer = styled.div`
   width: 200px;
-  height: 242px;
+  height: 252px;
   display: flex;
   background-color: #fff;
   box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 25%);
@@ -45,7 +45,6 @@ export const ProfileImg = styled.img`
 
 /**게시판 이름 */
 export const BoardList = styled.div<ThumbnailBg>`
-  margin-left: auto;
   margin-right: 10px;
   background-color: ${(props) => props.color};
   font-weight: bold;
@@ -81,8 +80,18 @@ export const FontBox = styled.div<PostFont>`
   font-weight: ${(props) => props.fontWeight};
   font-size: ${(props) => props.fontSize}px;
   flex-wrap: wrap;
-  padding: 4px;
+  margin: 0px;
 `;
+
+export const Cardbody = styled.div`
+  font-size: 16px;
+  font-weight: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+  height: 60px;
+`;
+
 /**검색 컨테이너 */
 export const SearchContainer = styled.div`
   width: auto;

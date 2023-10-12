@@ -1,37 +1,178 @@
+import * as S from './styled';
+import { useState } from 'react';
+import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+import createPostApi from '@/apis/postApi/createPostApi';
+import createPostImgApi from '@/apis/postApi/addImageApi';
+import { useRecoilRefresher_UNSTABLE, useRecoilValue } from 'recoil';
+import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
+import CustomSelect from '@/components/molecules/post-board/CustomSelect';
+import BOARDS from '@/apis/boards';
+import { useRouter } from 'next/router';
+import { PostListSelector } from '@/recoil/selectors/UserPostSelector';
+
+const QuillWrapper = dynamic(() => import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+
+const modules = {
+  toolbar: [
+    [{ header: '1' }, { header: '2' }, { font: [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
+    ['link'],
+    ['clean'],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};
+/*
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
+const formats = [
+  'header',
+  'font',
+  'size',
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'list',
+  'bullet',
+  'indent',
+  'link',
+];
+
 const PostCreate = () => {
+  const [unitTitle, setUnitTitle] = useState<string>(''); //제목
+  const [quillText, setQuillText] = useState<string>(''); //본문
+  const [uploadImage1, setUploadImage1] = useState<FormData>(); //이미지
+  const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
+  const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
+  const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
+  const router = useRouter();
+  const refresh = useRecoilRefresher_UNSTABLE(PostListSelector);
+
+  /**업로드 버튼 핸들링 */
+  const handleSubmit = async () => {
+    if (confirm('업로드하시겠습니까?')) {
+      const isData = {
+        head: unitTitle,
+        body: quillText,
+        main_category: getBoard.main,
+        sub_category: getBoard.sub,
+      };
+      const data = await BOARDS.createPost(isData);
+      if (uploadImage1 !== undefined) {
+        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+      }
+      if (uploadImage2 !== undefined) {
+        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+      }
+      if (uploadImage3 !== undefined) {
+        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+      }
+      //router => 해당 글 로 페이지 이동
+      refresh();
+      router.push(`/post/unit/${data.data.id}`);
+    }
+  };
+
+  /**이미지 버튼 핸들링 */
+  const handleImageUpload1 = (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    setUploadImage1(formData);
+  };
+  const handleImageUpload2 = (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    setUploadImage2(formData);
+  };
+  const handleImageUpload3 = (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    setUploadImage3(formData);
+  };
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}>
+    <S.CreatPostContainer>
       <div>
-        <div>
-          <div>제목</div>
-          <input type="text" placeholder="제목입력"></input>
-        </div>
-        <div>
-          <div>
-            <div>본문</div>
-            <div>본문 네비바</div>
-          </div>
-          <input
-            size={100}
-            style={{ height: 100 }}
+        <S.CreatePostTitle>
+          <S.FontSize>제목</S.FontSize>
+          <S.InputBox
             type="text"
-            placeholder="본문 입력"></input>
+            value={unitTitle}
+            placeholder="제목입력"
+            onChange={(e: any) => {
+              setUnitTitle(e.target.value);
+            }}></S.InputBox>
+        </S.CreatePostTitle>
+        <div>
+          <S.FlexBox direction="row">
+            <S.FontSize>본문</S.FontSize>
+            {/* 게시판 선택 */}
+            <CustomSelect />
+          </S.FlexBox>
+          <S.CreatePostBody>
+            <QuillWrapper
+              value={quillText}
+              theme="snow"
+              modules={modules}
+              formats={formats}
+              placeholder="글을 작성해 주세요."
+              onChange={(e: any) => setQuillText(e)}
+              style={{ height: 400 }}
+            />
+          </S.CreatePostBody>
         </div>
         <div>
-          <div>사진</div>
-          <div>
-            <div>사진</div>
-            <div>사진 url들어올 곳</div>
-            <button>사진추가</button>
-          </div>
+          <S.FontSize>사진</S.FontSize>
+          <S.AddImageContainer>
+            <BsFillFileEarmarkImageFill size={24} />
+            <S.ImageInput
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload1}
+            />
+          </S.AddImageContainer>
+          <S.AddImageContainer>
+            <BsFillFileEarmarkImageFill size={24} />
+            <S.ImageInput
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload2}
+            />
+          </S.AddImageContainer>
+          <S.AddImageContainer>
+            <BsFillFileEarmarkImageFill size={24} />
+            <S.ImageInput
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload3}
+            />
+          </S.AddImageContainer>
         </div>
-        <div>올리기</div>
+        <S.FlexBox side="25px 0px 10px 0px">
+          <S.ButtonUI onClick={handleSubmit}>올리기</S.ButtonUI>
+        </S.FlexBox>
       </div>
-    </div>
+    </S.CreatPostContainer>
   );
 };
 
