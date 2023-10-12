@@ -2,23 +2,21 @@ import React, { PropsWithChildren, useCallback } from 'react';
 import * as S from './styled';
 import Image from 'next/image';
 import logo from '../../../../public/Logo.png';
-import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
 import { useRouter } from 'next/router';
-import { Naver, Kakao, Facebook } from './Providers';
+import { Naver, Kakao } from './Providers';
+import useModal from '@/hooks/useModal';
 
-const LoginModal = () => {
-  const [isOpenModal, setOpenModal] = useRecoilState(LoginModalAtom);
+interface ModalType {
+  show: boolean;
+  hide: () => void;
+}
 
-  const onClickToggleModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-  }, [isOpenModal]);
-
+const LoginModal = ({ show, hide }: ModalType) => {
   return (
     <div>
       <S.ModalWrapper>
         <S.FlexBox>
-          <S.Button onClick={onClickToggleModal}>X</S.Button>
+          <S.Button onClick={hide}>X</S.Button>
         </S.FlexBox>
         <Image src={logo} alt="로고" width={80} />
         <S.FlexBox>
@@ -27,7 +25,6 @@ const LoginModal = () => {
         <div>로그인</div>
         <S.FlexBox direction="column">
           <Naver />
-          {/* <Facebook /> */}
           <Kakao />
         </S.FlexBox>
       </S.ModalWrapper>
@@ -35,8 +32,8 @@ const LoginModal = () => {
         onClick={(e: React.MouseEvent) => {
           e.preventDefault();
 
-          if (isOpenModal) {
-            onClickToggleModal();
+          if (show) {
+            hide();
           }
         }}
       />

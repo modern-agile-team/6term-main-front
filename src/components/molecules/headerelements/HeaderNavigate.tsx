@@ -5,9 +5,6 @@ import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
 import LoginModal from '../login-modal/LoginModal';
-import { useRecoilState } from 'recoil';
-import { LoginModalAtom } from '@/recoil/atoms/LoginModalAtom';
-import { NotificationModalAtom } from '@/recoil/atoms/NotificatioinModalAtom';
 import AlarmModal from '../notification/AlarmModal';
 import useModal from '@/hooks/useModal';
 
@@ -74,19 +71,8 @@ const NavData = [
 
 const HeaderNavigate = (): JSX.Element => {
   const router = useRouter();
-  const [isLoginModal, setIsLoginModal] = useRecoilState(LoginModalAtom);
-  const [isAlarmModal, setIsAlarmModal] = useRecoilState(NotificationModalAtom);
-
   const { isOpenModal: loginState, handleModal: loginHandle } = useModal();
   const { isOpenModal: alarmState, handleModal: alarmHandle } = useModal();
-
-  const handleLoginClick = useCallback(() => {
-    setIsLoginModal(!isLoginModal);
-  }, [isLoginModal]);
-
-  const handleAlarmClick = useCallback(() => {
-    setIsAlarmModal(!isAlarmModal);
-  }, [isAlarmModal]);
 
   return (
     <HeaderContainer>
@@ -128,11 +114,11 @@ const HeaderNavigate = (): JSX.Element => {
           </ul>
         </nav>
         <LoginButton onClick={loginHandle}>Login</LoginButton>
-        {loginState && <LoginModal/>}
+        {loginState && <LoginModal show={loginState} hide={loginHandle} />}
         <AlarmIcon onClick={alarmHandle}>
           <AiFillBell />
         </AlarmIcon>
-        {alarmState && <AlarmModal />}
+        {alarmState && <AlarmModal show={alarmState} hide={alarmHandle} />}
       </HeaderNavBox>
     </HeaderContainer>
   );
