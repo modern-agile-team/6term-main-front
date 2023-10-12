@@ -68,25 +68,29 @@ const PostCreate = () => {
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
     if (confirm('업로드하시겠습니까?')) {
-      const isData = {
-        head: unitTitle,
-        body: quillText,
-        main_category: getBoard.main,
-        sub_category: getBoard.sub,
-      };
-      const data = await BOARDS.createPost(isData);
-      if (uploadImage1 !== undefined) {
-        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+      if (getBoard.sub === '') {
+        alert('카테고리를 선택해주세요.');
+      } else {
+        const isData = {
+          head: unitTitle,
+          body: quillText,
+          main_category: getBoard.main,
+          sub_category: getBoard.sub,
+        };
+        const data = await BOARDS.createPost(isData);
+        if (uploadImage1 !== undefined) {
+          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        }
+        if (uploadImage2 !== undefined) {
+          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        }
+        if (uploadImage3 !== undefined) {
+          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        }
+        //router => 해당 글 로 페이지 이동
+        refresh();
+        router.push(`/post/unit/${data.data.id}`);
       }
-      if (uploadImage2 !== undefined) {
-        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-      }
-      if (uploadImage3 !== undefined) {
-        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-      }
-      //router => 해당 글 로 페이지 이동
-      refresh();
-      router.push(`/post/unit/${data.data.id}`);
     }
   };
 

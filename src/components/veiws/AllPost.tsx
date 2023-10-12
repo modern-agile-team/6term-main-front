@@ -1,5 +1,9 @@
 import PostTemplate from '../templates/post-temp/PostTemplate';
 
+export interface Board {
+  main: string;
+}
+
 const AllPost = () => {
   return (
     <div>

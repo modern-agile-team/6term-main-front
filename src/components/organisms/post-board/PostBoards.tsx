@@ -1,11 +1,11 @@
-import PostBox from '@/components/molecules/post-board/PostBox';
 import * as S from './styled';
-import { useRecoilState } from 'recoil';
-import { UserPostsAtom } from '@/recoil/atoms/UserPostsAtom';
-import { BoardNumber } from '@/components/veiws/FreePost';
+import { useRecoilValue } from 'recoil';
+import { PostListSelector } from '@/recoil/selectors/UserPostSelector';
+import UnitBox from '@/components/molecules/post-board/UnitBox';
+import { Board } from '@/components/veiws/AllPost';
 
-const PostBoards = (props: BoardNumber): JSX.Element => {
-  const [isData, setIsDate] = useRecoilState(UserPostsAtom);
+const PostBoards = (props: Board): JSX.Element => {
+  const getList = useRecoilValue(PostListSelector);
 
   return (
     <div
@@ -15,12 +15,12 @@ const PostBoards = (props: BoardNumber): JSX.Element => {
         flexDirection: 'row',
         flexWrap: 'wrap',
       }}>
-      {isData
-        .filter((data) => data.board === props.number)
-        .map((data) => {
+      {getList
+        .filter((data: any) => data.main_category === props.main)
+        .map((data: any) => {
           return (
             <div key={data.id}>
-              <PostBox {...data} />
+              <UnitBox {...data} />
             </div>
           );
         })}
