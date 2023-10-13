@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
+import useModal from '@/hooks/useModal';
+import { useEffect } from 'react';
 
 const CustomSelect = () => {
   const boardList = [
@@ -27,8 +29,8 @@ const CustomSelect = () => {
     },
   ];
 
-  const [isCheckShow, setCheckShow] = useState<boolean>(false);
   const [getBoard, setBoard] = useRecoilState(SelectBoardAtom);
+  const { isOpenModal, handleModal } = useModal();
 
   /** 게시판 선택 시 */
   const handleOnChangeSelectValue = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -39,21 +41,16 @@ const CustomSelect = () => {
       return {
         ...prev,
         main: target.dataset.mainselect || '',
-        sub: innerText,
+        sub: innerText || '',
       };
     });
   };
 
-  /**외부 클릭 시 */
-  const handleClose = () => {
-    setCheckShow(!isCheckShow);
-  };
-
   return (
     <>
-      <SelectBox onClick={() => setCheckShow(!isCheckShow)}>
+      <SelectBox onClick={handleModal}>
         <Label>{getBoard.sub}게시판</Label>
-        <SelectOptions show={`${isCheckShow}`}>
+        <SelectOptions show={`${isOpenModal}`}>
           {boardList.map((list) => {
             return (
               <div key={list.id}>
@@ -72,13 +69,13 @@ const CustomSelect = () => {
             );
           })}
         </SelectOptions>
-        {isCheckShow && (
+        {isOpenModal && (
           <DropDown
             onClick={(e: React.MouseEvent) => {
               e.preventDefault();
 
-              if (isCheckShow) {
-                handleClose();
+              if (isOpenModal) {
+                handleModal();
               }
             }}></DropDown>
         )}

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 /** 게시판 컨테이너 */
 export const PostContainer = styled.div`
   width: 200px;
-  height: 252px;
+  height: 242px;
   display: flex;
   background-color: #fff;
   box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 25%);
@@ -63,6 +63,7 @@ export const PostTitle = styled(Link)<PostBoxes>`
   background-color: ${(props) => props.color};
   text-decoration: none;
   color: #000;
+  //
 `;
 
 interface PostFont {
@@ -86,10 +87,25 @@ export const FontBox = styled.div<PostFont>`
 export const Cardbody = styled.div`
   font-size: 16px;
   font-weight: none;
-  overflow: hidden;
+  overflow: visible;
   text-overflow: ellipsis;
   width: 200px;
-  height: 60px;
+  height: 40px;
+  padding: 0px;
+  margin: 0px;
+  h1,
+  h2,
+  ol,
+  li,
+  p,
+  span,
+  strong,
+  u {
+    font-size: 16px;
+    font-weight: 0px;
+    margin: 0px;
+    text-decoration: none;
+  }
 `;
 
 /**검색 컨테이너 */
@@ -152,7 +168,7 @@ interface ThumbnailBg {
  */
 export const ThumbnailImg = styled.div<ThumbnailBg>`
   width: 200px;
-  height: 130px;
+  height: 120px;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: ${(props) => props.color};

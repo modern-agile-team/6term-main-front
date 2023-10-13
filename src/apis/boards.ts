@@ -46,10 +46,7 @@ const BOARDS = {
     const result: AxiosResponse = await instance.get(`${BOARDS.path}`, {
       params: {
         page: 1,
-        limit: 3,
-      },
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+        limit: 20,
       },
     });
     return result.data;

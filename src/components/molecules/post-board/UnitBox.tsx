@@ -3,6 +3,7 @@ import * as S from './styled';
 import Modal from './Modal';
 import UserSmaple from './UserSample';
 import { CgProfile } from 'react-icons/cg';
+import { mainCategoryMappings, subCategoryMappings } from './unitBoxMapping';
 interface BoardInfo {
   isData: {
     id: number;
@@ -30,86 +31,36 @@ interface BoardInfo {
 
 const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const [boardMainTitle, setBoardMainTitle] = useState<string>('');
-  const [boardSubTitle, setBoardSubTitle] = useState<string>('');
-  const [boardSubColor, setBoardSubColor] = useState<string>('');
-  const [boardMainColor, setBoardMainColor] = useState<string>('');
+  const [getHtml, setHtml] = useState<any>();
+
+  const [getCategory, setCategory] = useState({
+    boardMainTitle: mainCategoryMappings[isData.main_category]?.title || '',
+    boardSubTitle: subCategoryMappings[isData.sub_category]?.title || '',
+    boardSubColor: subCategoryMappings[isData.sub_category]?.color || '',
+    boardMainColor: mainCategoryMappings[isData.main_category]?.color || '',
+  });
 
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isOpenModal);
   }, [isOpenModal]);
 
-  const changeBoard = () => {
-    switch (isData.main_category) {
-      case '자유':
-        setBoardMainTitle('[자유]');
-        setBoardMainColor('#abf7f7');
-        break;
-      case '멘토멘티':
-        setBoardMainTitle('[멘멘]');
-        setBoardMainColor('#f99');
-        break;
-      case '만남':
-        setBoardMainTitle('[만남]');
-        setBoardMainColor('#adff88');
-        break;
-      case '장터':
-        setBoardMainTitle('[장터]');
-        setBoardMainColor('#ffee99');
-        break;
-    }
-    switch (isData.sub_category) {
-      case '잡담':
-        setBoardSubTitle('[잡담]');
-        setBoardSubColor('#cdffff');
-        break;
-      case '홍보':
-        setBoardSubTitle('[홍보]');
-        setBoardSubColor('#cdffff');
-        break;
-      case '공부':
-        setBoardSubTitle('[공부]');
-        setBoardSubColor('#ffc2c2');
-        break;
-      case '운동':
-        setBoardSubTitle('[운동]');
-        setBoardSubColor('#ffc2c2');
-        break;
-      case '토익':
-        setBoardSubTitle('[토익]');
-        setBoardSubColor('#ffc2c2');
-        break;
+  useEffect(() => {
+    setCategory((prevState) => ({
+      ...prevState,
+      boardMainTitle: mainCategoryMappings[isData.main_category]?.title || '',
+      boardMainColor: mainCategoryMappings[isData.main_category]?.color || '',
+      boardSubTitle: subCategoryMappings[isData.sub_category]?.title || '',
+      boardSubColor: subCategoryMappings[isData.sub_category]?.color || '',
+    }));
+  }, [isData.main_category, isData.sub_category]);
 
-      case '친구':
-        setBoardSubTitle('[친구]');
-        setBoardSubColor('#cbffb3');
-        break;
-      case '밥약':
-        setBoardSubTitle('[밥약]');
-        setBoardSubColor('#cbffb3');
-        break;
-      case '미팅':
-        setBoardSubTitle('[미팅]');
-        setBoardSubColor('#cbffb3');
-        break;
-      case '책':
-        setBoardSubTitle('[책]');
-        setBoardSubColor('#fff4bc');
-        break;
-      case '중고':
-        setBoardSubTitle('[중고]');
-        setBoardSubColor('#fff4bc');
-        break;
-      case '자취방':
-        setBoardSubTitle('[자취방]');
-        setBoardSubColor('#fff4bc');
-        break;
-    }
+  const getHTML = () => {
+    setHtml(<S.Cardbody dangerouslySetInnerHTML={{ __html: isData.body }} />);
   };
 
   useEffect(() => {
-    changeBoard();
-  });
+    getHTML();
+  }, []);
 
   return (
     <S.PostContainer>
@@ -135,7 +86,10 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
             <S.FontBox fontWeight="bold" fontSize={18}>
               {isData.head.slice(0, 20)}
             </S.FontBox>
-            <S.Cardbody dangerouslySetInnerHTML={{ __html: isData.body }} />
+            {/* {process.browser && (
+              <S.Cardbody dangerouslySetInnerHTML={{ __html: isData.body }} />
+            )} */}
+            {process.browser && getHtml}
           </S.FlexBox>
         </S.PostTitle>
         <S.FlexBox direction="row" margin="auto">
@@ -149,8 +103,12 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
           </S.DialogButton>
           <div>{isData.userId.name}</div>
           <div style={{ marginLeft: 'auto', display: 'flex' }}>
-            <S.BoardList color={boardMainColor}>{boardMainTitle}</S.BoardList>
-            <S.BoardList color={boardSubColor}>{boardSubTitle}</S.BoardList>
+            <S.BoardList color={getCategory.boardMainColor}>
+              {getCategory.boardMainTitle}
+            </S.BoardList>
+            <S.BoardList color={getCategory.boardSubColor}>
+              {getCategory.boardSubTitle}
+            </S.BoardList>
           </div>
         </S.FlexBox>
       </S.FlexBox>
