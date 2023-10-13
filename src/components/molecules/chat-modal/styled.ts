@@ -116,7 +116,7 @@ export const ChatSpaceName = styled.div`
   line-height: 64px;
   border: none;
   width: 100%;
-  text-align: left;
+  text-align: center;
   border-top: 1px solid rgb(82, 38, 83);
   border-bottom: 1px solid rgb(82, 38, 83);
   font-weight: 900;
@@ -126,13 +126,13 @@ export const ChatSpaceName = styled.div`
   overflow: hidden;
   white-space: nowrap;
   padding: 0;
-  padding-left: 16px;
+  /* padding-left: 16px; */
   margin: 0;
   color: white;
 `;
 
 export const ChatListScroll = styled.div`
-  height: calc(100vh - 102px);
+  height: 436px;
   overflow-y: auto;
 `;
 
