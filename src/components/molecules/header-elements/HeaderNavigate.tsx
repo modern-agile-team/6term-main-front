@@ -3,63 +3,10 @@ import Logo from '../Logo';
 import React, { useCallback, useState } from 'react';
 import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
-import { styled } from 'styled-components';
+import * as S from './styled';
 import LoginModal from '../login-modal/LoginModal';
 import AlarmModal from '../notification/AlarmModal';
 import useModal from '@/hooks/useModal';
-
-// 전체 Header Container
-const HeaderContainer = styled.div`
-  /* background-color: blanchedalmond; */
-  position: relative;
-  height: 80px;
-  width: 1000;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  /* flex-wrap: wrap; */
-
-  padding: 0px 20px;
-  z-index: 1000;
-  transition: all 0.3s ease;
-`;
-
-// Logo 박스
-const LogoSpace = styled.div`
-  position: relative;
-  margin-right: 20px;
-`;
-
-// HeaderNav List 박스
-const HeaderNavBox = styled.div`
-  margin-top: 20px;
-  margin-right: 10px;
-  position: sticky;
-  display: flex;
-  align-items: center;
-`;
-
-// 로그인 버튼
-const LoginButton = styled.button`
-  margin-top: -16px;
-  margin-right: 10px;
-  border: none;
-  cursor: pointer;
-`;
-
-// 알람 버튼
-const AlarmIcon = styled.button`
-  margin-top: -10px;
-  /* margin-left: 5px; */
-  color: #8acdef;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 24px;
-  &:hover {
-    color: #749bc2;
-  }
-`;
 
 const NavData = [
   { id: 'menu01', name: '전체 게시판', path: '/' },
@@ -75,11 +22,11 @@ const HeaderNavigate = (): JSX.Element => {
   const { isOpenModal: alarmState, handleModal: alarmHandle } = useModal();
 
   return (
-    <HeaderContainer>
-      <LogoSpace>
+    <S.HeaderContainer>
+      <S.LogoSpace>
         <Logo />
-      </LogoSpace>
-      <HeaderNavBox>
+      </S.LogoSpace>
+      <S.HeaderNavBox>
         <nav>
           <ul
             style={{
@@ -113,14 +60,14 @@ const HeaderNavigate = (): JSX.Element => {
             })}
           </ul>
         </nav>
-        <LoginButton onClick={loginHandle}>Login</LoginButton>
+        <S.LoginButton onClick={loginHandle}>Login</S.LoginButton>
         {loginState && <LoginModal show={loginState} hide={loginHandle} />}
-        <AlarmIcon onClick={alarmHandle}>
+        <S.AlarmIcon onClick={alarmHandle}>
           <AiFillBell />
-        </AlarmIcon>
+        </S.AlarmIcon>
         {alarmState && <AlarmModal show={alarmState} hide={alarmHandle} />}
-      </HeaderNavBox>
-    </HeaderContainer>
+      </S.HeaderNavBox>
+    </S.HeaderContainer>
   );
 };
 

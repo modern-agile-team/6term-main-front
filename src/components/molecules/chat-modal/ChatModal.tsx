@@ -1,5 +1,6 @@
 import React from 'react';
 import * as S from './styled';
+import ChatSpace from './ChatSpace';
 
 interface ModalType {
   show: boolean;
@@ -10,10 +11,7 @@ const ChatModal = ({ show, hide }: ModalType) => {
   return (
     <div>
       <S.ModalWrapper>
-        채팅 모달
-        <S.FlexBox>
-          <S.DivisionLine />
-        </S.FlexBox>
+        <ChatSpace />
       </S.ModalWrapper>
       <S.Backdrop
         onClick={(e: React.MouseEvent) => {
