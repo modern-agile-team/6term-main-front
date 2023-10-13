@@ -45,8 +45,10 @@ const scrollToTop = () => {
 const scrollToBottom = () => {
   const windowHeight = window.innerHeight;
   const documentHeight = document.documentElement.scrollHeight;
-  window.scrollTo({
-    top: documentHeight - windowHeight,
+  const scrollDifference = documentHeight - window.scrollY - windowHeight;
+
+  window.scrollBy({
+    top: scrollDifference,
     behavior: 'smooth',
   });
 };

@@ -13,4 +13,4 @@ const AllPost = () => {
   );
 };
 
-export default AllPost;
+export default TotalPost;
