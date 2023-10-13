@@ -1,6 +1,10 @@
 import PostTemplate from '../templates/post-temp/PostTemplate';
 
-const TotalPost = () => {
+export interface Board {
+  main: string;
+}
+
+const AllPost = () => {
   return (
     <div>
       {/* 전체 게시판 */}

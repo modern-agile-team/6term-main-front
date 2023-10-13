@@ -2,6 +2,9 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: 'http://13.209.21.62:3000',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 //요청 전 인터셉터

@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import createPostApi from '@/apis/postApi/createPostApi';
-import createPostImgApi from '@/apis/postApi/addImageApi';
-import { useRecoilRefresher_UNSTABLE, useRecoilValue } from 'recoil';
+import {
+  useRecoilRefresher_UNSTABLE,
+  useRecoilValue,
+  useResetRecoilState,
+} from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 import BOARDS from '@/apis/boards';
@@ -64,29 +66,36 @@ const PostCreate = () => {
   const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
   const router = useRouter();
   const refresh = useRecoilRefresher_UNSTABLE(PostListSelector);
-
+  const resetSelect = useResetRecoilState(SelectBoardAtom);
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
     if (confirm('업로드하시겠습니까?')) {
-      const isData = {
-        head: unitTitle,
-        body: quillText,
-        main_category: getBoard.main,
-        sub_category: getBoard.sub,
-      };
-      const data = await BOARDS.createPost(isData);
-      if (uploadImage1 !== undefined) {
-        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+      if (getBoard.sub === '' || unitTitle === '' || quillText === '') {
+        if (getBoard.sub === '') alert('카테고리를 선택해주세요.');
+        if (unitTitle === '') alert('제목을 입력해주세요.');
+        if (quillText === '') alert('본문내용을 입력해주세요.');
+      } else {
+        const isData = {
+          head: unitTitle,
+          body: quillText,
+          main_category: getBoard.main,
+          sub_category: getBoard.sub,
+        };
+        const data = await BOARDS.createPost(isData);
+        if (uploadImage1 !== undefined) {
+          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        }
+        if (uploadImage2 !== undefined) {
+          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        }
+        if (uploadImage3 !== undefined) {
+          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        }
+        //router => 해당 글 로 페이지 이동
+        refresh(); //selector update
+        router.push(`/post/unit/${data.data.id}`);
+        resetSelect(); //게시글 카테고리 초기화
       }
-      if (uploadImage2 !== undefined) {
-        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-      }
-      if (uploadImage3 !== undefined) {
-        await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-      }
-      //router => 해당 글 로 페이지 이동
-      refresh();
-      router.push(`/post/unit/${data.data.id}`);
     }
   };
 

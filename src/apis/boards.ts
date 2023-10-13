@@ -18,15 +18,12 @@ const BOARDS = {
     main_category,
     sub_category,
   }: Post): Promise<any> {
-    const result: AxiosResponse = await instance.post<Post>(
-      `${BOARDS.path}/post`,
-      {
-        head: head,
-        body: body,
-        main_category: main_category,
-        sub_category: sub_category,
-      },
-    );
+    const result: AxiosResponse = await instance.post<Post>(`${BOARDS.path}`, {
+      head: head,
+      body: body,
+      main_category: main_category,
+      sub_category: sub_category,
+    });
     return result;
   },
 
@@ -46,9 +43,10 @@ const BOARDS = {
 
   //게시글 리스트 api
   async getlistAll(): Promise<any> {
-    const result: AxiosResponse = await instance.get(`${BOARDS.path}/getall`, {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+    const result: AxiosResponse = await instance.get(`${BOARDS.path}`, {
+      params: {
+        page: 1,
+        limit: 20,
       },
     });
     return result.data;
