@@ -15,9 +15,9 @@ interface BoardInfo {
     userId: {
       id: number;
       name: string;
-      userImage?: {
+      userImage: {
         id: number | null;
-        imageUrl: string | null;
+        imageUrl?: string | undefined | null;
       };
     };
     boardImages: [
@@ -95,7 +95,10 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
         <S.FlexBox direction="row" margin="auto">
           {isOpenModal && (
             <Modal onClickToggleModal={onClickToggleModal}>
-              <UserSmaple name={isData.userId.name} />
+              <UserSmaple
+                name={isData.userId.name}
+                img={isData.userId.userImage.imageUrl}
+              />
             </Modal>
           )}
           <S.DialogButton onClick={onClickToggleModal}>
