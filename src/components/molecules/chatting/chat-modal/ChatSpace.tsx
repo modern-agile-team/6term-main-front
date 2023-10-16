@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import * as S from './styled';
 
-const ChatSpace = () => {
+export interface ChatSpaceProps {
+  children: React.ReactNode;
+}
+
+const ChatSpace = (props: ChatSpaceProps): JSX.Element => {
   return (
     <div>
       <S.ChatSpaceWrapper>

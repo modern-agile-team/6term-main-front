@@ -66,6 +66,8 @@ export const ChatSpaces = styled.div`
 
 export const ChatLists = styled.div`
   width: 260px;
+  /* height: ; */
+  border-radius: 7px 0 0 7px;
   display: inline-flex;
   flex-direction: column;
   background: #3f0e40;
@@ -115,7 +117,7 @@ export const ChatSpaceName = styled.div`
   height: 64px;
   line-height: 64px;
   border: none;
-  width: 100%;
+  width: 260px;
   text-align: center;
   border-top: 1px solid rgb(82, 38, 83);
   border-bottom: 1px solid rgb(82, 38, 83);
