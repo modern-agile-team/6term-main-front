@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import * as S from './styled';
+import BOARDS from '@/apis/boards';
 
 interface UnitInfo {
   img: string;
@@ -9,6 +11,16 @@ interface UnitInfo {
 
 const PostUnitHeader = ({ img, name, title }: UnitInfo) => {
   const router = useRouter();
+  const unitId = Number(router.query.id as string);
+
+  const handleTest = async () => {
+    BOARDS.getBoardLikeApi(unitId).then((res) => console.log(res));
+  };
+
+  useEffect(() => {
+    handleTest();
+  }, []);
+
   return (
     <S.FlexBox direction="row">
       <div>

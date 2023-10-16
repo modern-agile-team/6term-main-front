@@ -2,12 +2,14 @@ import * as S from './styled';
 import PostUnitHeader from '@/components/organisms/post-unit/PostUnitHeader';
 import PostUnitBody from '@/components/organisms/post-unit/PostUnitBody';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { UnitPostAtom } from '@/recoil/atoms/UserPostsAtom';
 import PostCreateComment from '@/components/organisms/post-unit/PostCreateComments';
 import PostComments from '@/components/organisms/post-unit/PostComments';
 import { useEffect, useState } from 'react';
 import { db3 } from '@/apis/apiData';
+import BOARDS from '@/apis/boards';
+import { UnitPostSelector } from '@/recoil/selectors/UserPostSelector';
 
 type ReplyType = { userName: string; comment: string; replyId: number };
 interface Info {
@@ -19,21 +21,27 @@ interface Info {
 }
 
 const PostUnit = () => {
-  const [getUnitInfo, setUnitInfo] = useRecoilState(UnitPostAtom);
-  const [getUnitComment, setUnitComment] = useState<Info[]>([]);
-
   const router = useRouter();
   const unitId = Number(router.query.id as string);
 
+  const [getUnitComment, setUnitComment] = useState<Info[]>([]);
+  // const getUnitInfo = useRecoilValue(UnitPostSelector(unitId));
+
+  // const handleTest = async (id: number) => {
+  //   BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
+  // };
+
   useEffect(() => {
+    // console.log(unitId);
+    // handleTest(unitId);
     setUnitComment(db3);
   }, []);
 
   return (
     <S.UnitContainer>
       <div>
-        <PostUnitHeader {...getUnitInfo[unitId]} />
-        <PostUnitBody {...getUnitInfo[unitId]} />
+        {/* <PostUnitHeader {...getUnitInfo[unitId]} />
+        <PostUnitBody {...getUnitInfo[unitId]} /> */}
         <S.DivisionLine />
         <PostCreateComment />
         <S.DivisionLine />
