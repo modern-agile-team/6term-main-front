@@ -1,13 +1,28 @@
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import * as S from './styled';
 
 interface UnitInfo {
-  thumbnailImg?: string;
-  mainText: string;
+  boardImages: [
+    {
+      imageUrl: string;
+      id: number;
+    },
+  ];
+  body: string;
 }
 
-const PostUnitBody = ({ thumbnailImg, mainText }: UnitInfo) => {
+const PostUnitBody = (props: UnitInfo) => {
+  const [getHtml, setHtml] = useState<any>();
   const router = useRouter();
+
+  const getHTML = () => {
+    setHtml(<S.TextOutPut dangerouslySetInnerHTML={{ __html: props.body }} />);
+  };
+
+  useEffect(() => {
+    getHTML();
+  }, []);
 
   return (
     <S.MainTextContainer>
@@ -16,9 +31,13 @@ const PostUnitBody = ({ thumbnailImg, mainText }: UnitInfo) => {
           width: 300,
           height: 250,
         }}
-        src={typeof thumbnailImg === 'string' ? thumbnailImg : undefined}
+        src={
+          typeof props.boardImages[0].imageUrl === 'string'
+            ? props.boardImages[0].imageUrl
+            : undefined
+        }
         alt="섬네일 이미지"></img>
-      <S.TextOutPut>{mainText}</S.TextOutPut>
+      {process.browser && getHtml}
     </S.MainTextContainer>
   );
 };

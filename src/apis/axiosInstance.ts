@@ -10,6 +10,12 @@ const instance = axios.create({
 //요청 전 인터셉터
 instance.interceptors.request.use(
   (config) => {
+    if (typeof window !== 'undefined') {
+      const accessToken = localStorage.getItem('accessToken');
+
+      config.headers['access_token'] = accessToken;
+    }
+    config.headers['Content-Type'] = 'application/json';
     return config;
   },
   (error) => {
@@ -20,6 +26,9 @@ instance.interceptors.request.use(
 //요청 후 인터셉터
 instance.interceptors.response.use(
   (response) => {
+    if (response.status === 401) {
+      console.log('401error');
+    }
     //요청 성공
     return response;
   },

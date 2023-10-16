@@ -31,7 +31,7 @@ interface BoardInfo {
 
 const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const [getHtml, setHtml] = useState<any>();
+  const [isStateHtml, setStateHtml] = useState<boolean>(false);
 
   const [getCategory, setCategory] = useState({
     boardMainTitle: mainCategoryMappings[isData.main_category]?.title || '',
@@ -54,12 +54,8 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
     }));
   }, [isData.main_category, isData.sub_category]);
 
-  const getHTML = () => {
-    setHtml(<S.Cardbody dangerouslySetInnerHTML={{ __html: isData.body }} />);
-  };
-
   useEffect(() => {
-    getHTML();
+    setStateHtml(true);
   }, []);
 
   return (
@@ -86,10 +82,9 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
             <S.FontBox fontWeight="bold" fontSize={18}>
               {isData.head.slice(0, 20)}
             </S.FontBox>
-            {/* {process.browser && (
+            {isStateHtml && (
               <S.Cardbody dangerouslySetInnerHTML={{ __html: isData.body }} />
-            )} */}
-            {process.browser && getHtml}
+            )}
           </S.FlexBox>
         </S.PostTitle>
         <S.FlexBox direction="row" margin="auto">

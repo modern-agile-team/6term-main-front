@@ -25,15 +25,16 @@ const PostUnit = () => {
   const unitId = Number(router.query.id as string);
 
   const [getUnitComment, setUnitComment] = useState<Info[]>([]);
-  // const getUnitInfo = useRecoilValue(UnitPostSelector(unitId));
+  const getUnitInfo = useRecoilValue(UnitPostSelector(unitId));
 
-  // const handleTest = async (id: number) => {
-  //   BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
-  // };
+  const handleTest = async (id: number) => {
+    BOARDS.postBoardLikeApi(id).then((res) => console.log(res));
+    BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
+  };
 
   useEffect(() => {
-    // console.log(unitId);
-    // handleTest(unitId);
+    console.log(getUnitInfo);
+    handleTest(unitId);
     setUnitComment(db3);
   }, []);
 

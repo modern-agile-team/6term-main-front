@@ -58,6 +58,14 @@ const BOARDS = {
     return result.data;
   },
 
+  //게시글 like [post요청]
+  async postBoardLikeApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.post(
+      `${BOARDS.path}/like/${id}`,
+    );
+    return result.data;
+  },
+
   //게시글 like [get요청]
   async getBoardLikeApi(id: number): Promise<any> {
     const result: AxiosResponse = await instance.get(
