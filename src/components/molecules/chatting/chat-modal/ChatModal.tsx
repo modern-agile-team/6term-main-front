@@ -1,17 +1,17 @@
-import React, { Children } from 'react';
+import React from 'react';
 import * as S from './styled';
-import ChatSpace, { ChatSpaceProps } from './ChatSpace';
+import ChatSpace from './ChatSpace';
 
 interface ModalType {
   show: boolean;
   hide: () => void;
 }
 
-const ChatModal = (props: ModalType, { children }: ChatSpaceProps) => {
+const ChatModal = (props: ModalType) => {
   return (
     <div>
       <S.ModalWrapper>
-        <ChatSpace> {children}: ChatSpaceProps</ChatSpace>
+        <ChatSpace />
       </S.ModalWrapper>
       <S.Backdrop
         onClick={(e: React.MouseEvent) => {
