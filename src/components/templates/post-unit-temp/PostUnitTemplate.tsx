@@ -24,25 +24,37 @@ const PostUnit = () => {
   const router = useRouter();
   const unitId = Number(router.query.id as string);
 
+  const [getBoardId, setBoardId] = useState<number>(unitId);
   const [getUnitComment, setUnitComment] = useState<Info[]>([]);
-  const getUnitInfo = useRecoilValue(UnitPostSelector(unitId));
+  const getUnitInfo = useRecoilValue(UnitPostSelector(getBoardId));
 
-  const handleTest = async (id: number) => {
-    BOARDS.postBoardLikeApi(id).then((res) => console.log(res));
-    BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
-  };
+  // const handleTest = async (id: number) => {
+  //   BOARDS.postBoardLikeApi(id).then((res) => console.log(res));
+  //   BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
+  // };
 
   useEffect(() => {
     console.log(getUnitInfo);
-    handleTest(unitId);
+    // handleTest(unitId);
     setUnitComment(db3);
   }, []);
+
+  useEffect(() => {
+    setBoardId(Number(router.query.id as string));
+  });
 
   return (
     <S.UnitContainer>
       <div>
-        {/* <PostUnitHeader {...getUnitInfo[unitId]} />
-        <PostUnitBody {...getUnitInfo[unitId]} /> */}
+        <PostUnitHeader
+          userImage={getUnitInfo.userId.userImage.imageUrl}
+          name={getUnitInfo.userId.name}
+          head={getUnitInfo.head}
+        />
+        <PostUnitBody
+          boardImages={getUnitInfo.boardImages}
+          body={getUnitInfo.body}
+        />
         <S.DivisionLine />
         <PostCreateComment />
         <S.DivisionLine />
