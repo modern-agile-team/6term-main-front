@@ -1,11 +1,12 @@
 import { selector, selectorFamily } from 'recoil';
 import BOARDS from '@/apis/boards';
 
-export const PostListSelector = selector({
+export const PostListSelector = selectorFamily({
   key: 'userPostSelect',
-  get: async () => {
-    const result = await BOARDS.getlistAll();
-    return result;
+  get: (page : number) => async () => {
+    const result = await BOARDS.getlistAll(page);
+    const response = [...result].reverse();
+    return response;
   },
 });
 

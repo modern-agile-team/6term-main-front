@@ -42,13 +42,14 @@ const BOARDS = {
   },
 
   //게시글 리스트 api
-  async getlistAll(): Promise<any> {
+  async getlistAll(page: number): Promise<any> {
     const result: AxiosResponse = await instance.get(`${BOARDS.path}`, {
       params: {
-        page: 1,
-        limit: 20,
+        page: page,
+        limit: 16,
       },
     });
+    console.log(page, result);
     return result.data;
   },
 

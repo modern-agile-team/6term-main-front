@@ -4,7 +4,7 @@ import Modal from './Modal';
 import UserSmaple from './UserSample';
 import { CgProfile } from 'react-icons/cg';
 import { mainCategoryMappings, subCategoryMappings } from './unitBoxMapping';
-interface BoardInfo {
+export interface BoardInfo {
   isData: {
     id: number;
     head: string;

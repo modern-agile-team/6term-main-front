@@ -20,28 +20,24 @@ interface Info {
   userName: string;
 }
 
-const PostUnit = () => {
-  const router = useRouter();
-  const unitId = Number(router.query.id as string);
+interface BoardType {
+  boardId: number;
+}
 
-  const [getBoardId, setBoardId] = useState<number>(unitId);
+const PostUnitTemplate = (props: BoardType) => {
+  const router = useRouter();
+
   const [getUnitComment, setUnitComment] = useState<Info[]>([]);
-  const getUnitInfo = useRecoilValue(UnitPostSelector(getBoardId));
+  const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
 
   // const handleTest = async (id: number) => {
   //   BOARDS.postBoardLikeApi(id).then((res) => console.log(res));
   //   BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
   // };
-
   useEffect(() => {
-    console.log(getUnitInfo);
-    // handleTest(unitId);
+    // console.log(getUnitInfo);
     setUnitComment(db3);
   }, []);
-
-  useEffect(() => {
-    setBoardId(Number(router.query.id as string));
-  });
 
   return (
     <S.UnitContainer>
@@ -59,7 +55,7 @@ const PostUnit = () => {
         <PostCreateComment />
         <S.DivisionLine />
         {getUnitComment
-          .filter((data) => data.postId == unitId)
+          .filter((data) => data.postId == props.boardId)
           .map((data, idx) => {
             return (
               <div key={idx}>
@@ -72,4 +68,4 @@ const PostUnit = () => {
   );
 };
 
-export default PostUnit;
+export default PostUnitTemplate;
