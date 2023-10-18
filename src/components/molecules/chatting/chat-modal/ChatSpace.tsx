@@ -1,6 +1,9 @@
-import React, { PropsWithChildren, ReactNode } from 'react';
+import React, { useEffect } from 'react';
 import * as S from './styled';
-// import DMList from '../direct-message/DMList';
+import DMList from '../chat-dm/ChatDMList';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { DMDummyAtom } from '@/recoil/atoms/DMUserAtom';
+import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
 
 const ChatSpace = (): JSX.Element => {
   return (
@@ -11,7 +14,7 @@ const ChatSpace = (): JSX.Element => {
           <S.ChatSpaceName>CrabChet</S.ChatSpaceName>
           <S.ChatListScroll>
             채팅방 List
-            {/* <DMList /> */}
+            <DMList />
           </S.ChatListScroll>
         </S.ChatLists>
         <S.Chats>실제채팅방</S.Chats>

@@ -1,15 +1,15 @@
 import * as S from './styles';
 import useSocket from '@/hooks/useSocket';
 // import { IUser, IUserWithOnline } from '@typings/db';
-// import fetcher from '@utils/fetcher';
+import fetcher from '@utils/fetcher';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 // import chatspace from '../chat-modal/chatspace';
 import { NavLink } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { UserDummyAtom } from '@/recoil/atoms/ChatUserAtom';
+import { UserDummyAtom } from '@/recoil/atoms/DMUserAtom';
 // import { chatUserType } from '@/recoil/atoms/ChatUserAtom';
-// import { ChatUserDummy } from './ChatUserDummy';
+// import { DMUserDummy } from './DMUserDummy';
 
 export interface IUser {
   id: number;
@@ -97,7 +97,3 @@ const DMList: FC = () => {
 };
 
 export default DMList;
-
-const hi = () => {
-  return ' ';
-};
