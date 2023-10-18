@@ -2,12 +2,14 @@ import * as S from './styled';
 import PostUnitHeader from '@/components/organisms/post-unit/PostUnitHeader';
 import PostUnitBody from '@/components/organisms/post-unit/PostUnitBody';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { UnitPostAtom } from '@/recoil/atoms/UserPostsAtom';
 import PostCreateComment from '@/components/organisms/post-unit/PostCreateComments';
 import PostComments from '@/components/organisms/post-unit/PostComments';
 import { useEffect, useState } from 'react';
 import { db3 } from '@/apis/apiData';
+import BOARDS from '@/apis/boards';
+import { UnitPostSelector } from '@/recoil/selectors/UserPostSelector';
 
 type ReplyType = { userName: string; comment: string; replyId: number };
 interface Info {
@@ -18,27 +20,42 @@ interface Info {
   userName: string;
 }
 
-const PostUnit = () => {
-  const [getUnitInfo, setUnitInfo] = useRecoilState(UnitPostAtom);
-  const [getUnitComment, setUnitComment] = useState<Info[]>([]);
+interface BoardType {
+  boardId: number;
+}
 
+const PostUnitTemplate = (props: BoardType) => {
   const router = useRouter();
-  const unitId = Number(router.query.id as string);
 
+  const [getUnitComment, setUnitComment] = useState<Info[]>([]);
+  const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
+
+  // const handleTest = async (id: number) => {
+  //   BOARDS.postBoardLikeApi(id).then((res) => console.log(res));
+  //   BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
+  // };
   useEffect(() => {
+    // console.log(getUnitInfo);
     setUnitComment(db3);
   }, []);
 
   return (
     <S.UnitContainer>
       <div>
-        <PostUnitHeader {...getUnitInfo[unitId]} />
-        <PostUnitBody {...getUnitInfo[unitId]} />
+        <PostUnitHeader
+          userImage={getUnitInfo.userId.userImage.imageUrl}
+          name={getUnitInfo.userId.name}
+          head={getUnitInfo.head}
+        />
+        <PostUnitBody
+          boardImages={getUnitInfo.boardImages}
+          body={getUnitInfo.body}
+        />
         <S.DivisionLine />
         <PostCreateComment />
         <S.DivisionLine />
         {getUnitComment
-          .filter((data) => data.postId == unitId)
+          .filter((data) => data.postId == props.boardId)
           .map((data, idx) => {
             return (
               <div key={idx}>
@@ -51,4 +68,4 @@ const PostUnit = () => {
   );
 };
 
-export default PostUnit;
+export default PostUnitTemplate;

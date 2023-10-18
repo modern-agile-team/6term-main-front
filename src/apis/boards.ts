@@ -1,5 +1,5 @@
 import instance from './axiosInstance';
-import { AxiosResponse } from 'axios';
+import { Axios, AxiosResponse } from 'axios';
 
 type Post = {
   head: string;
@@ -42,13 +42,35 @@ const BOARDS = {
   },
 
   //게시글 리스트 api
-  async getlistAll(): Promise<any> {
+  async getlistAll(page: number): Promise<any> {
     const result: AxiosResponse = await instance.get(`${BOARDS.path}`, {
       params: {
-        page: 1,
-        limit: 20,
+        page: page,
+        limit: 16,
       },
     });
+    return result.data;
+  },
+
+  //게시글 unit api [get요청]
+  async boardUnitApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.get(`${BOARDS.path}/${id}`);
+    return result.data;
+  },
+
+  //게시글 like [post요청]
+  async postBoardLikeApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.post(
+      `${BOARDS.path}/like/${id}`,
+    );
+    return result.data;
+  },
+
+  //게시글 like [get요청]
+  async getBoardLikeApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.get(
+      `${BOARDS.path}/like/${id}`,
+    );
     return result.data;
   },
 };

@@ -37,6 +37,23 @@ export const MainTextContainer = styled.div`
   padding: 25px;
 `;
 
+export const SlidImages = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  height: 350px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid red;
+`;
+
+export const BodyImages = styled.img`
+  width: 600px;
+  height: 350px;
+  background-repeat: no-repeat;
+  object-fit: scale-down;
+`;
+
 export const TextOutPut = styled.div`
   width: 800px;
   height: auto;

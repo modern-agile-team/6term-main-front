@@ -12,7 +12,6 @@ import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 import BOARDS from '@/apis/boards';
 import { useRouter } from 'next/router';
-import { PostListSelector } from '@/recoil/selectors/UserPostSelector';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -65,7 +64,6 @@ const PostCreate = () => {
   const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
   const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
   const router = useRouter();
-  const refresh = useRecoilRefresher_UNSTABLE(PostListSelector);
   const resetSelect = useResetRecoilState(SelectBoardAtom);
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
@@ -92,7 +90,6 @@ const PostCreate = () => {
           await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
         }
         //router => 해당 글 로 페이지 이동
-        refresh(); //selector update
         router.push(`/post/unit/${data.data.id}`);
         resetSelect(); //게시글 카테고리 초기화
       }
