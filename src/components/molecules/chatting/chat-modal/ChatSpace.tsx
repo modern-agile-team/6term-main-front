@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import * as S from './styled';
 import DMList from '../chat-dm/ChatDMList';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { DMDummyAtom } from '@/recoil/atoms/DMUserAtom';
-import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
 
 const ChatSpace = (): JSX.Element => {
   return (
