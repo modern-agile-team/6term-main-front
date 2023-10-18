@@ -49,7 +49,6 @@ const BOARDS = {
         limit: 16,
       },
     });
-    console.log(page, result);
     return result.data;
   },
 
