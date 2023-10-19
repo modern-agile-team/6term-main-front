@@ -58,6 +58,18 @@ const BOARDS = {
     return result.data;
   },
 
+  //게시글 unit 삭제 api [delete요청]
+  async boardUnitDeleteApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.delete(`${BOARDS.path}/${id}`);
+    return result.data;
+  },
+
+  //게시글 unit 수정 api [patch요청]
+  async boardUnitModifyApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.patch(`${BOARDS.path}/${id}`);
+    return result.data;
+  },
+
   //게시글 like [post요청]
   async postBoardLikeApi(id: number): Promise<any> {
     const result: AxiosResponse = await instance.post(

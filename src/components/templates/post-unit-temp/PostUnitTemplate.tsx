@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { db3 } from '@/apis/apiData';
 import BOARDS from '@/apis/boards';
 import { UnitPostSelector } from '@/recoil/selectors/UserPostSelector';
+import Link from 'next/link';
 
 type ReplyType = { userName: string; comment: string; replyId: number };
 interface Info {
@@ -34,6 +35,19 @@ const PostUnitTemplate = (props: BoardType) => {
   //   BOARDS.postBoardLikeApi(id).then((res) => console.log(res));
   //   BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
   // };
+
+  const handleDeleteButton = async () => {
+    if (confirm('삭제하시겠습니까?')) {
+      await BOARDS.boardUnitDeleteApi(props.boardId);
+      alert('게시글이 삭제되었습니다.');
+      router.push('/'); //이전 화면으로 돌아가는 로직을 추가예정
+    }
+  };
+
+  const handleModifyButton = async () => {
+    if (confirm('수정하시겠습니까?')) {
+    }
+  };
   useEffect(() => {
     // console.log(getUnitInfo);
     setUnitComment(db3);
@@ -51,6 +65,23 @@ const PostUnitTemplate = (props: BoardType) => {
           boardImages={getUnitInfo.boardImages}
           body={getUnitInfo.body}
         />
+        <div>
+          <div onClick={handleDeleteButton}>삭제버튼</div>
+          <Link
+            href={{
+              pathname: `/post/modify/[id]`,
+              query: {
+                id: getUnitInfo.id,
+                head: getUnitInfo.head,
+                body: getUnitInfo.body,
+                main_category: getUnitInfo.main_category,
+                sub_category: getUnitInfo.sub_category,
+                boarderImages: getUnitInfo.boarderImages,
+              },
+            }}>
+            수정버튼
+          </Link>
+        </div>
         <S.DivisionLine />
         <PostCreateComment />
         <S.DivisionLine />

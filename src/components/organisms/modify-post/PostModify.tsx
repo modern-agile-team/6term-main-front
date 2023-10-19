@@ -1,10 +1,11 @@
-import * as S from './styled';
+import * as S from '../create-post/styled';
 import { useState, useEffect } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import {
   useRecoilRefresher_UNSTABLE,
+  useRecoilState,
   useRecoilValue,
   useResetRecoilState,
 } from 'recoil';
@@ -12,6 +13,7 @@ import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 import BOARDS from '@/apis/boards';
 import { useRouter } from 'next/router';
+import { Route } from 'react-router-dom';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -56,15 +58,39 @@ const formats = [
   'link',
 ];
 
-const PostCreate = () => {
+const PostModify = () => {
   const [unitTitle, setUnitTitle] = useState<string>(''); //제목
   const [quillText, setQuillText] = useState<string>(''); //본문
   const [uploadImage1, setUploadImage1] = useState<FormData>(); //이미지
   const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
   const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
-  const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
+  const [getBoard, setBoard] = useRecoilState(SelectBoardAtom); //boardSelect
   const router = useRouter();
   const resetSelect = useResetRecoilState(SelectBoardAtom);
+
+  const getModifyInfo = () => {
+    setUnitTitle(router.query.head as string);
+    setQuillText(router.query.body as string);
+    setBoard((prev) => {
+      return {
+        ...prev,
+        main: router.query.main_category as string,
+        sub: router.query.sub_category as string,
+      };
+    });
+  };
+
+  useEffect(() => {
+    getModifyInfo();
+  }, []);
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', resetSelect);
+    return () => {
+      router.events.off('routeChangeStart', resetSelect);
+    };
+  });
+
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
     if (confirm('업로드하시겠습니까?')) {
@@ -95,13 +121,6 @@ const PostCreate = () => {
       }
     }
   };
-
-  useEffect(() => {
-    router.events.on('routeChangeStart', resetSelect);
-    return () => {
-      router.events.off('routeChangeStart', resetSelect);
-    };
-  }, []);
 
   /**이미지 버튼 핸들링 */
   const handleImageUpload1 = (e: any) => {
@@ -189,4 +208,4 @@ const PostCreate = () => {
   );
 };
 
-export default PostCreate;
+export default PostModify;
