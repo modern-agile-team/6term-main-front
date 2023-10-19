@@ -1,6 +1,7 @@
 import UserIcon from '@/components/common/UserIcon';
 import React, { useState, useEffect } from 'react';
-import { styled } from 'styled-components';
+import { useRouter } from 'next/router';
+import * as S from './styled';
 import {
   MdOutlineSearch,
   MdKeyboardArrowUp,
@@ -8,35 +9,8 @@ import {
 } from 'react-icons/md';
 import { IoMdChatbubbles } from 'react-icons/io';
 import Link from 'next/link';
-
-interface FloatingBoxProps {
-  position: number;
-}
-
-const FloatingBox = styled.div<FloatingBoxProps>`
-  margin: 10px;
-  position: absolute;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  top: ${(props) => props.position}px;
-  right: 50px;
-  /* border: 3px solid #9d9d9d; */
-`;
-const FriendSearchIcon = styled.div`
-  font-size: 30px;
-  color: #91c8e4;
-`;
-
-const ChatIcon = styled.div`
-  font-size: 30px;
-  color: #91c8e4;
-`;
-const ScrollButotn = styled.div`
-  font-size: 30px;
-  cursor: pointer;
-  opacity: 0.7;
-`;
+import ChatModal from '@/components/molecules/chatting/chat-modal/ChatModal';
+import useModal from '@/hooks/useModal';
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -74,34 +48,36 @@ const FloatingBar = () => {
     };
   }, []);
 
+  const router = useRouter();
+  const { isOpenModal: chatState, handleModal: chatHandle } = useModal();
+
   return (
-    <FloatingBox position={floatingPosition}>
+    <S.FloatingBox position={floatingPosition}>
       <a>
-        <ScrollButotn>
+        <S.ScrollButotn>
           <MdKeyboardArrowUp onClick={scrollToTop} />
-        </ScrollButotn>
+        </S.ScrollButotn>
       </a>
       <Link legacyBehavior href="/search/SearchFriends">
         <a>
-          <FriendSearchIcon>
+          <S.FriendSearchIcon>
             <MdOutlineSearch />
-          </FriendSearchIcon>
+          </S.FriendSearchIcon>
         </a>
       </Link>
       <UserIcon />
-      <Link legacyBehavior href="/chatting">
-        <a>
-          <ChatIcon>
-            <IoMdChatbubbles />
-          </ChatIcon>
-        </a>
-      </Link>
       <a>
-        <ScrollButotn>
-          <MdKeyboardArrowDown onClick={scrollToBottom} />
-        </ScrollButotn>
+        <S.ChatIcon onClick={chatHandle}>
+          <IoMdChatbubbles />
+        </S.ChatIcon>
+        {chatState && <ChatModal show={chatState} hide={chatHandle} />}
       </a>
-    </FloatingBox>
+      <a>
+        <S.ScrollButotn>
+          <MdKeyboardArrowDown onClick={scrollToBottom} />
+        </S.ScrollButotn>
+      </a>
+    </S.FloatingBox>
   );
 };
 
