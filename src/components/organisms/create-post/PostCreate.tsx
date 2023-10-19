@@ -1,5 +1,5 @@
 import * as S from './styled';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
@@ -95,13 +95,6 @@ const PostCreate = () => {
       }
     }
   };
-
-  useEffect(() => {
-    router.events.on('routeChangeStart', resetSelect);
-    return () => {
-      router.events.off('routeChangeStart', resetSelect);
-    };
-  }, []);
 
   /**이미지 버튼 핸들링 */
   const handleImageUpload1 = (e: any) => {

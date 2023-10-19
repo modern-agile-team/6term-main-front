@@ -55,6 +55,7 @@ const BOARDS = {
   //게시글 unit api [get요청]
   async boardUnitApi(id: number): Promise<any> {
     const result: AxiosResponse = await instance.get(`${BOARDS.path}/${id}`);
+    console.log(result);
     return result.data;
   },
 

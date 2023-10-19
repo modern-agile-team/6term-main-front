@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import * as S from './styled';
-
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 interface UnitInfo {
   boardImages: [
     {
@@ -19,7 +19,7 @@ const PostUnitBody = (props: UnitInfo) => {
   const router = useRouter();
 
   const handleSlideNext = () => {
-    if (currentSlide >= props.boardImages.length - 1) {
+    if (currentSlide === props.boardImages.length - 1) {
       setCurrentSlide(0);
       // alert('마지막 사진 입니다.');
     } else {
@@ -51,17 +51,29 @@ const PostUnitBody = (props: UnitInfo) => {
     <div>
       {props.boardImages.length >= 1 && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div onClick={handleSlidePrev}>&lt;</div>
-          <S.SlidImages>
-            {props.boardImages.map((data) => {
-              return (
-                <div ref={slideRef}>
-                  <S.BodyImages src={data.imageUrl} alt="썸네일 이미지" />
-                </div>
-              );
-            })}
-          </S.SlidImages>
-          <div onClick={handleSlideNext}>&gt;</div>
+          <S.SlideButton>
+            <GrFormPrevious
+              style={{ margin: '0 auto 0 auto' }}
+              onClick={handleSlidePrev}
+            />
+          </S.SlideButton>
+          <S.SlideContain>
+            <S.SlidImages ref={slideRef}>
+              {props.boardImages.map((data) => {
+                return (
+                  <div>
+                    <S.BodyImages src={data.imageUrl} alt="이미지" />
+                  </div>
+                );
+              })}
+            </S.SlidImages>
+          </S.SlideContain>
+          <S.SlideButton>
+            <GrFormNext
+              style={{ margin: '0 auto 0 auto' }}
+              onClick={handleSlideNext}
+            />
+          </S.SlideButton>
         </div>
       )}
       <S.MainTextContainer>
