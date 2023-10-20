@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import * as S from './styled';
-import DMList from '../chat-dm/ChatDMList';
+// import DMList from '../chat-dm/ChatDMList';
 
 const ChatSpace = (): JSX.Element => {
   return (
@@ -11,7 +11,7 @@ const ChatSpace = (): JSX.Element => {
           <S.ChatSpaceName>CrabChet</S.ChatSpaceName>
           <S.ChatListScroll>
             채팅방 List
-            <DMList />
+            {/* <DMList /> */}
           </S.ChatListScroll>
         </S.ChatLists>
         <S.Chats>실제채팅방</S.Chats>

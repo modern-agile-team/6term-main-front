@@ -12,7 +12,7 @@ export type ChatRoomType = {
   room: number;
 };
 
-export const DMDummyAtom = atom<DMUserDummyType>({
+export const DMDummyAtom = atom<DMUserDummyType[]>({
   key: 'userdummy',
   default: DMUserDummy,
 });
