@@ -30,7 +30,6 @@ const PostUnitTemplate = (props: BoardType) => {
 
   const [getUnitComment, setUnitComment] = useState<Info[]>([]);
   const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
-
   // const handleTest = async (id: number) => {
   //   BOARDS.postBoardLikeApi(id).then((res) => console.log(res));
   //   BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
@@ -44,10 +43,6 @@ const PostUnitTemplate = (props: BoardType) => {
     }
   };
 
-  const handleModifyButton = async () => {
-    if (confirm('수정하시겠습니까?')) {
-    }
-  };
   useEffect(() => {
     // console.log(getUnitInfo);
     setUnitComment(db3);
@@ -71,12 +66,8 @@ const PostUnitTemplate = (props: BoardType) => {
             href={{
               pathname: `/post/modify/[id]`,
               query: {
-                id: getUnitInfo.id,
-                head: getUnitInfo.head,
-                body: getUnitInfo.body,
-                main_category: getUnitInfo.main_category,
-                sub_category: getUnitInfo.sub_category,
-                boarderImages: getUnitInfo.boarderImages,
+                id: props.boardId,
+                data: JSON.stringify(getUnitInfo),
               },
             }}>
             수정버튼

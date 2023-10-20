@@ -66,16 +66,18 @@ const PostModify = () => {
   const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
   const [getBoard, setBoard] = useRecoilState(SelectBoardAtom); //boardSelect
   const router = useRouter();
+  const { data } = router.query;
+  const unitInfo = JSON.parse(data as string);
   const resetSelect = useResetRecoilState(SelectBoardAtom);
 
   const getModifyInfo = () => {
-    setUnitTitle(router.query.head as string);
-    setQuillText(router.query.body as string);
+    setUnitTitle(unitInfo.head as string);
+    setQuillText(unitInfo.body as string);
     setBoard((prev) => {
       return {
         ...prev,
-        main: router.query.main_category as string,
-        sub: router.query.sub_category as string,
+        main: unitInfo.main_category as string,
+        sub: unitInfo.sub_category as string,
       };
     });
   };
