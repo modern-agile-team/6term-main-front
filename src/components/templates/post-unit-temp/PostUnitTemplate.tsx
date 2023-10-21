@@ -3,7 +3,6 @@ import PostUnitHeader from '@/components/organisms/post-unit/PostUnitHeader';
 import PostUnitBody from '@/components/organisms/post-unit/PostUnitBody';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { UnitPostAtom } from '@/recoil/atoms/UserPostsAtom';
 import PostCreateComment from '@/components/organisms/post-unit/PostCreateComments';
 import PostComments from '@/components/organisms/post-unit/PostComments';
 import { useEffect, useState } from 'react';

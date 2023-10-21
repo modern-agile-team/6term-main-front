@@ -3,15 +3,12 @@ import { useEffect, useState } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import {
-  useRecoilRefresher_UNSTABLE,
-  useRecoilValue,
-  useResetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 import BOARDS from '@/apis/boards';
 import { useRouter } from 'next/router';
+import PreviewImg from './PreviewImg';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -56,27 +53,35 @@ const formats = [
   'link',
 ];
 
-interface FileInfoType {
+export interface FileInfoType {
   //이미지 업로드 리펙토링 type
   url: string;
-  image: boolean;
-  file: File;
+  image?: boolean;
+  file?: File;
 }
 
 const PostCreate = () => {
   const [unitTitle, setUnitTitle] = useState<string>(''); //제목
   const [quillText, setQuillText] = useState<string>(''); //본문
   const [uploadImage, setUploadImage] = useState<FormData>(); //리펙토링 된 이미지state
-  const [uploadImage1, setUploadImage1] = useState<FormData>(); //이미지
-  const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
-  const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
+  // const [uploadImage1, setUploadImage1] = useState<FormData>(); //이미지
+  // const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
+  // const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
   const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
   const router = useRouter();
   const resetSelect = useResetRecoilState(SelectBoardAtom);
 
+  //다른 페이지로 넘어가도 초기화
+  useEffect(() => {
+    router.events.on('routeChangeStart', resetSelect);
+    return () => {
+      router.events.off('routeChangeStart', resetSelect);
+    };
+  }, []);
+
   /**이미지 업로드 리펙토링 */
   const [files, setFiles] = useState<FileInfoType[]>([]);
-  const [warringMsg, setWarringMsg] = useState<string>('');
+  const [showImages, setShowImages] = useState([]);
 
   const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const list: FileInfoType[] = [];
@@ -94,20 +99,12 @@ const PostCreate = () => {
       }
     }
     if (list.length > 3) {
-      setWarringMsg(
-        '이미지 업로드는 3개까지만 가능합니다. 앞에 3개를 제외한 나머지 사진은 업로드 되지 않습니다.',
-      );
       setFiles(list.slice(0, 3));
     } else {
-      setWarringMsg('');
       setFiles(list);
     }
     setUploadImage(formData);
   };
-
-  useEffect(() => {
-    console.log(uploadImage);
-  });
 
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
@@ -139,30 +136,29 @@ const PostCreate = () => {
         //router => 해당 글 로 페이지 이동
         router.push(`/post/unit/${data.data.id}`);
         resetSelect(); //게시글 카테고리 초기화
-        setWarringMsg('');
       }
     }
   };
 
   /**이미지 버튼 핸들링 */
-  const handleImageUpload1 = (e: any) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    setUploadImage1(formData);
-  };
-  const handleImageUpload2 = (e: any) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    setUploadImage2(formData);
-  };
-  const handleImageUpload3 = (e: any) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    setUploadImage3(formData);
-  };
+  // const handleImageUpload1 = (e: any) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   setUploadImage1(formData);
+  // };
+  // const handleImageUpload2 = (e: any) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   setUploadImage2(formData);
+  // };
+  // const handleImageUpload3 = (e: any) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   setUploadImage3(formData);
+  // };
 
   return (
     <S.CreatPostContainer>
@@ -198,21 +194,13 @@ const PostCreate = () => {
         <div>
           <S.FontSize>사진</S.FontSize>
           {/* 이미지 업로드 리펙토링 */}
-          <div style={{ color: 'red', fontSize: 10 }}>{warringMsg}</div>
+          <BsFillFileEarmarkImageFill />
           <input type="file" onChange={onChangeFile} multiple />
-          {/* <div>
-            <label htmlFor="input-file" onChange={handleImageUpLoad}>
-              <input type="file" id="input-file" multiple />
-              <div>X</div>
-              <span>사진추가</span>
-            </label>
-            {showImages.map((image, id) => (
-              <div key={id}>
-                <img src={image} alt={`${image}-${id}`} />
-                <div onClick={() => handleDeleteImage(id)} />
-              </div>
-            ))}
-          </div> */}
+          <S.AddImageContainer>
+            {files.map((data) => {
+              return <PreviewImg url={data.url} />;
+            })}
+          </S.AddImageContainer>
           {/* <S.AddImageContainer>
             <BsFillFileEarmarkImageFill size={24} />
             <S.ImageInput

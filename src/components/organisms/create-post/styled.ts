@@ -56,6 +56,7 @@ export const CreatePostBody = styled.div`
 export const AddImageContainer = styled.div`
   display: flex;
   width: 780px;
+  height: 100px;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 25%);
   padding: 10px;
   margin: 10px 0px 10px 0px;
@@ -73,6 +74,12 @@ export const ButtonUI = styled.button`
   &:hover {
     background-color: #e7f7ff;
   }
+`;
+
+export const ImagePreview = styled.img`
+  width: 100px;
+  height: 100px;
+  background-size: cover;
 `;
 
 export const ImageInput = styled.input`

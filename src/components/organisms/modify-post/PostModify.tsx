@@ -3,17 +3,13 @@ import { useState, useEffect } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import {
-  useRecoilRefresher_UNSTABLE,
-  useRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-} from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 import BOARDS from '@/apis/boards';
 import { useRouter } from 'next/router';
-import { Route } from 'react-router-dom';
+import { FileInfoType } from '../create-post/PostCreate';
+import PreviewImg from '../create-post/PreviewImg';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -61,14 +57,16 @@ const formats = [
 const PostModify = () => {
   const [unitTitle, setUnitTitle] = useState<string>(''); //제목
   const [quillText, setQuillText] = useState<string>(''); //본문
-  const [uploadImage1, setUploadImage1] = useState<FormData>(); //이미지
-  const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
-  const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
+  const [uploadImage, setUploadImage] = useState<FormData>(); //이미지 업로드 state
+  // const [uploadImage1, setUploadImage1] = useState<FormData>(); //이미지
+  // const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
+  // const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
   const [getBoard, setBoard] = useRecoilState(SelectBoardAtom); //boardSelect
   const router = useRouter();
   const { data } = router.query;
   const unitInfo = JSON.parse(data as string);
   const resetSelect = useResetRecoilState(SelectBoardAtom);
+  const [files, setFiles] = useState<FileInfoType[]>([]);
 
   const getModifyInfo = () => {
     setUnitTitle(unitInfo.head as string);
@@ -86,12 +84,13 @@ const PostModify = () => {
     getModifyInfo();
   }, []);
 
+  //다른 페이지로 넘어가도 초기화
   useEffect(() => {
     router.events.on('routeChangeStart', resetSelect);
     return () => {
       router.events.off('routeChangeStart', resetSelect);
     };
-  });
+  }, []);
 
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
@@ -102,21 +101,25 @@ const PostModify = () => {
         if (quillText === '') alert('본문내용을 입력해주세요.');
       } else {
         const isData = {
+          id: router.query.id as number,
           head: unitTitle,
           body: quillText,
           main_category: getBoard.main,
           sub_category: getBoard.sub,
         };
-        const data = await BOARDS.createPost(isData);
-        if (uploadImage1 !== undefined) {
-          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        const data = await BOARDS.boardUnitModifyApi(isData);
+        if (uploadImage !== undefined) {
+          await BOARDS.createImg(uploadImage as FormData, data.data.id);
         }
-        if (uploadImage2 !== undefined) {
-          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-        }
-        if (uploadImage3 !== undefined) {
-          await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-        }
+        // if (uploadImage1 !== undefined) {
+        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        // }
+        // if (uploadImage2 !== undefined) {
+        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        // }
+        // if (uploadImage3 !== undefined) {
+        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        // }
         //router => 해당 글 로 페이지 이동
         router.push(`/post/unit/${data.data.id}`);
         resetSelect(); //게시글 카테고리 초기화
@@ -125,24 +128,46 @@ const PostModify = () => {
   };
 
   /**이미지 버튼 핸들링 */
-  const handleImageUpload1 = (e: any) => {
-    const file = e.target.files[0];
+  const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const list: FileInfoType[] = [];
+    const fileList = e.target.files;
     const formData = new FormData();
-    formData.append('file', file);
-    setUploadImage1(formData);
+
+    if (fileList) {
+      for (let i = 0; i < fileList.length; i++) {
+        list.push({
+          url: URL.createObjectURL(fileList[i]),
+          image: fileList[i].type.includes('image'),
+          file: fileList[i],
+        });
+        formData.append('file', fileList[i]);
+      }
+    }
+    if (list.length > 3) {
+      setFiles(list.slice(0, 3));
+    } else {
+      setFiles(list);
+    }
+    setUploadImage(formData);
   };
-  const handleImageUpload2 = (e: any) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    setUploadImage2(formData);
-  };
-  const handleImageUpload3 = (e: any) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    setUploadImage3(formData);
-  };
+  // const handleImageUpload1 = (e: any) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   setUploadImage1(formData);
+  // };
+  // const handleImageUpload2 = (e: any) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   setUploadImage2(formData);
+  // };
+  // const handleImageUpload3 = (e: any) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   setUploadImage3(formData);
+  // };
 
   return (
     <S.CreatPostContainer>
@@ -177,7 +202,14 @@ const PostModify = () => {
         </div>
         <div>
           <S.FontSize>사진</S.FontSize>
+          <BsFillFileEarmarkImageFill />
+          <input type="file" onChange={onChangeFile} multiple />
           <S.AddImageContainer>
+            {files.map((data) => {
+              return <PreviewImg url={data.url} />;
+            })}
+          </S.AddImageContainer>
+          {/* <S.AddImageContainer>
             <BsFillFileEarmarkImageFill size={24} />
             <S.ImageInput
               type="file"
@@ -200,7 +232,7 @@ const PostModify = () => {
               accept="image/*"
               onChange={handleImageUpload3}
             />
-          </S.AddImageContainer>
+          </S.AddImageContainer> */}
         </div>
         <S.FlexBox side="25px 0px 10px 0px">
           <S.ButtonUI onClick={handleSubmit}>올리기</S.ButtonUI>
