@@ -101,7 +101,7 @@ const PostModify = () => {
         if (quillText === '') alert('본문내용을 입력해주세요.');
       } else {
         const isData = {
-          id: router.query.id as number,
+          id: Number(router.query.id),
           head: unitTitle,
           body: quillText,
           main_category: getBoard.main,
