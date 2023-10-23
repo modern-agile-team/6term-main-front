@@ -4,6 +4,8 @@ import Modal from './Modal';
 import UserSmaple from './UserSample';
 import { CgProfile } from 'react-icons/cg';
 import { mainCategoryMappings, subCategoryMappings } from './unitBoxMapping';
+import { useRouter } from 'next/router';
+import { Link } from 'react-router-dom';
 export interface BoardInfo {
   isData: {
     id: number;
@@ -58,16 +60,20 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
     setStateHtml(true);
   }, []);
 
+  const router = useRouter();
+  const handleRouter = (id: number) => {
+    router.push({
+      pathname: `/post/unit/${id}`,
+      query: {
+        boardId: id,
+      },
+    });
+  };
+
   return (
     <S.PostContainer>
       <S.FlexBox direction="column">
-        <S.PostTitle
-          href={{
-            pathname: `/post/unit/[id]`,
-            query: {
-              id: isData.id,
-            },
-          }}>
+        <S.PostTitle onClick={() => handleRouter(isData.id)}>
           <S.FlexBox direction="column">
             {isData.boardImages.length === (0 as number) ? (
               <div>

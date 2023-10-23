@@ -2,6 +2,7 @@ import instance from './axiosInstance';
 import { Axios, AxiosResponse } from 'axios';
 
 type Post = {
+  id?: number;
   head: string;
   body: string;
   main_category: string;
@@ -54,7 +55,38 @@ const BOARDS = {
 
   //게시글 unit api [get요청]
   async boardUnitApi(id: number): Promise<any> {
-    const result: AxiosResponse = await instance.get(`${BOARDS.path}/${id}`);
+    const result: AxiosResponse = await instance.get(`${BOARDS.path}/unit`, {
+      params: {
+        boardId: id,
+      },
+    });
+    return result.data;
+  },
+
+  //게시글 unit 삭제 api [delete요청]
+  async boardUnitDeleteApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.delete(`${BOARDS.path}/${id}`);
+    return result.data;
+  },
+
+  //게시글 unit 수정 api [patch요청]
+  async boardUnitModifyApi({
+    id,
+    head,
+    body,
+    main_category,
+    sub_category,
+  }: Post): Promise<any> {
+    const result: AxiosResponse = await instance.patch<Post>(
+      `${BOARDS.path}/${id}`,
+      {
+        id: id,
+        head: head,
+        body: body,
+        main_category: main_category,
+        sub_category: sub_category,
+      },
+    );
     return result.data;
   },
 

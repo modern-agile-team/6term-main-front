@@ -3,7 +3,7 @@ import instance from './axiosInstance';
 
 const AUTH = {
   path: '/auth',
-  async getToken(com: string, code: string): Promise<any> {
+  async getToken(com: string, code: string | null): Promise<any> {
     try {
       const result = await instance.get(`${AUTH.path}/${com}/login`, {
         params: {

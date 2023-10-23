@@ -1,14 +1,15 @@
-import * as S from './styled';
-import { useEffect, useState } from 'react';
+import * as S from '../create-post/styled';
+import { useState, useEffect } from 'react';
 import { BsFillFileEarmarkImageFill } from 'react-icons/bs';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import CustomSelect from '@/components/molecules/post-board/CustomSelect';
 import BOARDS from '@/apis/boards';
 import { useRouter } from 'next/router';
-import PreviewImg from './PreviewImg';
+import { FileInfoType } from '../create-post/PostCreate';
+import PreviewImg from '../create-post/PreviewImg';
 
 const QuillWrapper = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -53,23 +54,35 @@ const formats = [
   'link',
 ];
 
-export interface FileInfoType {
-  //이미지 업로드 리펙토링 type
-  url: string;
-  image?: boolean;
-  file?: File;
-}
-
-const PostCreate = () => {
+const PostModify = () => {
   const [unitTitle, setUnitTitle] = useState<string>(''); //제목
   const [quillText, setQuillText] = useState<string>(''); //본문
-  const [uploadImage, setUploadImage] = useState<FormData>(); //리펙토링 된 이미지state
+  const [uploadImage, setUploadImage] = useState<FormData>(); //이미지 업로드 state
   // const [uploadImage1, setUploadImage1] = useState<FormData>(); //이미지
   // const [uploadImage2, setUploadImage2] = useState<FormData>(); //이미지2
   // const [uploadImage3, setUploadImage3] = useState<FormData>(); //이미지3
-  const getBoard = useRecoilValue(SelectBoardAtom); //boardSelect
+  const [getBoard, setBoard] = useRecoilState(SelectBoardAtom); //boardSelect
   const router = useRouter();
+  const { data } = router.query;
+  const unitInfo = JSON.parse(data as string);
   const resetSelect = useResetRecoilState(SelectBoardAtom);
+  const [files, setFiles] = useState<FileInfoType[]>([]);
+
+  const getModifyInfo = () => {
+    setUnitTitle(unitInfo.head as string);
+    setQuillText(unitInfo.body as string);
+    setBoard((prev) => {
+      return {
+        ...prev,
+        main: unitInfo.main_category as string,
+        sub: unitInfo.sub_category as string,
+      };
+    });
+  };
+
+  useEffect(() => {
+    getModifyInfo();
+  }, []);
 
   //다른 페이지로 넘어가도 초기화
   useEffect(() => {
@@ -79,10 +92,42 @@ const PostCreate = () => {
     };
   }, []);
 
-  /**이미지 업로드 리펙토링 */
-  const [files, setFiles] = useState<FileInfoType[]>([]);
-  const [showImages, setShowImages] = useState([]);
+  /**업로드 버튼 핸들링 */
+  const handleSubmit = async () => {
+    if (confirm('업로드하시겠습니까?')) {
+      if (getBoard.sub === '' || unitTitle === '' || quillText === '') {
+        if (getBoard.sub === '') alert('카테고리를 선택해주세요.');
+        if (unitTitle === '') alert('제목을 입력해주세요.');
+        if (quillText === '') alert('본문내용을 입력해주세요.');
+      } else {
+        const isData = {
+          id: Number(router.query.id),
+          head: unitTitle,
+          body: quillText,
+          main_category: getBoard.main,
+          sub_category: getBoard.sub,
+        };
+        const data = await BOARDS.boardUnitModifyApi(isData);
+        if (uploadImage !== undefined) {
+          await BOARDS.createImg(uploadImage as FormData, data.data.id);
+        }
+        // if (uploadImage1 !== undefined) {
+        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        // }
+        // if (uploadImage2 !== undefined) {
+        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        // }
+        // if (uploadImage3 !== undefined) {
+        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
+        // }
+        //router => 해당 글 로 페이지 이동
+        router.push(`/post/unit/${data.data.id}`);
+        resetSelect(); //게시글 카테고리 초기화
+      }
+    }
+  };
 
+  /**이미지 버튼 핸들링 */
   const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const list: FileInfoType[] = [];
     const fileList = e.target.files;
@@ -105,42 +150,6 @@ const PostCreate = () => {
     }
     setUploadImage(formData);
   };
-
-  /**업로드 버튼 핸들링 */
-  const handleSubmit = async () => {
-    if (confirm('업로드하시겠습니까?')) {
-      if (getBoard.sub === '' || unitTitle === '' || quillText === '') {
-        if (getBoard.sub === '') alert('카테고리를 선택해주세요.');
-        if (unitTitle === '') alert('제목을 입력해주세요.');
-        if (quillText === '') alert('본문내용을 입력해주세요.');
-      } else {
-        const isData = {
-          head: unitTitle,
-          body: quillText,
-          main_category: getBoard.main,
-          sub_category: getBoard.sub,
-        };
-        const data = await BOARDS.createPost(isData);
-        if (uploadImage !== undefined) {
-          await BOARDS.createImg(uploadImage as FormData, data.data.id);
-        }
-        // if (uploadImage1 !== undefined) {
-        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-        // }
-        // if (uploadImage2 !== undefined) {
-        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-        // }
-        // if (uploadImage3 !== undefined) {
-        //   await BOARDS.createImg(uploadImage1 as FormData, data.data.id);
-        // }
-        //router => 해당 글 로 페이지 이동
-        router.push(`/post/unit/${data.data.id}`);
-        resetSelect(); //게시글 카테고리 초기화
-      }
-    }
-  };
-
-  /**이미지 버튼 핸들링 */
   // const handleImageUpload1 = (e: any) => {
   //   const file = e.target.files[0];
   //   const formData = new FormData();
@@ -193,7 +202,6 @@ const PostCreate = () => {
         </div>
         <div>
           <S.FontSize>사진</S.FontSize>
-          {/* 이미지 업로드 리펙토링 */}
           <BsFillFileEarmarkImageFill />
           <input type="file" onChange={onChangeFile} multiple />
           <S.AddImageContainer>
@@ -234,4 +242,4 @@ const PostCreate = () => {
   );
 };
 
-export default PostCreate;
+export default PostModify;

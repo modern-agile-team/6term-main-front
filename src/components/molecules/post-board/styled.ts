@@ -51,19 +51,8 @@ export const BoardList = styled.div<ThumbnailBg>`
   border-radius: 5px;
 `;
 
-interface PostBoxes {
-  color?: string;
-}
-/**
- *    게시물 제목, 본문
- *    @params : background-color="color" : string
- *    @returns : hex, rgb, ...  color code
- */
-export const PostTitle = styled(Link)<PostBoxes>`
-  background-color: ${(props) => props.color};
-  text-decoration: none;
-  color: #000;
-  //
+export const PostTitle = styled.div`
+  cursor: pointer;
 `;
 
 interface PostFont {
