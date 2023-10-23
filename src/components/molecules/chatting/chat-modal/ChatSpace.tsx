@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import * as S from './styled';
+import DMFriendList from '../chat-dm/ChatDMFriendList';
+import DMList from '../chat-dm/ChatDMList';
 // import DMList from '../chat-dm/ChatDMList';
 
 const ChatSpace = (): JSX.Element => {
@@ -10,7 +12,9 @@ const ChatSpace = (): JSX.Element => {
         <S.ChatLists>
           <S.ChatSpaceName>CrabChet</S.ChatSpaceName>
           <S.ChatListScroll>
-            채팅방 List
+            <DMFriendList />
+            <DMList />
+            {/* 채팅방 List */}
             {/* <DMList /> */}
           </S.ChatListScroll>
         </S.ChatLists>
