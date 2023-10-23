@@ -18,7 +18,8 @@ const AfterLoginModal = ({ show, hide }: ModalType) => {
         : '';
 
     if (confirm('로그아웃 하시겠습니까?')) {
-      await AUTH.handleLogout(pr);
+      //logoutAPI요청
+      //   await AUTH.handleLogout(pr);
       //localStorage에서 토큰값 삭제
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
