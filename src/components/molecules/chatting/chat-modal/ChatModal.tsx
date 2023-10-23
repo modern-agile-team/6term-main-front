@@ -6,6 +6,7 @@ import ChatSpace from './ChatSpace';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { DMDummyAtom } from '@/recoil/atoms/DMUserAtom';
 import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
+import { useRouter } from 'next/router';
 
 interface ModalType {
   show: boolean;
@@ -60,7 +61,6 @@ const ChatModal = (props: ModalType) => {
       <S.Backdrop
         onClick={(e: React.MouseEvent) => {
           e.preventDefault();
-
           if (props.show) {
             props.hide();
           }

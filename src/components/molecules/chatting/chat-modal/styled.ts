@@ -122,9 +122,9 @@ export const ChatSpaceName = styled.div`
   border: none;
   width: 260px;
   text-align: center;
-  border-top: 1px solid #91c8e4;
+  /* border-top: 1px solid rgba(145, 200, 228); */
   border-radius: 7px 0 0 0;
-  border-bottom: 1px solid #91c8e4;
+  border-bottom: 1px solid rgba(145, 200, 228, 0.3);
   font-weight: 900;
   font-size: 24px;
   background: transparent;

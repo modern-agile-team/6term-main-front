@@ -6,6 +6,7 @@ import * as S from './styles';
 // import Link from 'next/link';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
+import { useRouter } from 'next/router';
 // import useSocket from '@/hooks/useSocket';
 // import ChatSpace from '../chat-modal/ChatSpace';
 
@@ -17,6 +18,15 @@ const DMFriendList = () => {
     setFriendListCollapse((prev) => !prev);
   }, []);
   // console.log(friendListCollapse);
+  const router = useRouter();
+  const handleRoomRouter = (id: number) => {
+    router.push({
+      pathname: `/${id}`,
+      query: {
+        roomId: id,
+      },
+    });
+  };
   return (
     <div>
       <S.CategoryBox>
@@ -27,9 +37,13 @@ const DMFriendList = () => {
         </S.CollapseButton>
         <S.Category>Friend</S.Category>
       </S.CategoryBox>
-      <div className={friendListCollapse ? 'collapse' : ''}>
+      <div className={friendListCollapse ? 'collapsed' : ''}>
         {friendsData?.map((friend) => (
-          <S.ListBox key={friend.id}>{friend.name}</S.ListBox>
+          <S.ListBox
+            key={friend.id}
+            onClick={() => handleRoomRouter(friend.id)}>
+            {friend.name}
+          </S.ListBox>
         ))}
       </div>
     </div>

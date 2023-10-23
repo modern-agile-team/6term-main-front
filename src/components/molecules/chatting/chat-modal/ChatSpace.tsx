@@ -13,7 +13,9 @@ const ChatSpace = (): JSX.Element => {
           <S.ChatSpaceName>CrabChet</S.ChatSpaceName>
           <S.ChatListScroll>
             <DMFriendList />
+            <br />
             <DMList />
+            <br />
             {/* 채팅방 List */}
             {/* <DMList /> */}
           </S.ChatListScroll>

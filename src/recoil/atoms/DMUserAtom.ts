@@ -13,6 +13,6 @@ export type DMUserDummyType = {
 // };
 
 export const DMDummyAtom = atom<DMUserDummyType[]>({
-  key: 'userdummy',
+  key: 'userDummy',
   default: DMUserDummy,
 });

@@ -18,6 +18,7 @@ export const CollapseButton = styled.div<{ collapse: boolean }>`
   }
 `;
 export const CategoryBox = styled.div`
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
