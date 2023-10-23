@@ -1,12 +1,15 @@
 import Link from 'next/link';
 import Logo from '../Logo';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import * as S from './styled';
 import LoginModal from '../login-modal/LoginModal';
 import AlarmModal from '../notification/AlarmModal';
 import useModal from '@/hooks/useModal';
+import { useRecoilValue } from 'recoil';
+import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
+import AfterLoginModal from '../login-modal/AfterLoginModal';
 
 const NavData = [
   { id: 'menu01', name: '전체 게시판', path: '/' },
@@ -20,6 +23,9 @@ const HeaderNavigate = (): JSX.Element => {
   const router = useRouter();
   const { isOpenModal: loginState, handleModal: loginHandle } = useModal();
   const { isOpenModal: alarmState, handleModal: alarmHandle } = useModal();
+  const { isOpenModal: afterLoginState, handleModal: afterLoginHandle } =
+    useModal();
+  const isLogin = useRecoilValue(LoginStateAtom);
 
   return (
     <S.HeaderContainer>
@@ -60,7 +66,16 @@ const HeaderNavigate = (): JSX.Element => {
             })}
           </ul>
         </nav>
-        <S.LoginButton onClick={loginHandle}>Login</S.LoginButton>
+        {isLogin ? (
+          <div>
+            <div onClick={afterLoginHandle}>아이콘</div>
+            {afterLoginState && (
+              <AfterLoginModal show={afterLoginState} hide={afterLoginHandle} />
+            )}
+          </div>
+        ) : (
+          <S.LoginButton onClick={loginHandle}>Login</S.LoginButton>
+        )}
         {loginState && <LoginModal show={loginState} hide={loginHandle} />}
         <S.AlarmIcon onClick={alarmHandle}>
           <AiFillBell />
