@@ -8,16 +8,13 @@ const ChatSpace = (): JSX.Element => {
   return (
     <div>
       <S.ChatSpaceWrapper>
-        {/* <S.ChatSpaces>test</S.ChatSpaces> */}
         <S.ChatLists>
-          <S.ChatSpaceName>CrabChet</S.ChatSpaceName>
+          <S.ChatSpaceName>CrabChat</S.ChatSpaceName>
           <S.ChatListScroll>
             <DMFriendList />
             <br />
             <DMList />
             <br />
-            {/* 채팅방 List */}
-            {/* <DMList /> */}
           </S.ChatListScroll>
         </S.ChatLists>
         <S.Chats>실제채팅방</S.Chats>

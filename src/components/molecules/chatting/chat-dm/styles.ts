@@ -14,6 +14,7 @@ export const CollapseButton = styled.div<{ collapse: boolean }>`
   cursor: pointer;
   & > svg {
     transition: transform 0.2s;
+    color: gray;
     transform: rotate(${(props) => (props.collapse ? '90deg' : '0')});
   }
 `;

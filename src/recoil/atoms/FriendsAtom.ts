@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { FriendsDummy } from '@/apis/FriendsDummy';
+import { FriendsDummy } from '@/apis/friendsDummy';
 
 export type FriendsType = {
   id: number;
