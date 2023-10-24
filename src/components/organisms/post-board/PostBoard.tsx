@@ -38,8 +38,6 @@ const PostBoard = (): JSX.Element => {
     const result = await BOARDS.getlistAll(page); //api요청 글 목록 불러오기
     if (result) {
       setGetList((prev: any) => [...prev, ...result]);
-    } else {
-      console.log('err');
     }
     setLoad(false);
   }, [page]);
