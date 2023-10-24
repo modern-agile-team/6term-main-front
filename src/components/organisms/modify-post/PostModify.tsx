@@ -159,7 +159,7 @@ const PostModify = () => {
           main_category: getBoard.main,
           sub_category: getBoard.sub,
         };
-        const data = await BOARDS.createPost(isData);
+        const data = await BOARDS.boardUnitModifyApi(isData);
         if (files[0] !== null) {
           await BOARDS.createImg(formData, data.data.id);
         }
