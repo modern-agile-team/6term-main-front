@@ -48,7 +48,6 @@ const BOARDS = {
 
   //게시글 리스트 api
   async getlistAll(page: number, limit: number): Promise<any> {
-    console.log(page, limit);
     try {
       const result: AxiosResponse = await instance.get(`${BOARDS.path}`, {
         params: {

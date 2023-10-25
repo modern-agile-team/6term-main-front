@@ -21,7 +21,7 @@ const PostBoard = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    if (page !== 0) getPost();
+    getPost();
   }, [page]);
 
   const handleObs = (entries: any) => {
@@ -42,9 +42,11 @@ const PostBoard = (): JSX.Element => {
       setPageState(false);
     } else {
       //마지막페이지까지 간다면
-      const result = await BOARDS.getlistAll(page, 16); //api요청 글 목록 불러오기
-      const reverseArr = [...result.data].reverse();
-      result && setGetList((prev: any) => [...prev, ...reverseArr]);
+      if (page > 0) {
+        const result = await BOARDS.getlistAll(page, 16); //api요청 글 목록 불러오기
+        const reverseArr = [...result.data].reverse();
+        result && setGetList((prev: any) => [...prev, ...reverseArr]);
+      }
     }
     setLoad(false);
   }, [page]);
@@ -67,8 +69,12 @@ const PostBoard = (): JSX.Element => {
           })}
         </>
       )}
-      {load && <div>Loading...</div>}
-      <div ref={obsRef}></div>
+      <div>
+        {load && <div>Loading...</div>}
+        <div
+          style={{ border: '1px solid #999', width: 100 }}
+          ref={obsRef}></div>
+      </div>
     </div>
   );
 };
