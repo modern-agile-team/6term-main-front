@@ -55,7 +55,6 @@ const BOARDS = {
           limit: limit,
         },
       });
-      console.log(result.data);
       return result.data;
     } catch (err) {
       Promise.reject(err);

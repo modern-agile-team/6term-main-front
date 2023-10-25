@@ -14,16 +14,11 @@ const PostBoard = (): JSX.Element => {
   //옵저버 생성
   useEffect(() => {
     const observer = new IntersectionObserver(handleObs, { threshold: 0.5 });
-    console.log(observer);
     if (obsRef.current) observer.observe(obsRef.current);
     return () => {
       observer.disconnect();
     };
   }, [obsRef, getList]);
-
-  useEffect(() => {
-    console.log('::::', page, load, pageState);
-  }, [page]);
 
   useEffect(() => {
     getPost();
