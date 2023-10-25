@@ -1,8 +1,7 @@
 // Socket이 구현 되는 순간 리팩토링 시작!!
-
 import React, { useEffect } from 'react';
 import * as S from './styled';
-import ChatSpace from './ChatSpace';
+import ChatSpace from '../chat-space/ChatSpace';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { DMDummyAtom } from '@/recoil/atoms/DMUserAtom';
 import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';

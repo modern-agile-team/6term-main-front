@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@loadable/component": "^5.15.3",
+    "@types/autosize": "^4.0.2",
     "@types/loadable__component": "^5.13.5",
     "@types/node": "20.5.4",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@types/react-mentions": "^4.1.11",
+    "autosize": "^6.0.1",
     "axios": "^1.5.0",
     "bootstrap": "^5.3.1",
     "dompurify": "^3.0.6",

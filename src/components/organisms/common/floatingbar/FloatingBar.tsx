@@ -9,7 +9,7 @@ import {
 } from 'react-icons/md';
 import { IoMdChatbubbles } from 'react-icons/io';
 import Link from 'next/link';
-import ChatModal from '@/components/molecules/chatting/chat-modal/ChatModal';
+import ChatModal from '@/components/organisms/chat-modal/ChatModal';
 import useModal from '@/hooks/useModal';
 
 const scrollToTop = () => {

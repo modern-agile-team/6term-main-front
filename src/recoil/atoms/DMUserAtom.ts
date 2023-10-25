@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { DMUserDummy } from '@/apis/DMUserDummy';
+import { DMUserDummy } from '@/apis/chat-dummy/DMUserDummy';
 
 export type DMUserDummyType = {
   id: number;
