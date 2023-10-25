@@ -5,7 +5,7 @@ import BOARDS from '@/apis/boards';
 
 const PostBoard = (): JSX.Element => {
   const [getList, setGetList] = useState<any>([]);
-  const obsRef = useRef(null); //옵저버 state
+  const obsRef = useRef<HTMLDivElement>(null); //옵저버 state
   const [page, setPage] = useState<number>(0); // 페이지 state
   const [load, setLoad] = useState(false);
   const [pageState, setPageState] = useState<boolean>(true); //페이지 State
@@ -14,11 +14,16 @@ const PostBoard = (): JSX.Element => {
   //옵저버 생성
   useEffect(() => {
     const observer = new IntersectionObserver(handleObs, { threshold: 0.5 });
+    console.log(observer);
     if (obsRef.current) observer.observe(obsRef.current);
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [obsRef, getList]);
+
+  useEffect(() => {
+    console.log('::::', page, load, pageState);
+  }, [page]);
 
   useEffect(() => {
     getPost();
@@ -40,13 +45,11 @@ const PostBoard = (): JSX.Element => {
       const tempPage = Math.ceil(totalPage.total / 16);
       setPage(tempPage);
       setPageState(false);
-    } else {
+    } else if (page > 0) {
       //마지막페이지까지 간다면
-      if (page > 0) {
-        const result = await BOARDS.getlistAll(page, 16); //api요청 글 목록 불러오기
-        const reverseArr = [...result.data].reverse();
-        result && setGetList((prev: any) => [...prev, ...reverseArr]);
-      }
+      const result = await BOARDS.getlistAll(page, 16); //api요청 글 목록 불러오기
+      const reverseArr = [...result.data].reverse();
+      result && setGetList((prev: any) => [...prev, ...reverseArr]);
     }
     setLoad(false);
   }, [page]);
@@ -71,9 +74,7 @@ const PostBoard = (): JSX.Element => {
       )}
       <div>
         {load && <div>Loading...</div>}
-        <div
-          style={{ border: '1px solid #999', width: 100 }}
-          ref={obsRef}></div>
+        <div ref={obsRef}></div>
       </div>
     </div>
   );
