@@ -43,7 +43,7 @@ const PostUnitTemplate = (props: BoardType) => {
   };
 
   useEffect(() => {
-    // console.log(getUnitInfo);
+    console.log(getUnitInfo);
     setUnitComment(db3);
   }, []);
 

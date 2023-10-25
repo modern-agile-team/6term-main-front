@@ -75,7 +75,7 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
       <S.FlexBox direction="column">
         <S.PostTitle onClick={() => handleRouter(isData.id)}>
           <S.FlexBox direction="column">
-            {isData.boardImages.length === (0 as number) ? (
+            {isData.boardImages.length === Number(0) ? (
               <div>
                 <S.ThumbnailImg color="#f1f1f1" />
               </div>

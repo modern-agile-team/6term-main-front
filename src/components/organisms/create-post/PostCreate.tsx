@@ -115,17 +115,12 @@ const PostCreate = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(files);
-  });
-
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
     const formData = new FormData();
     files.map((data) => {
       formData.append('files', data.object as File);
     });
-
     if (confirm('업로드하시겠습니까?')) {
       if (getBoard.sub === '' || unitTitle === '' || quillText === '') {
         if (getBoard.sub === '') alert('카테고리를 선택해주세요.');
@@ -143,7 +138,12 @@ const PostCreate = () => {
           await BOARDS.createImg(formData, data.data.id);
         }
         //router => 해당 글 로 페이지 이동
-        router.push(`/post/unit/${data.data.id}`);
+        router.push({
+          pathname: `/post/unit/[id]`,
+          // query: {
+          //   boardId: data.data.id,
+          // },
+        });
         resetSelect(); //게시글 카테고리 초기화
       }
     }

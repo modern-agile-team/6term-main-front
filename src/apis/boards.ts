@@ -47,15 +47,17 @@ const BOARDS = {
   },
 
   //게시글 리스트 api
-  async getlistAll(page: number): Promise<any> {
+  async getlistAll(page: number, limit: number): Promise<any> {
+    console.log(page, limit);
     try {
       const result: AxiosResponse = await instance.get(`${BOARDS.path}`, {
         params: {
           page: page,
-          limit: 16,
+          limit: limit,
         },
       });
-      return result.data.data;
+      console.log(result.data);
+      return result.data;
     } catch (err) {
       Promise.reject(err);
     }
@@ -63,12 +65,16 @@ const BOARDS = {
 
   //게시글 unit api [get요청]
   async boardUnitApi(id: number): Promise<any> {
-    const result: AxiosResponse = await instance.get(`${BOARDS.path}/unit`, {
-      params: {
-        boardId: id,
-      },
-    });
-    return result.data;
+    try {
+      const result: AxiosResponse = await instance.get(`${BOARDS.path}/unit`, {
+        params: {
+          boardId: id,
+        },
+      });
+      return result.data;
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   //게시글 unit 삭제 api [delete요청]
