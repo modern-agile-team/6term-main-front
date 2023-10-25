@@ -139,10 +139,10 @@ const PostCreate = () => {
         }
         //router => 해당 글 로 페이지 이동
         router.push({
-          pathname: `/post/unit/[id]`,
-          // query: {
-          //   boardId: data.data.id,
-          // },
+          pathname: `/post/unit/${data.data.id}`,
+          query: {
+            boardId: data.data.id,
+          },
         });
         resetSelect(); //게시글 카테고리 초기화
       }
