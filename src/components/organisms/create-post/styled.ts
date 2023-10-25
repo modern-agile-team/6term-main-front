@@ -55,12 +55,18 @@ export const CreatePostBody = styled.div`
 
 export const AddImageContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 780px;
-  height: 100px;
+  height: auto;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 25%);
   padding: 10px;
   margin: 10px 0px 10px 0px;
   border-radius: 5px;
+`;
+
+export const PreviewContainer = styled.div`
+  width: 300px;
+  margin-right: 0px auto 0px auto;
 `;
 
 export const ButtonUI = styled.button`

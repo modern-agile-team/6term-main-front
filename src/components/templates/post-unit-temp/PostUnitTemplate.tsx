@@ -43,7 +43,6 @@ const PostUnitTemplate = (props: BoardType) => {
   };
 
   useEffect(() => {
-    // console.log(getUnitInfo);
     setUnitComment(db3);
   }, []);
 
@@ -60,17 +59,21 @@ const PostUnitTemplate = (props: BoardType) => {
           body={getUnitInfo.body}
         />
         <div>
-          <div onClick={handleDeleteButton}>삭제버튼</div>
-          <Link
-            href={{
-              pathname: `/post/modify/[id]`,
-              query: {
-                id: props.boardId,
-                data: JSON.stringify(getUnitInfo),
-              },
-            }}>
-            수정버튼
-          </Link>
+          {getUnitInfo.unitowner && (
+            <div>
+              <div onClick={handleDeleteButton}>삭제버튼</div>
+              <Link
+                href={{
+                  pathname: `/post/modify/[id]`,
+                  query: {
+                    id: props.boardId,
+                    data: JSON.stringify(getUnitInfo),
+                  },
+                }}>
+                수정버튼
+              </Link>
+            </div>
+          )}
         </div>
         <S.DivisionLine />
         <PostCreateComment />
