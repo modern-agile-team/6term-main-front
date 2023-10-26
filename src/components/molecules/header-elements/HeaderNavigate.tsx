@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Logo from '../Logo';
+import Logo from '../../common/Logo';
 import React from 'react';
 import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
