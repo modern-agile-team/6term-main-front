@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Logo from '../Logo';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import * as S from './styled';
