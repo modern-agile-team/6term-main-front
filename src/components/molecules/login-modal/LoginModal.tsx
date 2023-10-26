@@ -18,10 +18,13 @@ const LoginModal = ({ show, hide }: ModalType) => {
         <S.FlexBox>
           <S.Button onClick={hide}>X</S.Button>
         </S.FlexBox>
-        <Image src={logo} alt="로고" width={80} />
-        <S.FlexBox>
-          <S.DivisionLine />
-        </S.FlexBox>
+        <Image
+          src="https://ma6-main.s3.ap-northeast-2.amazonaws.com/ma6_main_images/Logo.png"
+          alt="로고"
+          width={70}
+          height={70}
+        />
+        <S.FlexBox>{/* <S.DivisionLine /> */}</S.FlexBox>
         <div>로그인</div>
         <S.FlexBox direction="column">
           <Naver />

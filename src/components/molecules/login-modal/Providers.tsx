@@ -14,9 +14,10 @@ export const Naver = () => {
   return (
     <S.ProviderBox>
       <Image
-        src={naverImg}
+        src="https://ma6-main.s3.ap-northeast-2.amazonaws.com/ma6_main_images/naverImg.png"
         alt="네이버로그인"
         onClick={naverLogin}
+        height={50}
         width={183}
       />
     </S.ProviderBox>
@@ -29,7 +30,13 @@ export const Kakao = () => {
   };
   return (
     <S.ProviderBox>
-      <Image src={kakaoImg} alt="카카오로그인" onClick={kakaoLogin} />
+      <Image
+        src="https://ma6-main.s3.ap-northeast-2.amazonaws.com/ma6_main_images/kakaoImg.png"
+        alt="카카오로그인"
+        width={183}
+        height={50}
+        onClick={kakaoLogin}
+      />
     </S.ProviderBox>
   );
 };
