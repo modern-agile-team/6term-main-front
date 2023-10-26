@@ -50,7 +50,7 @@ const BOARDS = {
         limit: 16,
       },
     });
-    return result.data;
+    return result.data.data;
   },
 
   //게시글 unit api [get요청]

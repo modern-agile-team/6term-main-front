@@ -1,9 +1,9 @@
-import AUTH from '@/apis/oauth';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './styled';
 import { useSetRecoilState } from 'recoil';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
+import AUTHS from '@/apis/oauth';
 
 interface Company {
   provider: string;
@@ -16,7 +16,7 @@ const SaveToken = ({ provider }: Company) => {
   const getToken = async () => {
     const code = new URL(window.location.href).searchParams.get('code');
 
-    const result = await AUTH.getToken(provider, code as string);
+    const result = await AUTHS.getToken(provider, code as string);
     localStorage.setItem('accessToken', result.accessToken);
     localStorage.setItem('refreshToken', result.refreshToken);
     localStorage.setItem('provider', provider);
@@ -25,7 +25,9 @@ const SaveToken = ({ provider }: Company) => {
   };
 
   useEffect(() => {
-    getToken();
+    return () => {
+      getToken();
+    };
   }, []);
 
   return (
