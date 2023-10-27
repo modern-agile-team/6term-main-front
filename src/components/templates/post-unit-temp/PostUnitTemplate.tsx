@@ -29,10 +29,6 @@ const PostUnitTemplate = (props: BoardType) => {
 
   const [getUnitComment, setUnitComment] = useState<Info[]>([]);
   const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
-  // const handleTest = async (id: number) => {
-  //   BOARDS.postBoardLikeApi(id).then((res) => console.log(res));
-  //   BOARDS.getBoardLikeApi(id).then((res) => console.log(res));
-  // };
 
   const handleDeleteButton = async () => {
     if (confirm('삭제하시겠습니까?')) {
@@ -51,8 +47,10 @@ const PostUnitTemplate = (props: BoardType) => {
       <div>
         <PostUnitHeader
           userImage={getUnitInfo.userId.userImage.imageUrl}
+          userId={getUnitInfo.userId.userImage.id}
           name={getUnitInfo.userId.name}
           head={getUnitInfo.head}
+          boardId={props.boardId}
         />
         <PostUnitBody
           boardImages={getUnitInfo.boardImages}
