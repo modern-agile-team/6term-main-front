@@ -36,12 +36,12 @@ const PostBoard = (): JSX.Element => {
   const getPost = useCallback(async () => {
     setLoad(true); //로딩 시작
     const result = await BOARDS.getlistAll(page); //api요청 글 목록 불러오기
-    // if (result) {
-    //   setGetList((prev: any) => [...prev, ...result]);
-    // } else {
-    //   console.log('err');
-    // }
-    // setLoad(false);
+    if (result) {
+      setGetList((prev: any) => [...prev, ...result]);
+    } else {
+      console.log('err');
+    }
+    setLoad(false);
   }, [page]);
   return (
     <div
