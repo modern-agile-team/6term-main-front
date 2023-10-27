@@ -1,23 +1,31 @@
-import axios from 'axios';
+import { AxiosResponse } from 'axios';
 import instance from './axiosInstance';
 
-const AUTH = {
+const AUTHS = {
   path: '/auth',
-  async getToken(com: string, code: string | null): Promise<any> {
+  async getToken(provider: string, code: string | null): Promise<any> {
     try {
-      const result = await instance.get(`${AUTH.path}/${com}/login`, {
-        params: {
-          code: code,
+      const result: AxiosResponse = await instance.get(
+        `${AUTHS.path}/${provider}/login`,
+        {
+          params: {
+            code: code,
+          },
         },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      );
       return result.data;
     } catch (err) {
       console.log(err);
     }
   },
+
+  //logoutApi [post요청]
+  async handleLogout(provider: string): Promise<any> {
+    const result: AxiosResponse = await instance.post(
+      `${AUTHS.path}/${provider}/logout`,
+    );
+    return result;
+  },
 };
 
-export default AUTH;
+export default AUTHS;

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { styled } from 'styled-components';
 
@@ -27,10 +28,11 @@ const Footer = () => {
   return (
     <FooterBoard>
       <a href="#" onClick={openNewTab}>
-        <img
-          src="/ModernAgile.png"
+        <Image
+          src="https://ma6-main.s3.ap-northeast-2.amazonaws.com/ma6_main_images/ModernAgile.png"
           alt="모던 애자일"
-          style={{ width: '50px', height: 'auto' }}
+          width={50}
+          height={40}
         />
       </a>
       <FooterText>ⓒ 2023 Modern Agile</FooterText>

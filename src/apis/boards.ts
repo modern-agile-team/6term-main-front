@@ -1,3 +1,4 @@
+import { rejects } from 'assert';
 import instance from './axiosInstance';
 import { Axios, AxiosResponse } from 'axios';
 
@@ -31,9 +32,12 @@ const BOARDS = {
   //이미지 업로드 api
   async createImg(image: FormData, boardId: number): Promise<any> {
     const result: AxiosResponse = await instance.post(
-      `${BOARDS.path}/${boardId}/images`,
+      `${BOARDS.path}/images`,
       image,
       {
+        params: {
+          boardId: boardId,
+        },
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -43,24 +47,32 @@ const BOARDS = {
   },
 
   //게시글 리스트 api
-  async getlistAll(page: number): Promise<any> {
-    const result: AxiosResponse = await instance.get(`${BOARDS.path}`, {
-      params: {
-        page: page,
-        limit: 16,
-      },
-    });
-    return result.data;
+  async getlistAll(page: number, limit: number): Promise<any> {
+    try {
+      const result: AxiosResponse = await instance.get(`${BOARDS.path}`, {
+        params: {
+          page: page,
+          limit: limit,
+        },
+      });
+      return result.data;
+    } catch (err) {
+      Promise.reject(err);
+    }
   },
 
   //게시글 unit api [get요청]
   async boardUnitApi(id: number): Promise<any> {
-    const result: AxiosResponse = await instance.get(`${BOARDS.path}/unit`, {
-      params: {
-        boardId: id,
-      },
-    });
-    return result.data;
+    try {
+      const result: AxiosResponse = await instance.get(`${BOARDS.path}/unit`, {
+        params: {
+          boardId: id,
+        },
+      });
+      return result.data;
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   //게시글 unit 삭제 api [delete요청]
