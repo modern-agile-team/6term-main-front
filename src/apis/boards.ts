@@ -106,16 +106,37 @@ const BOARDS = {
   async postBoardLikeApi(id: number): Promise<any> {
     const result: AxiosResponse = await instance.post(
       `${BOARDS.path}/like/${id}`,
+      {
+        params: {
+          boardId: id,
+        },
+      },
     );
-    return result.data;
+    return result;
   },
 
   //게시글 like [get요청]
   async getBoardLikeApi(id: number): Promise<any> {
-    const result: AxiosResponse = await instance.get(
-      `${BOARDS.path}/like/${id}`,
-    );
+    const result: AxiosResponse = await instance.get(`${BOARDS.path}/like`, {
+      params: {
+        boardId: id,
+      },
+    });
+    console.log(result);
     return result.data;
+  },
+
+  //게시글 like [delete요청]
+  async delBoardLikeApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.delete(
+      `${BOARDS.path}/like/${id}`,
+      {
+        params: {
+          boardId: id,
+        },
+      },
+    );
+    return result;
   },
 };
 

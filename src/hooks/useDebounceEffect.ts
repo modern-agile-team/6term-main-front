@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 
-/**Debounce훅 : 입력 지연 */
+/**Debounce훅 : 입력 지연
+ * const 변수 = useDebounceEffect(state, time);
+ */
 const useDebouncedEffect = (func: string, delay: number) => {
   const [state, setState] = useState(func);
 
