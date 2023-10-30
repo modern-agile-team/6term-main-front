@@ -29,7 +29,7 @@ const BOARDS = {
     return result;
   },
 
-  //이미지 업로드 api
+  //이미지 업로드 api [post]
   async createImg(image: FormData, boardId: number): Promise<any> {
     const result: AxiosResponse = await instance.post(
       `${BOARDS.path}/images`,
@@ -44,6 +44,27 @@ const BOARDS = {
       },
     );
     return result;
+  },
+
+  //이미지 업로드 api [patch요청]
+  async modifyImg(image: FormData, boardId: number): Promise<any> {
+    try {
+      const result: AxiosResponse = await instance.patch(
+        `${BOARDS.path}/images`,
+        image,
+        {
+          params: {
+            boardId: boardId,
+          },
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      return result;
+    } catch (err) {
+      Promise.reject(err);
+    }
   },
 
   //게시글 리스트 api
@@ -122,7 +143,6 @@ const BOARDS = {
         boardId: id,
       },
     });
-    console.log(result);
     return result.data;
   },
 

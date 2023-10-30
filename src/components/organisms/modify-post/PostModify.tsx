@@ -143,9 +143,19 @@ const PostModify = () => {
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
     const formData = new FormData();
+    const regex: RegExp = /amazon/g;
     files.map((data) => {
-      formData.append('files', data.object as File);
+      // regex.test(data.url as string)
+      //   ? formData.append('files', data.url as string)
+      //   : formData.append('files', data.object as File);
+      if (data.url && regex.test(data.url)) {
+        console.log(regex.test(data.url));
+        formData.append('files', data.url);
+      } else {
+        formData.append('files', data.object as File);
+      }
     });
+    console.log(formData.getAll('files'));
 
     if (confirm('업로드하시겠습니까?')) {
       if (getBoard.sub === '' || unitTitle === '' || quillText === '') {
@@ -161,7 +171,7 @@ const PostModify = () => {
         };
         const data = await BOARDS.boardUnitModifyApi(isData);
         if (files[0] !== null) {
-          await BOARDS.createImg(formData, data.data.id);
+          await BOARDS.modifyImg(formData, data.data.id);
         }
         //router => 해당 글 로 페이지 이동
         router.push(`/post/unit/${data.data.id}`);
