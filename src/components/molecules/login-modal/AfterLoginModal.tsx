@@ -9,7 +9,13 @@ interface ModalType {
 }
 
 const AfterLoginModal = ({ show, hide }: ModalType) => {
+  const [isInitial, setIsInitital] = useState(false);
   const setIsLogin = useSetRecoilState(LoginStateAtom);
+
+  //useEffect를 사용해서 ssr확인
+  useEffect(() => {
+    setIsInitital(true);
+  }, []);
 
   const logoutHandle = async () => {
     const provider =
@@ -17,13 +23,12 @@ const AfterLoginModal = ({ show, hide }: ModalType) => {
 
     if (confirm('로그아웃 하시겠습니까?')) {
       //logoutAPI요청
-      const res = await AUTHS.handleLogout(provider);
+      await AUTHS.handleLogout(provider);
       // localStorage에서 토큰값 삭제
-      console.log(localStorage.getItem('provider'));
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('provider');
-      setIsLogin(false);
+      isInitial ? setIsLogin(false) : setIsInitital(false);
     }
   };
 
