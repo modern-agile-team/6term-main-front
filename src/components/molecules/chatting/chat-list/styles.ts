@@ -27,7 +27,7 @@ export const CategoryBox = styled.div`
 `;
 
 export const Category = styled.div`
-  color: #ffc2c2;
+  color: #0073e6;
 `;
 
 // interface ColumnAndRow {

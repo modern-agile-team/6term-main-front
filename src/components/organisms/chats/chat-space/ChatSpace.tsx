@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import * as S from './styled';
-import DMFriendList from '../../molecules/chatting/chat-list/ChatDMFriendList';
-import DMList from '../../molecules/chatting/chat-list/ChatDMList';
-import ChattingRoom from '../chat-room/ChatRoom';
+import DMFriendList from '../../../molecules/chatting/chat-list/ChatDMFriendList';
+import DMList from '../../../molecules/chatting/chat-list/ChatDMList';
+import Chatting from '../chatting/Chatting';
+// import ChattingRoom from '../chat-room/ChatRoom';
 // import DMList from '../chat-dm/ChatDMList';
 
 const ChatSpace = (): JSX.Element => {
@@ -19,7 +20,7 @@ const ChatSpace = (): JSX.Element => {
           </S.ChatListScroll>
         </S.ChatLists>
         <S.Chats>
-          <ChattingRoom/>
+          <Chatting />
         </S.Chats>
       </S.ChatSpaceWrapper>
     </div>

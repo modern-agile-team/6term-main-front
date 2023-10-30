@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { MentionsInput } from 'react-mentions';
 
 export const ChatArea = styled.div`
   display: flex;
