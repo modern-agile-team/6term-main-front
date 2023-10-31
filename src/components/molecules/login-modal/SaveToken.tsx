@@ -14,20 +14,23 @@ const SaveToken = ({ provider }: Company) => {
   const setIsLogin = useSetRecoilState(LoginStateAtom);
 
   const getToken = async () => {
-    const code = new URL(window.location.href).searchParams.get('code');
+    try {
+      const code = new URL(window.location.href).searchParams.get('code');
 
-    const result = await AUTHS.getToken(provider, code as string);
-    localStorage.setItem('accessToken', result.accessToken);
-    localStorage.setItem('refreshToken', result.refreshToken);
-    localStorage.setItem('provider', provider);
-    setIsLogin(true);
-    router.push('/');
+      const result = await AUTHS.getToken(provider, code as string);
+      localStorage.setItem('accessToken', result.accessToken);
+      localStorage.setItem('refreshToken', result.refreshToken);
+      localStorage.setItem('provider', provider);
+      setIsLogin(true);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      router.push('/');
+    }
   };
 
   useEffect(() => {
-    return () => {
-      getToken();
-    };
+    getToken();
   }, []);
 
   return (

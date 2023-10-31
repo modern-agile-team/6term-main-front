@@ -143,9 +143,19 @@ const PostModify = () => {
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
     const formData = new FormData();
+    const regex: RegExp = /amazon/g;
     files.map((data) => {
-      formData.append('files', data.object as File);
+      // regex.test(data.url as string)
+      //   ? formData.append('files', data.url as string)
+      //   : formData.append('files', data.object as File);
+      if (data.url && regex.test(data.url)) {
+        console.log(regex.test(data.url));
+        formData.append('files', data.url);
+      } else {
+        formData.append('files', data.object as File);
+      }
     });
+    console.log(formData.getAll('files'));
 
     if (confirm('업로드하시겠습니까?')) {
       if (getBoard.sub === '' || unitTitle === '' || quillText === '') {
@@ -159,12 +169,17 @@ const PostModify = () => {
           main_category: getBoard.main,
           sub_category: getBoard.sub,
         };
-        const data = await BOARDS.boardUnitModifyApi(isData);
+        const boardInfo = await BOARDS.boardUnitModifyApi(isData);
         if (files[0] !== null) {
-          await BOARDS.createImg(formData, data.data.id);
+          await BOARDS.modifyImg(formData, boardInfo.id);
         }
         //router => 해당 글 로 페이지 이동
-        router.push(`/post/unit/${data.data.id}`);
+        router.push({
+          pathname: `/post/unit/${boardInfo.id}`,
+          query: {
+            boardId: boardInfo.id,
+          },
+        });
         resetSelect(); //게시글 카테고리 초기화
       }
     }
