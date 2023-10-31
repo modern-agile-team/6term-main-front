@@ -27,7 +27,6 @@ const reNewToken = async () => {
       refresh_token: refreshToken,
     },
   });
-  console.log('재발급 됨');
   localStorage.setItem('accessToken', response.data.accessToken);
 };
 
@@ -58,7 +57,7 @@ instance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response.status === 401) {
+    if (error.response.status === 401 || error.response.status === 403) {
       if (isTokenExpired() !== undefined) await reNewToken();
 
       const accessToken = localStorage.getItem('accessToken');
