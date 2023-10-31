@@ -45,10 +45,6 @@ const PostUnitHeader = (props: UnitInfo) => {
   };
 
   useEffect(() => {
-    console.log(props.userId);
-  });
-
-  useEffect(() => {
     getLikeApi(props.boardId);
   }, []);
 

@@ -7,4 +7,4 @@ export const LoginStateAtom = atom({
   key: 'loginState',
   default: false,
   effects_UNSTABLE: [persistAtom],
-});
+}); 

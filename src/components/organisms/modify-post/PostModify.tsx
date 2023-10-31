@@ -169,12 +169,17 @@ const PostModify = () => {
           main_category: getBoard.main,
           sub_category: getBoard.sub,
         };
-        const data = await BOARDS.boardUnitModifyApi(isData);
+        const boardInfo = await BOARDS.boardUnitModifyApi(isData);
         if (files[0] !== null) {
-          await BOARDS.modifyImg(formData, data.data.id);
+          await BOARDS.modifyImg(formData, boardInfo.id);
         }
         //router => 해당 글 로 페이지 이동
-        router.push(`/post/unit/${data.data.id}`);
+        router.push({
+          pathname: `/post/unit/${boardInfo.id}`,
+          query: {
+            boardId: boardInfo.id,
+          },
+        });
         resetSelect(); //게시글 카테고리 초기화
       }
     }

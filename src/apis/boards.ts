@@ -98,7 +98,11 @@ const BOARDS = {
 
   //게시글 unit 삭제 api [delete요청]
   async boardUnitDeleteApi(id: number): Promise<any> {
-    const result: AxiosResponse = await instance.delete(`${BOARDS.path}/${id}`);
+    const result: AxiosResponse = await instance.delete(`${BOARDS.path}`, {
+      params: {
+        boardId: id,
+      },
+    });
     return result.data;
   },
 
@@ -111,7 +115,7 @@ const BOARDS = {
     sub_category,
   }: Post): Promise<any> {
     const result: AxiosResponse = await instance.patch<Post>(
-      `${BOARDS.path}/${id}`,
+      `${BOARDS.path}`,
       {
         id: id,
         head: head,
@@ -119,7 +123,13 @@ const BOARDS = {
         main_category: main_category,
         sub_category: sub_category,
       },
+      {
+        params: {
+          id: id,
+        },
+      },
     );
+    console.log(result.data);
     return result.data;
   },
 

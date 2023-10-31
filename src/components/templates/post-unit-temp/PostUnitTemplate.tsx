@@ -2,7 +2,7 @@ import * as S from './styled';
 import PostUnitHeader from '@/components/organisms/post-unit/PostUnitHeader';
 import PostUnitBody from '@/components/organisms/post-unit/PostUnitBody';
 import { useRouter } from 'next/router';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from 'recoil';
 import PostCreateComment from '@/components/organisms/post-unit/PostCreateComments';
 import PostComments from '@/components/organisms/post-unit/PostComments';
 import { useEffect, useState } from 'react';
@@ -29,6 +29,7 @@ const PostUnitTemplate = (props: BoardType) => {
 
   const [getUnitComment, setUnitComment] = useState<Info[]>([]);
   const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
+  // const getUnitInfo = useRecoilValueLoadable(UnitPostSelector(props.boardId));
 
   const handleDeleteButton = async () => {
     if (confirm('삭제하시겠습니까?')) {
@@ -41,6 +42,10 @@ const PostUnitTemplate = (props: BoardType) => {
   useEffect(() => {
     setUnitComment(db3);
   }, []);
+
+  if (!getUnitInfo) {
+    return <div>Loading</div>;
+  }
 
   return (
     <S.UnitContainer>
