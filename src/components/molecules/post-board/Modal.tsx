@@ -1,14 +1,12 @@
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-interface ModalDefaultType {
-  onClickToggleModal: () => void;
+interface ModalType {
+  show: boolean;
+  hide: () => void;
 }
 
-function Modal({
-  onClickToggleModal,
-  children,
-}: PropsWithChildren<ModalDefaultType>) {
+const Modal = ({ show, hide, children }: PropsWithChildren<ModalType>) => {
   return (
     <ModalContainer>
       <DialogBox>{children}</DialogBox>
@@ -16,17 +14,17 @@ function Modal({
         onClick={(e: React.MouseEvent) => {
           e.preventDefault();
 
-          if (onClickToggleModal) {
-            onClickToggleModal();
+          if (show) {
+            hide();
           }
         }}
       />
     </ModalContainer>
   );
-}
+};
 
 const ModalContainer = styled.div`
-  width: 300px;
+  width: 150px;
   height: auto;
   display: flex;
   align-items: center;
@@ -52,7 +50,7 @@ const Backdrop = styled.div`
   position: fixed;
   top: 0;
   z-index: 9999;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(f, f, f, 0.2);
 `;
 
 export default Modal;
