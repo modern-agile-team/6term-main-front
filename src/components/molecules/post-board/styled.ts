@@ -4,7 +4,7 @@ import styled from 'styled-components';
 /** 게시판 컨테이너 */
 export const PostContainer = styled.div`
   width: 270px;
-  height: 242px;
+  height: 272px;
   display: flex;
   background-color: #fff;
   box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 25%);
@@ -157,7 +157,7 @@ interface ThumbnailBg {
  */
 export const ThumbnailImg = styled.div<ThumbnailBg>`
   width: 270px;
-  height: 120px;
+  height: 140px;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: ${(props) => props.color};

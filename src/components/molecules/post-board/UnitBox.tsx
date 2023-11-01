@@ -81,7 +81,6 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
               <div>
                 <S.ThumbnailImg
                   img={isData.boardImages[0].imageUrl}></S.ThumbnailImg>
-                <div>{isData.boardLike}</div>
               </div>
             )}
             <div style={{ display: 'flex' }}>

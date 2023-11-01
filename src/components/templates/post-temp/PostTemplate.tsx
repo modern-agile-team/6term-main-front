@@ -6,7 +6,7 @@ const PostBoardTemplate = (): JSX.Element => {
   return (
     <S.postBoardUnit>
       <div>
-        <PostBoardHeader />
+        <PostBoardHeader main="전체" />
         <Suspense fallback={<h1>로딩중...</h1>}>
           <PostBoard />
         </Suspense>

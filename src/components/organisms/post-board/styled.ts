@@ -3,7 +3,7 @@ import styled from 'styled-components';
 /** postBoard */
 export const PostBoardTitle = styled.div`
   font-size: 25px;
-  width: 150px;
+  width: 180px;
   font-weight: bold;
   margin: auto;
 `;

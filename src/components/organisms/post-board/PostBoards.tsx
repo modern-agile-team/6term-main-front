@@ -52,7 +52,7 @@ const PostBoards = (props: Board): JSX.Element => {
   return (
     <div
       style={{
-        width: 1000,
+        width: 1300,
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
