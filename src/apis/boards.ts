@@ -155,6 +155,7 @@ const BOARDS = {
         boardId: id,
       },
     });
+    console.log(result);
     return result.data;
   },
 
