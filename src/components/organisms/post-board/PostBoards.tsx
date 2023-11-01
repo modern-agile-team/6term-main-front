@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { useRecoilValue } from 'recoil';
-import UnitBox, { BoardInfo } from '@/components/molecules/post-board/UnitBox';
+import UnitBox from '@/components/molecules/post-board/UnitBox';
 import BOARDS from '@/apis/boards';
 import { Board } from '@/components/veiws/AllPost';
+import * as S from './styled';
 
 const PostBoards = (props: Board): JSX.Element => {
   const [getList, setGetList] = useState<any>([]);
@@ -50,13 +50,7 @@ const PostBoards = (props: Board): JSX.Element => {
     setLoad(false);
   }, [page]);
   return (
-    <div
-      style={{
-        width: 1300,
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-      }}>
+    <S.HeaderContainer>
       {getList && (
         <>
           {getList
@@ -74,7 +68,7 @@ const PostBoards = (props: Board): JSX.Element => {
         {load && <div>Loading...</div>}
         <div ref={obsRef}></div>
       </div>
-    </div>
+    </S.HeaderContainer>
   );
 };
 

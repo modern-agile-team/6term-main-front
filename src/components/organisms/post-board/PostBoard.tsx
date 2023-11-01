@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { useRecoilValue } from 'recoil';
-import UnitBox, { BoardInfo } from '@/components/molecules/post-board/UnitBox';
+import UnitBox from '@/components/molecules/post-board/UnitBox';
 import BOARDS from '@/apis/boards';
+import * as S from './styled';
 
 const PostBoard = (): JSX.Element => {
   const [getList, setGetList] = useState<any>([]);
@@ -49,13 +49,7 @@ const PostBoard = (): JSX.Element => {
     setLoad(false);
   }, [page]);
   return (
-    <div
-      style={{
-        width: 1300,
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-      }}>
+    <S.HeaderContainer>
       {getList && (
         <>
           {getList.map((data: any) => {
@@ -71,7 +65,7 @@ const PostBoard = (): JSX.Element => {
         {load && <div>Loading...</div>}
         <div ref={obsRef}></div>
       </div>
-    </div>
+    </S.HeaderContainer>
   );
 };
 

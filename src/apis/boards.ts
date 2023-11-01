@@ -76,7 +76,6 @@ const BOARDS = {
           limit: limit,
         },
       });
-      console.log(result.data);
       return result.data;
     } catch (err) {
       Promise.reject(err);
@@ -91,7 +90,6 @@ const BOARDS = {
           boardId: id,
         },
       });
-      console.log(result.data);
       return result.data;
     } catch (err) {
       console.log(err);
@@ -131,7 +129,6 @@ const BOARDS = {
         },
       },
     );
-    console.log(result.data);
     return result.data;
   },
 
@@ -155,7 +152,6 @@ const BOARDS = {
         boardId: id,
       },
     });
-    console.log(result);
     return result.data;
   },
 
