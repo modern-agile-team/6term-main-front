@@ -8,12 +8,13 @@ import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
 import { useRouter } from 'next/router';
 import { Socket, io } from 'socket.io-client';
 
-interface ModalType {
+export interface ModalType {
   show: boolean;
   hide: () => void;
 }
 
 const ChatModal = (props: ModalType) => {
+  // 모달 오픈 시 소켓 연결
   useEffect(() => {
     const namespaceURL = 'http://13.209.21.62:3000/ch-653383a4468680bc4e9f8491';
     const socket = io(namespaceURL);
