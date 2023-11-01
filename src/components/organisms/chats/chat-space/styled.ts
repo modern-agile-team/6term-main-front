@@ -1,48 +1,6 @@
 import exp from 'constants';
 import styled from 'styled-components';
 
-interface ColumnAndRow {
-  direction?: string;
-}
-/**
- * @params : direction="column" | "row": string
- * @returns : direction="column" | "row"
- */
-// flexible box
-export const FlexBox = styled.div<ColumnAndRow>`
-  display: flex;
-  flex-direction: ${(props) =>
-    props.direction === 'column' ? 'column' : 'row'};
-  justify-content: center;
-  align-items: center;
-`;
-// modal Wrapper
-export const ModalWrapper = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 500px;
-  /* padding: 20px; */
-  border: 1px solid #ccc;
-  border-radius: 7px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10000;
-  text-align: center;
-  background-color: white;
-`;
-// modal 주변 backgound
-export const Backdrop = styled.div`
-  width: 10000px;
-  height: 10000px;
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  z-index: 9999;
-  background-color: rgba(0, 0, 0, 0.2);
-`;
-
 // ********************* ChatSpace ***********************//
 
 export const ChatSpaceWrapper = styled.div`
@@ -72,7 +30,7 @@ export const ChatLists = styled.div`
   /* display: inline-flex; */
   /* flex-direction: column; */
   background: #e7f7ff;
-  color: rgb(188, 171, 188);
+  color: #333333;
   /* vertical-align: top; */
   /* & a {
     padding-left: 36px;
@@ -117,32 +75,30 @@ export const ChatLists = styled.div`
 
 // WorkSpaceName
 export const ChatSpaceName = styled.div`
-  height: 64px;
-  line-height: 64px;
-  border: none;
+  height: 48px;
+  display: flex;
   width: 260px;
-  text-align: center;
-  border-top: 1px solid #91c8e4;
+  align-items: center;
+  justify-content: center;
+  /* border-top: 1px solid rgba(145, 200, 228); */
+  border: none;
   border-radius: 7px 0 0 0;
-  border-bottom: 1px solid #91c8e4;
-  font-weight: 900;
+  border-bottom: 1px solid rgba(145, 200, 228, 0.3);
+  font-weight: 800;
   font-size: 24px;
   background: transparent;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  padding: 0;
-  /* padding-left: 16px; */
-  margin: 0;
-  color: black;
 `;
 
 // MenuScroll
 export const ChatListScroll = styled.div`
-  height: 436px;
+  height: 451px;
   overflow-y: auto;
 `;
 
 export const Chats = styled.div`
+  max-height: 500px;
   flex: 1;
 `;

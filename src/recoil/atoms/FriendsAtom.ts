@@ -1,12 +1,13 @@
 import { atom } from 'recoil';
-import { FriendsDummy } from '@/apis/FriendsDummy';
+import { FriendsDummy } from '@/apis/chat-dummy/friendsDummy';
 
 export type FriendsType = {
   id: number;
   name: string;
+  roomId: number;
 };
 
 export const FriendsAtom = atom<FriendsType[]>({
-  key: 'friendsdummy',
+  key: 'friendList',
   default: FriendsDummy,
 });

@@ -14,10 +14,12 @@ export const CollapseButton = styled.div<{ collapse: boolean }>`
   cursor: pointer;
   & > svg {
     transition: transform 0.2s;
+    color: gray;
     transform: rotate(${(props) => (props.collapse ? '90deg' : '0')});
   }
 `;
 export const CategoryBox = styled.div`
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,7 +27,7 @@ export const CategoryBox = styled.div`
 `;
 
 export const Category = styled.div`
-  color: #ffc2c2;
+  color: #0073e6;
 `;
 
 // interface ColumnAndRow {

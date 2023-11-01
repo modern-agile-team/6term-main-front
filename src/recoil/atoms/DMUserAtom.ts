@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { DMUserDummy } from '@/apis/DMUserDummy';
+import { DMUserDummy } from '@/apis/chat-dummy/DMUserDummy';
 
 export type DMUserDummyType = {
   id: number;
@@ -13,6 +13,6 @@ export type DMUserDummyType = {
 // };
 
 export const DMDummyAtom = atom<DMUserDummyType[]>({
-  key: 'userdummy',
+  key: 'userDummy',
   default: DMUserDummy,
 });

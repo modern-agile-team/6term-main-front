@@ -1,24 +1,27 @@
 import React, { useEffect } from 'react';
 import * as S from './styled';
-import DMFriendList from '../chat-dm/ChatDMFriendList';
-import DMList from '../chat-dm/ChatDMList';
+import DMFriendList from '../../../molecules/chatting/chat-list/ChatDMFriendList';
+import DMList from '../../../molecules/chatting/chat-list/ChatDMList';
+import Chatting from '../chatting/Chatting';
+// import ChattingRoom from '../chat-room/ChatRoom';
 // import DMList from '../chat-dm/ChatDMList';
 
 const ChatSpace = (): JSX.Element => {
   return (
     <div>
       <S.ChatSpaceWrapper>
-        {/* <S.ChatSpaces>test</S.ChatSpaces> */}
         <S.ChatLists>
-          <S.ChatSpaceName>CrabChet</S.ChatSpaceName>
+          <S.ChatSpaceName>CrabChat</S.ChatSpaceName>
           <S.ChatListScroll>
             <DMFriendList />
+            <br />
             <DMList />
-            {/* 채팅방 List */}
-            {/* <DMList /> */}
+            <br />
           </S.ChatListScroll>
         </S.ChatLists>
-        <S.Chats>실제채팅방</S.Chats>
+        <S.Chats>
+          <Chatting />
+        </S.Chats>
       </S.ChatSpaceWrapper>
     </div>
   );
