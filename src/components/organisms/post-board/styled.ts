@@ -35,7 +35,8 @@ export const FlexBox = styled.div`
 `;
 
 export const HeaderContainer = styled.div`
-  width: 1300px;
+  max-width: 1300px;
+  justify-content: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
