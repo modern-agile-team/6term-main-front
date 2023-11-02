@@ -62,6 +62,7 @@ const PostModify = () => {
   const unitInfo = JSON.parse(data as string);
   const resetSelect = useResetRecoilState(SelectBoardAtom);
   const [files, setFiles] = useState<IFileTypes[]>([]);
+  const [delImg, setDelImg] = useState<IFileTypes[]>([]);
   const fileId = useRef<number>(0);
 
   const getModifyInfo = () => {
@@ -80,7 +81,7 @@ const PostModify = () => {
         ...tempFiles,
         {
           id: fileId.current++, // fileId의 값을 1씩 늘려주면서 각 파일의 고유값
-          object: file,
+          object: file as File,
           url: file.imageUrl,
         },
       ];
@@ -128,6 +129,10 @@ const PostModify = () => {
   const handleFilterFile = useCallback(
     (id: number): void => {
       setFiles(files.filter((file: IFileTypes) => file.id !== id));
+      setDelImg((prev) => [
+        ...prev,
+        ...files.filter((file: IFileTypes) => file.id === id),
+      ]);
     },
     [files],
   );
@@ -145,17 +150,13 @@ const PostModify = () => {
     const formData = new FormData();
     const regex: RegExp = /amazon/g;
     files.map((data) => {
-      // regex.test(data.url as string)
-      //   ? formData.append('files', data.url as string)
-      //   : formData.append('files', data.object as File);
       if (data.url && regex.test(data.url)) {
         console.log(regex.test(data.url));
-        formData.append('files', data.url);
+        // formData.append('files', data.url);
       } else {
         formData.append('files', data.object as File);
       }
     });
-    console.log(formData.getAll('files'));
 
     if (confirm('업로드하시겠습니까?')) {
       if (getBoard.sub === '' || unitTitle === '' || quillText === '') {
@@ -164,6 +165,7 @@ const PostModify = () => {
         if (quillText === '') alert('본문내용을 입력해주세요.');
       } else {
         const isData = {
+          id: unitInfo.id,
           head: unitTitle,
           body: quillText,
           main_category: getBoard.main,
@@ -171,7 +173,7 @@ const PostModify = () => {
         };
         const boardInfo = await BOARDS.boardUnitModifyApi(isData);
         if (files[0] !== null) {
-          await BOARDS.modifyImg(formData, boardInfo.id);
+          await BOARDS.modifyImg(formData, boardInfo.id, delImg);
         }
         //router => 해당 글 로 페이지 이동
         router.push({
