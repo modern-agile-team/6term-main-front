@@ -8,7 +8,7 @@ const instance = axios.create({
 const isTokenExpired = async () => {
   const accessToken = localStorage.getItem('accessToken');
   try {
-    const result = await instance.get(`/auth/kakao/logout`, {
+    const result = await instance.get(`/auth/status`, {
       headers: {
         access_token: accessToken,
       },
