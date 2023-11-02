@@ -129,7 +129,6 @@ const BOARDS = {
         },
       },
     );
-    console.log(result.data);
     return result.data;
   },
 

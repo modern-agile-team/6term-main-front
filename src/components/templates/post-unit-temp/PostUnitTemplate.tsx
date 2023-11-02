@@ -6,20 +6,33 @@ import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from 'recoil';
 import PostCreateComment from '@/components/organisms/post-unit/PostCreateComments';
 import PostComments from '@/components/organisms/post-unit/PostComments';
 import { useEffect, useState } from 'react';
-import { db3 } from '@/apis/apiData';
 import BOARDS from '@/apis/boards';
 import { UnitPostSelector } from '@/recoil/selectors/UserPostSelector';
 import Link from 'next/link';
+import { commentDummy } from '@/apis/dummy';
 
-type ReplyType = { userName: string; comment: string; replyId: number };
-interface Info {
-  postId: number;
+// type ReplyType = { userName: string; comment: string; replyId: number };
+// interface Info {
+//   postId: number;
+//   commentId: number;
+//   comment: string;
+//   reply?: ReplyType[];
+//   userName: string;
+// }
+export type UserType = {
+  name: string;
+  userImage: {
+    id: number;
+    userId: number;
+    imageUrl: string;
+  };
+};
+export interface CommentInfo {
   commentId: number;
-  comment: string;
-  reply?: ReplyType[];
-  userName: string;
+  content: string;
+  commentOwner: boolean;
+  userId: UserType;
 }
-
 interface BoardType {
   boardId: number;
 }
@@ -27,9 +40,8 @@ interface BoardType {
 const PostUnitTemplate = (props: BoardType) => {
   const router = useRouter();
 
-  const [getUnitComment, setUnitComment] = useState<Info[]>([]);
+  const [getUnitComment, setUnitComment] = useState<CommentInfo[]>([]);
   const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
-  // const getUnitInfo = useRecoilValueLoadable(UnitPostSelector(props.boardId));
 
   const handleDeleteButton = async () => {
     if (confirm('삭제하시겠습니까?')) {
@@ -40,7 +52,7 @@ const PostUnitTemplate = (props: BoardType) => {
   };
 
   useEffect(() => {
-    setUnitComment(db3);
+    setUnitComment(commentDummy);
   }, []);
 
   if (!getUnitInfo) {
@@ -52,7 +64,7 @@ const PostUnitTemplate = (props: BoardType) => {
       <div>
         <PostUnitHeader
           userImage={getUnitInfo.userId.userImage.imageUrl}
-          userId={getUnitInfo.userId.userImage.id}
+          userId={getUnitInfo.userId.userImage.userId}
           name={getUnitInfo.userId.name}
           head={getUnitInfo.head}
           boardId={props.boardId}
@@ -81,15 +93,14 @@ const PostUnitTemplate = (props: BoardType) => {
         <S.DivisionLine />
         <PostCreateComment />
         <S.DivisionLine />
-        {getUnitComment
-          .filter((data) => data.postId == props.boardId)
-          .map((data, idx) => {
-            return (
-              <div key={idx}>
-                <PostComments {...data} />
-              </div>
-            );
-          })}
+        <S.ComponentHeader>댓글</S.ComponentHeader>
+        {getUnitComment.map((data, idx) => {
+          return (
+            <div key={idx}>
+              <PostComments {...data} />
+            </div>
+          );
+        })}
       </div>
     </S.UnitContainer>
   );

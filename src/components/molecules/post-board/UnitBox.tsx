@@ -1,25 +1,27 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import * as S from './styled';
 import Modal from './Modal';
 import UserSmaple from './UserSample';
 import { CgProfile } from 'react-icons/cg';
 import { mainCategoryMappings, subCategoryMappings } from './unitBoxMapping';
 import { useRouter } from 'next/router';
-import { Link } from 'react-router-dom';
+import useModal from '@/hooks/useModal';
+import { AiFillHeart } from 'react-icons/ai';
 export interface BoardInfo {
   isData: {
     id: number;
+    boardLike: number;
     head: string;
     body: string;
     main_category: string;
     sub_category: string;
     createAt: string;
     userId: {
-      id: number;
       name: string;
       userImage: {
         id: number | null;
         imageUrl?: string | undefined | null;
+        userId: number;
       };
     };
     boardImages: [
@@ -32,7 +34,7 @@ export interface BoardInfo {
 }
 
 const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const { isOpenModal, handleModal } = useModal();
   const [isStateHtml, setStateHtml] = useState<boolean>(false);
 
   const [getCategory, setCategory] = useState({
@@ -41,10 +43,6 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
     boardSubColor: subCategoryMappings[isData.sub_category]?.color || '',
     boardMainColor: mainCategoryMappings[isData.main_category]?.color || '',
   });
-
-  const onClickToggleModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-  }, [isOpenModal]);
 
   useEffect(() => {
     setCategory((prevState) => ({
@@ -85,28 +83,44 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
                   img={isData.boardImages[0].imageUrl}></S.ThumbnailImg>
               </div>
             )}
-            <S.FontBox fontWeight="bold" fontSize={18}>
-              {isData.head.slice(0, 20)}
-            </S.FontBox>
-            {isStateHtml && (
-              <S.Cardbody dangerouslySetInnerHTML={{ __html: isData.body }} />
-            )}
+            <div style={{ display: 'flex' }}>
+              <div>
+                <S.FontBox fontWeight="bold" fontSize={18}>
+                  {isData.head.slice(0, 20)}
+                </S.FontBox>
+                {isStateHtml && (
+                  <S.Cardbody
+                    dangerouslySetInnerHTML={{ __html: isData.body }}
+                  />
+                )}
+              </div>
+              <div style={{ display: 'flex' }}>
+                <AiFillHeart />
+                <div>{isData.boardLike}</div>
+              </div>
+            </div>
           </S.FlexBox>
         </S.PostTitle>
+
         <S.FlexBox direction="row" margin="auto">
           {isOpenModal && (
-            <Modal onClickToggleModal={onClickToggleModal}>
+            <Modal show={isOpenModal} hide={handleModal}>
               <UserSmaple
                 name={isData.userId.name}
                 img={isData.userId.userImage.imageUrl}
+                id={isData.userId.userImage.userId}
               />
             </Modal>
           )}
-          <S.DialogButton onClick={onClickToggleModal}>
+          <S.DialogButton onClick={handleModal}>
             <CgProfile />
           </S.DialogButton>
           <div>{isData.userId.name}</div>
-          <div style={{ marginLeft: 'auto', display: 'flex' }}>
+          <div
+            style={{
+              marginLeft: 'auto',
+              display: 'flex',
+            }}>
             <S.BoardList color={getCategory.boardMainColor}>
               {getCategory.boardMainTitle}
             </S.BoardList>
