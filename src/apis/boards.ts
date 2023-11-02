@@ -147,7 +147,7 @@ const BOARDS = {
       },
       {
         params: {
-          id: id,
+          boardId: id,
         },
       },
     );
