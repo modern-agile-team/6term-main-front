@@ -6,7 +6,7 @@ type Friend = {
   id?: number;
   requesterId: number;
   respondendtId: number;
-  status: '친구 수락';
+  status: string;
 };
 
 const FRIENDS = {
@@ -23,5 +23,20 @@ const FRIENDS = {
     const result: AxiosResponse = await instance.post<Friend>(
       `${FRIENDS.path}/requests/{friend_id}`,
     );
+    return result;
   },
+
+  // 내가 요청 보낸 친구 목록 api(get)
+  async requestedList(): Promise<any> {
+    const result: AxiosResponse = await instance.get<Friend>(`${FRIENDS.path}/requests/pending`)
+    return result;
+  },
+
+  // 내가 요청 받은 친구 목록 api(get)
+  async responseList(): Promise<any> {
+    const result: AxiosResponse = await instance.get<Friend>(`${FRIENDS.path}/responses/pending`)
+    return result;
+  },
+
+  // 차단 목록
 };

@@ -29,7 +29,7 @@ const scrollToBottom = () => {
 
 const FloatingBar = () => {
   const [floatingPosition, setFloatingPosition] = useState(200);
-  const router = useRouter();
+  // const router = useRouter();
   useEffect(() => {
     const handleScroll = () => {
       setFloatingPosition(window.scrollY);
@@ -48,9 +48,9 @@ const FloatingBar = () => {
     };
   }, []);
 
-  const friendOnClink = () => {
-    router.push(`/mypage/${67}`);
-  };
+  // const friendOnClink = () => {
+  //   router.push(`/mypage/67`);
+  // };
 
   const { isOpenModal: chatState, handleModal: chatHandle } = useModal();
 
@@ -64,8 +64,15 @@ const FloatingBar = () => {
           <MdOutlineSearch />
         </S.FriendSearchIcon>
       </div>
-      <div onClick={friendOnClink}>
+      {/* <div onClick={friendOnClink}>
         <UserIcon />
+      </div> */}
+      <div>
+        <Link legacyBehavior href="/mypage">
+          <a>
+            <UserIcon />
+          </a>
+        </Link>
       </div>
 
       <S.ChatIcon onClick={chatHandle}>
