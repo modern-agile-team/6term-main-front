@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import RelationLists from '@/components/organisms/friend-list/FriendList';
+import RelationLists from '@/components/templates/relation-list/RelatioinLists';
 import IndividualPage from '@/components/veiws/MyPage';
 
 const UserPage = (): React.JSX.Element => {

@@ -1,54 +1,70 @@
 import instance from '../axiosInstance';
-import { Axios, AxiosResponse } from 'axios';
+import { Axios, AxiosResponse, AxiosError } from 'axios';
 
 // 친구 목록의 상태...등등
-type Friend = {
+interface Friend {
   id?: number;
   requesterId: number;
   respondendtId: number;
   status: string;
-};
+}
 
 const FRIENDS = {
   path: '/friends',
 
   // 친구 목록 조회 api(get)
-  async friendList(): Promise<any> {
-    const result: AxiosResponse = await instance.get<Friend>(`${FRIENDS.path}`);
+  async friendList(): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.get(
+      `${FRIENDS.path}`,
+    );
     return result;
   },
 
   // 내가 요청 보낸 친구 목록 api(get)
-  async requestedList(): Promise<any> {
-    const result: AxiosResponse = await instance.get<Friend>(
+  async requestedList(): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.get(
       `${FRIENDS.path}/requests/pending`,
     );
     return result;
   },
 
   // 내가 요청 받은 친구 목록 api(get)
-  async responsedList(): Promise<any> {
-    const result: AxiosResponse = await instance.get<Friend>(
+  async responsedList(): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.get(
       `${FRIENDS.path}/responses/pending`,
     );
     return result;
   },
+  // 이런 식으로도 리팩토링이 가능할까?
+  // async responsedList(): Promise<AxiosResponse<Friend[]>> {
+  //   return await instance.get(`${FRIENDS.path}/responses/pending`);
+  // }
 
   // 차단 목록(영구 거절) api(get)
-  async rejectList(): Promise<any> {
-    const result: AxiosResponse = await instance.get<Friend>(
+  async rejectList(): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.get(
       `${FRIENDS.path}/responses/reject/permanent`,
     );
     return result;
   },
 
-  // 친구 요청 api(post)
-  async friendRequest(): Promise<any> {
-    const result: AxiosResponse = await instance.post<Friend>(
+  // 친구 요청 api(post) -> 담아주어야하는 friend_id에 대해 고찰
+  // borad.unit 에서 명시한 interface 중 userId-id number를 바꿔 보내주자.
+  async friendRequest(): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.post(
       `${FRIENDS.path}/requests/{friend_id}`,
     );
     return result;
   },
 
-  // 친구 요청 수락 api(post)
+  // 친구 요청 수락 api(patch) -> 담아주어야하는 friend_id에 대해 고찰
+  // borad.unit 에서 명시한 interface 중 userId-id number를 바꿔 보내주자.
+  async friendAccept(): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.patch(
+      `${FRIENDS.path}/reponses/accept/{friend_id}`,
+    );
+    return result;
+  },
 };
+
+export default FRIENDS;
