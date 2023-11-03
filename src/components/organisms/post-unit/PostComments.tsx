@@ -7,6 +7,8 @@ import { CommentInfo } from '@/components/templates/post-unit-temp/PostUnitTempl
 import useModal from '@/hooks/useModal';
 import PostReComment from './PostReComment';
 import Modal from '@/components/molecules/post-board/Modal';
+import { CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
+import { useRecoilState } from 'recoil';
 
 export interface ReCommentInfo {
   reCommentId: number;

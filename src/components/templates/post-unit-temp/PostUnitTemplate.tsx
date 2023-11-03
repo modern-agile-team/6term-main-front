@@ -10,6 +10,7 @@ import BOARDS from '@/apis/boards';
 import { UnitPostSelector } from '@/recoil/selectors/UserPostSelector';
 import Link from 'next/link';
 import { commentDummy } from '@/apis/dummy';
+import { CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 
 // type ReplyType = { userName: string; comment: string; replyId: number };
 // interface Info {
@@ -41,6 +42,7 @@ const PostUnitTemplate = (props: BoardType) => {
   const router = useRouter();
 
   const [getUnitComment, setUnitComment] = useState<CommentInfo[]>([]);
+  const [getCreateComment, setCreateComment] = useRecoilState(CommentLoadAtom);
   const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
 
   const handleDeleteButton = async () => {
@@ -54,6 +56,11 @@ const PostUnitTemplate = (props: BoardType) => {
   useEffect(() => {
     setUnitComment(commentDummy);
   }, []);
+
+  useEffect(() => {
+    if (getCreateComment.content !== '')
+      setUnitComment((prev) => [...prev, getCreateComment]);
+  }, [getCreateComment]);
 
   if (!getUnitInfo) {
     return <div>Loading</div>;
