@@ -7,12 +7,14 @@ import { CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 interface UserType {
   userName: string;
   userImage: string;
+  userId: number;
 }
 
 const PostCreateComment = () => {
   const [userInfo, setUSerInfo] = useState<UserType>({
     userName: '',
     userImage: '',
+    userId: 0,
   });
   const [userState, setUserState] = useState<boolean>(false);
   const [getCreateInput, setCreateInput] = useState<string>('');

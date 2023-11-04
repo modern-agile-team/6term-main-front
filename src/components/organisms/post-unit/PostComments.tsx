@@ -7,8 +7,8 @@ import { CommentInfo } from '@/components/templates/post-unit-temp/PostUnitTempl
 import useModal from '@/hooks/useModal';
 import PostReComment from './PostReComment';
 import Modal from '@/components/molecules/post-board/Modal';
-import { CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
-import { useRecoilState } from 'recoil';
+import { CommentDeleteAtom, CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 export interface ReCommentInfo {
   reCommentId: number;
@@ -30,6 +30,7 @@ const PostComments = (commentData: CommentInfo) => {
   const { isOpenModal, handleModal } = useModal();
   const [isCheckToken, setCheckToken] = useState(false);
   const [getReComment, setReComment] = useState<ReCommentInfo['reComment']>([]);
+  const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
 
   const checkToken = () => {
     const token = window.localStorage.getItem('accessToken');
@@ -39,6 +40,13 @@ const PostComments = (commentData: CommentInfo) => {
   const reCommentApi = () => {
     //commentId로 요청보내서 get받아오기
     setReComment(reCommentDummy.reComment);
+  };
+
+  const handleDelComment = () => {
+    if (confirm('댓글을 삭제하시겠습니까?')) {
+      //commentId 로 api요청보내기
+      setCommentDelId(commentData.commentId);
+    }
   };
 
   useEffect(() => {
@@ -60,7 +68,7 @@ const PostComments = (commentData: CommentInfo) => {
               {isOpenModal && (
                 <Modal show={isOpenModal} hide={handleModal}>
                   <div>
-                    <S.Option>삭제</S.Option>
+                    <S.Option onClick={handleDelComment}>삭제</S.Option>
                     <S.Option>수정</S.Option>
                   </div>
                 </Modal>

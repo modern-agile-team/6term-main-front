@@ -4,7 +4,7 @@ import { atom } from 'recoil';
 export const CommentLoadAtom = atom<CommentInfo>({
   key: 'commentLoad',
   default: {
-    commentId: 0,
+    commentId: 1,
     content: '',
     commentOwner: true,
     userId: {
@@ -16,4 +16,9 @@ export const CommentLoadAtom = atom<CommentInfo>({
       },
     },
   },
+});
+
+export const CommentDeleteAtom = atom({
+  key: 'commentDel',
+  default: 0,
 });

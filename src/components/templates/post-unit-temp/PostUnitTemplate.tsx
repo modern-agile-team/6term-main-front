@@ -10,7 +10,7 @@ import BOARDS from '@/apis/boards';
 import { UnitPostSelector } from '@/recoil/selectors/UserPostSelector';
 import Link from 'next/link';
 import { commentDummy } from '@/apis/dummy';
-import { CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
+import { CommentDeleteAtom, CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 
 // type ReplyType = { userName: string; comment: string; replyId: number };
 // interface Info {
@@ -44,6 +44,7 @@ const PostUnitTemplate = (props: BoardType) => {
   const [getUnitComment, setUnitComment] = useState<CommentInfo[]>([]);
   const [getCreateComment, setCreateComment] = useRecoilState(CommentLoadAtom);
   const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
+  const getCommentDelId = useRecoilValue(CommentDeleteAtom);
 
   const handleDeleteButton = async () => {
     if (confirm('삭제하시겠습니까?')) {
@@ -55,12 +56,24 @@ const PostUnitTemplate = (props: BoardType) => {
 
   useEffect(() => {
     setUnitComment(commentDummy);
+    console.log(getUnitComment);
   }, []);
 
   useEffect(() => {
     if (getCreateComment.content !== '')
       setUnitComment((prev) => [...prev, getCreateComment]);
   }, [getCreateComment]);
+
+  useEffect(() => {
+    getUnitComment
+      .filter((prev) => {
+        prev.commentId !== getCommentDelId;
+      })
+      .map((data) => {
+        console.log(data);
+        setUnitComment([data]);
+      });
+  }, [getCommentDelId]);
 
   if (!getUnitInfo) {
     return <div>Loading</div>;
