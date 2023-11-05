@@ -62,7 +62,7 @@ const PostModify = () => {
   const unitInfo = JSON.parse(data as string);
   const resetSelect = useResetRecoilState(SelectBoardAtom);
   const [files, setFiles] = useState<IFileTypes[]>([]);
-  const [delImg, setDelImg] = useState<IFileTypes[]>([]);
+  const [delImg, setDelImg] = useState('');
   const fileId = useRef<number>(0);
 
   const getModifyInfo = () => {
@@ -129,10 +129,9 @@ const PostModify = () => {
   const handleFilterFile = useCallback(
     (id: number): void => {
       setFiles(files.filter((file: IFileTypes) => file.id !== id));
-      setDelImg((prev) => [
-        ...prev,
-        ...files.filter((file: IFileTypes) => file.id === id),
-      ]);
+      files
+        .filter((data) => data.id === id)
+        .map((data) => setDelImg(delImg + data.url));
     },
     [files],
   );
@@ -147,6 +146,8 @@ const PostModify = () => {
 
   /**업로드 버튼 핸들링 */
   const handleSubmit = async () => {
+    console.log(files);
+    console.log(delImg);
     const formData = new FormData();
     const regex: RegExp = /amazon/g;
     files.map((data) => {

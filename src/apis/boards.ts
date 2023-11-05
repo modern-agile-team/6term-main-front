@@ -67,7 +67,7 @@ const BOARDS = {
   async modifyImg(
     image: FormData,
     boardId: number,
-    delUrl: IFileTypes[],
+    delUrl: string,
   ): Promise<any> {
     try {
       const result: AxiosResponse = await instance.patch(
