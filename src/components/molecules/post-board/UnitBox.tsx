@@ -9,17 +9,18 @@ import { Link } from 'react-router-dom';
 export interface BoardInfo {
   isData: {
     id: number;
+    boardLike: number;
     head: string;
     body: string;
     main_category: string;
     sub_category: string;
     createAt: string;
     userId: {
-      id: number;
       name: string;
       userImage: {
         id: number | null;
         imageUrl?: string | undefined | null;
+        userId: number;
       };
     };
     boardImages: [
@@ -99,6 +100,7 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
               <UserSmaple
                 name={isData.userId.name}
                 img={isData.userId.userImage.imageUrl}
+                id={isData.userId.userImage.userId}
               />
             </Modal>
           )}

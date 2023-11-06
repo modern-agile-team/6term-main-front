@@ -4,9 +4,9 @@ import { Axios, AxiosResponse, AxiosError } from 'axios';
 // 친구 목록의 상태...등등
 interface Friend {
   id?: number;
-  requesterId: number;
-  respondendtId: number;
-  status: string;
+  // requesterId: number;
+  // respondendtId: number;
+  // status: string;
 }
 
 const FRIENDS = {
@@ -50,9 +50,12 @@ const FRIENDS = {
 
   // 친구 요청 api(post) -> 담아주어야하는 friend_id에 대해 고찰
   // borad.unit 에서 명시한 interface 중 userId-id number를 바꿔 보내주자.
-  async friendRequest(): Promise<AxiosResponse<Friend[]>> {
+  async friendRequest(friend_id: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.post(
-      `${FRIENDS.path}/requests/{friend_id}`,
+      `${FRIENDS.path}/requests/${friend_id}`,
+      {
+        friend_id: friend_id,
+      },
     );
     return result;
   },
