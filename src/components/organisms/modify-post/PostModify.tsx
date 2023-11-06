@@ -53,6 +53,10 @@ const formats = [
   'link',
 ];
 
+interface DelArrayType {
+  url: string;
+}
+
 const PostModify = () => {
   const [unitTitle, setUnitTitle] = useState<string>(''); //제목
   const [quillText, setQuillText] = useState<string>(''); //본문
@@ -62,7 +66,7 @@ const PostModify = () => {
   const unitInfo = JSON.parse(data as string);
   const resetSelect = useResetRecoilState(SelectBoardAtom);
   const [files, setFiles] = useState<IFileTypes[]>([]);
-  const [delImg, setDelImg] = useState('');
+  const [delImg, setDelImg] = useState<string[]>([]);
   const fileId = useRef<number>(0);
 
   const getModifyInfo = () => {
@@ -131,7 +135,11 @@ const PostModify = () => {
       setFiles(files.filter((file: IFileTypes) => file.id !== id));
       files
         .filter((data) => data.id === id)
-        .map((data) => setDelImg(delImg + data.url));
+        .map((data) => {
+          if (data.url) {
+            setDelImg((prev) => [...prev, data.url as string]);
+          }
+        });
     },
     [files],
   );
@@ -144,7 +152,7 @@ const PostModify = () => {
     };
   }, []);
 
-  /**업로드 버튼 핸들링 */
+  /**수정 버튼 핸들링 */
   const handleSubmit = async () => {
     console.log(files);
     console.log(delImg);
@@ -152,14 +160,14 @@ const PostModify = () => {
     const regex: RegExp = /amazon/g;
     files.map((data) => {
       if (data.url && regex.test(data.url)) {
-        console.log(regex.test(data.url));
+        // console.log(regex.test(data.url));
         // formData.append('files', data.url);
       } else {
         formData.append('files', data.object as File);
       }
     });
 
-    if (confirm('업로드하시겠습니까?')) {
+    if (confirm('수정하시겠습니까?')) {
       if (getBoard.sub === '' || unitTitle === '' || quillText === '') {
         if (getBoard.sub === '') alert('카테고리를 선택해주세요.');
         if (unitTitle === '') alert('제목을 입력해주세요.');
@@ -242,7 +250,7 @@ const PostModify = () => {
           </S.AddImageContainer>
         </div>
         <S.FlexBox side="25px 0px 10px 0px">
-          <S.ButtonUI onClick={handleSubmit}>올리기</S.ButtonUI>
+          <S.ButtonUI onClick={handleSubmit}>수정하기</S.ButtonUI>
         </S.FlexBox>
       </div>
     </S.CreatPostContainer>

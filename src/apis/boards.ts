@@ -67,26 +67,22 @@ const BOARDS = {
   async modifyImg(
     image: FormData,
     boardId: number,
-    delUrl: string,
+    delUrl: string[],
   ): Promise<any> {
-    try {
-      const result: AxiosResponse = await instance.patch(
-        `${BOARDS.path}/images`,
-        image,
-        {
-          params: {
-            boardId: boardId,
-            delUrl: JSON.stringify(delUrl),
-          },
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+    const result: AxiosResponse = await instance.patch(
+      `${BOARDS.path}/images`,
+      image,
+      {
+        params: {
+          boardId: boardId,
+          deleteImageUrl: JSON.stringify(delUrl),
         },
-      );
-      return result;
-    } catch (err) {
-      Promise.reject(err);
-    }
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return result;
   },
 
   //게시글 리스트 api
