@@ -40,7 +40,7 @@ const PostCreateComment = () => {
   };
 
   const getUserInfo = async () => {
-    const response = await USERS.getUserProfile;
+    const response = await USERS.getUserProfile();
     setUSerInfo((prev) => {
       return {
         ...prev,
@@ -49,12 +49,8 @@ const PostCreateComment = () => {
       };
     });
   };
-
   useEffect(() => {
     getUserInfo();
-  });
-
-  useEffect(() => {
     if (localStorage.getItem('accesToken') !== undefined) setUserState(true);
   }, []);
 
@@ -64,8 +60,8 @@ const PostCreateComment = () => {
       <S.CreateCommentBox>
         {userState ? (
           <S.FlexBox>
-            <div>프로필사진</div>
-            <div>이름</div>
+            <S.CommentUserImage img={userInfo.userImage} />
+            <div>{userInfo.userName}</div>
           </S.FlexBox>
         ) : (
           <div>로그인이 필요합니다.</div>

@@ -3,6 +3,10 @@ import instance from './axiosInstance';
 
 export interface UserInfo {
   name: string;
+  email: string;
+  gender: string;
+  admin: boolean;
+  provider: string;
   userImage: string;
 }
 

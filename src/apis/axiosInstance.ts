@@ -13,7 +13,6 @@ const isTokenExpired = async () => {
         access_token: accessToken,
       },
     });
-    console.log(result);
     return result.data.success;
   } catch (err) {
     Promise.reject(err);
@@ -59,7 +58,7 @@ instance.interceptors.response.use(
   },
   async (error) => {
     if (error.response.status === 401 || error.response.status === 403) {
-      if (await isTokenExpired()) await reNewToken();
+      await reNewToken();
       const accessToken = localStorage.getItem('accessToken');
 
       error.config.headers = {
