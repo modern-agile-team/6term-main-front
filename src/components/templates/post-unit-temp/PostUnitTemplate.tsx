@@ -42,7 +42,6 @@ const PostUnitTemplate = (props: BoardType) => {
 
   const [getUnitComment, setUnitComment] = useState<CommentInfo[]>([]);
   const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
-
   const handleDeleteButton = async () => {
     if (confirm('삭제하시겠습니까?')) {
       await BOARDS.boardUnitDeleteApi(props.boardId);
