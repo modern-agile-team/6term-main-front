@@ -206,3 +206,16 @@ export const DivisionLine = styled.div`
   height: auto;
   left: 0px;
 `;
+
+interface CommentProfileBg {
+  img?: string;
+}
+
+/** 댓글프로필이미지 */
+export const CommentUserImage = styled.div<CommentProfileBg>`
+  border-radius: 50%;
+  background-image: url(${(props) => props.img});
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+`;
