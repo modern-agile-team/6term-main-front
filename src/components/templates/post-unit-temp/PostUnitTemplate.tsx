@@ -56,7 +56,6 @@ const PostUnitTemplate = (props: BoardType) => {
 
   useEffect(() => {
     setUnitComment(commentDummy);
-    console.log(getUnitComment);
   }, []);
 
   useEffect(() => {
@@ -70,7 +69,6 @@ const PostUnitTemplate = (props: BoardType) => {
         prev.commentId !== getCommentDelId;
       })
       .map((data) => {
-        console.log(data);
         setUnitComment([data]);
       });
   }, [getCommentDelId]);
