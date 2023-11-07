@@ -101,7 +101,6 @@ const UnitBox = (isData: BoardInfo['isData']): JSX.Element => {
             </div>
           </S.FlexBox>
         </S.PostTitle>
-
         <S.FlexBox direction="row" margin="auto">
           {isOpenModal && (
             <Modal show={isOpenModal} hide={handleModal}>

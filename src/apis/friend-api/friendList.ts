@@ -62,9 +62,12 @@ const FRIENDS = {
 
   // 친구 요청 수락 api(patch) -> 담아주어야하는 friend_id에 대해 고찰
   // borad.unit 에서 명시한 interface 중 userId-id number를 바꿔 보내주자.
-  async friendAccept(): Promise<AxiosResponse<Friend[]>> {
+  async friendAccept(friend_id: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.patch(
-      `${FRIENDS.path}/reponses/accept/{friend_id}`,
+      `${FRIENDS.path}/reponses/accept/${friend_id}`,
+      {
+        firend_id: friend_id,
+      },
     );
     return result;
   },

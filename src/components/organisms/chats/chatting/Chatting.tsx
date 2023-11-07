@@ -107,8 +107,15 @@ const Chatting = () => {
         <Stack spacing={2} direction="column" sx={{ height: '350px' }}>
           <Paper
             variant="outlined"
-            sx={{ overflow: 'auto', height: '500px', padding: '1rem' }}>
+            sx={{
+              overflow: 'auto',
+              height: '500px',
+              padding: '1rem',
+              fontSize: '24px',
+            }}>
             {}
+            동건아 뒤지기 전에 소켓 작업 다시 시작하기 전에 피드백 반영부분
+            수정하고 해라!!!!!!!
           </Paper>
         </Stack>
         {/* 채팅 메시지 입력 영역 */}
