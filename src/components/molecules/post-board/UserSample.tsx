@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import * as S from './styled';
 import { CgProfile } from 'react-icons/cg';
+import AddFriend from '../add-friend/AddFriend';
 
 interface User {
   name: string;
@@ -28,6 +29,7 @@ const UserSmaple = (props: User) => {
       )}
       <div>이름 : {props.name}</div>
       <div onClick={handleProfile}>프로필 이동</div>
+      <AddFriend name={props.name} id={props.id} />
     </div>
   );
 };

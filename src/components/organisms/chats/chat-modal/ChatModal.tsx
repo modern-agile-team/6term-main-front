@@ -6,13 +6,23 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { DMDummyAtom } from '@/recoil/atoms/DMUserAtom';
 import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
 import { useRouter } from 'next/router';
+import { Socket, io } from 'socket.io-client';
 
-interface ModalType {
+export interface ModalType {
   show: boolean;
   hide: () => void;
 }
 
 const ChatModal = (props: ModalType) => {
+  // 모달 오픈 시 소켓 연결
+  useEffect(() => {
+    const namespaceURL = 'http://13.209.21.62:3000/ch-653383a4468680bc4e9f8491';
+    const socket = io(namespaceURL);
+
+    socket.on('connect', () => {
+      console.log('연결 완료');
+    });
+  }, []);
   // Modal Open state일 때 아래 두 개의 함수로 인해 useEffect로
   // 해당 Modal Component가 mount 됐을 때 업데이트된 값을 불러오기
   // 고민 더 해봐야 될 듯
@@ -51,7 +61,6 @@ const ChatModal = (props: ModalType) => {
   //     updateDMUserList();
   //   }
   // }, [props.show, setDMUser]);
-
   return (
     <div>
       <S.ModalWrapper>
