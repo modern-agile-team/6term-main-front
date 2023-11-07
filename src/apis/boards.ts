@@ -1,6 +1,7 @@
 import { rejects } from 'assert';
 import instance from './axiosInstance';
 import { Axios, AxiosResponse } from 'axios';
+import { IFileTypes } from '@/components/organisms/create-post/PostCreate';
 
 type Post = {
   id?: number;
@@ -46,25 +47,42 @@ const BOARDS = {
     return result;
   },
 
-  //이미지 업로드 api [patch요청]
-  async modifyImg(image: FormData, boardId: number): Promise<any> {
-    try {
-      const result: AxiosResponse = await instance.patch(
-        `${BOARDS.path}/images`,
-        image,
-        {
-          params: {
-            boardId: boardId,
-          },
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+  //이미지 업로드 api [delete요청]
+  async delImageApi(image: FormData, boardId: number): Promise<any> {
+    const result: AxiosResponse = await instance.delete(
+      `${BOARDS.path}/images`,
+      {
+        params: {
+          boardId: boardId,
         },
-      );
-      return result;
-    } catch (err) {
-      Promise.reject(err);
-    }
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return result;
+  },
+
+  //이미지 업로드 api [patch요청]
+  async modifyImg(
+    image: FormData,
+    boardId: number,
+    delUrl: string[],
+  ): Promise<any> {
+    const result: AxiosResponse = await instance.patch(
+      `${BOARDS.path}/images`,
+      image,
+      {
+        params: {
+          boardId: boardId,
+          deleteImageUrl: JSON.stringify(delUrl),
+        },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return result;
   },
 
   //게시글 리스트 api
@@ -125,11 +143,10 @@ const BOARDS = {
       },
       {
         params: {
-          id: id,
+          boardId: id,
         },
       },
     );
-    console.log(result.data);
     return result.data;
   },
 
