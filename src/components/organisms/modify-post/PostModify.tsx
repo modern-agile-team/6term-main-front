@@ -184,13 +184,14 @@ const PostModify = () => {
         if (files[0] !== null) {
           await BOARDS.modifyImg(formData, boardInfo.id, delImg);
         }
-        //router => 해당 글 로 페이지 이동
+        //해당 글 로 페이지 이동
         router.push({
           pathname: `/post/unit/${boardInfo.id}`,
           query: {
             boardId: boardInfo.id,
           },
         });
+        // router.back();
         resetSelect(); //게시글 카테고리 초기화
       }
     }
