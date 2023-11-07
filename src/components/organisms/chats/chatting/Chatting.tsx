@@ -67,7 +67,6 @@ const Chatting = () => {
         // profileImage: profileImage,
       };
       console.log(sendMessage);
-      console.log(Date);
       // emitMessage(message);
 
       setSendMessage('');
@@ -106,7 +105,11 @@ const Chatting = () => {
       </Stack> */}
         {/* 채팅 메시지 출력 영역 */}
         <Stack spacing={2} direction="column" sx={{ height: '350px' }}>
-          <Paper></Paper>
+          <Paper
+            variant="outlined"
+            sx={{ overflow: 'auto', height: '500px', padding: '1rem' }}>
+            {}
+          </Paper>
         </Stack>
         {/* 채팅 메시지 입력 영역 */}
         <Stack spacing={1} direction="row">

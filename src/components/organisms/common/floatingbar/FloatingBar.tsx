@@ -29,7 +29,7 @@ const scrollToBottom = () => {
 
 const FloatingBar = () => {
   const [floatingPosition, setFloatingPosition] = useState(200);
-
+  // const router = useRouter();
   useEffect(() => {
     const handleScroll = () => {
       setFloatingPosition(window.scrollY);
@@ -48,35 +48,41 @@ const FloatingBar = () => {
     };
   }, []);
 
-  const router = useRouter();
+  // const friendOnClink = () => {
+  //   router.push(`/mypage/67`);
+  // };
+
   const { isOpenModal: chatState, handleModal: chatHandle } = useModal();
 
   return (
     <S.FloatingBox position={floatingPosition}>
-      <a>
-        <S.ScrollButotn>
-          <MdKeyboardArrowUp onClick={scrollToTop} />
-        </S.ScrollButotn>
-      </a>
-      <Link legacyBehavior href="/search/SearchFriends">
-        <a>
-          <S.FriendSearchIcon>
-            <MdOutlineSearch />
-          </S.FriendSearchIcon>
-        </a>
-      </Link>
-      <UserIcon />
-      <a>
-        <S.ChatIcon onClick={chatHandle}>
-          <IoMdChatbubbles />
-        </S.ChatIcon>
-        {chatState && <ChatModal show={chatState} hide={chatHandle} />}
-      </a>
-      <a>
-        <S.ScrollButotn>
-          <MdKeyboardArrowDown onClick={scrollToBottom} />
-        </S.ScrollButotn>
-      </a>
+      <S.ScrollButotn>
+        <MdKeyboardArrowUp onClick={scrollToTop} />
+      </S.ScrollButotn>
+      <div>
+        <S.FriendSearchIcon>
+          <MdOutlineSearch />
+        </S.FriendSearchIcon>
+      </div>
+      {/* <div onClick={friendOnClink}>
+        <UserIcon />
+      </div> */}
+      <div>
+        <Link legacyBehavior href="/mypage">
+          <a>
+            <UserIcon />
+          </a>
+        </Link>
+      </div>
+
+      <S.ChatIcon onClick={chatHandle}>
+        <IoMdChatbubbles />
+      </S.ChatIcon>
+      {chatState && <ChatModal show={chatState} hide={chatHandle} />}
+
+      <S.ScrollButotn>
+        <MdKeyboardArrowDown onClick={scrollToBottom} />
+      </S.ScrollButotn>
     </S.FloatingBox>
   );
 };
