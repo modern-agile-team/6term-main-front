@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 /** 게시판 컨테이너 */
 export const PostContainer = styled.div`
-  width: 200px;
-  height: 242px;
+  width: 270px;
+  height: 272px;
   display: flex;
   background-color: #fff;
   box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 25%);
@@ -78,7 +78,7 @@ export const Cardbody = styled.div`
   font-weight: none;
   overflow: visible;
   text-overflow: ellipsis;
-  width: 200px;
+  width: 240px;
   height: 40px;
   padding: 0px;
   margin: 0px;
@@ -156,8 +156,8 @@ interface ThumbnailBg {
  * @returns url
  */
 export const ThumbnailImg = styled.div<ThumbnailBg>`
-  width: 200px;
-  height: 120px;
+  width: 270px;
+  height: 140px;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: ${(props) => props.color};

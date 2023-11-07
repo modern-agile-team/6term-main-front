@@ -8,7 +8,7 @@ const PostBoardTemplates = (props: Board): JSX.Element => {
   return (
     <S.postBoardUnit>
       <div>
-        <PostBoardHeader />
+        <PostBoardHeader main={props.main} />
         <Suspense fallback={<h1>로딩중...</h1>}>
           <PostBoards main={props.main} />
         </Suspense>

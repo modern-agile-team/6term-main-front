@@ -3,7 +3,7 @@ import styled from 'styled-components';
 /** postBoard */
 export const PostBoardTitle = styled.div`
   font-size: 25px;
-  width: 150px;
+  width: 180px;
   font-weight: bold;
   margin: auto;
 `;
@@ -32,4 +32,12 @@ export const FooterContainer = styled.div`
 
 export const FlexBox = styled.div`
   display: flex;
+`;
+
+export const HeaderContainer = styled.div`
+  max-width: 1300px;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;

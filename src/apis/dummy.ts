@@ -1,552 +1,64 @@
-export const boardlist = [
+//boardId로 요청보내서 get 받아오기
+export const commentDummy = [
   {
-    id: 1,
-    head: 'test14',
-    body: '<h1>안녕하세요</h1><p>저는 이재진입니다</p>',
-    main_category: '자유',
-    sub_category: '잡담',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
+    commentId: 1,
+    content: '댓글내용입니다.1',
+    commentOwner: false,
     userId: {
-      id: 1,
-      name: 'test1',
+      name: '이재진',
       userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [
-      {
-        id: 11,
-        imageUrl:
-          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
-      },
-      {
-        id: 12,
-        imageUrl:
-          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
-      },
-      {
         id: 13,
+        userId: 63,
         imageUrl:
-          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
-      },
-    ],
-  },
-  {
-    id: 2,
-    head: 'test15',
-    body: '<p>test15 2023.10.04 만남, 친구 dfdfddfdfdfdfdfdffd게시판</p>',
-    main_category: '자유',
-    sub_category: '홍보',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test2',
-      userImage: {
-        id: null,
-        imageUrl: null,
+          'https://phinf.pstatic.net/contact/20230313_71/1678704142906wkazc_JPEG/E2B77116-D2F9-4CCC-A177-A357FF611682.jpg',
       },
     },
-    boardImages: [
-      {
-        id: 11,
+  },
+  {
+    commentId: 2,
+    content: '댓글내용입니다.2',
+    commentOwner: true,
+    userId: {
+      name: '이재진',
+      userImage: {
+        id: 13,
+        userId: 63,
         imageUrl:
-          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
-      },
-    ],
-  },
-  {
-    id: 3,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '멘토멘티',
-    sub_category: '공부',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test3',
-      userImage: {
-        id: null,
-        imageUrl: null,
+          'https://phinf.pstatic.net/contact/20230313_71/1678704142906wkazc_JPEG/E2B77116-D2F9-4CCC-A177-A357FF611682.jpg',
       },
     },
-    boardImages: [
-      {
-        id: 11,
-        imageUrl:
-          'https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-into-the-june-sunflower-background-image_788302.jpg',
-      },
-    ],
-  },
-  {
-    id: 4,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '멘토멘티',
-    sub_category: '운동',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test4',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 5,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '멘토멘티',
-    sub_category: '토익',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 6,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '만남',
-    sub_category: '친구',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 7,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '만남',
-    sub_category: '밥약',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 8,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '만남',
-    sub_category: '미팅',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 9,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '책',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 10,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '중고',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 11,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 12,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 13,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 14,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 15,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 16,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 17,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '멘토멘티',
-    sub_category: '토익',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 18,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '만남',
-    sub_category: '미팅',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 19,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '만남',
-    sub_category: '밥약',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 20,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '자유',
-    sub_category: '홍보',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 21,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 22,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 23,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 24,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 25,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 26,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 27,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 28,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
-  },
-  {
-    id: 29,
-    head: 'test14',
-    body: '<p>test14 2023.10.04 만남, 친구 게시판</p>',
-    main_category: '장터',
-    sub_category: '자취방',
-    createAt: '2023-09-24T22:26:49.953Z',
-    updateAt: '2023-09-24T22:26:49.953Z',
-    userId: {
-      id: 1,
-      name: 'test',
-      userImage: {
-        id: null,
-        imageUrl: null,
-      },
-    },
-    boardImages: [],
   },
 ];
+
+//commentId로 요청보내서 get받아오기
+export const reCommentDummy = {
+  reCommentId: 1,
+  reComment: [
+    {
+      reComment: '대댓글1',
+      reCommentOwner: true,
+      userId: {
+        name: '이재진',
+        userImage: {
+          id: 13,
+          userId: 63,
+          imageUrl:
+            'https://phinf.pstatic.net/contact/20230313_71/1678704142906wkazc_JPEG/E2B77116-D2F9-4CCC-A177-A357FF611682.jpg',
+        },
+      },
+    },
+    {
+      reComment: '대댓글2',
+      reCommentOwner: true,
+      userId: {
+        name: '이재진',
+        userImage: {
+          id: 13,
+          userId: 63,
+          imageUrl:
+            'https://phinf.pstatic.net/contact/20230313_71/1678704142906wkazc_JPEG/E2B77116-D2F9-4CCC-A177-A357FF611682.jpg',
+        },
+      },
+    },
+  ],
+};

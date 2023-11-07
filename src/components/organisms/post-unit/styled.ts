@@ -176,7 +176,7 @@ export const SelectOptions = styled.ul<Show>`
 `;
 
 //**콤보박스 내부 요소 */
-export const Option = styled.li`
+export const Option = styled.div`
   font-size: 14px;
   padding: 6px 8px;
   transition: background-color 0.2s ease-in;

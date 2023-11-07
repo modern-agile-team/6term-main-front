@@ -19,7 +19,7 @@ const PostUnitHeader = (props: UnitInfo) => {
 
   const getLikeApi = async (id: number) => {
     const response = await BOARDS.getBoardLikeApi(id);
-    setLike(response.count);
+    setLike(response.boardLikesCount);
     setLikeState(response.isLike);
   };
 

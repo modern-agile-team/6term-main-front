@@ -13,3 +13,9 @@ export const DivisionLine = styled.div`
   width: 800px;
   height: auto;
 `;
+
+export const ComponentHeader = styled.div`
+  font-size: 28px;
+  font-weight: bold;
+  padding: 10px 0px 10px 15px;
+`;
