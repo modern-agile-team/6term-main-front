@@ -3,10 +3,11 @@ import { Axios, AxiosResponse, AxiosError } from 'axios';
 
 // 친구 목록의 상태...등등
 interface Friend {
-  id?: number;
-  // requesterId: number;
-  // respondendtId: number;
-  // status: string;
+  userName: string;
+  userImage: string;
+  requesterId: number;
+  respondendtId: number;
+  status: string;
 }
 
 const FRIENDS = {
@@ -31,14 +32,10 @@ const FRIENDS = {
   // 내가 요청 받은 친구 목록 api(get)
   async responsedList(): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.get(
-      `${FRIENDS.path}/responses/pending`,
+      `${FRIENDS.path}/re sponses/pending`,
     );
     return result;
   },
-  // 이런 식으로도 리팩토링이 가능할까?
-  // async responsedList(): Promise<AxiosResponse<Friend[]>> {
-  //   return await instance.get(`${FRIENDS.path}/responses/pending`);
-  // }
 
   // 차단 목록(영구 거절) api(get)
   async rejectList(): Promise<AxiosResponse<Friend[]>> {
@@ -66,7 +63,55 @@ const FRIENDS = {
     const result: AxiosResponse<Friend[]> = await instance.patch(
       `${FRIENDS.path}/reponses/accept/${friend_id}`,
       {
-        firend_id: friend_id,
+        friend_id: friend_id,
+      },
+    );
+    return result;
+  },
+
+  // 친구 요청 거절 api(patch)
+  async friendRefuse(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.patch(
+      `${FRIENDS.path}/reponses/reject/${friend_id}`,
+      {
+        friend_id: friend_id,
+      },
+    );
+    return result;
+  },
+
+  // 친구 요청 영구 거절 api(patch)
+  async friendReject(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.patch(
+      `${FRIENDS.path}/reponses/reject/permanent/${friend_id}`,
+      {
+        friend_id: friend_id,
+      },
+    );
+    return result;
+  },
+
+  // 친구 요청 영구 거절 취소 api(delete)
+  async cancelPermanent(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.delete(
+      `${FRIENDS.path}/reponses/reject/permanent/${friend_id}`,
+      {
+        data: {
+          friend_id: friend_id,
+        },
+      },
+    );
+    return result;
+  },
+
+  // 친구 삭제 api(delete)
+  async deleteFriend(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.delete(
+      `${FRIENDS.path}/${friend_id}`,
+      {
+        data: {
+          friend_id: friend_id,
+        },
       },
     );
     return result;

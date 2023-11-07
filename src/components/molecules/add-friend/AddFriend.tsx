@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as S from './styled';
 import { BoardInfo } from '../post-board/UnitBox';
-import FRIENDS from '@/apis/friendApi/friendList';
+import FRIENDS from '@/apis/friend-api/friendList';
 
 interface User {
   id: number;

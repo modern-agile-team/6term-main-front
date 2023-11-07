@@ -58,7 +58,7 @@ instance.interceptors.response.use(
   },
   async (error) => {
     if (error.response.status === 401 || error.response.status === 403) {
-      if (isTokenExpired() !== undefined) await reNewToken();
+      await reNewToken();
 
       const accessToken = localStorage.getItem('accessToken');
 
