@@ -32,7 +32,8 @@ const PostComments = (commentData: CommentInfo) => {
   const [isCheckToken, setCheckToken] = useState(false);
   const [getReComment, setReComment] = useState<ReCommentInfo['reComment']>([]);
   const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
-  const [modifyComment, setModifyComment] = useState('');
+  const [modifyComment, setModifyComment] = useState(commentData.content);
+  const [isModifyState, setIsModifyState] = useState(false);
 
   const checkToken = () => {
     const token = window.localStorage.getItem('accessToken');
@@ -53,8 +54,21 @@ const PostComments = (commentData: CommentInfo) => {
     }
   };
 
+  //댓글 수정 핸들러
   const handleModifyComment = async () => {
     handleModal();
+    setIsModifyState(true);
+  };
+
+  const handleInputComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const event = e.target.value;
+    setModifyComment(event);
+  };
+  1;
+
+  const handleDone = async () => {
+    setIsModifyState(false);
+    await COMMENTS.commetModifyApi(commentData.id);
   };
 
   useEffect(() => {
@@ -71,7 +85,18 @@ const PostComments = (commentData: CommentInfo) => {
         </S.FlexBox>
         <S.FlexBox>
           <S.CommentArea>
-            {modifyComment ? <input type="text" /> : commentData.content}
+            {isModifyState ? (
+              <div>
+                <input
+                  type="text"
+                  onChange={handleInputComment}
+                  value={modifyComment}
+                />
+                <button onClick={handleDone}>확인</button>
+              </div>
+            ) : (
+              modifyComment
+            )}
           </S.CommentArea>
           {commentData.commentowner && (
             <div>

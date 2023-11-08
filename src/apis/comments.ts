@@ -44,6 +44,16 @@ const COMMENTS = {
     });
     return result;
   },
+
+  //comment 삭제 api [delete요청]
+  async commetModifyApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.patch(`${COMMENTS.path}`, {
+      params: {
+        commentId: id,
+      },
+    });
+    return result;
+  },
 };
 
 export default COMMENTS;
