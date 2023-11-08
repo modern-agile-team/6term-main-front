@@ -27,7 +27,6 @@ export interface CommentInfo {
   id: number;
   content: string;
   commentowner: boolean;
-  commentId: number;
   userId: UserType;
 }
 interface BoardType {
@@ -53,15 +52,15 @@ const PostUnitTemplate = (props: BoardType) => {
   };
 
   //댓글 불러오기 api호출
-  const getCommentListAll = async () => {
-    const response = await COMMENTS.commentListAllApi(props.boardId);
+  const getCommentListAll = async (id: number) => {
+    const response = await COMMENTS.commentListAllApi(id);
     setUnitComment(response);
+    refresh();
   };
 
   //mount시 댓글 불러오기
   useEffect(() => {
-    getCommentListAll();
-    refresh();
+    getCommentListAll(props.boardId);
   }, []);
 
   //댓글 추가시 새로고침하지 않고, 값 추가
@@ -76,11 +75,7 @@ const PostUnitTemplate = (props: BoardType) => {
     setTempDelArr([]);
     getUnitComment
       .filter((prev) => {
-        if (prev.commentId) {
-          return prev.commentId !== getCommentDelId;
-        } else {
-          return prev.id !== getCommentDelId;
-        }
+        return prev.id !== getCommentDelId;
       })
       .map((data) => {
         setTempDelArr((prev) => [...prev, data]);

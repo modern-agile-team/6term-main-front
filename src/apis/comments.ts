@@ -28,6 +28,7 @@ const COMMENTS = {
           boardId: id,
         },
       });
+      console.log(result.data);
       return result.data;
     } catch (err) {
       console.log(err);

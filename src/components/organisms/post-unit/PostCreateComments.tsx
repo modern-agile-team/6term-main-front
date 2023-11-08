@@ -41,7 +41,7 @@ const PostCreateComment = (props: BoardId) => {
         setCreateComment((prev) => {
           return {
             ...prev,
-            commentId: response.id,
+            id: response.id,
             content: getCreateInput,
             userId: {
               name: userInfo.userName,
@@ -58,6 +58,9 @@ const PostCreateComment = (props: BoardId) => {
       alert('로그인이 필요합니다.');
     }
   };
+  useEffect(() => {
+    console.log(getCreateComment);
+  });
 
   //본인 정보 받아오는 api 호출
   const getUserInfo = async () => {

@@ -32,8 +32,6 @@ const PostComments = (commentData: CommentInfo) => {
   const [isCheckToken, setCheckToken] = useState(false);
   const [getReComment, setReComment] = useState<ReCommentInfo['reComment']>([]);
   const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
-  const [isCommentModify, setIsCommemtModify] = useState(false);
-  const [isDone, setIsDone] = useState(false);
   const [modifyComment, setModifyComment] = useState('');
 
   const checkToken = () => {
@@ -50,35 +48,18 @@ const PostComments = (commentData: CommentInfo) => {
   const handleDelComment = async () => {
     handleModal();
     if (confirm('댓글을 삭제하시겠습니까?')) {
-      if (commentData.commentId) {
-        await COMMENTS.commetDelApi(commentData.commentId);
-        setCommentDelId(commentData.commentId);
-      } else {
-        await COMMENTS.commetDelApi(commentData.id);
-        setCommentDelId(commentData.id);
-      }
+      await COMMENTS.commetDelApi(commentData.id);
+      setCommentDelId(commentData.id);
     }
   };
 
-  //댓글 수정 핸들러
-  const handleChangeComment = () => {
+  const handleModifyComment = async () => {
     handleModal();
-    setIsCommemtModify(!isCommentModify);
-  };
-  //댓글 수정 확인버튼 핸들러
-  const handleDoneModify = () => {
-    setIsDone(true);
-    setIsCommemtModify(false);
-  };
-  //댓글 수정 input 핸들러
-  const handleInputComment = (e: any) => {
-    isDone ? setModifyComment(e.target.value) : setModifyComment(modifyComment);
   };
 
   useEffect(() => {
     checkToken();
     reCommentApi();
-    setModifyComment(commentData.content);
   }, []);
 
   return (
@@ -90,15 +71,7 @@ const PostComments = (commentData: CommentInfo) => {
         </S.FlexBox>
         <S.FlexBox>
           <S.CommentArea>
-            {isCommentModify ? (
-              <div>
-                <input type="text" onChange={handleInputComment} />
-                <button onClick={handleDoneModify}>확인</button>
-                <button onClick={handleChangeComment}>취소</button>
-              </div>
-            ) : (
-              modifyComment
-            )}
+            {modifyComment ? <input type="text" /> : commentData.content}
           </S.CommentArea>
           {commentData.commentowner && (
             <div>
@@ -106,7 +79,7 @@ const PostComments = (commentData: CommentInfo) => {
                 <Modal show={isOpenModal} hide={handleModal}>
                   <div>
                     <S.Option onClick={handleDelComment}>삭제</S.Option>
-                    <S.Option onClick={handleChangeComment}>수정</S.Option>
+                    <S.Option onClick={handleModifyComment}>수정</S.Option>
                   </div>
                 </Modal>
               )}
