@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
 import FRIENDS from '@/apis/friend-api/friendList';
+import { Friend } from '@/apis/friend-api/friendList';
 
-interface UserResponsed {
-  id: number;
-  name: string;
-}
-
-const FriendResponse = (props: UserResponsed) => {
+const FriendResponse = (props: Friend) => {
+  const [responsedFriend, setResponsedFriend] = useState<Friend[]>([]);
   const [isAccept, setIsAccept] = useState(false);
   const [isRefuse, setIsRefuse] = useState(false);
   const [isReject, setIsReject] = useState(false);
+
+  // useEffect(() => {
+  //   const handleResponsedFriends = async () => {
+  //     try {
+  //       const response = await FRIENDS.responsedList();
+  //       const friedInfo = response
+  //     }
+  //   }
+  // })
+
   //요청 수락 핸들러 -> 요청 수락하면 요청 수락 버튼 삭제
   // -> 삭제 버튼 있는 자리에 '요청을 수락하였습니다.' -> 친구 목록으로 GO
   const handleAccept = async () => {
@@ -27,6 +34,7 @@ const FriendResponse = (props: UserResponsed) => {
       }
     }
   };
+
   //요청 거절 핸들러
   const handleRefuse = async () => {
     const isConfirmed = window.confirm(

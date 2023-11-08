@@ -1,13 +1,26 @@
 import instance from '../axiosInstance';
 import { Axios, AxiosResponse, AxiosError } from 'axios';
 
-// 친구 목록의 상태...등등
-interface Friend {
-  userName: string;
-  userImage: string;
-  requesterId: number;
-  respondendtId: number;
-  status: string;
+export interface Friend {
+  id: number;
+  requesterId: number; //요청 보낸 자
+  respondentId: number; // 요청 받은 자
+  status: string; // 서로의 상태값(수락, 대기, 영구거절 등)
+  createAt: string; // 상태가 변경된 때.
+  requester: {
+    // 요청 보낸 자
+    name: string;
+    userImage: {
+      imageUrl: string;
+    };
+  };
+  respondent: {
+    // 요청 받은 자
+    name: string;
+    userImage: {
+      imageUrl: string;
+    };
+  };
 }
 
 const FRIENDS = {
@@ -23,18 +36,18 @@ const FRIENDS = {
 
   // 내가 요청 보낸 친구 목록 api(get)
   async requestedList(): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.get(
+    const result: AxiosResponse<any> = await instance.get(
       `${FRIENDS.path}/requests/pending`,
     );
-    return result;
+    return result.data;
   },
 
   // 내가 요청 받은 친구 목록 api(get)
   async responsedList(): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.get(
-      `${FRIENDS.path}/re sponses/pending`,
+    const result: AxiosResponse<any> = await instance.get(
+      `${FRIENDS.path}/responses/pending`,
     );
-    return result;
+    return result.data;
   },
 
   // 차단 목록(영구 거절) api(get)
@@ -45,59 +58,57 @@ const FRIENDS = {
     return result;
   },
 
-  // 친구 요청 api(post) -> 담아주어야하는 friend_id에 대해 고찰
-  // borad.unit 에서 명시한 interface 중 userId-id number를 바꿔 보내주자.
-  async friendRequest(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+  // 친구 요청 api(post)
+  async friendRequest(friendId: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.post(
-      `${FRIENDS.path}/requests/${friend_id}`,
+      `${FRIENDS.path}/requests/${friendId}`,
       {
-        friend_id: friend_id,
+        friendId: friendId,
       },
     );
     return result;
   },
 
-  // 친구 요청 수락 api(patch) -> 담아주어야하는 friend_id에 대해 고찰
-  // borad.unit 에서 명시한 interface 중 userId-id number를 바꿔 보내주자.
-  async friendAccept(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+  // 친구 요청 수락 api(patch)
+  async friendAccept(friendId: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.patch(
-      `${FRIENDS.path}/reponses/accept/${friend_id}`,
+      `${FRIENDS.path}/reponses/accept/${friendId}`,
       {
-        friend_id: friend_id,
+        friendId: friendId,
       },
     );
     return result;
   },
 
   // 친구 요청 거절 api(patch)
-  async friendRefuse(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+  async friendRefuse(friendId: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.patch(
-      `${FRIENDS.path}/reponses/reject/${friend_id}`,
+      `${FRIENDS.path}/reponses/reject/${friendId}`,
       {
-        friend_id: friend_id,
+        friendId: friendId,
       },
     );
     return result;
   },
 
   // 친구 요청 영구 거절 api(patch)
-  async friendReject(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+  async friendReject(friendId: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.patch(
-      `${FRIENDS.path}/reponses/reject/permanent/${friend_id}`,
+      `${FRIENDS.path}/reponses/reject/permanent/${friendId}`,
       {
-        friend_id: friend_id,
+        friendId: friendId,
       },
     );
     return result;
   },
 
   // 친구 요청 영구 거절 취소 api(delete)
-  async cancelPermanent(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+  async cancelPermanent(friendId: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.delete(
-      `${FRIENDS.path}/reponses/reject/permanent/${friend_id}`,
+      `${FRIENDS.path}/reponses/reject/permanent/${friendId}`,
       {
         data: {
-          friend_id: friend_id,
+          friendId: friendId,
         },
       },
     );
@@ -105,12 +116,12 @@ const FRIENDS = {
   },
 
   // 친구 삭제 api(delete)
-  async deleteFriend(friend_id: number): Promise<AxiosResponse<Friend[]>> {
+  async deleteFriend(friendId: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.delete(
-      `${FRIENDS.path}/${friend_id}`,
+      `${FRIENDS.path}/${friendId}`,
       {
         data: {
-          friend_id: friend_id,
+          friendId: friendId,
         },
       },
     );

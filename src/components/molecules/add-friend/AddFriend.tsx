@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as S from './styled';
-import { BoardInfo } from '../post-board/UnitBox';
 import FRIENDS from '@/apis/friend-api/friendList';
+import USERS from '@/apis/user';
 
 interface User {
   id: number;
@@ -13,7 +13,15 @@ interface User {
 const AddFriend = (props: User) => {
   const [isFriendAdded, setIsFriendAdded] = useState(false);
   const router = useRouter();
-  // 매개변수에 추가할 유저의 id값 받아오기
+  const handleMypage = async () => {
+    try {
+      const userInfo = await USERS.getUserProfile();
+      const id = userInfo.id;
+      router.push(`/mypage/${id}`);
+    } catch (error) {
+      console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);
+    }
+  };
   const handleAddFriend = async () => {
     const isConfirmed = window.confirm(
       `${props.name}님을 친구로 추가하시겠습니까?`,
@@ -27,7 +35,7 @@ const AddFriend = (props: User) => {
           `${props.name} 님이 친구로 추가되었습니다. 목록을 확인하시겠습니까?`,
         );
         if (isConfirmed) {
-          router.push('/mypage');
+          handleMypage();
         }
       } catch (error) {
         console.error('친구 추가 중 오류가 발생했습니다:', error);

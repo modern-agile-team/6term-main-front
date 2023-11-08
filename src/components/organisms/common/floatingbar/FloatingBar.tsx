@@ -11,6 +11,7 @@ import { IoMdChatbubbles } from 'react-icons/io';
 import Link from 'next/link';
 import ChatModal from '@/components/organisms/chats/chat-modal/ChatModal';
 import useModal from '@/hooks/useModal';
+import USERS from '@/apis/user';
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -29,7 +30,7 @@ const scrollToBottom = () => {
 
 const FloatingBar = () => {
   const [floatingPosition, setFloatingPosition] = useState(200);
-  // const router = useRouter();
+  const router = useRouter();
   useEffect(() => {
     const handleScroll = () => {
       setFloatingPosition(window.scrollY);
@@ -48,9 +49,15 @@ const FloatingBar = () => {
     };
   }, []);
 
-  // const friendOnClink = () => {
-  //   router.push(`/mypage/67`);
-  // };
+  const handleMypage = async () => {
+    try {
+      const userInfo = await USERS.getUserProfile();
+      const id = userInfo.id;
+      router.push(`/mypage/${id}`, undefined, { shallow: true });
+    } catch (error) {
+      console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);
+    }
+  };
 
   const { isOpenModal: chatState, handleModal: chatHandle } = useModal();
 
@@ -67,12 +74,8 @@ const FloatingBar = () => {
       {/* <div onClick={friendOnClink}>
         <UserIcon />
       </div> */}
-      <div>
-        <Link legacyBehavior href="/mypage">
-          <a>
-            <UserIcon />
-          </a>
-        </Link>
+      <div onClick={handleMypage}>
+        <UserIcon />
       </div>
 
       <S.ChatIcon onClick={chatHandle}>
