@@ -1,5 +1,6 @@
 import { selectorFamily } from 'recoil';
 import BOARDS from '@/apis/boards';
+import COMMENTS from '@/apis/comments';
 
 export const UnitPostSelector = selectorFamily({
   key: 'UnitPost',
@@ -8,5 +9,13 @@ export const UnitPostSelector = selectorFamily({
       const result = await BOARDS.boardUnitApi(id);
       return result;
     }
+  },
+});
+
+export const CommentListAllSelecor = selectorFamily({
+  key: 'commentlist',
+  get: (id: number) => async () => {
+    const result = await COMMENTS.commentListAllApi(id);
+    return result;
   },
 });

@@ -1,6 +1,5 @@
 import { BsArrowReturnRight } from 'react-icons/bs';
 import * as S from './styled';
-import UserIcon from '@/components/common/UserIcon';
 import { ReCommentInfo } from './PostComments';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/molecules/post-board/Modal';
@@ -10,7 +9,7 @@ const PostReComment = (props: ReCommentInfo['reComment'][0]) => {
   return (
     <S.FlexBox side="0px 0px 0px 18px">
       <BsArrowReturnRight />
-      <UserIcon />
+      <S.CommentUserImage img={props.userId.userImage.imageUrl} />
       <S.ShowUserName size={18}>{props.userId.name}</S.ShowUserName>
       <S.Comment>{props.reComment}</S.Comment>
       {props.reCommentOwner && (

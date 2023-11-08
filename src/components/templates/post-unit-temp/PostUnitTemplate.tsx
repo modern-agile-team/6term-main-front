@@ -11,15 +11,10 @@ import { UnitPostSelector } from '@/recoil/selectors/UserPostSelector';
 import Link from 'next/link';
 import { commentDummy } from '@/apis/dummy';
 import { CommentDeleteAtom, CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
+import useRecoilCacheRefresh from '@/hooks/useRecoilCaheRefresh';
+import COMMENTS from '@/apis/comments';
+import { getUnit } from '@mui/material/styles/cssUtils';
 
-// type ReplyType = { userName: string; comment: string; replyId: number };
-// interface Info {
-//   postId: number;
-//   commentId: number;
-//   comment: string;
-//   reply?: ReplyType[];
-//   userName: string;
-// }
 export type UserType = {
   name: string;
   userImage: {
@@ -29,9 +24,9 @@ export type UserType = {
   };
 };
 export interface CommentInfo {
-  commentId: number;
+  id: number;
   content: string;
-  commentOwner: boolean;
+  commentowner: boolean;
   userId: UserType;
 }
 interface BoardType {
@@ -44,7 +39,9 @@ const PostUnitTemplate = (props: BoardType) => {
   const [getUnitComment, setUnitComment] = useState<CommentInfo[]>([]);
   const [getCreateComment, setCreateComment] = useRecoilState(CommentLoadAtom);
   const getUnitInfo = useRecoilValue(UnitPostSelector(props.boardId));
+  const refresh = useRecoilCacheRefresh(UnitPostSelector(props.boardId));
   const getCommentDelId = useRecoilValue(CommentDeleteAtom);
+  const [tempDelArr, setTempDelArr] = useState<CommentInfo[]>([]);
 
   const handleDeleteButton = async () => {
     if (confirm('삭제하시겠습니까?')) {
@@ -54,24 +51,42 @@ const PostUnitTemplate = (props: BoardType) => {
     }
   };
 
+  //댓글 불러오기 api호출
+  const getCommentListAll = async (id: number) => {
+    const response = await COMMENTS.commentListAllApi(id);
+    setUnitComment(response);
+    refresh();
+  };
+
+  //mount시 댓글 불러오기
   useEffect(() => {
-    setUnitComment(commentDummy);
+    getCommentListAll(props.boardId);
   }, []);
 
+  //댓글 추가시 새로고침하지 않고, 값 추가
   useEffect(() => {
-    if (getCreateComment.content !== '')
+    if (getCreateComment.content.length !== 0) {
       setUnitComment((prev) => [...prev, getCreateComment]);
+    }
   }, [getCreateComment]);
 
+  //댓글 삭제시 새로고침하지 않고, 값 삭제
   useEffect(() => {
+    setTempDelArr([]);
     getUnitComment
       .filter((prev) => {
-        prev.commentId !== getCommentDelId;
+        return prev.id !== getCommentDelId;
       })
       .map((data) => {
-        setUnitComment([data]);
+        setTempDelArr((prev) => [...prev, data]);
       });
   }, [getCommentDelId]);
+
+  //댓글 삭제 시 실행되는 로직
+
+  useEffect(() => {
+    setUnitComment(tempDelArr);
+  }, [tempDelArr]);
 
   if (!getUnitInfo) {
     return <div>Loading</div>;
@@ -109,7 +124,7 @@ const PostUnitTemplate = (props: BoardType) => {
           )}
         </div>
         <S.DivisionLine />
-        <PostCreateComment />
+        <PostCreateComment id={props.boardId} />
         <S.DivisionLine />
         <S.ComponentHeader>댓글</S.ComponentHeader>
         {getUnitComment.map((data, idx) => {
