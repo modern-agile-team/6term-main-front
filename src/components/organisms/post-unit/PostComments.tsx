@@ -68,7 +68,7 @@ const PostComments = (commentData: CommentInfo) => {
 
   const handleDone = async () => {
     setIsModifyState(false);
-    await COMMENTS.commetModifyApi(commentData.id);
+    await COMMENTS.commetModifyApi(commentData.id, modifyComment);
   };
 
   useEffect(() => {
