@@ -9,17 +9,18 @@ import PostReComment from './PostReComment';
 import Modal from '@/components/molecules/post-board/Modal';
 import { CommentDeleteAtom, CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import COMMENTS from '@/apis/comments';
 
 export interface ReCommentInfo {
-  reCommentId: number;
+  // reCommentId: number;
   reComment: {
     reComment: string;
     reCommentOwner: boolean;
     userId: {
       name: string;
       userImage: {
-        id: number;
-        userId: number;
+        // id: number;
+        // userId: number;
         imageUrl: string;
       };
     };
@@ -31,6 +32,9 @@ const PostComments = (commentData: CommentInfo) => {
   const [isCheckToken, setCheckToken] = useState(false);
   const [getReComment, setReComment] = useState<ReCommentInfo['reComment']>([]);
   const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
+  const [isCommentModify, setIsCommemtModify] = useState(false);
+  const [isDone, setIsDone] = useState(false);
+  const [modifyComment, setModifyComment] = useState('');
 
   const checkToken = () => {
     const token = window.localStorage.getItem('accessToken');
@@ -42,34 +46,67 @@ const PostComments = (commentData: CommentInfo) => {
     setReComment(reCommentDummy.reComment);
   };
 
-  const handleDelComment = () => {
+  //댓글 삭제 핸들러
+  const handleDelComment = async () => {
+    handleModal();
     if (confirm('댓글을 삭제하시겠습니까?')) {
-      //commentId 로 api요청보내기
-      setCommentDelId(commentData.commentId);
+      if (commentData.commentId) {
+        await COMMENTS.commetDelApi(commentData.commentId);
+        setCommentDelId(commentData.commentId);
+      } else {
+        await COMMENTS.commetDelApi(commentData.id);
+        setCommentDelId(commentData.id);
+      }
     }
+  };
+
+  //댓글 수정 핸들러
+  const handleChangeComment = () => {
+    handleModal();
+    setIsCommemtModify(!isCommentModify);
+  };
+  //댓글 수정 확인버튼 핸들러
+  const handleDoneModify = () => {
+    setIsDone(true);
+    setIsCommemtModify(false);
+  };
+  //댓글 수정 input 핸들러
+  const handleInputComment = (e: any) => {
+    isDone ? setModifyComment(e.target.value) : setModifyComment(modifyComment);
   };
 
   useEffect(() => {
     checkToken();
     reCommentApi();
+    setModifyComment(commentData.content);
   }, []);
 
   return (
     <S.CommentContainer>
       <S.CreateCommentBox>
         <S.FlexBox>
-          <UserIcon />
+          <S.CommentUserImage img={commentData.userId.userImage.imageUrl} />
           <S.ShowUserName size={20}>{commentData.userId.name}</S.ShowUserName>
         </S.FlexBox>
         <S.FlexBox>
-          <S.CommentArea>{commentData.content}.</S.CommentArea>
-          {commentData.commentOwner && (
+          <S.CommentArea>
+            {isCommentModify ? (
+              <div>
+                <input type="text" onChange={handleInputComment} />
+                <button onClick={handleDoneModify}>확인</button>
+                <button onClick={handleChangeComment}>취소</button>
+              </div>
+            ) : (
+              modifyComment
+            )}
+          </S.CommentArea>
+          {commentData.commentowner && (
             <div>
               {isOpenModal && (
                 <Modal show={isOpenModal} hide={handleModal}>
                   <div>
                     <S.Option onClick={handleDelComment}>삭제</S.Option>
-                    <S.Option>수정</S.Option>
+                    <S.Option onClick={handleChangeComment}>수정</S.Option>
                   </div>
                 </Modal>
               )}
@@ -91,7 +128,6 @@ const PostComments = (commentData: CommentInfo) => {
           <S.ShowUserName>
             {isCheckToken ? (
               <S.FlexBox>
-                <UserIcon />
                 <input type="text" placeholder="댓글을 입력해주세요" />
                 <button>등록</button>
               </S.FlexBox>

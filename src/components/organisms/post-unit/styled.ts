@@ -216,6 +216,6 @@ export const CommentUserImage = styled.div<CommentProfileBg>`
   border-radius: 50%;
   background-image: url(${(props) => props.img});
   background-size: cover;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
 `;

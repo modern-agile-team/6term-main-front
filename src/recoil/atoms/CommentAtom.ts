@@ -4,14 +4,14 @@ import { atom } from 'recoil';
 export const CommentLoadAtom = atom<CommentInfo>({
   key: 'commentLoad',
   default: {
-    commentId: 1,
+    id: 0,
     content: '',
-    commentOwner: true,
+    commentowner: true,
     userId: {
-      name: '이재진',
+      name: '',
       userImage: {
-        id: 16,
-        userId: 63,
+        id: 0,
+        userId: 0,
         imageUrl: '',
       },
     },
