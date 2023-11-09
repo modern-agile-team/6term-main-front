@@ -5,18 +5,16 @@ import FriendList from '@/components/organisms/friend-list/ListFriend';
 import FriendResponse from '@/components/organisms/friend-list/ListResponsed';
 import FriendRequest from '@/components/organisms/friend-list/ListRequested';
 import UserRejected from '@/components/organisms/friend-list/ListRejected';
-import { useRouter } from 'next/router';
+import { RequestFriend } from '@/apis/friend-api/friendRequest';
 
-const RelationLists = () => {
-  const router = useRouter();
-  console.log(router);
+const RelationLists = (props: RequestFriend) => {
   return (
     <S.Container>
       <S.ListBox>
-        <FriendList />
-        <FriendResponse />
-        <FriendRequest />
-        <UserRejected />
+        {/* <FriendList /> */}
+        {/* <FriendResponse /> */}
+        <FriendRequest id={FriendRequest} />
+        {/* <UserRejected /> */}
       </S.ListBox>
     </S.Container>
   );

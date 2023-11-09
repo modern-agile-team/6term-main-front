@@ -3,9 +3,6 @@ import React from 'react';
 import IndividualPage from '@/components/veiws/IndividualPage';
 
 const UserPage = () => {
-  // const router = useRouter();
-  // const { id } = router.query;
-
   return (
     <>
       <IndividualPage />

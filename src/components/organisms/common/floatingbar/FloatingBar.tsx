@@ -67,10 +67,6 @@ const FloatingBar = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(myInfo);
-  });
-
   const { isOpenModal, handleModal } = useModal();
 
   return (
