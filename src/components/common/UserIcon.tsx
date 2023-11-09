@@ -3,7 +3,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
-import Link from 'next/link';
 
 const UserPageIcon = styled.div`
   font-size: 30px;
@@ -13,13 +12,9 @@ const UserPageIcon = styled.div`
 
 const UserIcon = () => {
   return (
-    <Link legacyBehavior href="/mypage">
-      <a>
-        <UserPageIcon>
-          <CgProfile />
-        </UserPageIcon>
-      </a>
-    </Link>
+    <UserPageIcon>
+      <CgProfile />
+    </UserPageIcon>
   );
 };
 

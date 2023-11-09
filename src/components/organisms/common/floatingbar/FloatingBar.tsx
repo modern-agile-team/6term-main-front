@@ -11,7 +11,7 @@ import { IoMdChatbubbles } from 'react-icons/io';
 import Link from 'next/link';
 import ChatModal from '@/components/organisms/chats/chat-modal/ChatModal';
 import useModal from '@/hooks/useModal';
-import USERS from '@/apis/user';
+import USERS, { UserInfo } from '@/apis/user';
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -29,8 +29,16 @@ const scrollToBottom = () => {
 };
 
 const FloatingBar = () => {
+  const [myInfo, setMyInfo] = useState(0);
   const [floatingPosition, setFloatingPosition] = useState(200);
   const router = useRouter();
+
+  const handleGetMyId = async () => {
+    const response = await USERS.getUserProfile();
+    console.log(response);
+    setMyInfo(response.userId);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setFloatingPosition(window.scrollY);
@@ -43,23 +51,27 @@ const FloatingBar = () => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
+    handleGetMyId();
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  const handleMypage = async () => {
-    try {
-      const userInfo = await USERS.getUserProfile();
-      const id = userInfo.id;
-      router.push(`/mypage/${id}`, undefined, { shallow: true });
-    } catch (error) {
-      console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);
-    }
+  const handleMypage = () => {
+    router.push({
+      pathname: `/mypage/${myInfo}`,
+      query: {
+        id: myInfo,
+      },
+    });
   };
 
-  const { isOpenModal: chatState, handleModal: chatHandle } = useModal();
+  useEffect(() => {
+    console.log(myInfo);
+  });
+
+  const { isOpenModal, handleModal } = useModal();
 
   return (
     <S.FloatingBox position={floatingPosition}>
@@ -78,10 +90,10 @@ const FloatingBar = () => {
         <UserIcon />
       </div>
 
-      <S.ChatIcon onClick={chatHandle}>
+      <S.ChatIcon onClick={handleModal}>
         <IoMdChatbubbles />
       </S.ChatIcon>
-      {chatState && <ChatModal show={chatState} hide={chatHandle} />}
+      {isOpenModal && <ChatModal show={isOpenModal} hide={handleModal} />}
 
       <S.ScrollButotn>
         <MdKeyboardArrowDown onClick={scrollToBottom} />

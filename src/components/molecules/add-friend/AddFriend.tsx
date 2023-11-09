@@ -16,7 +16,7 @@ const AddFriend = (props: User) => {
   const handleMypage = async () => {
     try {
       const userInfo = await USERS.getUserProfile();
-      const id = userInfo.id;
+      const id = userInfo.userId;
       router.push(`/mypage/${id}`);
     } catch (error) {
       console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);

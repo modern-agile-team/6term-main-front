@@ -40,8 +40,8 @@ const FriendRequest = (props: RequestFriend) => {
   return (
     <div>
       <span>요청 보낸 목록</span>
-      {requestedFriends.map((requestUser, index) => (
-        <S.UserBox key={index}>
+      {requestedFriends.map((requestUser, respondent) => (
+        <S.UserBox key={respondent}>
           {requestUser.respondent ? (
             <>
               <img

@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import instance from './axiosInstance';
 
 export interface UserInfo {
-  id: number;
+  userId: number;
   name: string;
   email: string;
   gender: string;
