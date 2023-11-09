@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
-import FRIENDS from '@/apis/friend-api/friendList';
-import { Friend } from '@/apis/friend-api/friendList';
+import { ResponseFriend } from '@/apis/friend-api/friendResponse';
 
-const FriendResponse = (props: Friend) => {
-  const [responsedFriend, setResponsedFriend] = useState<Friend[]>([]);
+const FriendResponse = (props: ResponseFriend) => {
+  const [responsedFriend, setResponsedFriend] = useState<ResponseFriend[]>([]);
   const [isAccept, setIsAccept] = useState(false);
   const [isRefuse, setIsRefuse] = useState(false);
   const [isReject, setIsReject] = useState(false);
 
-  // useEffect(() => {
-  //   const handleResponsedFriends = async () => {
-  //     try {
-  //       const response = await FRIENDS.responsedList();
-  //       const friedInfo = response
-  //     }
-  //   }
-  // })
+  useEffect(() => {
+    const handleResponsedFriends = async () => {
+      try {
+        const response = await RESPONSE.responsedList();
+        console.log(response)
+      }
+    }
+  })
 
   //요청 수락 핸들러 -> 요청 수락하면 요청 수락 버튼 삭제
   // -> 삭제 버튼 있는 자리에 '요청을 수락하였습니다.' -> 친구 목록으로 GO

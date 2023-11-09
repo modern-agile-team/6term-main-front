@@ -6,8 +6,8 @@ import { CgProfile } from 'react-icons/cg';
 
 const UserPageIcon = styled.div`
   font-size: 30px;
-  /* font-weight: bold;  */
   color: #91c8e4;
+  cursor: pointer;
 `;
 
 const UserIcon = () => {

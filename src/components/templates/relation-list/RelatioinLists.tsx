@@ -1,19 +1,18 @@
 import { useEventCallback } from '@mui/material';
 import * as S from './styled';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FriendList from '@/components/organisms/friend-list/ListFriend';
 import FriendResponse from '@/components/organisms/friend-list/ListResponsed';
 import FriendRequest from '@/components/organisms/friend-list/ListRequested';
 import UserRejected from '@/components/organisms/friend-list/ListRejected';
-import { RequestFriend } from '@/apis/friend-api/friendRequest';
 
-const RelationLists = (props: RequestFriend) => {
+const RelationLists = () => {
   return (
     <S.Container>
       <S.ListBox>
         {/* <FriendList /> */}
         {/* <FriendResponse /> */}
-        <FriendRequest id={FriendRequest} />
+        <FriendRequest />
         {/* <UserRejected /> */}
       </S.ListBox>
     </S.Container>
