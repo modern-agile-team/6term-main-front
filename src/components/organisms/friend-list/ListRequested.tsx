@@ -8,32 +8,42 @@ interface RequestUser {
   userImage: string;
 }
 const ListRequested = () => {
-  const [requestedFriends, setRequestedFriends] = useState<RequestFriend[]>([]);
-  const friendRequest = () => {
-    const handleRequestedFriends = async () => {
+  // const [requestedFriends, setRequestedFriends] = useState<RequestFriend[]>([]);
+  // const friendRequest = () => {
+  //   const handleRequestedFriends = async () => {
+  //     const response = await REQUEST.requestedList();
+  //     console.log(response);
+  //     setRequestedFriends(response.data);
+  //   };
+  //   handleRequestedFriends();
+  // };
+  const [requestedFriends, setRequestedFriends] = useState<
+    RequestFriend['data']
+  >([]);
+
+  const friendRequest = async () => {
+    try {
       const response = await REQUEST.requestedList();
-      console.log(response);
-      setRequestedFriends(response.data);
-    };
-    handleRequestedFriends();
+      setRequestedFriends(response);
+    } catch (error) {
+      console.error('요청 보낸 친구 목록을 가져오는 중 오류 발생:', error);
+    }
   };
 
   useEffect(() => {
     friendRequest();
+    console.log(requestedFriends);
   }, []);
 
   return (
     <div>
       <span>요청 보낸 목록</span>
-      {requestedFriends.map((requestUser, index) => (
+      {requestedFriends.map((data, index) => (
         <S.UserBox key={index}>
-          {requestUser.data.respondent ? (
+          {data.respondent ? (
             <>
-              <img
-                src={requestUser.respondent.userImage.imageUrl}
-                alt="User Image"
-              />
-              <div>{requestUser.respondent.name}</div>
+              <img src={data.respondent.userImage.imageUrl} alt="User Image" />
+              <div>{data.respondent.name}</div>
             </>
           ) : (
             <div>요청 보낸 목록이 없습니다!!</div>

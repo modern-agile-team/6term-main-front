@@ -34,14 +34,6 @@ const FRIENDS = {
     return result;
   },
 
-  // 내가 요청 보낸 친구 목록 api(get)
-  async requestedList(): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<any> = await instance.get(
-      `${FRIENDS.path}/requests/pending`,
-    );
-    return result.data;
-  },
-
   // 내가 요청 받은 친구 목록 api(get)
   async responsedList(): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<any> = await instance.get(
