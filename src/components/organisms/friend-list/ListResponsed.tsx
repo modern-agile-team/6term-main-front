@@ -13,6 +13,7 @@ const FriendResponse = () => {
   const friendResponse = async () => {
     try {
       const response = await RESPONSE.responsedList();
+      console.log(response);
       setResponsedFriends(response);
     } catch (error) {
       console.error('요청 받은 친구 목록을 가져오는 중 오류 발생:', error);
