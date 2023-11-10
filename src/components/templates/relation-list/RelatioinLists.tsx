@@ -1,6 +1,6 @@
 import { useEventCallback } from '@mui/material';
 import * as S from './styled';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FriendList from '@/components/organisms/friend-list/ListFriend';
 import FriendResponse from '@/components/organisms/friend-list/ListResponsed';
 import FriendRequest from '@/components/organisms/friend-list/ListRequested';
@@ -10,10 +10,10 @@ const RelationLists = () => {
   return (
     <S.Container>
       <S.ListBox>
-        <FriendList />
+        {/* <FriendList /> */}
         <FriendResponse />
         <FriendRequest />
-        <UserRejected />
+        {/* <UserRejected /> */}
       </S.ListBox>
     </S.Container>
   );

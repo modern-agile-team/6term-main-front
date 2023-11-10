@@ -3,23 +3,18 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
-import Link from 'next/link';
 
 const UserPageIcon = styled.div`
   font-size: 30px;
-  /* font-weight: bold;  */
   color: #91c8e4;
+  cursor: pointer;
 `;
 
 const UserIcon = () => {
   return (
-    <Link legacyBehavior href="/mypage">
-      <a>
-        <UserPageIcon>
-          <CgProfile />
-        </UserPageIcon>
-      </a>
-    </Link>
+    <UserPageIcon>
+      <CgProfile />
+    </UserPageIcon>
   );
 };
 

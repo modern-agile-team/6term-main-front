@@ -23,10 +23,15 @@ export default function App({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <React.Suspense fallback={<div>Loading...</div>}>
         <ComponentsWithNoSSR />
-
-        <Component {...pageProps} />
+        <div
+          style={{
+            minHeight: '100vh', //뷰 포트 : 브라우저의 최소 높이를 100%로 해서, 빈 값을 할당
+            display: 'flex', // flex:1을 할당해 나머지 요소 사이의 빈 부분을 전부 할당
+            flexDirection: 'column',
+          }}>
+          <Component {...pageProps} style={{ flex: 1 }} />
+        </div>
         <FloatingBarWithNoSSR />
-        {/* <FloatingBar /> */}
         <Footer />
       </React.Suspense>
     </RecoilRoot>

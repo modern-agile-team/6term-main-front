@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as S from './styled';
-import { BoardInfo } from '../post-board/UnitBox';
-import FRIENDS from '@/apis/friendApi/friendList';
+import FRIENDS from '@/apis/friend-api/friendList';
+import USERS from '@/apis/user';
+import { UserInfo } from 'os';
 
 interface User {
   id: number;
@@ -13,27 +14,43 @@ interface User {
 const AddFriend = (props: User) => {
   const [isFriendAdded, setIsFriendAdded] = useState(false);
   const router = useRouter();
-  // 매개변수에 추가할 유저의 id값 받아오기
-  const handleAddFriend = async () => {
-    const isConfirmed = window.confirm(
-      `${props.name}님을 친구로 추가하시겠습니까?`,
-    );
-    if (isConfirmed) {
-      try {
-        await FRIENDS.friendRequest(props.id);
-        console.log('친구 추가에 성공했습니다.');
-        setIsFriendAdded(true);
-        const isConfirmed = window.confirm(
-          `${props.name} 님이 친구로 추가되었습니다. 목록을 확인하시겠습니까?`,
-        );
-        if (isConfirmed) {
-          router.push('/mypage');
-        }
-      } catch (error) {
-        console.error('친구 추가 중 오류가 발생했습니다:', error);
-      }
+  const handleMypage = async () => {
+    try {
+      const userInfo = await USERS.getUserProfile();
+      const id = userInfo.userId;
+      router.push(`/mypage/${id}`);
+    } catch (error) {
+      console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);
     }
   };
+  const handleAddFriend = async () => {
+    try {
+      const userInfo = await USERS.getUserProfile();
+      const currentUserId = userInfo.userId;
+      const friendId = props.id;
+      if (currentUserId === friendId) {
+        alert('본인은 친구로 추가할 수 없습니다.');
+      } else {
+        const isConfirmed = window.confirm(
+          `${props.name}님을 친구로 추가하시겠습니까?`,
+        );
+        if (isConfirmed) {
+          await FRIENDS.friendRequest(props.id);
+          console.log('친구 추가에 성공했습니다.');
+          setIsFriendAdded(true);
+          const isConfirmed = window.confirm(
+            `${props.name} 님이 친구로 추가되었습니다. 목록을 확인하시겠습니까?`,
+          );
+          if (isConfirmed) {
+            handleMypage();
+          }
+        }
+      }
+    } catch (error) {
+      console.error('친구 추가 중 오류가 발생했습니다:', error);
+    }
+  };
+  console.log(isFriendAdded);
   return <div onClick={handleAddFriend}>친구 추가 기능 버튼</div>;
 };
 
