@@ -2,10 +2,6 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  withCredentials: true,
-  headers: {
-    'Set-Cookie': 'myCookie=cookieValue; HttpOnly; Secure; SameSite=None',
-  },
 });
 
 //토큰 만료 여부 판단
@@ -37,6 +33,7 @@ instance.interceptors.request.use(
       const accessToken = localStorage.getItem('accessToken');
 
       config.headers['access_token'] = accessToken;
+      config.headers['withCredentials'] = true;
     }
 
     return config;
