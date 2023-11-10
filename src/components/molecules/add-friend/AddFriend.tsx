@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import * as S from './styled';
 import FRIENDS from '@/apis/friend-api/friendList';
 import USERS from '@/apis/user';
+import { UserInfo } from 'os';
 
 interface User {
   id: number;
@@ -23,25 +24,33 @@ const AddFriend = (props: User) => {
     }
   };
   const handleAddFriend = async () => {
-    const isConfirmed = window.confirm(
-      `${props.name}님을 친구로 추가하시겠습니까?`,
-    );
-    if (isConfirmed) {
-      try {
-        await FRIENDS.friendRequest(props.id);
-        console.log('친구 추가에 성공했습니다.');
-        setIsFriendAdded(true);
+    try {
+      const userInfo = await USERS.getUserProfile();
+      const currentUserId = userInfo.userId;
+      const friendId = props.id;
+      if (currentUserId === friendId) {
+        alert('본인은 친구로 추가할 수 없습니다.');
+      } else {
         const isConfirmed = window.confirm(
-          `${props.name} 님이 친구로 추가되었습니다. 목록을 확인하시겠습니까?`,
+          `${props.name}님을 친구로 추가하시겠습니까?`,
         );
         if (isConfirmed) {
-          handleMypage();
+          await FRIENDS.friendRequest(props.id);
+          console.log('친구 추가에 성공했습니다.');
+          setIsFriendAdded(true);
+          const isConfirmed = window.confirm(
+            `${props.name} 님이 친구로 추가되었습니다. 목록을 확인하시겠습니까?`,
+          );
+          if (isConfirmed) {
+            handleMypage();
+          }
         }
-      } catch (error) {
-        console.error('친구 추가 중 오류가 발생했습니다:', error);
       }
+    } catch (error) {
+      console.error('친구 추가 중 오류가 발생했습니다:', error);
     }
   };
+  console.log(isFriendAdded);
   return <div onClick={handleAddFriend}>친구 추가 기능 버튼</div>;
 };
 
