@@ -24,6 +24,7 @@ const FriendResponse = () => {
     console.log(responsedFriends);
   }, []);
 
+  //토큰 에러 핸들링 완료 후 작업
   //요청 수락 핸들러 -> 요청 수락하면 요청 수락 버튼 삭제
   // -> 삭제 버튼 있는 자리에 '요청을 수락하였습니다.' -> 친구 목록으로 GO
   // const handleAccept = async () => {
