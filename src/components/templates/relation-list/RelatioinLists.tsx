@@ -11,7 +11,7 @@ const RelationLists = () => {
     <S.Container>
       <S.ListBox>
         {/* <FriendList /> */}
-        {/* <FriendResponse /> */}
+        <FriendResponse />
         <FriendRequest />
         {/* <UserRejected /> */}
       </S.ListBox>

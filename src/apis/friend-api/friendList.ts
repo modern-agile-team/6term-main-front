@@ -26,30 +26,6 @@ export interface Friend {
 const FRIENDS = {
   path: '/friends',
 
-  // 친구 목록 조회 api(get)
-  async friendList(): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.get(
-      `${FRIENDS.path}`,
-    );
-    return result;
-  },
-
-  // 내가 요청 받은 친구 목록 api(get)
-  async responsedList(): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<any> = await instance.get(
-      `${FRIENDS.path}/responses/pending`,
-    );
-    return result.data;
-  },
-
-  // 차단 목록(영구 거절) api(get)
-  async rejectList(): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.get(
-      `${FRIENDS.path}/responses/reject/permanent`,
-    );
-    return result;
-  },
-
   // 친구 요청 api(post)
   async friendRequest(friendId: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.post(
@@ -61,35 +37,18 @@ const FRIENDS = {
     return result;
   },
 
-  // 친구 요청 수락 api(patch)
-  async friendAccept(friendId: number): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.patch(
-      `${FRIENDS.path}/reponses/accept/${friendId}`,
-      {
-        friendId: friendId,
-      },
+  // 친구 목록 조회 api(get)
+  async friendList(): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.get(
+      `${FRIENDS.path}`,
     );
     return result;
   },
 
-  // 친구 요청 거절 api(patch)
-  async friendRefuse(friendId: number): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.patch(
-      `${FRIENDS.path}/reponses/reject/${friendId}`,
-      {
-        friendId: friendId,
-      },
-    );
-    return result;
-  },
-
-  // 친구 요청 영구 거절 api(patch)
-  async friendReject(friendId: number): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.patch(
-      `${FRIENDS.path}/reponses/reject/permanent/${friendId}`,
-      {
-        friendId: friendId,
-      },
+  // 차단 목록(영구 거절) api(get)
+  async rejectList(): Promise<AxiosResponse<Friend[]>> {
+    const result: AxiosResponse<Friend[]> = await instance.get(
+      `${FRIENDS.path}/responses/reject/permanent`,
     );
     return result;
   },

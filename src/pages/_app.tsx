@@ -32,7 +32,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} style={{ flex: 1 }} />
         </div>
         <FloatingBarWithNoSSR />
-        {/* <FloatingBar /> */}
         <Footer />
       </React.Suspense>
     </RecoilRoot>

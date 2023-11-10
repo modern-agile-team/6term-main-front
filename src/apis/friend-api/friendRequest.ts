@@ -19,7 +19,6 @@ export interface RequestFriend {
 
 const REQUEST = {
   path: '/friends',
-
   // 내가 요청 보낸 친구 목록 api(get)
   async requestedList(): Promise<any> {
     const result: AxiosResponse<any> = await instance.get(
