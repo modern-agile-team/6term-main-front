@@ -33,6 +33,7 @@ export const commentDummy = [
 //commentId로 요청보내서 get받아오기
 export const reCommentDummy = {
   reCommentId: 1,
+  reCommentCount: 2,
   reComment: [
     {
       reComment: '대댓글1',

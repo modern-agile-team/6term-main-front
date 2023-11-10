@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://13.209.21.62:3000',
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
 //토큰 만료 여부 판단
@@ -13,7 +13,7 @@ const isTokenExpired = async () => {
         access_token: accessToken,
       },
     });
-    return result.data.accessToken;
+    return result.data.success;
   } catch (err) {
     Promise.reject(err);
   }
@@ -35,10 +35,8 @@ instance.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
       const accessToken = localStorage.getItem('accessToken');
-      const refreshToken = localStorage.getItem('refreshToken');
 
       config.headers['access_token'] = accessToken;
-      config.headers['refreshtoken'] = refreshToken;
     }
 
     return config;
@@ -58,8 +56,7 @@ instance.interceptors.response.use(
   },
   async (error) => {
     if (error.response.status === 401 || error.response.status === 403) {
-      await reNewToken();
-
+      reNewToken();
       const accessToken = localStorage.getItem('accessToken');
 
       error.config.headers = {
