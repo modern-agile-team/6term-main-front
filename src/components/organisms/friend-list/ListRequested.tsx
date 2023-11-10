@@ -28,7 +28,11 @@ const ListRequested = () => {
         <S.UserBox key={index}>
           {data.respondent ? (
             <>
-              <img src={data.respondent.userImage.imageUrl} alt="User Image" />
+              <img
+                src={data.respondent.userImage.imageUrl}
+                alt="User Image"
+                style={{ width: '30px', height: '30px', borderRadius: '50%' }}
+              />
               <div>{data.respondent.name}</div>
             </>
           ) : (

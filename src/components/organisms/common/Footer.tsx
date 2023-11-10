@@ -8,13 +8,14 @@ const FooterBoard = styled.div`
   left: 0;
   right: 0;
   display: flex;
-  margin: auto;
+  /* margin: auto; */
   padding: 8px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 100%;
   background-color: #d9d9d9;
+  z-index: 999;
 `;
 const FooterText = styled.div`
   font-size: 14px;

@@ -9,6 +9,7 @@ export const ListTitle = styled.div`
 export const UserBox = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 export const Button = styled.button`
