@@ -2,6 +2,10 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  withCredentials: true,
+  headers: {
+    'Set-Cookie': 'myCookie=cookieValue; HttpOnly; Secure; SameSite=None',
+  },
 });
 
 //토큰 만료 여부 판단
@@ -22,11 +26,7 @@ const isTokenExpired = async () => {
 //토근 갱신
 const reNewToken = async () => {
   const refreshToken = localStorage.getItem('refreshToken');
-  const response = await instance.get(`auth/new-access-token`, {
-    headers: {
-      refresh_token: refreshToken,
-    },
-  });
+  const response = await instance.get(`auth/new-access-token`);
   localStorage.setItem('accessToken', response.data.accessToken);
 };
 
@@ -56,7 +56,7 @@ instance.interceptors.response.use(
   },
   async (error) => {
     if (error.response.status === 401 || error.response.status === 403) {
-      reNewToken();
+      // reNewToken();
       const accessToken = localStorage.getItem('accessToken');
 
       error.config.headers = {
