@@ -65,7 +65,7 @@ const HeaderNavigate = (): JSX.Element => {
                     fontWeight:
                       menu.path === router.pathname ? 'bolder' : 'bold',
                     textDecoration: 'none',
-                    color: menu.path === router.pathname ? 'gray' : 'black',
+                    color: menu.path === router.pathname ? '  gray' : 'black',
                     margin: '0px 10px 0px 10px',
                     cursor: 'pointer',
                   }}

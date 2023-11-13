@@ -80,6 +80,12 @@ const SearchBox = () => {
       });
     }
     setSearchState(true);
+    setSearch((prev) => {
+      return {
+        ...prev,
+        searchQuery: '',
+      };
+    });
   };
 
   return (
@@ -92,6 +98,7 @@ const SearchBox = () => {
         <S.SearchInput
           type="text"
           placeholder="검색어 입력"
+          value={getSearch.searchQuery}
           onChange={onChangeInputSearch}
         />
         <S.SearchButton onClick={hanldeSearchButton}>검색</S.SearchButton>

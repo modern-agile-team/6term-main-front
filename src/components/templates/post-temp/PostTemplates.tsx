@@ -8,14 +8,13 @@ import PostSearchBoard from '@/components/organisms/post-board/PostSearchBoard';
 
 const PostBoardTemplates = (props: Board): JSX.Element => {
   const router = useRouter();
-  console.log(router);
 
   return (
     <S.postBoardUnit>
       <div>
         <PostBoardHeader main={props.main} />
         <Suspense fallback={<h1>로딩중...</h1>}>
-          {Object.keys(router.query).length === 1 ? (
+          {Object.keys(router.query).length <= 1 ? (
             <PostBoards main={props.main} />
           ) : (
             <PostSearchBoard

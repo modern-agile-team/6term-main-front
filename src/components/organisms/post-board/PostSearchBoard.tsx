@@ -5,6 +5,7 @@ import * as S from './styled';
 import SEARCH from '@/apis/search';
 import { useRecoilState } from 'recoil';
 import { searchStateAtom } from '@/recoil/atoms/SearchAtom';
+import { useRouter } from 'next/router';
 
 interface searchInfoType {
   searchQuery: string;
@@ -31,9 +32,6 @@ const PostSearchBoard = (props: searchInfoType) => {
   }, [obsRef, getList]);
 
   useEffect(() => {
-    if (searchState) {
-      setSearchState(false);
-    }
     getPost();
   }, [page]);
 
@@ -48,14 +46,14 @@ const PostSearchBoard = (props: searchInfoType) => {
 
   const getPost = useCallback(async () => {
     setLoad(true); //로딩 시작
+    const totalPage = await SEARCH.searchApi(
+      props.part,
+      props.searchQuery,
+      1,
+      1,
+      props.category,
+    );
     if (pageState) {
-      const totalPage = await SEARCH.searchApi(
-        props.part,
-        props.searchQuery,
-        1,
-        1,
-        props.category,
-      );
       const tempPage = Math.ceil(totalPage.meta.total / 16);
       setPage(tempPage);
       setPageState(false);
