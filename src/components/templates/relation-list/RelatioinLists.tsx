@@ -10,7 +10,7 @@ const RelationLists = () => {
   return (
     <S.Container>
       <S.ListBox>
-        {/* <FriendList /> */}
+        <FriendList />
         <FriendResponse />
         <FriendRequest />
         {/* <UserRejected /> */}

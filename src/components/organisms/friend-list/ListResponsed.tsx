@@ -18,27 +18,24 @@ const FriendResponse = () => {
     } catch (error) {
       console.error('요청 받은 친구 목록을 가져오는 중 오류 발생:', error);
     }
-  };
 
-  useEffect(() => {
-    friendResponse();
-    console.log(responsedFriends);
-  }, []);
+    useEffect(() => {
+      friendResponse();
+    }, []);
+  };
 
   //토큰 에러 핸들링 완료 후 작업
   //요청 수락 핸들러 -> 요청 수락하면 요청 수락 버튼 삭제
   // -> 삭제 버튼 있는 자리에 '요청을 수락하였습니다.' -> 친구 목록으로 GO
-  // const handleAccept = async () => {
-  //   const isConfirmed = window.confirm(
-  //     `${props.name}님의 친구 요청을 수락하시겠습니까?`,
-  //   );
+  // const handleAccept = async (requesterId: number, requesterName: string) => {
+  //   const isConfirmed = window.confirm('님의 친구 요청을 수락하시겠습니까?');
   //   if (isConfirmed) {
   //     try {
-  //       await FRIENDS.friendAccept(props.id);
-  //       console.log('친구 요청을 수락하셨습니다.');
+  //       await RESPONSE.friendAccept(requesterId);
   //       setIsAccept(true);
+  //       alert('님의 친구 요청을 수락하였습니다.');
   //     } catch (error) {
-  //       console.error('친구 요청 수락 중 오류가 발생했습니다:', error);
+  //       console.error('친구 요청 수락 중 오류 발생');
   //     }
   //   }
   // };
@@ -84,10 +81,13 @@ const FriendResponse = () => {
             <>
               <img
                 src={data.requester.userImage.imageUrl}
-                alt="User Image"
+                alt={`${data.requester.name}의 프로필 이미지`}
                 style={{ width: '30px', height: '30px', borderRadius: '50%' }}
               />
               <div>{data.requester.name}</div>
+              <S.Button>수락</S.Button>
+              <S.Button>거절</S.Button>
+              <S.Button>영구 거절</S.Button>
             </>
           ) : (
             <div>요청 받은 목록이 없습니다!!</div>
