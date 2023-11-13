@@ -15,14 +15,14 @@ export interface ModalType {
 
 const ChatModal = (props: ModalType) => {
   // 모달 오픈 시 소켓 연결
-  useEffect(() => {
-    const namespaceURL = 'http://13.209.21.62:3000/ch-653383a4468680bc4e9f8491';
-    const socket = io(namespaceURL);
+  // useEffect(() => {
+  //   const namespaceURL = 'http://13.209.21.62:3000/ch-653383a4468680bc4e9f8491';
+  //   const socket = io(namespaceURL);
 
-    socket.on('connect', () => {
-      console.log('연결 완료');
-    });
-  }, []);
+  //   socket.on('connect', () => {
+  //     console.log('연결 완료');
+  //   });
+  // }, []);
   // Modal Open state일 때 아래 두 개의 함수로 인해 useEffect로
   // 해당 Modal Component가 mount 됐을 때 업데이트된 값을 불러오기
   // 고민 더 해봐야 될 듯

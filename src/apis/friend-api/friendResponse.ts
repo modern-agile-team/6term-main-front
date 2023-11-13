@@ -29,11 +29,11 @@ const RESPONSE = {
   },
 
   // 친구 요청 수락 api(patch)
-  async friendAccept(friendId: number): Promise<any> {
+  async friendAccept(requesterId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.patch(
-      `${RESPONSE.path}/reponses/accept/${friendId}`,
+      `${RESPONSE.path}/reponses/accept/${requesterId}`,
       {
-        friendId: friendId,
+        requesterId: requesterId,
       },
     );
     return result;

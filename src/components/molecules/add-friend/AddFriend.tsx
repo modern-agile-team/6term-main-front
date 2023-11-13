@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import * as S from './styled';
 import FRIENDS from '@/apis/friend-api/friendList';
 import USERS from '@/apis/user';
-import { UserInfo } from 'os';
 
 interface User {
   id: number;
