@@ -22,7 +22,6 @@ const isTokenExpired = async () => {
 
 //토근 갱신
 const reNewToken = async () => {
-  const refreshToken = localStorage.getItem('refreshToken');
   const response = await instance.get(`auth/new-access-token`);
   localStorage.setItem('accessToken', response.data.accessToken);
 };
@@ -34,8 +33,8 @@ instance.interceptors.request.use(
       const accessToken = localStorage.getItem('accessToken');
 
       config.headers['access_token'] = accessToken;
-      config.headers['withCredentials'] = true;
-      config.headers['credentials'] = 'include';
+      // config.headers['withCredentials'] = true;
+      // config.headers['credentials'] = 'include';
     }
 
     return config;
