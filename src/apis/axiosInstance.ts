@@ -56,7 +56,7 @@ instance.interceptors.response.use(
   },
   async (error) => {
     if (error.response.status === 401 || error.response.status === 403) {
-      reNewToken();
+      // reNewToken();
       const accessToken = localStorage.getItem('accessToken');
 
       error.config.headers = {

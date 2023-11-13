@@ -12,11 +12,11 @@ import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import AfterLoginModal from '../login-modal/AfterLoginModal';
 
 const NavData = [
-  { id: 'menu01', name: '전체 게시판', path: '/' },
-  { id: 'menu02', name: '자유 게시판', path: '/postboards/free' },
-  { id: 'menu03', name: '멘토멘티 게시판', path: '/postboards/menmen' },
-  { id: 'menu04', name: '만남 게시판', path: '/postboards/meeting' },
-  { id: 'menu05', name: '장터 게시판', path: '/postboards/market' },
+  { id: 'menu01', name: '전체', path: '/' },
+  { id: 'menu02', name: '자유', path: '/free' },
+  { id: 'menu03', name: '멘토멘티', path: '/menmen' },
+  { id: 'menu04', name: '만남', path: '/meeting' },
+  { id: 'menu05', name: '장터', path: '/market' },
 ];
 
 const HeaderNavigate = (): JSX.Element => {
@@ -27,6 +27,21 @@ const HeaderNavigate = (): JSX.Element => {
     useModal();
   const isLogin = useRecoilValue(LoginStateAtom);
 
+  const handlePushRouter = (path: string) => {
+    if (path === '/') {
+      router.push({
+        pathname: `/`,
+      });
+    } else {
+      router.push({
+        pathname: `${path}`,
+        query: {
+          category: path,
+        },
+      });
+    }
+  };
+
   return (
     <S.HeaderContainer>
       <S.LogoSpace>
@@ -34,37 +49,32 @@ const HeaderNavigate = (): JSX.Element => {
       </S.LogoSpace>
       <S.HeaderNavBox>
         <nav>
-          <ul
+          <div
             style={{
-              width: '1000',
+              display: 'flex',
+              justifyContent: 'center',
               flexWrap: 'wrap',
-              flexDirection: 'row',
-              margin: '-20px 0 0 0px', // 수정 필요
+              minWidth: 500,
             }}>
             {NavData.map((menu) => {
               return (
-                <li
+                <div
                   key={menu.id}
                   style={{
-                    display: 'inline',
-                    marginRight: '70px',
-                  }}>
-                  <Link legacyBehavior href={menu.path}>
-                    <a
-                      style={{
-                        fontSize: '20px',
-                        fontWeight:
-                          menu.path === router.pathname ? 'bolder' : 'bold',
-                        textDecoration: 'none',
-                        color: menu.path === router.pathname ? 'gray' : 'black',
-                      }}>
-                      {menu.name}
-                    </a>
-                  </Link>
-                </li>
+                    fontSize: '20px',
+                    fontWeight:
+                      menu.path === router.pathname ? 'bolder' : 'bold',
+                    textDecoration: 'none',
+                    color: menu.path === router.pathname ? 'gray' : 'black',
+                    margin: '0px 10px 0px 10px',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => handlePushRouter(menu.path)}>
+                  {menu.name}게시판
+                </div>
               );
             })}
-          </ul>
+          </div>
         </nav>
         {isLogin ? (
           <div>

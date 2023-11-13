@@ -62,13 +62,23 @@ const SearchBox = () => {
   };
 
   const hanldeSearchButton = () => {
-    router.push({
-      pathname: '/',
-      query: {
-        searchQuery: getSearch.searchQuery,
-        part: getSearch.part,
-      },
-    });
+    if (router.query.category === undefined) {
+      router.push({
+        pathname: `/`,
+        query: {
+          searchQuery: getSearch.searchQuery,
+          part: getSearch.part,
+        },
+      });
+    } else {
+      router.push({
+        pathname: `${router.query.category}`,
+        query: {
+          searchQuery: getSearch.searchQuery,
+          part: getSearch.part,
+        },
+      });
+    }
     setSearchState(true);
   };
 

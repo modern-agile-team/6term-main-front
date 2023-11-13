@@ -3,14 +3,27 @@ import * as S from './styled';
 import PostBoards from '@/components/organisms/post-board/PostBoards';
 import { Suspense } from 'react';
 import { Board } from '@/components/veiws/AllPost';
+import { useRouter } from 'next/router';
+import PostSearchBoard from '@/components/organisms/post-board/PostSearchBoard';
 
 const PostBoardTemplates = (props: Board): JSX.Element => {
+  const router = useRouter();
+  console.log(router);
+
   return (
     <S.postBoardUnit>
       <div>
         <PostBoardHeader main={props.main} />
         <Suspense fallback={<h1>로딩중...</h1>}>
-          <PostBoards main={props.main} />
+          {Object.keys(router.query).length === 1 ? (
+            <PostBoards main={props.main} />
+          ) : (
+            <PostSearchBoard
+              searchQuery={router.query.searchQuery as string}
+              part={router.query.part as string}
+              category={props.main}
+            />
+          )}
         </Suspense>
       </div>
     </S.postBoardUnit>
