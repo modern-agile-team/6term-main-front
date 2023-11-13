@@ -46,8 +46,17 @@ const AddFriend = (props: User) => {
           }
         }
       }
-    } catch (error) {
-      console.error('친구 추가 중 오류가 발생했습니다:', error);
+    } catch (error: any) {
+      if (error.response) {
+        const statusCode = error.response.status;
+        const errorMessage = error.response.data.message;
+
+        if (statusCode === 404 || statusCode === 409 || statusCode === 410) {
+          alert(errorMessage);
+        } else {
+          console.error('친구 추가 중 오류가 발생했습니다:', error);
+        }
+      }
     }
   };
   console.log(isFriendAdded);

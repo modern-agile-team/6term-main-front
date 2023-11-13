@@ -27,8 +27,8 @@ const FRIENDS = {
   path: '/friends',
 
   // 친구 요청 api(post)
-  async friendRequest(friendId: number): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.post(
+  async friendRequest(friendId: number): Promise<any> {
+    const result: AxiosResponse<any> = await instance.post(
       `${FRIENDS.path}/requests/${friendId}`,
       {
         friendId: friendId,
