@@ -9,7 +9,6 @@ const PostBoards = (props: Board): JSX.Element => {
   const obsRef = useRef<HTMLDivElement>(null); //옵저버 state
   const [page, setPage] = useState<number>(0); // 페이지 state
   const [load, setLoad] = useState(false);
-  const [pageState, setPageState] = useState<boolean>(true); //페이지 State
   const preventRef = useRef(true); //옵저버 중복 방지
 
   //옵저버 생성
@@ -21,8 +20,14 @@ const PostBoards = (props: Board): JSX.Element => {
     };
   }, [obsRef, getList]);
 
+  //첫 페이지 로드
   useEffect(() => {
     getPost();
+  }, []);
+
+  //무한스크롤 로드
+  useEffect(() => {
+    loadPost();
   }, [page]);
 
   const handleObs = (entries: any) => {
@@ -34,34 +39,55 @@ const PostBoards = (props: Board): JSX.Element => {
     }
   };
 
+  //첫 페이지 로드 함수
   const getPost = useCallback(async () => {
+    const totalPage = await BOARDS.getlistAll(1, 1);
+    const tempPage = Math.ceil(totalPage.total / 16);
+    setPage(tempPage);
+  }, []);
+
+  //스크롤 시 로드 함수
+  const loadPost = useCallback(async () => {
     setLoad(true); //로딩 시작
-    if (pageState) {
-      const totalPage = await BOARDS.getlistAll(1, 1);
-      const tempPage = Math.ceil(totalPage.total / 16);
-      setPage(tempPage);
-      setPageState(false);
-    } else if (page > 0) {
-      //마지막페이지까지 간다면
+    if (page > 0) {
       const result = await BOARDS.getlistAll(page, 16); //api요청 글 목록 불러오기
       const reverseArr = [...result.data].reverse();
       result && setGetList((prev: any) => [...prev, ...reverseArr]);
     }
     setLoad(false);
   }, [page]);
+
   return (
     <S.HeaderContainer>
-      {getList && (
+      {props.main !== '전체' ? (
         <>
-          {getList
-            .filter((data: any) => data.main_category === props.main)
-            .map((data: any) => {
-              return (
-                <div key={data.id}>
-                  <UnitBox {...data} />
-                </div>
-              );
-            })}
+          {getList && (
+            <>
+              {getList
+                .filter((data: any) => data.main_category === props.main)
+                .map((data: any) => {
+                  return (
+                    <div key={data.id}>
+                      <UnitBox {...data} />
+                    </div>
+                  );
+                })}
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          {getList && (
+            <>
+              {getList.map((data: any) => {
+                return (
+                  <div key={data.id}>
+                    <UnitBox {...data} />
+                  </div>
+                );
+              })}
+            </>
+          )}
         </>
       )}
       <div>

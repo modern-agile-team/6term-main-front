@@ -12,7 +12,7 @@ const PostBoardTemplates = (props: Board): JSX.Element => {
   return (
     <S.postBoardUnit>
       <div>
-        <PostBoardHeader main={props.main} />
+        <PostBoardHeader main={props.main as string} />
         <Suspense fallback={<h1>로딩중...</h1>}>
           {Object.keys(router.query).length <= 1 ? (
             <PostBoards main={props.main} />
@@ -20,7 +20,7 @@ const PostBoardTemplates = (props: Board): JSX.Element => {
             <PostSearchBoard
               searchQuery={router.query.searchQuery as string}
               part={router.query.part as string}
-              category={props.main}
+              category={props.main as string}
             />
           )}
         </Suspense>
