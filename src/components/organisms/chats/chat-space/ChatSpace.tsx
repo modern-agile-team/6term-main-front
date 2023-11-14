@@ -12,12 +12,14 @@ const ChatSpace = (): JSX.Element => {
       <S.ChatSpaceWrapper>
         <S.ChatLists>
           <S.ChatSpaceName>CrabChat</S.ChatSpaceName>
-          <S.ChatListScroll>
-            <DMFriendList />
-            <br />
-            <DMList />
-            <br />
-          </S.ChatListScroll>
+          <S.ChatListContainer>
+            <S.ChatListScroll>
+              <DMFriendList />
+              <br />
+              <DMList />
+              <br />
+            </S.ChatListScroll>
+          </S.ChatListContainer>
         </S.ChatLists>
         <S.Chats>
           <Chatting />

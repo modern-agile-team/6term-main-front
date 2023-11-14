@@ -92,10 +92,15 @@ export const ChatSpaceName = styled.div`
   white-space: nowrap;
 `;
 
+export const ChatListContainer = styled.div`
+  height: 451px;
+  overflow-y: auto;
+`;
+
 // MenuScroll
 export const ChatListScroll = styled.div`
   height: 451px;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;
 
 export const Chats = styled.div`

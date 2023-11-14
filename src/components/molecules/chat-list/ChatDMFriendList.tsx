@@ -1,51 +1,53 @@
-import React, { FC, useCallback, useState } from 'react';
-import { BiSolidRightArrow } from 'react-icons/bi';
+import React, { FC, useCallback, useState, useEffect, useRef } from 'react';
 import * as S from './styles';
-// import ChatModal from '../chat-modal/ChatModal';
-// import { useRouter } from 'next/router';
-// import Link from 'next/link';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
 import { useRouter } from 'next/router';
-// import useSocket from '@/hooks/useSocket';
-// import ChatSpace from '../chat-modal/ChatSpace';
+import { BiSolidDownArrow } from 'react-icons/bi';
 
-const DMFriendList = () => {
+interface DMFriendListProps {}
+
+const DMFriendList: FC<DMFriendListProps> = () => {
   const [friendListCollapse, setFriendListCollapse] = useState(false);
   const friendsData = useRecoilValue(FriendsAtom);
-  const [onlineList, setOnlineList] = useState<number[]>([]);
+  const router = useRouter();
+  const collapsibleRef = useRef<HTMLDivElement>(null);
+
   const toggleFriendListCollapse = useCallback(() => {
     setFriendListCollapse((prev) => !prev);
   }, []);
-  // console.log(friendListCollapse);
-  const router = useRouter();
-  const handleRoomRouter = (id: number) => {
-    router.push({
-      pathname: `/${id}`,
-      query: {
-        roomId: id,
-      },
-    });
-  };
+
+  useEffect(() => {
+    if (collapsibleRef.current) {
+      collapsibleRef.current.style.maxHeight = friendListCollapse
+        ? '0'
+        : `${collapsibleRef.current.scrollHeight}px`;
+    }
+  }, [friendListCollapse]);
+
+  // const handleRoomRouter = (id: number) => {};
+
   return (
     <div>
       <S.CategoryBox>
-        <S.CollapseButton
+        <S.ButtonContainer
           collapse={friendListCollapse}
           onClick={toggleFriendListCollapse}>
-          <BiSolidRightArrow />
-        </S.CollapseButton>
+          <BiSolidDownArrow />
+        </S.ButtonContainer>
         <S.Category>Friend</S.Category>
       </S.CategoryBox>
-      <div className={friendListCollapse ? 'collapsed' : ''}>
+      <S.CollapsibleContainer
+        ref={collapsibleRef}
+        className={friendListCollapse ? 'collapsed' : ''}>
         {friendsData?.map((friend) => (
           <S.ListBox
             key={friend.id}
-            onClick={() => handleRoomRouter(friend.id)}>
-            {friend.name}
+            className={friendListCollapse ? 'hidden' : ''}>
+            {friendListCollapse ? '' : friend.name}
           </S.ListBox>
         ))}
-      </div>
+      </S.CollapsibleContainer>
     </div>
   );
 };
