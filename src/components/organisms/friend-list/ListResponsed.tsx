@@ -3,7 +3,7 @@ import * as S from './styled';
 import RESPONSE, { ResponseFriend } from '@/apis/friend-api/friendResponse';
 import { useRouter } from 'next/router';
 
-const FriendResponse = () => {
+const ResponsedList = () => {
   const router = useRouter();
   const [responsedFriends, setResponsedFriends] = useState<
     ResponseFriend['data']
@@ -103,4 +103,4 @@ const FriendResponse = () => {
   );
 };
 
-export default FriendResponse;
+export default ResponsedList;

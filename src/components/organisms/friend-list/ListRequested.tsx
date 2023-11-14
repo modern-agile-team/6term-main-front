@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as S from './styled';
 import REQUEST, { RequestFriend } from '@/apis/friend-api/friendRequest';
 
-const ListRequested = () => {
+const RequestedList = () => {
   const [requestedFriends, setRequestedFriends] = useState<
     RequestFriend['data']
   >([]);
@@ -44,4 +44,4 @@ const ListRequested = () => {
   );
 };
 
-export default ListRequested;
+export default RequestedList;

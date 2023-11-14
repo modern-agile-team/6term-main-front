@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as S from './styled';
 import REJECT, { RejectFriend } from '@/apis/friend-api/friendReject';
 
-const ListRejected = () => {
+const RejectedList = () => {
   const [rejectedFriends, setRejectedFriends] = useState<RejectFriend['data']>(
     [],
   );
@@ -43,3 +43,5 @@ const ListRejected = () => {
     </div>
   );
 };
+
+export default RejectedList;
