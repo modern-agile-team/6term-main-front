@@ -12,7 +12,7 @@ const AUTHS = {
             code: code,
           },
           headers: {
-            credentials: true,
+            withCredentials: true,
           },
         },
       );

@@ -33,8 +33,6 @@ instance.interceptors.request.use(
       const accessToken = localStorage.getItem('accessToken');
 
       config.headers['access_token'] = accessToken;
-      // config.headers['withCredentials'] = true;
-      // config.headers['credentials'] = 'include';
     }
 
     return config;
