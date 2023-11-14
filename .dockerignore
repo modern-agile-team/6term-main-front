@@ -1,6 +1,6 @@
 .git
 node_modules
-src
+.next
 
 .eslintrc.js
 .gitignore
