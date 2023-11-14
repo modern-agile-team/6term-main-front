@@ -11,11 +11,3 @@ export const UnitPostSelector = selectorFamily({
     }
   },
 });
-
-export const CommentListAllSelecor = selectorFamily({
-  key: 'commentlist',
-  get: (id: number) => async () => {
-    const result = await COMMENTS.commentListAllApi(id);
-    return result;
-  },
-});

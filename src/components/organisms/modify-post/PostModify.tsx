@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
-import CustomSelect from '@/components/molecules/post-board/CustomSelect';
+import CustomSelect from '@/components/molecules/post-board/BoardSelect';
 import BOARDS from '@/apis/boards';
 import { useRouter } from 'next/router';
 import { IFileTypes } from '../create-post/PostCreate';
@@ -63,7 +63,7 @@ const PostModify = () => {
   const [getBoard, setBoard] = useRecoilState(SelectBoardAtom); //boardSelect
   const router = useRouter();
   const { data } = router.query;
-  const unitInfo = JSON.parse(data as string);
+  const unitInfo = data ? JSON.parse(data as string) : '';
   const resetSelect = useResetRecoilState(SelectBoardAtom);
   const [files, setFiles] = useState<IFileTypes[]>([]);
   const [delImg, setDelImg] = useState<string[]>([]);

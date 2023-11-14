@@ -68,7 +68,7 @@ const PostCreateComment = (props: BoardId) => {
     setUSerInfo((prev) => {
       return {
         ...prev,
-        userId: response.id,
+        userId: response.userId,
         userName: response.name,
         userImage: response.userImage,
       };

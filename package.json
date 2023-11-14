@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/is-prop-valid": "^1.2.1",
     "@loadable/component": "^5.15.3",
     "@mui/material": "^5.14.15",
     "@mui/styled-engine-sc": "^6.0.0-alpha.3",
@@ -38,9 +39,5 @@
     "socket.io-client": "^4.7.2",
     "styled-components": "^6.1.0",
     "typescript": "5.1.6"
-  },
-  "devDependencies": {
-    "@loadable/babel-plugin": "^5.16.1",
-    "babel-plugin-styled-components": "^2.1.4"
   }
 }

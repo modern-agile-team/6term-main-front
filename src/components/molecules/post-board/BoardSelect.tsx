@@ -3,32 +3,30 @@ import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
 import useModal from '@/hooks/useModal';
-import { useEffect } from 'react';
+const boardList = [
+  {
+    id: 1,
+    main: '자유',
+    sub: ['잡담', '홍보'],
+  },
+  {
+    id: 2,
+    main: '멘토멘티',
+    sub: ['공부', '운동', '토익'],
+  },
+  {
+    id: 3,
+    main: '만남',
+    sub: ['친구', '밥약', '미팅'],
+  },
+  {
+    id: 4,
+    main: '장터',
+    sub: ['책', '중고', '자취방'],
+  },
+];
 
-const CustomSelect = () => {
-  const boardList = [
-    {
-      id: 1,
-      main: '자유',
-      sub: ['잡담', '홍보'],
-    },
-    {
-      id: 2,
-      main: '멘토멘티',
-      sub: ['공부', '운동', '토익'],
-    },
-    {
-      id: 3,
-      main: '만남',
-      sub: ['친구', '밥약', '미팅'],
-    },
-    {
-      id: 4,
-      main: '장터',
-      sub: ['책', '중고', '자취방'],
-    },
-  ];
-
+const BoardSelect = () => {
   const [getBoard, setBoard] = useRecoilState(SelectBoardAtom);
   const { isOpenModal, handleModal } = useModal();
 
@@ -149,4 +147,4 @@ const DropDown = styled.div`
   cursor: auto;
 `;
 
-export default CustomSelect;
+export default BoardSelect;

@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { SelectBoardAtom } from '@/recoil/atoms/UserPostsAtom';
-import CustomSelect from '@/components/molecules/post-board/CustomSelect';
+import CustomSelect from '@/components/molecules/post-board/BoardSelect';
 import BOARDS from '@/apis/boards';
 import { useRouter } from 'next/router';
 import PreviewImg from './PreviewImg';
