@@ -1,11 +1,12 @@
-import { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import * as S from './styled';
 import CustomSelect from '@/components/common/CustomSelect';
 import useModal from '@/hooks/useModal';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { json } from 'stream/consumers';
-import { searchBoardAtom, searchStateAtom } from '@/recoil/atoms/SearchAtom';
+import { searchBoardAtom } from '@/recoil/atoms/SearchAtom';
+import { escape } from 'querystring';
 
 export interface searchType {
   searchQuery: string;
@@ -20,7 +21,6 @@ const SearchBox = () => {
     part: 'head',
   });
   const router = useRouter();
-  const [searchSate, setSearchState] = useRecoilState(searchStateAtom);
   /** 선택 시 */
   const handleOnChangeSelectValue = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
@@ -79,7 +79,6 @@ const SearchBox = () => {
         },
       });
     }
-    setSearchState(true);
     setSearch((prev) => {
       return {
         ...prev,

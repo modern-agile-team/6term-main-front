@@ -11,21 +11,17 @@ const SEARCH = {
     limit: number,
     category: string,
   ): Promise<any> {
-    try {
-      const result: AxiosResponse = await instance.get(
-        `${SEARCH.path}/boards/${category}/${part}`,
-        {
-          params: {
-            searchQuery: search,
-            page: page,
-            limit: limit,
-          },
+    const result: AxiosResponse = await instance.get(
+      `${SEARCH.path}/boards/${category}/${part}`,
+      {
+        params: {
+          searchQuery: search,
+          page: page,
+          limit: limit,
         },
-      );
-      return result.data;
-    } catch (err: any) {
-      if (err.response.status === 404) alert('검색 중 오류 발생!');
-    }
+      },
+    );
+    return result.data;
   },
 };
 

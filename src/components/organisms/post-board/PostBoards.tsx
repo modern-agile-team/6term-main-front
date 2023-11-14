@@ -39,7 +39,7 @@ const PostBoards = (props: Board): JSX.Element => {
     }
   };
 
-  //첫 페이지 로드 함수
+  //페이지 수 로드 함수
   const getPost = useCallback(async () => {
     const totalPage = await BOARDS.getlistAll(1, 1);
     const tempPage = Math.ceil(totalPage.total / 16);
