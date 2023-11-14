@@ -18,21 +18,22 @@ export interface ResponseFriend {
 }
 
 const RESPONSE = {
-  path: '/friend',
+  path: '/friends',
   // 내가 요청 받은 친구 목록 api(get)
   async responsedList(): Promise<any> {
     const result: AxiosResponse<any> = await instance.get(
       `${RESPONSE.path}/responses/pending`,
     );
+    console.log(result);
     return result.data;
   },
 
   // 친구 요청 수락 api(patch)
-  async friendAccept(friendId: number): Promise<any> {
+  async friendAccept(requesterId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.patch(
-      `${RESPONSE.path}/reponses/accept/${friendId}`,
+      `${RESPONSE.path}/reponses/accept/${requesterId}`,
       {
-        friendId: friendId,
+        requesterId: requesterId,
       },
     );
     return result;

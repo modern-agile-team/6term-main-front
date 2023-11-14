@@ -11,6 +11,7 @@ const ListRequested = () => {
     try {
       const response = await REQUEST.requestedList();
       setRequestedFriends(response);
+      console.log(response);
     } catch (error) {
       console.error('요청 보낸 친구 목록을 가져오는 중 오류 발생:', error);
     }
@@ -18,7 +19,6 @@ const ListRequested = () => {
 
   useEffect(() => {
     friendRequest();
-    console.log(requestedFriends);
   }, []);
 
   return (
@@ -30,7 +30,7 @@ const ListRequested = () => {
             <>
               <img
                 src={data.respondent.userImage.imageUrl}
-                alt="User Image"
+                alt={`${data.respondent.name}의 프로필 이미지`}
                 style={{ width: '30px', height: '30px', borderRadius: '50%' }}
               />
               <div>{data.respondent.name}</div>

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+//확실히 slack을 따온거라 불편함도 있고, CollapseButton 코드 자체가
+//에러도 많이 뿜는 상태. 좀더 간결하고 효율적으로 리팩토링할 필요가 있음.
 export const CollapseButton = styled.div<{ collapse: boolean }>`
   background: transparent;
   font-size: 12px;
