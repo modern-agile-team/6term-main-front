@@ -1,6 +1,6 @@
 import PostModifyTemplate from '@/components/templates/post-create-temp/PostModifyTemplate';
 
-const CreatePost = (): JSX.Element => {
+const CreatePost = () => {
   return (
     <>
       <PostModifyTemplate />
