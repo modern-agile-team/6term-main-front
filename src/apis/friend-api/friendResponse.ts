@@ -28,11 +28,13 @@ const RESPONSE = {
   },
 
   // 친구 요청 수락 api(patch)
-  async friendAccept(requesterId: number): Promise<any> {
+  async friendAccept(friendId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.patch(
-      `${RESPONSE.path}/reponses/accept/${requesterId}`,
+      `${RESPONSE.path}/responses/accept/${friendId}`,
       {
-        requesterId: requesterId,
+        params: {
+          friend_id: friendId,
+        },
       },
     );
     return result;
@@ -41,9 +43,11 @@ const RESPONSE = {
   // 친구 요청 거절 api(patch)
   async friendRefuse(friendId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.patch(
-      `${RESPONSE.path}/reponses/reject/${friendId}`,
+      `${RESPONSE.path}/responses/reject/${friendId}`,
       {
-        friendId: friendId,
+        params: {
+          friend_Id: friendId,
+        },
       },
     );
     return result;
@@ -52,9 +56,11 @@ const RESPONSE = {
   // 친구 요청 영구 거절 api(patch)
   async friendReject(friendId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.patch(
-      `${RESPONSE.path}/reponses/reject/permanent/${friendId}`,
+      `${RESPONSE.path}/responses/reject/permanent/${friendId}`,
       {
-        friendId: friendId,
+        params: {
+          friend_Id: friendId,
+        },
       },
     );
     return result;

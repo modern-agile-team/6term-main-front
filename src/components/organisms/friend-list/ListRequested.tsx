@@ -11,11 +11,11 @@ const ListRequested = () => {
     try {
       const response = await REQUEST.requestedList();
       setRequestedFriends(response);
-      console.log(response);
     } catch (error) {
       console.error('요청 보낸 친구 목록을 가져오는 중 오류 발생:', error);
     }
   };
+  // 보낸 요청 취소 추가 예정
 
   useEffect(() => {
     friendRequest();

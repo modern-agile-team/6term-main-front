@@ -31,16 +31,14 @@ const FriendResponse = () => {
 
   useEffect(() => {
     friendResponse();
-    // setAcceptFriend((prev) => {
-    //   return {
-    //     ...prev,
-    //     id: acceptFriend.requesterId,
-    //     name: acceptFriend.name,
-    //   };
-    // });
-    // console.log(acceptFriend.requesterId);
+    setAcceptFriend((prev) => {
+      return {
+        ...prev,
+        id: acceptFriend.requesterId,
+        name: acceptFriend.name,
+      };
+    });
   }, []);
-
   // 토큰 에러 핸들링 완료 후 작업
   // 요청 수락 핸들러 -> 요청 수락하면 요청 수락 버튼 삭제
   // -> 삭제 버튼 있는 자리에 '요청을 수락하였습니다.' -> 친구 목록으로 GO
@@ -61,36 +59,23 @@ const FriendResponse = () => {
   };
 
   //요청 거절 핸들러
-  // const handleRefuse = async () => {
-  //   const isConfirmed = window.confirm(
-  //     `${props.name}님의 친구 요청을 거절하시겠습니까?`,
-  //   );
-  //   if (isConfirmed) {
-  //     try {
-  //       await FRIENDS.friendRefuse(props.id);
-  //       console.log('친구 요청을 거절하셨습니다.');
-  //       setIsRefuse(true);
-  //     } catch (error) {
-  //       console.error('친구 요청 거절 중 오류가 발생했습니다:', error);
-  //     }
-  //   }
-  // };
+  const handleRefuse = async () => {
+    const isConfirmed = window.confirm(
+      `${acceptFriend.name}님의 요청을 거절하시겠습니까?`,
+    );
+    if (isConfirmed) {
+      try {
+        await RESPONSE.friendRefuse(acceptFriend.requesterId);
+        setIsRefuse(true);
+        alert(`${acceptFriend.name}님의 요청을 거절하였습니다.`);
+        router.reload();
+      } catch (error) {
+        console.error('친구 요청 거절 중 오류 발생');
+      }
+    }
+  };
 
   //영구 거절 핸들러
-  // const handleReject = async () => {
-  //   const isConfirmed = window.confirm(
-  //     `${props.name}님의 요청을 영구 거절하시겠습니까?`,
-  //   );
-  //   if (isConfirmed) {
-  //     try {
-  //       await FRIENDS.friendReject(props.id);
-  //       console.log('친구 요청을 영구 거절하셨습니다.');
-  //       setIsReject(true);
-  //     } catch (error) {
-  //       console.error('친구 요청 영구 거절 중 오류가 발생했습니다:', error);
-  //     }
-  //   }
-  // };
 
   return (
     <div>
@@ -106,7 +91,7 @@ const FriendResponse = () => {
               />
               <div>{data.requester.name}</div>
               <S.Button onClick={handleAccept}>수락</S.Button>
-              <S.Button>거절</S.Button>
+              <S.Button onClick={handleRefuse}>거절</S.Button>
               <S.Button>영구 거절</S.Button>
             </>
           ) : (

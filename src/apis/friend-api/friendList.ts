@@ -33,7 +33,9 @@ const FRIENDS = {
     const result: AxiosResponse<Friend[]> = await instance.post(
       `${FRIENDS.path}/requests/${friendId}`,
       {
-        friendId: friendId,
+        params: {
+          friend_id: friendId,
+        },
       },
     );
     return result;
@@ -51,7 +53,7 @@ const FRIENDS = {
       `${FRIENDS.path}/${friendId}`,
       {
         data: {
-          friendId: friendId,
+          friend_Id: friendId,
         },
       },
     );

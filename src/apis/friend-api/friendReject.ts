@@ -31,10 +31,10 @@ const REJECT = {
   // 친구 요청 영구 거절 취소 api(delete)
   async cancelPermanent(friendId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.delete(
-      `${REJECT.path}/reponses/reject/permanent/${friendId}`,
+      `${REJECT.path}/responses/reject/permanent/${friendId}`,
       {
         params: {
-          friendId: friendId,
+          friend_Id: friendId,
         },
       },
     );
