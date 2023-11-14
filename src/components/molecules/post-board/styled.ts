@@ -115,7 +115,7 @@ export const SearchForm = styled.form`
 `;
 /** 검색입력창*/
 export const SearchInput = styled.input`
-  width: 530px;
+  width: 500px;
   padding: 5px;
   margin-right: auto;
   border: none;
