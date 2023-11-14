@@ -4,6 +4,7 @@ import FRIENDS, { Friend } from '@/apis/friend-api/friendList';
 
 const FriendList = () => {
   const [friend, setFriend] = useState<Friend['data']>([]);
+
   const getFreindList = async () => {
     try {
       const response = await FRIENDS.friendList();
@@ -12,6 +13,7 @@ const FriendList = () => {
       console.error('친구 목록을 가져오는 중 오류 발생:', error);
     }
   };
+
   useEffect(() => {
     getFreindList();
   }, []);
@@ -32,6 +34,7 @@ const FriendList = () => {
   //     }
   //   }
   // };
+
   return (
     <div>
       <span>친구 목록</span>

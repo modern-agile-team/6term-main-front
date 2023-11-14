@@ -1,36 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './styled';
-import FRIENDS from '@/apis/friend-api/friendList';
+import REJECT, { RejectFriend } from '@/apis/friend-api/friendReject';
 
-interface UserRejected {
-  id: number;
-  name: string;
-}
+const ListRejected = () => {
+  const [rejectedFriends, setRejectedFriends] = useState<RejectFriend['data']>(
+    [],
+  );
 
-const UserRejected = (props: UserRejected) => {
-  const [isRejectCancel, setIsRejectCancel] = useState(false);
-  // 영구 거절 취소 핸들러
-  const handleCancelReject = async () => {
-    const isConfirmed = window.confirm(
-      `${props.name}님의 영구 거절을 취소하시겠습니까?`,
-    );
-    if (isConfirmed) {
-      try {
-        await FRIENDS.cancelPermanent(props.id);
-        console.log('영구 거절을 취소하셨습니다.');
-        setIsRejectCancel(true);
-      } catch (error) {
-        console.error('영구 거절 취소 중 오류가 발생했습니다:', error);
-      }
+  const friendReject = async () => {
+    try {
+      const response = await REJECT.rejectList();
+      setRejectedFriends(response);
+    } catch (error) {
+      console.error('영구 거절한 유저 목록을 가져오는 중 오류 발생:', error);
     }
   };
 
+  useEffect(() => {
+    friendReject();
+  }, []);
+
   return (
     <div>
-      <span>차단 목록</span>
-      <S.UserBox>박준혁</S.UserBox>
+      <span>영구 거절 목록</span>
+      {rejectedFriends.map((data, index) => (
+        <S.UserBox key={index}>
+          {data.requester ? (
+            <>
+              <img
+                src={data.requester.userImage.imageUrl}
+                alt={`${data.requester.name}의 프로필 이미지`}
+                style={{ width: '30px', height: '30px', borderRadius: '50%' }}
+              />
+              <div>{data.requester.name}</div>
+              <S.Button>영구 거절 취소</S.Button>
+            </>
+          ) : (
+            <div>영구 거절 목록이 없습니다!!</div>
+          )}
+        </S.UserBox>
+      ))}
     </div>
   );
 };
-
-export default UserRejected;

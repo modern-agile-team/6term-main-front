@@ -24,7 +24,6 @@ const RESPONSE = {
     const result: AxiosResponse<any> = await instance.get(
       `${RESPONSE.path}/responses/pending`,
     );
-    console.log(result);
     return result.data;
   },
 

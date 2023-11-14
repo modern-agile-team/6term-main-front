@@ -45,27 +45,6 @@ const FRIENDS = {
     return result.data;
   },
 
-  // 차단 목록(영구 거절) api(get)
-  async rejectList(): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.get(
-      `${FRIENDS.path}/responses/reject/permanent`,
-    );
-    return result;
-  },
-
-  // 친구 요청 영구 거절 취소 api(delete)
-  async cancelPermanent(friendId: number): Promise<AxiosResponse<Friend[]>> {
-    const result: AxiosResponse<Friend[]> = await instance.delete(
-      `${FRIENDS.path}/reponses/reject/permanent/${friendId}`,
-      {
-        data: {
-          friendId: friendId,
-        },
-      },
-    );
-    return result;
-  },
-
   // 친구 삭제 api(delete)
   async deleteFriend(friendId: number): Promise<AxiosResponse<Friend[]>> {
     const result: AxiosResponse<Friend[]> = await instance.delete(
