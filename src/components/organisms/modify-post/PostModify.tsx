@@ -63,7 +63,7 @@ const PostModify = () => {
   const [getBoard, setBoard] = useRecoilState(SelectBoardAtom); //boardSelect
   const router = useRouter();
   const { data } = router.query;
-  const unitInfo = JSON.parse(data as string);
+  const unitInfo = data ? JSON.parse(data as string) : '';
   const resetSelect = useResetRecoilState(SelectBoardAtom);
   const [files, setFiles] = useState<IFileTypes[]>([]);
   const [delImg, setDelImg] = useState<string[]>([]);
