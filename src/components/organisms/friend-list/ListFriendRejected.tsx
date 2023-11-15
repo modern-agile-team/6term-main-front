@@ -15,6 +15,7 @@ const ListRejected = () => {
     requesterId: 0,
     name: '',
   });
+  //영구 거절 목록
   const getListRejectPermannet = async () => {
     try {
       const response = await PermanentREJECT.getRejectPermanentFriendList();

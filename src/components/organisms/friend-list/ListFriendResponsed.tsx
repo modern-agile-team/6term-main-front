@@ -16,7 +16,7 @@ const ListResponsed = () => {
   const [isAccept, setIsAccept] = useState(false);
   const [isReject, setIsReject] = useState(false);
   const [isRejectPermanent, setIsRejectPermament] = useState(false);
-
+  //친구 요청 받은 목록
   const getListResponsed = async () => {
     try {
       const response = await FriendRESPONSE.getResponsedList();
@@ -26,7 +26,7 @@ const ListResponsed = () => {
         name: response[0]?.requester?.name || '',
       });
     } catch (error) {
-      console.error('요청 받은 친구 목록을 가져오는 중 오류 발생:', error);
+      console.error('친구 요청 받은 목록을 가져오는 중 오류 발생:', error);
     }
   };
 
