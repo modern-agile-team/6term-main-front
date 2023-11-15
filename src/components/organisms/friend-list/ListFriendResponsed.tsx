@@ -15,7 +15,7 @@ const ListResponsed = () => {
   });
   const [isAccept, setIsAccept] = useState(false);
   const [isReject, setIsReject] = useState(false);
-  const [isRejectPermanent, setIsRejectPermament] = useState(false);
+  const [isRejectPermanent, setIsRejectPermanent] = useState(false);
   //친구 요청 받은 목록
   const getListResponsed = async () => {
     try {
@@ -83,7 +83,7 @@ const ListResponsed = () => {
     if (isConfirmed) {
       try {
         await FriendRESPONSE.friendRejectPermanent(friendInfo.requesterId);
-        setIsRejectPermament(true);
+        setIsRejectPermanent(true);
         alert(`${friendInfo.name}님의 요청을 영구 거절하였습니다.`);
         router.reload();
       } catch (error) {

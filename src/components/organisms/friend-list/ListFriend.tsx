@@ -58,23 +58,25 @@ const ListFriend = () => {
   return (
     <div>
       <span>친구 목록</span>
-      {friend.map((data, index) => (
-        <S.UserBox key={index}>
-          {data.requester ? (
-            <>
-              <img
-                src={data.requester.userImage.imageUrl}
-                alt="User Image"
-                style={{ width: '30px', height: '30px', borderRadius: '50%' }}
-              />
-              <div>{data.requester.name}</div>
-              <S.Button onClick={handleDelete}>삭제</S.Button>
-            </>
-          ) : (
-            <div>친구 목록이 없습니다!!</div>
-          )}
-        </S.UserBox>
-      ))}
+      {friend.length > 0 ? (
+        friend.map((data, index) => (
+          <S.UserBox key={index}>
+            {data.requester ? (
+              <>
+                <img
+                  src={data.requester.userImage.imageUrl}
+                  alt="User Image"
+                  style={{ width: '30px', height: '30px', borderRadius: '50%' }}
+                />
+                <div>{data.requester.name}</div>
+                <S.Button onClick={handleDelete}>삭제</S.Button>
+              </>
+            ) : null}
+          </S.UserBox>
+        ))
+      ) : (
+        <div>친구 목록이 없습니다!!</div>
+      )}
     </div>
   );
 };

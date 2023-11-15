@@ -34,7 +34,7 @@ const FriendRESPONSE = {
       `${FriendRESPONSE.path}/responses/accept/${friendId}`,
       {
         params: {
-          friend_id: friendId,
+          friendId: friendId,
         },
       },
     );
@@ -47,7 +47,7 @@ const FriendRESPONSE = {
       `${FriendRESPONSE.path}/responses/reject/${friendId}`,
       {
         params: {
-          friend_Id: friendId,
+          friendId: friendId,
         },
       },
     );
@@ -60,7 +60,7 @@ const FriendRESPONSE = {
       `${FriendRESPONSE.path}/responses/reject/permanent/${friendId}`,
       {
         params: {
-          friend_Id: friendId,
+          friendId: friendId,
         },
       },
     );

@@ -16,7 +16,7 @@ const ListRejected = () => {
     name: '',
   });
   //영구 거절 목록
-  const getListRejectPermannet = async () => {
+  const getListRejectPermanent = async () => {
     try {
       const response = await PermanentREJECT.getRejectPermanentFriendList();
       setRejectedFriends(response);
@@ -30,7 +30,7 @@ const ListRejected = () => {
   };
 
   useEffect(() => {
-    getListRejectPermannet();
+    getListRejectPermanent();
     setFriendInfo((prev) => {
       return {
         ...prev,

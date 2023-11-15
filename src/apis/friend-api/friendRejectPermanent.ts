@@ -36,7 +36,7 @@ const PermanentREJECT = {
       `${PermanentREJECT.path}/responses/reject/permanent/${friendId}`,
       {
         params: {
-          friend_Id: friendId,
+          friendId: friendId,
         },
       },
     );
