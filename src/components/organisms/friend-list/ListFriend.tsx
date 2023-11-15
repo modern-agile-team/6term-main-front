@@ -57,7 +57,7 @@ const ListFriend = () => {
 
   return (
     <div>
-      <span>친구 목록</span>
+      <S.ListTitle>친구 목록</S.ListTitle>
       {friend.length > 0 ? (
         friend.map((data, index) => (
           <S.UserBox key={index}>
@@ -75,7 +75,7 @@ const ListFriend = () => {
           </S.UserBox>
         ))
       ) : (
-        <div>친구 목록이 없습니다!!</div>
+        <S.IfNoData>친구 목록이 없습니다!!</S.IfNoData>
       )}
     </div>
   );

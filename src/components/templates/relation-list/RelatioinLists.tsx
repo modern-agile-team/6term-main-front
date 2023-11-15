@@ -10,8 +10,14 @@ const RelationLists = () => {
     <S.Container>
       <S.ListBox>
         <ListFriend />
+      </S.ListBox>
+      <S.ListBox>
         <ListResponsed />
+      </S.ListBox>
+      <S.ListBox>
         <ListRequested />
+      </S.ListBox>
+      <S.ListBox>
         <ListRejected />
       </S.ListBox>
     </S.Container>

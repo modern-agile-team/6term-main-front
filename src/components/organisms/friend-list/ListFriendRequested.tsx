@@ -24,7 +24,7 @@ const ListRequested = () => {
 
   return (
     <div>
-      <span>요청 보낸 목록</span>
+      <S.ListTitle>요청 보낸 목록</S.ListTitle>
       {requestedFriends.length > 0 ? (
         requestedFriends.map((data, index) => (
           <S.UserBox key={index}>
@@ -41,7 +41,7 @@ const ListRequested = () => {
           </S.UserBox>
         ))
       ) : (
-        <div>보낸 친구 요청이 없습니다!!</div>
+        <S.IfNoData>보낸 친구 요청이 없습니다!!</S.IfNoData>
       )}
     </div>
   );
