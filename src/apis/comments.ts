@@ -95,7 +95,7 @@ const COMMENTS = {
       },
       {
         params: {
-          commentId: id,
+          reCommentId: id,
         },
       },
     );

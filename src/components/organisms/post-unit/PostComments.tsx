@@ -39,6 +39,8 @@ const PostComments = (commentData: CommentInfo) => {
   const getCreateReComment =
     useRecoilValue<ReCommentCreateType>(ReCommentLoadAtom);
 
+  console.log(commentData);
+
   //댓글 삭제 핸들러
   const handleDelComment = async () => {
     handleModal();
@@ -71,10 +73,6 @@ const PostComments = (commentData: CommentInfo) => {
       setReCommentList((prev) => [...prev, getCreateReComment]);
     }
   }, [getCreateReComment]);
-
-  useEffect(() => {
-    console.log(getReCommnetList);
-  }, []);
 
   return (
     <S.CommentContainer>
