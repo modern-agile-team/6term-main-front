@@ -52,6 +52,7 @@ const PostCreateReComment = ({ commentId }: PropsCommentType) => {
         },
       };
     });
+    setModifyReComment('');
   };
 
   //본인 정보 받아오는 api 호출
@@ -77,6 +78,7 @@ const PostCreateReComment = ({ commentId }: PropsCommentType) => {
             type="text"
             placeholder="댓글을 입력해주세요"
             onChange={handleInputReComment}
+            value={modifyReComment}
           />
           <button onClick={handleCreateReComment}>등록</button>
         </S.FlexBox>

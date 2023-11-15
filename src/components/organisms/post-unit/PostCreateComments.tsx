@@ -18,12 +18,12 @@ interface BoardId {
 
 const PostCreateComment = (props: BoardId) => {
   const loginState = useRecoilValue(LoginStateAtom);
-  const [userInfo, setUSerInfo] = useState<UserType>({
+  const [userInfo, setUserInfo] = useState<UserType>({
     userId: 0,
     userName: '',
     userImage: '',
   });
-  const [getCreateInput, setCreateInput] = useState<string>('');
+  const [getCreateInput, setCreateInput] = useState('');
   const setCreateComment = useSetRecoilState(CommentLoadAtom);
   //생성값 불러오기
   const handleCreateCommentInput = (e: any) => {
@@ -64,7 +64,7 @@ const PostCreateComment = (props: BoardId) => {
   //본인 정보 받아오는 api 호출
   const getUserInfo = async () => {
     const response = await USERS.getUserProfile();
-    setUSerInfo((prev) => {
+    setUserInfo((prev) => {
       return {
         ...prev,
         userId: response.userId,
@@ -92,7 +92,9 @@ const PostCreateComment = (props: BoardId) => {
         <S.FlexBox>
           <S.CommentInputBox
             placeholder="댓글을 작성해 보세요."
-            onChange={handleCreateCommentInput}></S.CommentInputBox>
+            onChange={handleCreateCommentInput}
+            value={getCreateInput}
+          />
           <S.CreateCommentButton onClick={handleUploadComment}>
             등록
           </S.CreateCommentButton>

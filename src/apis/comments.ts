@@ -28,7 +28,6 @@ const COMMENTS = {
           boardId: id,
         },
       });
-      console.log(result.data);
       return result.data;
     } catch (err) {
       console.log(err);
@@ -84,6 +83,22 @@ const COMMENTS = {
         reCommentId: id,
       },
     });
+    return result;
+  },
+
+  //reComment 수정 api [patch요청]
+  async reCommetModifyApi(id: number, modify: string): Promise<any> {
+    const result: AxiosResponse = await instance.patch(
+      `${COMMENTS.path}/Re`,
+      {
+        content: modify,
+      },
+      {
+        params: {
+          commentId: id,
+        },
+      },
+    );
     return result;
   },
 };

@@ -33,9 +33,7 @@ const PostComments = (commentData: CommentInfo) => {
   const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
   const [modifyComment, setModifyComment] = useState(commentData.content);
   const [isModifyState, setIsModifyState] = useState(false);
-  const [getReCommentList, setReCommentList] =
-    useState<ReCommentCreateType[]>();
-  const [getReCommnetAdd, setReCommentAdd] = useState<ReCommentCreateType[]>(
+  const [getReCommnetList, setReCommentList] = useState<ReCommentCreateType[]>(
     commentData.reComment,
   );
   const getCreateReComment =
@@ -67,12 +65,16 @@ const PostComments = (commentData: CommentInfo) => {
     await COMMENTS.commetModifyApi(commentData.id, modifyComment);
   };
 
-  //댓글 추가시 새로고침하지 않고, 값 추가
+  //대댓글 추가시 새로고침하지 않고, 값 추가
   useEffect(() => {
     if (getCreateReComment.content.length !== 0) {
-      setReCommentAdd((prev) => [...prev, getCreateReComment]);
+      setReCommentList((prev) => [...prev, getCreateReComment]);
     }
   }, [getCreateReComment]);
+
+  useEffect(() => {
+    console.log(getReCommnetList);
+  }, []);
 
   return (
     <S.CommentContainer>
@@ -110,7 +112,7 @@ const PostComments = (commentData: CommentInfo) => {
             </div>
           )}
         </S.FlexBox>
-        {getReCommnetAdd.map((data, idx) => {
+        {getReCommnetList.map((data, idx) => {
           return (
             <div key={idx}>
               <PostReComment reComment={data} />
