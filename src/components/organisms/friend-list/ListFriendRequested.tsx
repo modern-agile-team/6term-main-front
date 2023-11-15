@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
 import REQUEST, { RequestFriend } from '@/apis/friend-api/friendRequest';
+import FriendREQUEST from '@/apis/friend-api/friendRequest';
 
-const RequestedList = () => {
+const ListRequested = () => {
   const [requestedFriends, setRequestedFriends] = useState<
     RequestFriend['data']
   >([]);
 
-  const friendRequest = async () => {
+  const getListRequested = async () => {
     try {
-      const response = await REQUEST.requestedList();
+      const response = await FriendREQUEST.getRequestedList();
       setRequestedFriends(response);
     } catch (error) {
       console.error('요청 보낸 친구 목록을 가져오는 중 오류 발생:', error);
@@ -18,7 +19,7 @@ const RequestedList = () => {
   // 보낸 요청 취소 추가 예정
 
   useEffect(() => {
-    friendRequest();
+    getListRequested();
   }, []);
 
   return (
@@ -44,4 +45,4 @@ const RequestedList = () => {
   );
 };
 
-export default RequestedList;
+export default ListRequested;

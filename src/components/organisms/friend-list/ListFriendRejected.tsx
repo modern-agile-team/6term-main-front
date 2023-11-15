@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
-import REJECT, { RejectFriend } from '@/apis/friend-api/friendReject';
 
-const RejectedList = () => {
-  const [rejectedFriends, setRejectedFriends] = useState<RejectFriend['data']>(
-    [],
-  );
+import PermanentREJECT, {
+  RejectPermanentFriend,
+} from '@/apis/friend-api/friendRejectPermanent';
 
-  const friendReject = async () => {
+const ListRejected = () => {
+  const [rejectedFriends, setRejectedFriends] = useState<
+    RejectPermanentFriend['data']
+  >([]);
+
+  const getListReject = async () => {
     try {
-      const response = await REJECT.rejectList();
+      const response = await PermanentREJECT.getRejectPermanentFriendList();
       setRejectedFriends(response);
     } catch (error) {
       console.error('영구 거절한 유저 목록을 가져오는 중 오류 발생:', error);
@@ -17,8 +20,10 @@ const RejectedList = () => {
   };
 
   useEffect(() => {
-    friendReject();
+    getListReject();
   }, []);
+
+  //영구 거절 취소 핸들러
 
   return (
     <div>
@@ -44,4 +49,4 @@ const RejectedList = () => {
   );
 };
 
-export default RejectedList;
+export default ListRejected;
