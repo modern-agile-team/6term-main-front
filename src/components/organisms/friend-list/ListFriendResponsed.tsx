@@ -95,25 +95,27 @@ const ListResponsed = () => {
   return (
     <div>
       <span>요청 받은 목록</span>
-      {responsedFriends.map((data, index) => (
-        <S.UserBox key={index}>
-          {data.requester ? (
-            <>
-              <img
-                src={data.requester.userImage.imageUrl}
-                alt={`${data.requester.name}의 프로필 이미지`}
-                style={{ width: '30px', height: '30px', borderRadius: '50%' }}
-              />
-              <div>{data.requester.name}</div>
-              <S.Button onClick={handleAccept}>수락</S.Button>
-              <S.Button onClick={handleReject}>거절</S.Button>
-              <S.Button onClick={handleRejectPermanet}>영구 거절</S.Button>
-            </>
-          ) : (
-            <div>요청 받은 목록이 없습니다!!</div>
-          )}
-        </S.UserBox>
-      ))}
+      {responsedFriends.length > 0 ? (
+        responsedFriends.map((data, index) => (
+          <S.UserBox key={index}>
+            {data.requester ? (
+              <>
+                <img
+                  src={data.requester.userImage.imageUrl}
+                  alt={`${data.requester.name}의 프로필 이미지`}
+                  style={{ width: '30px', height: '30px', borderRadius: '50%' }}
+                />
+                <div>{data.requester.name}</div>
+                <S.Button onClick={handleAccept}>수락</S.Button>
+                <S.Button onClick={handleReject}>거절</S.Button>
+                <S.Button onClick={handleRejectPermanet}>영구 거절</S.Button>
+              </>
+            ) : null}
+          </S.UserBox>
+        ))
+      ) : (
+        <div>받은 친구 요청이 없습니다!!</div>
+      )}
     </div>
   );
 };

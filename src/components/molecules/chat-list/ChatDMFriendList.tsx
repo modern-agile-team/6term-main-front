@@ -7,7 +7,7 @@ import { BiSolidDownArrow } from 'react-icons/bi';
 
 interface DMFriendListProps {}
 
-const DMFriendList: FC<DMFriendListProps> = () => {
+const DMFriendList = ({}: DMFriendListProps) => {
   const [friendListCollapse, setFriendListCollapse] = useState(false);
   const friendsData = useRecoilValue(FriendsAtom);
   const router = useRouter();

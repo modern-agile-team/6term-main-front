@@ -25,22 +25,24 @@ const ListRequested = () => {
   return (
     <div>
       <span>요청 보낸 목록</span>
-      {requestedFriends.map((data, index) => (
-        <S.UserBox key={index}>
-          {data.respondent ? (
-            <>
-              <img
-                src={data.respondent.userImage.imageUrl}
-                alt={`${data.respondent.name}의 프로필 이미지`}
-                style={{ width: '30px', height: '30px', borderRadius: '50%' }}
-              />
-              <div>{data.respondent.name}</div>
-            </>
-          ) : (
-            <div>요청 보낸 목록이 없습니다!!</div>
-          )}
-        </S.UserBox>
-      ))}
+      {requestedFriends.length > 0 ? (
+        requestedFriends.map((data, index) => (
+          <S.UserBox key={index}>
+            {data.respondent ? (
+              <>
+                <img
+                  src={data.respondent.userImage.imageUrl}
+                  alt={`${data.respondent.name}'s profile`}
+                  style={{ width: '30px', height: '30px', borderRadius: '50%' }}
+                />
+                <div>{data.respondent.name}</div>
+              </>
+            ) : null}
+          </S.UserBox>
+        ))
+      ) : (
+        <div>보낸 친구 요청이 없습니다!!</div>
+      )}
     </div>
   );
 };

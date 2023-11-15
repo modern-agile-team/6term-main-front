@@ -6,7 +6,7 @@ import { DMDummyAtom } from '@/recoil/atoms/DMUserAtom';
 
 interface DMListProps {}
 
-const DMList: FC<DMListProps> = () => {
+const DMList = ({}: DMListProps) => {
   const [DMListCollapse, setDMListCollapse] = useState(false);
   const DMUserData = useRecoilValue(DMDummyAtom);
   const [onlineList, setOnlineList] = useState<number[]>([]);
