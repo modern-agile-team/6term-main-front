@@ -11,6 +11,9 @@ const AUTHS = {
           params: {
             code: code,
           },
+          headers: {
+            withCredentials: true,
+          },
         },
       );
       return result.data;
