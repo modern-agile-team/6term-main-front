@@ -9,17 +9,14 @@ import { useEffect, useState } from 'react';
 import BOARDS from '@/apis/boards';
 import { UnitPostSelector } from '@/recoil/selectors/UserPostSelector';
 import Link from 'next/link';
-import { commentDummy } from '@/apis/dummy';
 import { CommentDeleteAtom, CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 import useRecoilCacheRefresh from '@/hooks/useRecoilCaheRefresh';
 import COMMENTS from '@/apis/comments';
-import { getUnit } from '@mui/material/styles/cssUtils';
 
 export type UserType = {
   name: string;
   userImage: {
     id: number;
-    userId: number;
     imageUrl: string;
   };
 };
@@ -27,7 +24,8 @@ export interface CommentInfo {
   id: number;
   content: string;
   commentowner: boolean;
-  userId: UserType;
+  user: UserType;
+  reComment: [];
 }
 interface BoardType {
   boardId: number;

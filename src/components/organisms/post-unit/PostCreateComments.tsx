@@ -1,9 +1,10 @@
 import USERS from '@/apis/user';
 import * as S from './styled';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 import COMMENTS from '@/apis/comments';
+import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 
 interface UserType {
   userId: number;
@@ -16,14 +17,14 @@ interface BoardId {
 }
 
 const PostCreateComment = (props: BoardId) => {
+  const loginState = useRecoilValue(LoginStateAtom);
   const [userInfo, setUSerInfo] = useState<UserType>({
     userId: 0,
     userName: '',
     userImage: '',
   });
-  const [userState, setUserState] = useState<boolean>(false);
   const [getCreateInput, setCreateInput] = useState<string>('');
-  const [getCreateComment, setCreateComment] = useRecoilState(CommentLoadAtom);
+  const setCreateComment = useSetRecoilState(CommentLoadAtom);
   //생성값 불러오기
   const handleCreateCommentInput = (e: any) => {
     setCreateInput(e.target.value);
@@ -31,7 +32,7 @@ const PostCreateComment = (props: BoardId) => {
 
   //댓글 등록 핸들러
   const handleUploadComment = async () => {
-    if (localStorage.getItem('accessToken') !== undefined) {
+    if (loginState) {
       if (confirm('댓글을 등록하시겠습니까?')) {
         const response = await COMMENTS.createCommentApi(
           getCreateInput,
@@ -43,7 +44,7 @@ const PostCreateComment = (props: BoardId) => {
             ...prev,
             id: response.id,
             content: getCreateInput,
-            userId: {
+            user: {
               name: userInfo.userName,
               userImage: {
                 id: 0,
@@ -57,10 +58,8 @@ const PostCreateComment = (props: BoardId) => {
     } else {
       alert('로그인이 필요합니다.');
     }
+    setCreateInput('');
   };
-  useEffect(() => {
-    console.log(getCreateComment);
-  });
 
   //본인 정보 받아오는 api 호출
   const getUserInfo = async () => {
@@ -76,14 +75,13 @@ const PostCreateComment = (props: BoardId) => {
   };
   useEffect(() => {
     getUserInfo();
-    if (localStorage.getItem('accesToken') !== undefined) setUserState(true);
   }, []);
 
   return (
     <S.CommentContainer>
       <S.ComponentHeader>댓글 작성</S.ComponentHeader>
       <S.CreateCommentBox>
-        {userState ? (
+        {loginState ? (
           <S.FlexBox>
             <S.CommentUserImage img={userInfo.userImage} />
             <div>{userInfo.userName}</div>

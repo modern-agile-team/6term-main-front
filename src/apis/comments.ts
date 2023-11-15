@@ -45,7 +45,7 @@ const COMMENTS = {
     return result;
   },
 
-  //comment 삭제 api [delete요청]
+  //comment 수정 api [patch요청]
   async commetModifyApi(id: number, modify: string): Promise<any> {
     const result: AxiosResponse = await instance.patch(
       `${COMMENTS.path}`,
@@ -58,6 +58,32 @@ const COMMENTS = {
         },
       },
     );
+    return result;
+  },
+
+  //reComment 생성 api [post요청]
+  async createReCommentApi(id: number, recomment: string): Promise<any> {
+    const result: AxiosResponse = await instance.post(
+      `${COMMENTS.path}/Re`,
+      {
+        content: recomment,
+      },
+      {
+        params: {
+          commentId: id,
+        },
+      },
+    );
+    return result;
+  },
+
+  //reComment 삭제 api [delete요청]
+  async reCommetDelApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.delete(`${COMMENTS.path}/Re`, {
+      params: {
+        reCommentId: id,
+      },
+    });
     return result;
   },
 };

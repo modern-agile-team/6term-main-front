@@ -1,49 +1,45 @@
 import { useEffect, useState } from 'react';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import * as S from './styled';
-import UserIcon from '@/components/common/UserIcon';
-import { reCommentDummy } from '@/apis/dummy';
 import { CommentInfo } from '@/components/templates/post-unit-temp/PostUnitTemplate';
 import useModal from '@/hooks/useModal';
-import PostReComment from './PostReComment';
+import PostReComment, {
+  ReCommentInfo,
+} from '../../molecules/post-comment/PostReComment';
 import Modal from '@/components/molecules/post-board/Modal';
-import { CommentDeleteAtom, CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import {
+  CommentDeleteAtom,
+  ReCommentLoadAtom,
+} from '@/recoil/atoms/CommentAtom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import COMMENTS from '@/apis/comments';
+import PostCreateReComment from '@/components/molecules/post-comment/PostCreateReComment';
 
-export interface ReCommentInfo {
-  // reCommentId: number;
-  reComment: {
-    reComment: string;
-    reCommentOwner: boolean;
-    userId: {
-      name: string;
-      userImage: {
-        // id: number;
-        // userId: number;
-        imageUrl: string;
-      };
+export interface ReCommentCreateType {
+  id: number;
+  content: string;
+  reCommentowner: boolean;
+  user: {
+    name: string;
+    userImage: {
+      userId: number;
+      imageUrl: string;
     };
-  }[];
+  };
 }
 
 const PostComments = (commentData: CommentInfo) => {
   const { isOpenModal, handleModal } = useModal();
-  const [isCheckToken, setCheckToken] = useState(false);
-  const [getReComment, setReComment] = useState<ReCommentInfo['reComment']>([]);
   const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
   const [modifyComment, setModifyComment] = useState(commentData.content);
   const [isModifyState, setIsModifyState] = useState(false);
-
-  const checkToken = () => {
-    const token = window.localStorage.getItem('accessToken');
-    token !== undefined ? setCheckToken(true) : setCheckToken(false);
-  };
-
-  const reCommentApi = () => {
-    //commentId로 요청보내서 get받아오기
-    setReComment(reCommentDummy.reComment);
-  };
+  const [getReCommentList, setReCommentList] =
+    useState<ReCommentCreateType[]>();
+  const [getReCommnetAdd, setReCommentAdd] = useState<ReCommentCreateType[]>(
+    commentData.reComment,
+  );
+  const getCreateReComment =
+    useRecoilValue<ReCommentCreateType>(ReCommentLoadAtom);
 
   //댓글 삭제 핸들러
   const handleDelComment = async () => {
@@ -64,24 +60,26 @@ const PostComments = (commentData: CommentInfo) => {
     const event = e.target.value;
     setModifyComment(event);
   };
-  1;
 
+  //확인 버튼 핸들러
   const handleDone = async () => {
     setIsModifyState(false);
     await COMMENTS.commetModifyApi(commentData.id, modifyComment);
   };
 
+  //댓글 추가시 새로고침하지 않고, 값 추가
   useEffect(() => {
-    checkToken();
-    reCommentApi();
-  }, []);
+    if (getCreateReComment.content.length !== 0) {
+      setReCommentAdd((prev) => [...prev, getCreateReComment]);
+    }
+  }, [getCreateReComment]);
 
   return (
     <S.CommentContainer>
       <S.CreateCommentBox>
         <S.FlexBox>
-          <S.CommentUserImage img={commentData.userId.userImage.imageUrl} />
-          <S.ShowUserName size={20}>{commentData.userId.name}</S.ShowUserName>
+          <S.CommentUserImage img={commentData.user.userImage.imageUrl} />
+          <S.ShowUserName size={20}>{commentData.user.name}</S.ShowUserName>
         </S.FlexBox>
         <S.FlexBox>
           <S.CommentArea>
@@ -112,26 +110,18 @@ const PostComments = (commentData: CommentInfo) => {
             </div>
           )}
         </S.FlexBox>
+        {getReCommnetAdd.map((data, idx) => {
+          return (
+            <div key={idx}>
+              <PostReComment reComment={data} />
+            </div>
+          );
+        })}
         <S.DivisionLine />
-        {getReComment &&
-          getReComment.map((data, idx) => {
-            return (
-              <div key={idx}>
-                <PostReComment {...data} />
-              </div>
-            );
-          })}
         <S.FlexBox side="0px 0px 0px 18px">
           <BsArrowReturnRight />
           <S.ShowUserName>
-            {isCheckToken ? (
-              <S.FlexBox>
-                <input type="text" placeholder="댓글을 입력해주세요" />
-                <button>등록</button>
-              </S.FlexBox>
-            ) : (
-              <div>로그인이 필요합니다.</div>
-            )}
+            <PostCreateReComment commentId={commentData.id} />
           </S.ShowUserName>
         </S.FlexBox>
       </S.CreateCommentBox>

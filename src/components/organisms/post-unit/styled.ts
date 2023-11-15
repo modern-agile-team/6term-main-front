@@ -137,11 +137,6 @@ export const CommentArea = styled.div`
   font-weight: bold;
   padding: 15px 0px 15px 15px;
 `;
-
-export const Comment = styled.div`
-  width: 570px;
-  padding: 5px 0px 0px 15px;
-`;
 //**콤보박스 컨테이너 */
 export const ComboBox = styled.ul`
   position: relative;
