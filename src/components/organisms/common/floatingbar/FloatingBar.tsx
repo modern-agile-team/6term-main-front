@@ -34,9 +34,16 @@ const FloatingBar = () => {
   const router = useRouter();
 
   const handleGetMyId = async () => {
-    const response = await USERS.getUserProfile();
-    console.log(response);
-    setMyInfo(response.userId);
+    try {
+      const response = await USERS.getUserProfile();
+      console.log(response);
+      setMyInfo(response.userId);
+    } catch (error: any) {
+      // 에러가 403일 때는 에러를 출력하지 않도록 조건 추가
+      if (error.response && error.response.status !== 403) {
+        console.error(error);
+      }
+    }
   };
 
   useEffect(() => {
@@ -52,6 +59,7 @@ const FloatingBar = () => {
     window.addEventListener('resize', handleResize);
 
     handleGetMyId();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);

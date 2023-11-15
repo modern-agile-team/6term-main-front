@@ -1,31 +1,33 @@
 import instance from '../axiosInstance';
 import { AxiosResponse } from 'axios';
 
-export interface RequestFriend {
-  data: {
-    id: number;
-    requesterId: number;
-    respondentId: number;
-    status: string;
-    createdAt: string;
-    respondent: {
-      name: string;
-      userImage: {
-        imageUrl: string;
-      };
+interface RequestFriendData {
+  id: number;
+  requesterId: number;
+  respondentId: number;
+  status: string;
+  createdAt: string;
+  respondent: {
+    name: string;
+    userImage: {
+      imageUrl: string;
     };
-  }[];
+  };
 }
 
-const REQUEST = {
+export interface RequestFriend {
+  data: RequestFriendData[];
+}
+
+const FriendREQUEST = {
   path: '/friends',
   // 내가 요청 보낸 친구 목록 api(get)
-  async requestedList(): Promise<any> {
+  async getRequestedList(): Promise<any> {
     const result: AxiosResponse<any> = await instance.get(
-      `${REQUEST.path}/requests/pending`,
+      `${FriendREQUEST.path}/requests/pending`,
     );
     return result.data;
   },
 };
 
-export default REQUEST;
+export default FriendREQUEST;

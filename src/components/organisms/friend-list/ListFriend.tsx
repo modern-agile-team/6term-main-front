@@ -1,50 +1,74 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import * as S from './styled';
 import FRIENDS, { Friend } from '@/apis/friend-api/friendList';
 
-const FriendList = () => {
+const ListFriend = () => {
+  const router = useRouter();
   const [friend, setFriend] = useState<Friend['data']>([]);
-  const getFreindList = async () => {
+  const [isDelete, setIsDelete] = useState(false);
+  const [friendInfo, setFriendInfo] = useState({
+    requesterId: 0,
+    name: '',
+  });
+
+  const getListFriend = async () => {
     try {
-      const response = await FRIENDS.friendList();
+      const response = await FRIENDS.getFriendList();
       setFriend(response);
+      setFriendInfo({
+        requesterId: response[0]?.requesterId || 0,
+        name: response[0]?.requester?.name || '',
+      });
     } catch (error) {
       console.error('친구 목록을 가져오는 중 오류 발생:', error);
     }
   };
+
   useEffect(() => {
-    getFreindList();
+    getListFriend();
+    setFriendInfo((prev) => {
+      return {
+        ...prev,
+        id: friendInfo.requesterId,
+        name: friendInfo.name,
+      };
+    });
   }, []);
 
-  // const [isDelete, setIsDelete] = useState(false);
-  // // 친구 삭제 핸들러
-  // const handleDelete = async () => {
-  //   const isConfirmed = window.confirm(
-  //     `${props.name}님을 친구 목록에서 삭제하시겠습니까?`,
-  //   );
-  //   if (isConfirmed) {
-  //     try {
-  //       await FRIENDS.deleteFriend(props.id);
-  //       console.log('친구 요청을 수락하셨습니다.');
-  //       setIsDelete(true);
-  //     } catch (error) {
-  //       console.error('친구 삭제 중 오류가 발생했습니다.:', error);
-  //     }
-  //   }
-  // };
+  // 친구 삭제 핸들러
+  const handleDelete = async () => {
+    const isConfirmed = window.confirm(
+      `${friendInfo.name}님을 친구에서 삭제하시겠습니까?`,
+    );
+    if (isConfirmed) {
+      try {
+        await FRIENDS.deleteFriend(friendInfo.requesterId);
+        setIsDelete(true);
+        alert(`${friendInfo.name}님을 친구에서 삭제하였습니다.`);
+        router.reload();
+      } catch (error) {
+        console.error('친구 삭제 중 오류 발생');
+      }
+    }
+  };
+
+  // 친구 차단(or 유저 차단) 추가 예정
+
   return (
     <div>
       <span>친구 목록</span>
       {friend.map((data, index) => (
         <S.UserBox key={index}>
-          {data.respondent ? (
+          {data.requester ? (
             <>
               <img
-                src={data.respondent.userImage.imageUrl}
+                src={data.requester.userImage.imageUrl}
                 alt="User Image"
                 style={{ width: '30px', height: '30px', borderRadius: '50%' }}
               />
-              <div>{data.respondent.name}</div>
+              <div>{data.requester.name}</div>
+              <S.Button onClick={handleDelete}>삭제</S.Button>
             </>
           ) : (
             <div>친구 목록이 없습니다!!</div>
@@ -55,4 +79,4 @@ const FriendList = () => {
   );
 };
 
-export default FriendList;
+export default ListFriend;

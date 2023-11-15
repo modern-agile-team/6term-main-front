@@ -1,65 +1,71 @@
 import instance from '../axiosInstance';
 import { AxiosResponse } from 'axios';
 
-export interface ResponseFriend {
-  data: {
-    id: number;
-    requesterId: number;
-    respondentId: number;
-    status: string;
-    createdAt: string;
-    requester: {
-      name: string;
-      userImage: {
-        imageUrl: string;
-      };
+export interface ResponseFriendData {
+  id: number;
+  requesterId: number;
+  respondentId: number;
+  status: string;
+  createdAt: string;
+  requester: {
+    name: string;
+    userImage: {
+      imageUrl: string;
     };
-  }[];
+  };
+}
+export interface ResponseFriend {
+  data: ResponseFriendData[];
 }
 
-const RESPONSE = {
+const FriendRESPONSE = {
   path: '/friends',
   // 내가 요청 받은 친구 목록 api(get)
-  async responsedList(): Promise<any> {
+  async getResponsedList(): Promise<any> {
     const result: AxiosResponse<any> = await instance.get(
-      `${RESPONSE.path}/responses/pending`,
+      `${FriendRESPONSE.path}/responses/pending`,
     );
-    console.log(result);
     return result.data;
   },
 
   // 친구 요청 수락 api(patch)
-  async friendAccept(requesterId: number): Promise<any> {
+  async friendAccept(friendId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.patch(
-      `${RESPONSE.path}/reponses/accept/${requesterId}`,
+      `${FriendRESPONSE.path}/responses/accept/${friendId}`,
       {
-        requesterId: requesterId,
+        params: {
+          friend_id: friendId,
+        },
       },
     );
     return result;
   },
 
   // 친구 요청 거절 api(patch)
-  async friendRefuse(friendId: number): Promise<any> {
+  async friendReject(friendId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.patch(
-      `${RESPONSE.path}/reponses/reject/${friendId}`,
+      `${FriendRESPONSE.path}/responses/reject/${friendId}`,
       {
-        friendId: friendId,
+        params: {
+          friend_Id: friendId,
+        },
       },
     );
     return result;
   },
 
   // 친구 요청 영구 거절 api(patch)
-  async friendReject(friendId: number): Promise<any> {
+  async friendRejectPermanent(friendId: number): Promise<any> {
     const result: AxiosResponse<any> = await instance.patch(
-      `${RESPONSE.path}/reponses/reject/permanent/${friendId}`,
+      `${FriendRESPONSE.path}/responses/reject/permanent/${friendId}`,
       {
-        friendId: friendId,
+        params: {
+          friend_Id: friendId,
+        },
       },
     );
     return result;
   },
 };
 
-export default RESPONSE;
+export default FriendRESPONSE;
