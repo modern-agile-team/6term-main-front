@@ -15,11 +15,12 @@ const ListFriend = () => {
     try {
       const response = await FRIENDS.getFriendList();
       setFriend(response);
-      setFriendInfo({
-        requesterId: response[0]?.requesterId || 0,
-        name: response[0]?.requester?.name || '',
-        image: response[0]?.requester?.userImage?.imageUrl || '',
-      });
+      const updatedFriendInfo = response.map((item: any) => ({
+        requesterId: item.requesterId || 0,
+        name: item.requester?.name || '',
+        image: item.requester?.userImage?.imageUrl || '',
+      }));
+      setFriendInfo(updatedFriendInfo);
     } catch (error) {
       console.error('친구 목록을 가져오는 중 오류 발생:', error);
     }
@@ -30,15 +31,19 @@ const ListFriend = () => {
   }, []);
 
   // 친구 삭제 핸들러
-  const handleDelete = async () => {
+  const handleDelete = async (deletedId: number) => {
     const isConfirmed = window.confirm(
-      `${friendInfo?.name}님을 친구에서 삭제하시겠습니까?`,
+      `${friendInfo.find((friend) => friend.requesterId === deletedId)
+        ?.name}님을 친구에서 삭제하시겠습니까?`,
     );
     if (isConfirmed) {
       try {
-        await FRIENDS.deleteFriend(friendInfo?.requesterId ?? 0);
+        await FRIENDS.deleteFriend(deletedId);
         setIsDelete(true);
-        alert(`${friendInfo?.name}님을 친구에서 삭제하였습니다.`);
+        alert(
+          `${friendInfo.find((friend) => friend.requesterId === deletedId)
+            ?.name}님을 친구에서 삭제하였습니다.`,
+        );
         router.reload();
       } catch (error) {
         console.error('친구 삭제 중 오류 발생');
@@ -62,7 +67,9 @@ const ListFriend = () => {
                   style={{ width: '30px', height: '30px', borderRadius: '50%' }}
                 />
                 <div>{data.requester.name}</div>
-                <S.Button onClick={handleDelete}>삭제</S.Button>
+                <S.Button onClick={() => handleDelete(data.requesterId)}>
+                  삭제
+                </S.Button>
               </>
             ) : null}
           </S.UserBox>

@@ -1,15 +1,15 @@
 import React, { FC, useCallback, useState, useEffect, useRef } from 'react';
 import * as S from './styles';
-import { useRecoilValue } from 'recoil';
-import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
 import { useRouter } from 'next/router';
 import { BiSolidDownArrow } from 'react-icons/bi';
+import { useRecoilValue } from 'recoil';
+import { friendInfoState } from '@/recoil/atoms/FriendsAtom';
 
 interface DMFriendListProps {}
 
 const DMFriendList = ({}: DMFriendListProps) => {
   const [friendListCollapse, setFriendListCollapse] = useState(false);
-  const friendsData = useRecoilValue(FriendsAtom);
+  const friendsData = useRecoilValue(friendInfoState);
   const router = useRouter();
   const collapsibleRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +42,7 @@ const DMFriendList = ({}: DMFriendListProps) => {
         className={friendListCollapse ? 'collapsed' : ''}>
         {friendsData?.map((friend) => (
           <S.ListBox
-            key={friend.id}
+            key={friend.requesterId}
             className={friendListCollapse ? 'hidden' : ''}>
             {friendListCollapse ? '' : friend.name}
           </S.ListBox>

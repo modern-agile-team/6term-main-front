@@ -6,7 +6,7 @@ export interface FriendInfo {
   image: string;
 }
 
-export const friendInfoState = atom<FriendInfo | null>({
+export const friendInfoState = atom<FriendInfo[]>({
   key: 'friendInfoState',
-  default: null,
+  default: [],
 });
