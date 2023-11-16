@@ -5,7 +5,7 @@ import Modal from '@/components/molecules/post-board/Modal';
 import { useSetRecoilState } from 'recoil';
 import { ReCommentDeleteAtom } from '@/recoil/atoms/CommentAtom';
 import COMMENTS from '@/apis/comments';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export interface ReCommentInfo {
   // reCommentId: number;
@@ -27,8 +27,11 @@ export interface ReCommentInfo {
 const PostReComment = ({ reComment }: ReCommentInfo) => {
   const { isOpenModal, handleModal } = useModal();
   const setReCommentDelId = useSetRecoilState(ReCommentDeleteAtom);
-  const [isModifyState, setIsModifyState] = useState(false);
-  const [modifyReComment, setModifyReComment] = useState(reComment.content);
+  const [isModifyState, setModifyState] = useState(false);
+  const [modifedReCommentValue, setModifedReCommentValue] = useState(
+    reComment.content,
+  );
+  const focusOnInput = useRef<HTMLInputElement>(null);
 
   //대댓글 삭제 핸들러
   const handleDelReComment = async () => {
@@ -41,18 +44,28 @@ const PostReComment = ({ reComment }: ReCommentInfo) => {
 
   const handleModifyReComment = async () => {
     handleModal();
-    setIsModifyState(true);
+    setModifyState(true);
   };
 
-  const handleInputReComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //수정버튼 클릭 시 input에 focus
+  useEffect(() => {
+    if (focusOnInput.current !== null) {
+      focusOnInput.current.disabled = false; //input 비활성화 해제
+      focusOnInput.current.focus(); //input에 focus
+    }
+  }, [isModifyState]);
+
+  //수정내용받아오는 함수
+  const handleReCommentValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const event = e.target.value;
-    setModifyReComment(event);
+    setModifedReCommentValue(event);
   };
 
   //확인 버튼 핸들러
-  const handleDone = async () => {
-    setIsModifyState(false);
-    await COMMENTS.reCommetModifyApi(reComment.id, modifyReComment);
+  const handleDone = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setModifyState(false);
+    await COMMENTS.reCommetModifyApi(reComment.id, modifedReCommentValue);
   };
 
   return (
@@ -61,16 +74,17 @@ const PostReComment = ({ reComment }: ReCommentInfo) => {
       <S.CommentUserImage img={reComment.user.userImage.imageUrl} />
       <S.ShowUserName size={18}>{reComment.user.name}</S.ShowUserName>
       {isModifyState ? (
-        <div>
+        <form onSubmit={handleDone}>
           <input
             type="text"
-            onChange={handleInputReComment}
-            value={modifyReComment}
+            onChange={handleReCommentValue}
+            value={modifedReCommentValue}
+            ref={focusOnInput}
           />
-          <button onClick={handleDone}>확인</button>
-        </div>
+          <button type="submit">확인</button>
+        </form>
       ) : (
-        <S.Comment>{modifyReComment}</S.Comment>
+        <S.Comment>{modifedReCommentValue}</S.Comment>
       )}
       {reComment.reCommentowner && (
         <div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import * as S from './styled';
 import { CommentInfo } from '@/components/templates/post-unit-temp/PostUnitTemplate';
@@ -38,8 +38,7 @@ const PostComments = (commentData: CommentInfo) => {
   );
   const getCreateReComment =
     useRecoilValue<ReCommentCreateType>(ReCommentLoadAtom);
-
-  console.log(commentData);
+  const focusOnInput = useRef<HTMLInputElement>(null);
 
   //댓글 삭제 핸들러
   const handleDelComment = async () => {
@@ -61,8 +60,17 @@ const PostComments = (commentData: CommentInfo) => {
     setModifyComment(event);
   };
 
+  //수정버튼 클릭 시 input에 focus
+  useEffect(() => {
+    if (focusOnInput.current !== null) {
+      focusOnInput.current.disabled = false; //input 비활성화 해제
+      focusOnInput.current.focus(); //input에 focus
+    }
+  }, [isModifyState]);
+
   //확인 버튼 핸들러
-  const handleDone = async () => {
+  const handleDone = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsModifyState(false);
     await COMMENTS.commetModifyApi(commentData.id, modifyComment);
   };
@@ -83,18 +91,21 @@ const PostComments = (commentData: CommentInfo) => {
         </S.FlexBox>
         <S.FlexBox>
           <S.CommentArea>
-            {isModifyState ? (
-              <div>
-                <input
-                  type="text"
-                  onChange={handleInputComment}
-                  value={modifyComment}
-                />
-                <button onClick={handleDone}>확인</button>
-              </div>
-            ) : (
-              modifyComment
-            )}
+            <form onSubmit={handleDone}>
+              {isModifyState ? (
+                <div>
+                  <input
+                    type="text"
+                    onChange={handleInputComment}
+                    value={modifyComment}
+                    ref={focusOnInput}
+                  />
+                  <button type="submit">확인</button>
+                </div>
+              ) : (
+                modifyComment
+              )}
+            </form>
           </S.CommentArea>
           {commentData.commentowner && (
             <div>
