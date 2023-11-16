@@ -3,7 +3,6 @@ import { Axios, AxiosResponse, AxiosError } from 'axios';
 
 interface FriendData {
   id: number;
-  isMe: boolean;
   requesterId: number; //요청 보낸 자
   respondentId: number; // 요청 받은 자
   status: string; // 서로의 상태값(수락, 대기, 영구거절 등)
