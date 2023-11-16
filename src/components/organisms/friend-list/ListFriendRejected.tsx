@@ -15,7 +15,8 @@ const ListRejected = () => {
     requesterId: 0,
     name: '',
   });
-  const getListRejectPermannet = async () => {
+  //영구 거절 목록
+  const getListRejectPermanent = async () => {
     try {
       const response = await PermanentREJECT.getRejectPermanentFriendList();
       setRejectedFriends(response);
@@ -29,7 +30,7 @@ const ListRejected = () => {
   };
 
   useEffect(() => {
-    getListRejectPermannet();
+    getListRejectPermanent();
     setFriendInfo((prev) => {
       return {
         ...prev,
@@ -60,7 +61,7 @@ const ListRejected = () => {
 
   return (
     <div>
-      <span>영구 거절 목록</span>
+      <S.ListTitle>영구 거절 목록</S.ListTitle>
       {rejectedFriends.length > 0 ? (
         rejectedFriends.map((data, index) => (
           <S.UserBox key={index}>
@@ -80,7 +81,7 @@ const ListRejected = () => {
           </S.UserBox>
         ))
       ) : (
-        <div>영구 거절한 요청이 없습니다!!</div>
+        <S.IfNoData>영구 거절한 요청이 없습니다!!</S.IfNoData>
       )}
     </div>
   );

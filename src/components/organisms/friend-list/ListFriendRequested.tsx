@@ -7,13 +7,13 @@ const ListRequested = () => {
   const [requestedFriends, setRequestedFriends] = useState<
     RequestFriend['data']
   >([]);
-
+  //친구 요청 보낸 목록
   const getListRequested = async () => {
     try {
       const response = await FriendREQUEST.getRequestedList();
       setRequestedFriends(response);
     } catch (error) {
-      console.error('요청 보낸 친구 목록을 가져오는 중 오류 발생:', error);
+      console.error('친구 요청 보낸 목록을 가져오는 중 오류 발생:', error);
     }
   };
   // 보낸 요청 취소 추가 예정
@@ -24,7 +24,7 @@ const ListRequested = () => {
 
   return (
     <div>
-      <span>요청 보낸 목록</span>
+      <S.ListTitle>요청 보낸 목록</S.ListTitle>
       {requestedFriends.length > 0 ? (
         requestedFriends.map((data, index) => (
           <S.UserBox key={index}>
@@ -41,7 +41,7 @@ const ListRequested = () => {
           </S.UserBox>
         ))
       ) : (
-        <div>보낸 친구 요청이 없습니다!!</div>
+        <S.IfNoData>보낸 친구 요청이 없습니다!!</S.IfNoData>
       )}
     </div>
   );

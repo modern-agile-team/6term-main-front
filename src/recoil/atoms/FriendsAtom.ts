@@ -1,13 +1,12 @@
 import { atom } from 'recoil';
-import { FriendsDummy } from '@/apis/chat-dummy/friendsDummy';
 
-export type FriendsType = {
-  id: number;
+export interface FriendInfo {
+  requesterId: number;
   name: string;
-  roomId: number;
-};
+  image: string;
+}
 
-export const FriendsAtom = atom<FriendsType[]>({
-  key: 'friendList',
-  default: FriendsDummy,
+export const friendInfoState = atom<FriendInfo | null>({
+  key: 'friendInfoState',
+  default: null,
 });

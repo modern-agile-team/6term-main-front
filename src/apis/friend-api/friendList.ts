@@ -36,7 +36,7 @@ const FRIENDS = {
       `${FRIENDS.path}/requests/${friendId}`,
       {
         params: {
-          friend_id: friendId,
+          friendId: friendId,
         },
       },
     );
@@ -55,7 +55,7 @@ const FRIENDS = {
       `${FRIENDS.path}/${friendId}`,
       {
         params: {
-          friend_Id: friendId,
+          friendId: friendId,
         },
       },
     );
