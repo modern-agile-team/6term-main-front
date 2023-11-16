@@ -3,24 +3,27 @@ import { useRouter } from 'next/router';
 import * as S from './styled';
 import FRIENDS, { Friend } from '@/apis/friend-api/friendList';
 import { useRecoilState } from 'recoil';
-import { friendInfoState } from '@/recoil/atoms/FriendsAtom';
+import { FriendInfo, friendInfoState } from '@/recoil/atoms/FriendsAtom';
 
 const ListFriend = () => {
   const router = useRouter();
   const [friend, setFriend] = useState<Friend['data']>([]);
-  const [isDelete, setIsDelete] = useState(false);
   const [friendInfo, setFriendInfo] = useRecoilState(friendInfoState);
-  const loginUserId = router.query.id;
+  const loginUserId: number | undefined = router.query.id
+    ? Number(router.query.id)
+    : undefined;
 
   const getListFriend = async () => {
     try {
       const response = await FRIENDS.getFriendList();
       setFriend(response);
-      const updatedFriendInfo = response.map((item: any) => ({
-        requesterId: item.requesterId || 0,
-        name: item.requester?.name || '',
-        image: item.requester?.userImage?.imageUrl || '',
-        isMe: item.requesterId === loginUserId,
+      const updatedFriendInfo: FriendInfo[] = response.map((item: any) => ({
+        requesterId: item.requesterId,
+        requesterName: item.requester?.name || '',
+        requesterImage: item.requester?.userImage?.imageUrl || '',
+        respondentId: item.respondentId,
+        respondentName: item.respondent?.name || '',
+        respondentImage: item.respondent?.userImage?.imageUrl || '',
       }));
       setFriendInfo(updatedFriendInfo);
     } catch (error) {
@@ -32,46 +35,44 @@ const ListFriend = () => {
     getListFriend();
   }, []);
 
-  // 친구 삭제 핸들러
-  // 친구 삭제 핸들러
   const handleDelete = async (deletedId: number) => {
     const friendToDelete = friendInfo.find(
-      (friend) => friend.requesterId === deletedId,
+      (friend) =>
+        friend.respondentId === deletedId || friend.requesterId === deletedId,
     );
-    const isMeRequester = friendToDelete?.isMe || false;
 
     const isConfirmed = window.confirm(
       `${
-        isMeRequester
-          ? friendToDelete?.requesterName
-          : friendToDelete?.respondentName
+        friendToDelete?.respondentId === deletedId
+          ? friendToDelete?.respondentName
+          : friendToDelete?.requesterName
       }님을 친구에서 삭제하시겠습니까?`,
     );
+    console.log(deletedId);
 
     if (isConfirmed) {
       try {
-        const idToDelete = isMeRequester
-          ? friendToDelete?.respondentId
-          : friendToDelete?.requesterId;
+        const idToDelete =
+          friendToDelete?.respondentId === deletedId
+            ? friendToDelete?.respondentId
+            : friendToDelete?.requesterId;
+        console.log(idToDelete);
         if (idToDelete) {
           await FRIENDS.deleteFriend(idToDelete);
-          setIsDelete(true);
           alert(
             `${
-              isMeRequester
-                ? friendToDelete?.requesterName
-                : friendToDelete?.respondentName
+              friendToDelete?.respondentId === deletedId
+                ? friendToDelete?.respondentName
+                : friendToDelete?.requesterName
             }님을 친구 목록에서 삭제하였습니다.`,
           );
           router.reload();
         }
       } catch (error) {
-        console.error('Error occurred while deleting friend');
+        console.error('친구 삭제 중 오류가 발생했습니다', error);
       }
     }
   };
-
-  // 친구 차단(or 유저 차단) 추가 예정
 
   return (
     <div>
@@ -79,7 +80,7 @@ const ListFriend = () => {
       {friend.length > 0 ? (
         friend.map((data, index) => (
           <S.UserBox key={index}>
-            {data.isMe ? (
+            {data.requesterId === loginUserId ? (
               // 만약 현재 사용자 자신이 요청자인 경우
               <>
                 <img
