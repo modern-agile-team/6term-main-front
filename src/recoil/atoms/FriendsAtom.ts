@@ -1,7 +1,6 @@
 import { atom } from 'recoil';
 
 export interface FriendInfo {
-  isMe: boolean;
   requesterId: number;
   requesterName: string;
   requesterImage: string;

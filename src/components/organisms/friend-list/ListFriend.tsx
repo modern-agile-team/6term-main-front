@@ -17,14 +17,31 @@ const ListFriend = () => {
     try {
       const response = await FRIENDS.getFriendList();
       setFriend(response);
-      const updatedFriendInfo: FriendInfo[] = response.map((item: any) => ({
-        requesterId: item.requesterId,
-        requesterName: item.requester?.name || '',
-        requesterImage: item.requester?.userImage?.imageUrl || '',
-        respondentId: item.respondentId,
-        respondentName: item.respondent?.name || '',
-        respondentImage: item.respondent?.userImage?.imageUrl || '',
-      }));
+      const updatedFriendInfo: FriendInfo[] = response.map((item: any) => {
+        const isCurrentUserRequester = loginUserId === item.requesterId;
+
+        return {
+          requesterId: isCurrentUserRequester
+            ? item.requesterId
+            : item.respondentId,
+          requesterName: isCurrentUserRequester
+            ? item.requester?.name || ''
+            : item.respondent?.name || '',
+          requesterImage: isCurrentUserRequester
+            ? item.requester?.userImage?.imageUrl || ''
+            : item.respondent?.userImage?.imageUrl || '',
+          respondentId: isCurrentUserRequester
+            ? item.respondentId
+            : item.requesterId,
+          respondentName: isCurrentUserRequester
+            ? item.respondent?.name || ''
+            : item.requester?.name || '',
+          respondentImage: isCurrentUserRequester
+            ? item.respondent?.userImage?.imageUrl || ''
+            : item.requester?.userImage?.imageUrl || '',
+        };
+      });
+
       setFriendInfo(updatedFriendInfo);
     } catch (error) {
       console.error('친구 목록을 가져오는 중 오류 발생:', error);
