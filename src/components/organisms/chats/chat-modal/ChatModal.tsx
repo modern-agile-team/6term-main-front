@@ -76,27 +76,4 @@ const ChatModal = (props: ModalType) => {
   );
 };
 
-// 일단 fetcher로, axois는 본격적으로 API 호출 할 때 리팩토링
-// const fetchUpdatedFriendsList = async () => {
-//   try {
-//     // 아직 api URL은 모른다 일단 설정
-//     const response = await fetch('/api/friends');
-//     const updatedFriends = await response.json();
-//     return updatedFriends;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
-// const fetchUpdatedDMUserList = async () => {
-//   try {
-//     // 아직 api URL은 모른다 일단 설정
-//     const response = await fetch('/api/friends');
-//     const updatedDMUser = await response.json();
-//     return updatedDMUser;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
 export default ChatModal;
