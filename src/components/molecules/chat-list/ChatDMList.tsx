@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { BiSolidDownArrow } from 'react-icons/bi';
 import * as S from './styles';
 import { useRecoilValue } from 'recoil';

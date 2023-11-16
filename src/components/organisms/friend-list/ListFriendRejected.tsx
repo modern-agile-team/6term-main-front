@@ -43,7 +43,7 @@ const ListRejected = () => {
   //영구 거절 취소 핸들러
   const handleCancelRejectPermanent = async () => {
     const isConfirmed = window.confirm(
-      `${friendInfo.name}님에 대한 영구 거절을 취소하겠습니까?`,
+      `${friendInfo.name}님에 대한 영구 거절을 취소하시겠습니까?`,
     );
     if (isConfirmed) {
       try {

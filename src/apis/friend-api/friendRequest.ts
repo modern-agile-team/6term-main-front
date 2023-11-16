@@ -28,6 +28,19 @@ const FriendREQUEST = {
     );
     return result.data;
   },
+
+  // 요청 취소 api(delete)
+  async cancelRequestFriend(friendId: number): Promise<any> {
+    const result: AxiosResponse<any> = await instance.delete(
+      `${FriendREQUEST.path}/requests/cancel/${friendId}`,
+      {
+        params: {
+          friendId: friendId,
+        },
+      },
+    );
+    return result;
+  },
 };
 
 export default FriendREQUEST;
