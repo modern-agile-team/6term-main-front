@@ -36,7 +36,7 @@ const PostReComment = ({ reComment }: ReCommentInfo) => {
   //대댓글 삭제 핸들러
   const handleDelReComment = async () => {
     handleModal();
-    if (confirm('댓글을 삭제하시겠습니까?')) {
+    if (confirm('대댓글을 삭제하시겠습니까?')) {
       await COMMENTS.reCommetDelApi(reComment.id);
       setReCommentDelId(reComment.id);
     }

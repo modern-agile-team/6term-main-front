@@ -9,9 +9,10 @@ import PostReComment, {
 import Modal from '@/components/molecules/post-board/Modal';
 import {
   CommentDeleteAtom,
+  ReCommentDeleteAtom,
   ReCommentLoadAtom,
 } from '@/recoil/atoms/CommentAtom';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import COMMENTS from '@/apis/comments';
 import PostCreateReComment from '@/components/molecules/post-comment/PostCreateReComment';
 
@@ -31,6 +32,7 @@ export interface ReCommentCreateType {
 const PostComments = (commentData: CommentInfo) => {
   const { isOpenModal, handleModal } = useModal();
   const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
+  const getReCommentDelId = useRecoilValue(ReCommentDeleteAtom);
   const [modifyComment, setModifyComment] = useState(commentData.content);
   const [isModifyState, setIsModifyState] = useState(false);
   const [getReCommnetList, setReCommentList] = useState<ReCommentCreateType[]>(
@@ -39,6 +41,9 @@ const PostComments = (commentData: CommentInfo) => {
   const getCreateReComment =
     useRecoilValue<ReCommentCreateType>(ReCommentLoadAtom);
   const focusOnInput = useRef<HTMLInputElement>(null);
+  const [tempDelArr, setTempDelArr] = useState<ReCommentCreateType[]>([]);
+
+  console.log(commentData);
 
   //댓글 삭제 핸들러
   const handleDelComment = async () => {
@@ -77,10 +82,29 @@ const PostComments = (commentData: CommentInfo) => {
 
   //대댓글 추가시 새로고침하지 않고, 값 추가
   useEffect(() => {
-    if (getCreateReComment.content.length !== 0) {
+    if (
+      getCreateReComment.content.length > 0 &&
+      commentData.id === getCreateReComment.id
+    ) {
       setReCommentList((prev) => [...prev, getCreateReComment]);
     }
   }, [getCreateReComment]);
+
+  //대댓글 삭제시 새로고침하지 않고, 값 삭제
+  useEffect(() => {
+    setTempDelArr([]);
+    getReCommnetList
+      .filter((prev) => {
+        return prev.id !== getReCommentDelId;
+      })
+      .map((data) => {
+        setTempDelArr((prev) => [...prev, data]);
+      });
+  }, [getReCommentDelId]);
+
+  useEffect(() => {
+    setReCommentList(tempDelArr);
+  }, [tempDelArr]);
 
   return (
     <S.CommentContainer>

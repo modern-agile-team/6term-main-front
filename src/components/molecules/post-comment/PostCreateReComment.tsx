@@ -19,7 +19,7 @@ interface UserType {
 
 const PostCreateReComment = ({ commentId }: PropsCommentType) => {
   const [modifyReComment, setModifyReComment] = useState('');
-  const [userInfo, setUSerInfo] = useState<UserType>({
+  const [userInfo, setUserInfo] = useState<UserType>({
     userId: 0,
     userName: '',
     userImage: '',
@@ -58,7 +58,7 @@ const PostCreateReComment = ({ commentId }: PropsCommentType) => {
   //본인 정보 받아오는 api 호출
   const getUserInfo = async () => {
     const response = await USERS.getUserProfile();
-    setUSerInfo((prev) => {
+    setUserInfo((prev) => {
       return {
         ...prev,
         userId: response.userId,
