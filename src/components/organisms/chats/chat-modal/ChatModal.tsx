@@ -3,8 +3,6 @@ import React, { useEffect } from 'react';
 import * as S from './styled';
 import ChatSpace from '../chat-space/ChatSpace';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { DMDummyAtom } from '@/recoil/atoms/DMUserAtom';
-import { FriendsAtom } from '@/recoil/atoms/FriendsAtom';
 import { useRouter } from 'next/router';
 import { Socket, io } from 'socket.io-client';
 
