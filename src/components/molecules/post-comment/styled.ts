@@ -57,3 +57,26 @@ export const Option = styled.div`
     background-color: #ddd;
   }
 `;
+
+export const CommentInput = styled.input`
+  outline: none;
+  border: none;
+  width: 250px;
+  margin: 0px 0px 10px 0px;
+`;
+
+export const CommentSubmitButton = styled.button`
+  cursor: pointer;
+  border: 1px solid #999;
+  background-color: #fff;
+  padding: 2px 2px 2px 2px;
+  border-radius: 15px;
+  margin: 0px 0px 10px 0px;
+  &:hover {
+    background-color: #999;
+  }
+`;
+
+export const ModalBeforeBox = styled.div`
+  cursor: pointer;
+`;

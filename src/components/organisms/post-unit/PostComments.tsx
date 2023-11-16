@@ -43,7 +43,7 @@ const PostComments = (commentData: CommentInfo) => {
   const focusOnInput = useRef<HTMLInputElement>(null);
   const [tempDelArr, setTempDelArr] = useState<ReCommentCreateType[]>([]);
 
-  console.log(commentData);
+  console.log(getReCommnetList);
 
   //댓글 삭제 핸들러
   const handleDelComment = async () => {

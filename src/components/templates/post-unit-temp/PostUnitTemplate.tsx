@@ -20,12 +20,13 @@ export type UserType = {
     imageUrl: string;
   };
 };
+
 export interface CommentInfo {
   id: number;
   content: string;
   commentowner: boolean;
   user: UserType;
-  reComment: [];
+  reComment: any[];
 }
 interface BoardType {
   boardId: number;

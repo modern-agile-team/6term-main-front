@@ -31,7 +31,8 @@ const PostCreateComment = (props: BoardId) => {
   };
 
   //댓글 등록 핸들러
-  const handleUploadComment = async () => {
+  const handleUploadComment = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (loginState) {
       if (confirm('댓글을 등록하시겠습니까?')) {
         const response = await COMMENTS.createCommentApi(
@@ -80,26 +81,26 @@ const PostCreateComment = (props: BoardId) => {
   return (
     <S.CommentContainer>
       <S.ComponentHeader>댓글 작성</S.ComponentHeader>
-      <S.CreateCommentBox>
-        {loginState ? (
+      <form onSubmit={handleUploadComment}>
+        <S.CreateCommentBox>
+          {loginState ? (
+            <S.FlexBox>
+              <S.CommentUserImage img={userInfo.userImage} />
+              <div>{userInfo.userName}</div>
+            </S.FlexBox>
+          ) : (
+            <div>로그인이 필요합니다.</div>
+          )}
           <S.FlexBox>
-            <S.CommentUserImage img={userInfo.userImage} />
-            <div>{userInfo.userName}</div>
+            <S.CommentInputBox
+              placeholder="댓글을 작성해 보세요."
+              onChange={handleCreateCommentInput}
+              value={getCreateInput}
+            />
+            <S.CreateCommentButton type="submit">등록</S.CreateCommentButton>
           </S.FlexBox>
-        ) : (
-          <div>로그인이 필요합니다.</div>
-        )}
-        <S.FlexBox>
-          <S.CommentInputBox
-            placeholder="댓글을 작성해 보세요."
-            onChange={handleCreateCommentInput}
-            value={getCreateInput}
-          />
-          <S.CreateCommentButton onClick={handleUploadComment}>
-            등록
-          </S.CreateCommentButton>
-        </S.FlexBox>
-      </S.CreateCommentBox>
+        </S.CreateCommentBox>
+      </form>
     </S.CommentContainer>
   );
 };

@@ -100,11 +100,11 @@ export const CreateCommentBox = styled.div`
   border-radius: 5px;
 `;
 
-export const CommentInputBox = styled.textarea`
+export const CommentInputBox = styled.input`
   width: 715px;
   height: 80px;
-  padding-top: 10px;
   margin: 8px;
+  padding: 0px 0px 0px 10px;
   border: 1px solid rgb(9, 9, 9, 25%);
   outline: none;
   resize: none;

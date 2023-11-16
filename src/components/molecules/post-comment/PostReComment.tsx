@@ -75,13 +75,13 @@ const PostReComment = ({ reComment }: ReCommentInfo) => {
       <S.ShowUserName size={18}>{reComment.user.name}</S.ShowUserName>
       {isModifyState ? (
         <form onSubmit={handleDone}>
-          <input
+          <S.CommentInput
             type="text"
             onChange={handleReCommentValue}
             value={modifedReCommentValue}
             ref={focusOnInput}
           />
-          <button type="submit">확인</button>
+          <S.CommentSubmitButton type="submit">확인</S.CommentSubmitButton>
         </form>
       ) : (
         <S.Comment>{modifedReCommentValue}</S.Comment>
@@ -96,7 +96,7 @@ const PostReComment = ({ reComment }: ReCommentInfo) => {
               </div>
             </Modal>
           )}
-          <div onClick={handleModal}>...</div>
+          <S.ModalBeforeBox onClick={handleModal}>...</S.ModalBeforeBox>
         </div>
       )}
     </S.FlexBox>

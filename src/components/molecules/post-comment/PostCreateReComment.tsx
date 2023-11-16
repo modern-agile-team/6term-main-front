@@ -33,7 +33,8 @@ const PostCreateReComment = ({ commentId }: PropsCommentType) => {
     setModifyReComment(event);
   };
 
-  const handleCreateReComment = async () => {
+  const handleCreateReComment = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const response = await COMMENTS.createReCommentApi(
       commentId,
       modifyReComment,
@@ -73,15 +74,17 @@ const PostCreateReComment = ({ commentId }: PropsCommentType) => {
   return (
     <div>
       {loginState ? (
-        <S.FlexBox>
-          <input
-            type="text"
-            placeholder="댓글을 입력해주세요"
-            onChange={handleInputReComment}
-            value={modifyReComment}
-          />
-          <button onClick={handleCreateReComment}>등록</button>
-        </S.FlexBox>
+        <form onSubmit={handleCreateReComment}>
+          <S.FlexBox>
+            <S.CommentInput
+              type="text"
+              placeholder="댓글을 입력해주세요"
+              onChange={handleInputReComment}
+              value={modifyReComment}
+            />
+            <S.CommentSubmitButton type="submit">등록</S.CommentSubmitButton>
+          </S.FlexBox>
+        </form>
       ) : (
         <div>로그인이 필요합니다.</div>
       )}
