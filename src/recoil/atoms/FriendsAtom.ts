@@ -1,9 +1,13 @@
 import { atom } from 'recoil';
 
 export interface FriendInfo {
+  isMe: boolean;
   requesterId: number;
-  name: string;
-  image: string;
+  requesterName: string;
+  requesterImage: string;
+  respondentId: number;
+  respondentName: string;
+  respondentImage: string;
 }
 
 export const friendInfoState = atom<FriendInfo[]>({
