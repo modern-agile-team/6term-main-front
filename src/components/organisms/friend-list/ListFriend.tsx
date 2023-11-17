@@ -5,6 +5,22 @@ import FRIENDS, { Friend } from '@/apis/friend-api/friendList';
 import { useRecoilState } from 'recoil';
 import { FriendInfo, friendInfoState } from '@/recoil/atoms/FriendsAtom';
 
+interface UserType {
+  requester: 'requester' | 'respondent';
+  respondent: 'requester' | 'respondent';
+}
+
+const getUserType = (
+  loginUserId: number | undefined,
+  requesterId: number,
+): UserType => {
+  const isCurrentUserRequester = loginUserId === requesterId;
+  return {
+    requester: isCurrentUserRequester ? 'requester' : 'respondent',
+    respondent: isCurrentUserRequester ? 'respondent' : 'requester',
+  };
+};
+
 const ListFriend = () => {
   const router = useRouter();
   const [friend, setFriend] = useState<Friend['data']>([]);
@@ -17,36 +33,38 @@ const ListFriend = () => {
     try {
       const response = await FRIENDS.getFriendList();
       setFriend(response);
-      const updatedFriendInfo: FriendInfo[] = response.map((item: any) => {
-        const isCurrentUserRequester = loginUserId === item.requesterId;
 
-        return {
-          requesterId: isCurrentUserRequester
-            ? item.requesterId
-            : item.respondentId,
-          requesterName: isCurrentUserRequester
-            ? item.requester?.name || ''
-            : item.respondent?.name || '',
-          requesterImage: isCurrentUserRequester
-            ? item.requester?.userImage?.imageUrl || ''
-            : item.respondent?.userImage?.imageUrl || '',
-          respondentId: isCurrentUserRequester
-            ? item.respondentId
-            : item.requesterId,
-          respondentName: isCurrentUserRequester
-            ? item.respondent?.name || ''
-            : item.requester?.name || '',
-          respondentImage: isCurrentUserRequester
-            ? item.respondent?.userImage?.imageUrl || ''
-            : item.requester?.userImage?.imageUrl || '',
-        };
+      const updatedFriendInfoList = response.map((item: any) => {
+        const { requester, respondent } = getUserType(
+          loginUserId,
+          item.requesterId,
+        );
+
+        let friendInfo = {};
+
+        if (loginUserId === item.requesterId) {
+          friendInfo = {
+            requesterId: item[`${requester}Id`],
+            requesterName: item[requester]?.name || '',
+            requesterImage: item[requester]?.userImage?.imageUrl || '',
+          };
+        } else {
+          friendInfo = {
+            respondentId: item[`${respondent}Id`],
+            respondentName: item[respondent]?.name || '',
+            respondentImage: item[respondent]?.userImage?.imageUrl || '',
+          };
+        }
+
+        return friendInfo;
       });
 
-      setFriendInfo(updatedFriendInfo);
+      setFriendInfo(updatedFriendInfoList);
     } catch (error) {
       console.error('친구 목록을 가져오는 중 오류 발생:', error);
     }
   };
+  console.log(friendInfo);
 
   useEffect(() => {
     getListFriend();
