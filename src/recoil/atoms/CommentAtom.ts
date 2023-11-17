@@ -1,4 +1,3 @@
-import { ReCommentInfo } from '@/components/molecules/post-comment/PostReComment';
 import { ReCommentCreateType } from '@/components/organisms/post-unit/PostComments';
 import { CommentInfo } from '@/components/templates/post-unit-temp/PostUnitTemplate';
 import { atom } from 'recoil';
