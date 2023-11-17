@@ -3,9 +3,7 @@ import { BsArrowReturnRight } from 'react-icons/bs';
 import * as S from './styled';
 import { CommentInfo } from '@/components/templates/post-unit-temp/PostUnitTemplate';
 import useModal from '@/hooks/useModal';
-import PostReComment, {
-  ReCommentInfo,
-} from '../../molecules/post-comment/PostReComment';
+import PostReComment from '../../molecules/post-comment/PostReComment';
 import Modal from '@/components/molecules/post-board/Modal';
 import {
   CommentDeleteAtom,
@@ -33,7 +31,9 @@ const PostComments = (commentData: CommentInfo) => {
   const { isOpenModal, handleModal } = useModal();
   const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
   const getReCommentDelId = useRecoilValue(ReCommentDeleteAtom);
-  const [modifyComment, setModifyComment] = useState(commentData.content);
+  const [modifedCommentValue, setModifedCommentValue] = useState(
+    commentData.content,
+  );
   const [isModifyState, setIsModifyState] = useState(false);
   const [getReCommnetList, setReCommentList] = useState<ReCommentCreateType[]>(
     commentData.reComment,
@@ -43,13 +43,11 @@ const PostComments = (commentData: CommentInfo) => {
   const focusOnInput = useRef<HTMLInputElement>(null);
   const [tempDelArr, setTempDelArr] = useState<ReCommentCreateType[]>([]);
 
-  console.log(getReCommnetList);
-
   //댓글 삭제 핸들러
   const handleDelComment = async () => {
     handleModal();
     if (confirm('댓글을 삭제하시겠습니까?')) {
-      await COMMENTS.commetDelApi(commentData.id);
+      await COMMENTS.deleteCommentApi(commentData.id);
       setCommentDelId(commentData.id);
     }
   };
@@ -62,7 +60,7 @@ const PostComments = (commentData: CommentInfo) => {
 
   const handleInputComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     const event = e.target.value;
-    setModifyComment(event);
+    setModifedCommentValue(event);
   };
 
   //수정버튼 클릭 시 input에 focus
@@ -77,7 +75,7 @@ const PostComments = (commentData: CommentInfo) => {
   const handleDone = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsModifyState(false);
-    await COMMENTS.commetModifyApi(commentData.id, modifyComment);
+    await COMMENTS.modifedCommentApi(commentData.id, modifedCommentValue);
   };
 
   //대댓글 추가시 새로고침하지 않고, 값 추가
@@ -121,13 +119,13 @@ const PostComments = (commentData: CommentInfo) => {
                   <input
                     type="text"
                     onChange={handleInputComment}
-                    value={modifyComment}
+                    value={modifedCommentValue}
                     ref={focusOnInput}
                   />
                   <button type="submit">확인</button>
                 </div>
               ) : (
-                modifyComment
+                modifedCommentValue
               )}
             </form>
           </S.CommentArea>

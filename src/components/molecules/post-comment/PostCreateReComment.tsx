@@ -7,7 +7,7 @@ import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import USERS from '@/apis/user';
 import { ReCommentCreateType } from '@/components/organisms/post-unit/PostComments';
 
-interface PropsCommentType {
+interface PostCreateRCommentProps {
   commentId: number;
 }
 
@@ -17,7 +17,7 @@ interface UserType {
   userImage: string;
 }
 
-const PostCreateReComment = ({ commentId }: PropsCommentType) => {
+const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
   const [modifyReComment, setModifyReComment] = useState('');
   const [userInfo, setUserInfo] = useState<UserType>({
     userId: 0,

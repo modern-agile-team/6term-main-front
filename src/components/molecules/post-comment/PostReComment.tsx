@@ -7,7 +7,7 @@ import { ReCommentDeleteAtom } from '@/recoil/atoms/CommentAtom';
 import COMMENTS from '@/apis/comments';
 import { useEffect, useRef, useState } from 'react';
 
-export interface ReCommentInfo {
+export interface PostReCommentProps {
   // reCommentId: number;
   reComment: {
     content: string;
@@ -24,7 +24,7 @@ export interface ReCommentInfo {
   };
 }
 
-const PostReComment = ({ reComment }: ReCommentInfo) => {
+const PostReComment = ({ reComment }: PostReCommentProps) => {
   const { isOpenModal, handleModal } = useModal();
   const setReCommentDelId = useSetRecoilState(ReCommentDeleteAtom);
   const [isModifyState, setModifyState] = useState(false);
@@ -37,7 +37,7 @@ const PostReComment = ({ reComment }: ReCommentInfo) => {
   const handleDelReComment = async () => {
     handleModal();
     if (confirm('대댓글을 삭제하시겠습니까?')) {
-      await COMMENTS.reCommetDelApi(reComment.id);
+      await COMMENTS.deleteReCommentApi(reComment.id);
       setReCommentDelId(reComment.id);
     }
   };
@@ -65,7 +65,7 @@ const PostReComment = ({ reComment }: ReCommentInfo) => {
   const handleDone = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setModifyState(false);
-    await COMMENTS.reCommetModifyApi(reComment.id, modifedReCommentValue);
+    await COMMENTS.modifedReCommentApi(reComment.id, modifedReCommentValue);
   };
 
   return (

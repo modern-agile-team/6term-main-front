@@ -52,7 +52,7 @@ const PostUnitTemplate = (props: BoardType) => {
 
   //댓글 불러오기 api호출
   const getCommentListAll = async (id: number) => {
-    const response = await COMMENTS.commentListAllApi(id);
+    const response = await COMMENTS.getListAllCommentApi(id);
     setUnitComment(response);
     refresh();
   };
