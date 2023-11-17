@@ -21,7 +21,7 @@ const COMMENTS = {
   },
 
   //comment 불러오기 api [get요청]
-  async commentListAllApi(id: number): Promise<any> {
+  async getListAllCommentApi(id: number): Promise<any> {
     try {
       const result: AxiosResponse = await instance.get(`${COMMENTS.path}`, {
         params: {
@@ -36,7 +36,7 @@ const COMMENTS = {
   },
 
   //comment 삭제 api [delete요청]
-  async commetDelApi(id: number): Promise<any> {
+  async deleteCommentApi(id: number): Promise<any> {
     const result: AxiosResponse = await instance.delete(`${COMMENTS.path}`, {
       params: {
         commentId: id,
@@ -45,8 +45,8 @@ const COMMENTS = {
     return result;
   },
 
-  //comment 삭제 api [delete요청]
-  async commetModifyApi(id: number, modify: string): Promise<any> {
+  //comment 수정 api [patch요청]
+  async modifedCommentApi(id: number, modify: string): Promise<any> {
     const result: AxiosResponse = await instance.patch(
       `${COMMENTS.path}`,
       {
@@ -55,6 +55,48 @@ const COMMENTS = {
       {
         params: {
           commentId: id,
+        },
+      },
+    );
+    return result;
+  },
+
+  //reComment 생성 api [post요청]
+  async createReCommentApi(id: number, recomment: string): Promise<any> {
+    const result: AxiosResponse = await instance.post(
+      `${COMMENTS.path}/Re`,
+      {
+        content: recomment,
+      },
+      {
+        params: {
+          commentId: id,
+        },
+      },
+    );
+    return result;
+  },
+
+  //reComment 삭제 api [delete요청]
+  async deleteReCommentApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.delete(`${COMMENTS.path}/Re`, {
+      params: {
+        reCommentId: id,
+      },
+    });
+    return result;
+  },
+
+  //reComment 수정 api [patch요청]
+  async modifedReCommentApi(id: number, modify: string): Promise<any> {
+    const result: AxiosResponse = await instance.patch(
+      `${COMMENTS.path}/Re`,
+      {
+        content: modify,
+      },
+      {
+        params: {
+          reCommentId: id,
         },
       },
     );

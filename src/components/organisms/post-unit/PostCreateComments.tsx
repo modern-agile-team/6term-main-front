@@ -1,9 +1,10 @@
 import USERS from '@/apis/user';
 import * as S from './styled';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 import COMMENTS from '@/apis/comments';
+import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 
 interface UserType {
   userId: number;
@@ -16,22 +17,23 @@ interface BoardId {
 }
 
 const PostCreateComment = (props: BoardId) => {
-  const [userInfo, setUSerInfo] = useState<UserType>({
+  const loginState = useRecoilValue(LoginStateAtom);
+  const [userInfo, setUserInfo] = useState<UserType>({
     userId: 0,
     userName: '',
     userImage: '',
   });
-  const [userState, setUserState] = useState<boolean>(false);
-  const [getCreateInput, setCreateInput] = useState<string>('');
-  const [getCreateComment, setCreateComment] = useRecoilState(CommentLoadAtom);
+  const [getCreateInput, setCreateInput] = useState('');
+  const setCreateComment = useSetRecoilState(CommentLoadAtom);
   //생성값 불러오기
   const handleCreateCommentInput = (e: any) => {
     setCreateInput(e.target.value);
   };
 
   //댓글 등록 핸들러
-  const handleUploadComment = async () => {
-    if (localStorage.getItem('accessToken') !== undefined) {
+  const handleUploadComment = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (loginState) {
       if (confirm('댓글을 등록하시겠습니까?')) {
         const response = await COMMENTS.createCommentApi(
           getCreateInput,
@@ -43,7 +45,7 @@ const PostCreateComment = (props: BoardId) => {
             ...prev,
             id: response.id,
             content: getCreateInput,
-            userId: {
+            user: {
               name: userInfo.userName,
               userImage: {
                 id: 0,
@@ -57,15 +59,13 @@ const PostCreateComment = (props: BoardId) => {
     } else {
       alert('로그인이 필요합니다.');
     }
+    setCreateInput('');
   };
-  useEffect(() => {
-    console.log(getCreateComment);
-  });
 
   //본인 정보 받아오는 api 호출
   const getUserInfo = async () => {
     const response = await USERS.getUserProfile();
-    setUSerInfo((prev) => {
+    setUserInfo((prev) => {
       return {
         ...prev,
         userId: response.userId,
@@ -76,30 +76,31 @@ const PostCreateComment = (props: BoardId) => {
   };
   useEffect(() => {
     getUserInfo();
-    if (localStorage.getItem('accesToken') !== undefined) setUserState(true);
   }, []);
 
   return (
     <S.CommentContainer>
       <S.ComponentHeader>댓글 작성</S.ComponentHeader>
-      <S.CreateCommentBox>
-        {userState ? (
+      <form onSubmit={handleUploadComment}>
+        <S.CreateCommentBox>
+          {loginState ? (
+            <S.FlexBox>
+              <S.CommentUserImage img={userInfo.userImage} />
+              <div>{userInfo.userName}</div>
+            </S.FlexBox>
+          ) : (
+            <div>로그인이 필요합니다.</div>
+          )}
           <S.FlexBox>
-            <S.CommentUserImage img={userInfo.userImage} />
-            <div>{userInfo.userName}</div>
+            <S.CommentInputBox
+              placeholder="댓글을 작성해 보세요."
+              onChange={handleCreateCommentInput}
+              value={getCreateInput}
+            />
+            <S.CreateCommentButton type="submit">등록</S.CreateCommentButton>
           </S.FlexBox>
-        ) : (
-          <div>로그인이 필요합니다.</div>
-        )}
-        <S.FlexBox>
-          <S.CommentInputBox
-            placeholder="댓글을 작성해 보세요."
-            onChange={handleCreateCommentInput}></S.CommentInputBox>
-          <S.CreateCommentButton onClick={handleUploadComment}>
-            등록
-          </S.CreateCommentButton>
-        </S.FlexBox>
-      </S.CreateCommentBox>
+        </S.CreateCommentBox>
+      </form>
     </S.CommentContainer>
   );
 };

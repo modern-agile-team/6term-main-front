@@ -1,55 +1,53 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import * as S from './styled';
-import UserIcon from '@/components/common/UserIcon';
-import { reCommentDummy } from '@/apis/dummy';
 import { CommentInfo } from '@/components/templates/post-unit-temp/PostUnitTemplate';
 import useModal from '@/hooks/useModal';
-import PostReComment from './PostReComment';
+import PostReComment from '../../molecules/post-comment/PostReComment';
 import Modal from '@/components/molecules/post-board/Modal';
-import { CommentDeleteAtom, CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import {
+  CommentDeleteAtom,
+  ReCommentDeleteAtom,
+  ReCommentLoadAtom,
+} from '@/recoil/atoms/CommentAtom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import COMMENTS from '@/apis/comments';
+import PostCreateReComment from '@/components/molecules/post-comment/PostCreateReComment';
 
-export interface ReCommentInfo {
-  // reCommentId: number;
-  reComment: {
-    reComment: string;
-    reCommentOwner: boolean;
-    userId: {
-      name: string;
-      userImage: {
-        // id: number;
-        // userId: number;
-        imageUrl: string;
-      };
+export interface ReCommentCreateType {
+  id: number;
+  content: string;
+  reCommentowner: boolean;
+  user: {
+    name: string;
+    userImage: {
+      userId: number;
+      imageUrl: string;
     };
-  }[];
+  };
 }
 
 const PostComments = (commentData: CommentInfo) => {
   const { isOpenModal, handleModal } = useModal();
-  const [isCheckToken, setCheckToken] = useState(false);
-  const [getReComment, setReComment] = useState<ReCommentInfo['reComment']>([]);
   const setCommentDelId = useSetRecoilState(CommentDeleteAtom);
-  const [modifyComment, setModifyComment] = useState(commentData.content);
+  const getReCommentDelId = useRecoilValue(ReCommentDeleteAtom);
+  const [modifedCommentValue, setModifedCommentValue] = useState(
+    commentData.content,
+  );
   const [isModifyState, setIsModifyState] = useState(false);
-
-  const checkToken = () => {
-    const token = window.localStorage.getItem('accessToken');
-    token !== undefined ? setCheckToken(true) : setCheckToken(false);
-  };
-
-  const reCommentApi = () => {
-    //commentId로 요청보내서 get받아오기
-    setReComment(reCommentDummy.reComment);
-  };
+  const [getReCommnetList, setReCommentList] = useState<ReCommentCreateType[]>(
+    commentData.reComment,
+  );
+  const getCreateReComment =
+    useRecoilValue<ReCommentCreateType>(ReCommentLoadAtom);
+  const focusOnInput = useRef<HTMLInputElement>(null);
+  const [tempDelArr, setTempDelArr] = useState<ReCommentCreateType[]>([]);
 
   //댓글 삭제 핸들러
   const handleDelComment = async () => {
     handleModal();
     if (confirm('댓글을 삭제하시겠습니까?')) {
-      await COMMENTS.commetDelApi(commentData.id);
+      await COMMENTS.deleteCommentApi(commentData.id);
       setCommentDelId(commentData.id);
     }
   };
@@ -62,41 +60,74 @@ const PostComments = (commentData: CommentInfo) => {
 
   const handleInputComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     const event = e.target.value;
-    setModifyComment(event);
+    setModifedCommentValue(event);
   };
-  1;
 
-  const handleDone = async () => {
+  //수정버튼 클릭 시 input에 focus
+  useEffect(() => {
+    if (focusOnInput.current !== null) {
+      focusOnInput.current.disabled = false; //input 비활성화 해제
+      focusOnInput.current.focus(); //input에 focus
+    }
+  }, [isModifyState]);
+
+  //확인 버튼 핸들러
+  const handleDone = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsModifyState(false);
-    await COMMENTS.commetModifyApi(commentData.id, modifyComment);
+    await COMMENTS.modifedCommentApi(commentData.id, modifedCommentValue);
   };
+
+  //대댓글 추가시 새로고침하지 않고, 값 추가
+  useEffect(() => {
+    if (
+      getCreateReComment.content.length > 0 &&
+      commentData.id === getCreateReComment.id
+    ) {
+      setReCommentList((prev) => [...prev, getCreateReComment]);
+    }
+  }, [getCreateReComment]);
+
+  //대댓글 삭제시 새로고침하지 않고, 값 삭제
+  useEffect(() => {
+    setTempDelArr([]);
+    getReCommnetList
+      .filter((prev) => {
+        return prev.id !== getReCommentDelId;
+      })
+      .map((data) => {
+        setTempDelArr((prev) => [...prev, data]);
+      });
+  }, [getReCommentDelId]);
 
   useEffect(() => {
-    checkToken();
-    reCommentApi();
-  }, []);
+    setReCommentList(tempDelArr);
+  }, [tempDelArr]);
 
   return (
     <S.CommentContainer>
       <S.CreateCommentBox>
         <S.FlexBox>
-          <S.CommentUserImage img={commentData.userId.userImage.imageUrl} />
-          <S.ShowUserName size={20}>{commentData.userId.name}</S.ShowUserName>
+          <S.CommentUserImage img={commentData.user.userImage.imageUrl} />
+          <S.ShowUserName size={20}>{commentData.user.name}</S.ShowUserName>
         </S.FlexBox>
         <S.FlexBox>
           <S.CommentArea>
-            {isModifyState ? (
-              <div>
-                <input
-                  type="text"
-                  onChange={handleInputComment}
-                  value={modifyComment}
-                />
-                <button onClick={handleDone}>확인</button>
-              </div>
-            ) : (
-              modifyComment
-            )}
+            <form onSubmit={handleDone}>
+              {isModifyState ? (
+                <div>
+                  <input
+                    type="text"
+                    onChange={handleInputComment}
+                    value={modifedCommentValue}
+                    ref={focusOnInput}
+                  />
+                  <button type="submit">확인</button>
+                </div>
+              ) : (
+                modifedCommentValue
+              )}
+            </form>
           </S.CommentArea>
           {commentData.commentowner && (
             <div>
@@ -112,26 +143,18 @@ const PostComments = (commentData: CommentInfo) => {
             </div>
           )}
         </S.FlexBox>
+        {getReCommnetList.map((data, idx) => {
+          return (
+            <div key={idx}>
+              <PostReComment reComment={data} />
+            </div>
+          );
+        })}
         <S.DivisionLine />
-        {getReComment &&
-          getReComment.map((data, idx) => {
-            return (
-              <div key={idx}>
-                <PostReComment {...data} />
-              </div>
-            );
-          })}
         <S.FlexBox side="0px 0px 0px 18px">
           <BsArrowReturnRight />
           <S.ShowUserName>
-            {isCheckToken ? (
-              <S.FlexBox>
-                <input type="text" placeholder="댓글을 입력해주세요" />
-                <button>등록</button>
-              </S.FlexBox>
-            ) : (
-              <div>로그인이 필요합니다.</div>
-            )}
+            <PostCreateReComment commentId={commentData.id} />
           </S.ShowUserName>
         </S.FlexBox>
       </S.CreateCommentBox>
