@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios';
 import instance from './axiosInstance';
-import { useRouter } from 'next/router';
 
 const SEARCH = {
   path: '/search',
@@ -21,6 +20,7 @@ const SEARCH = {
         },
       },
     );
+    console.log(result.data);
     return result.data;
   },
 };

@@ -12,7 +12,7 @@ interface searchInfoType {
 const PostSearchBoard = (props: searchInfoType) => {
   const [getList, setGetList] = useState<any>([]);
   const obsRef = useRef<HTMLDivElement>(null); //옵저버 state
-  const [page, setPage] = useState<number>(0); // 페이지 state
+  const [page, setPage] = useState(0); // 페이지 state
   const [load, setLoad] = useState(false);
   const preventRef = useRef(true); //옵저버 중복 방지
 
@@ -25,9 +25,9 @@ const PostSearchBoard = (props: searchInfoType) => {
     };
   }, [obsRef, getList]);
 
-  //첫 페이지 로드
+  // 첫 페이지 로드
   useEffect(() => {
-    getPost();
+    if (props.searchQuery) getPost();
   }, []);
 
   useEffect(() => {
@@ -39,6 +39,10 @@ const PostSearchBoard = (props: searchInfoType) => {
     loadPost();
   }, [page]);
 
+  useEffect(() => {
+    console.log(':::', page);
+  });
+
   const handleObs = (entries: any) => {
     const target = entries[0];
     if (target.isIntersecting) {
@@ -49,6 +53,7 @@ const PostSearchBoard = (props: searchInfoType) => {
   };
   //페이지 수 로드 함수
   const getPost = useCallback(async () => {
+    console.log('시작');
     const totalPage = await SEARCH.searchApi(
       props.part,
       props.searchQuery,
@@ -57,6 +62,7 @@ const PostSearchBoard = (props: searchInfoType) => {
       props.category,
     );
     const tempPage = Math.ceil(totalPage.meta.total / 16);
+    console.log('temp', tempPage);
     setPage(tempPage);
   }, []);
 
@@ -68,7 +74,7 @@ const PostSearchBoard = (props: searchInfoType) => {
       16,
       props.category,
     ); //api요청 글 목록 불러오기
-    const reverseArr = [...result.data].reverse();
+    const reverseArr = result.data && [...result.data].reverse();
     result && setGetList([...reverseArr]);
   }, [props.searchQuery]);
 
