@@ -7,12 +7,13 @@ interface searchInfoType {
   searchQuery: string;
   part: string;
   category: string;
+  total: number;
 }
 
 const PostSearchBoard = (props: searchInfoType) => {
   const [getList, setGetList] = useState<any>([]);
   const obsRef = useRef<HTMLDivElement>(null); //옵저버 state
-  const [page, setPage] = useState(0); // 페이지 state
+  const [page, setPage] = useState(props.total); // 페이지 state
   const [load, setLoad] = useState(false);
   const preventRef = useRef(true); //옵저버 중복 방지
 
@@ -26,9 +27,9 @@ const PostSearchBoard = (props: searchInfoType) => {
   }, [obsRef, getList]);
 
   // 첫 페이지 로드
-  useEffect(() => {
-    if (props.searchQuery) getPost();
-  }, []);
+  // useEffect(() => {
+  //   getPost();
+  // }, []);
 
   useEffect(() => {
     getSearchPost();
@@ -36,12 +37,9 @@ const PostSearchBoard = (props: searchInfoType) => {
 
   //무한스크롤 로드
   useEffect(() => {
+    console.log(':::', page);
     loadPost();
   }, [page]);
-
-  useEffect(() => {
-    console.log(':::', page);
-  });
 
   const handleObs = (entries: any) => {
     const target = entries[0];
@@ -52,19 +50,19 @@ const PostSearchBoard = (props: searchInfoType) => {
     }
   };
   //페이지 수 로드 함수
-  const getPost = useCallback(async () => {
-    console.log('시작');
-    const totalPage = await SEARCH.searchApi(
-      props.part,
-      props.searchQuery,
-      1,
-      1,
-      props.category,
-    );
-    const tempPage = Math.ceil(totalPage.meta.total / 16);
-    console.log('temp', tempPage);
-    setPage(tempPage);
-  }, []);
+  // const getPost = useCallback(async () => {
+  //   console.log('시작');
+  //   const totalPage = await SEARCH.searchApi(
+  //     props.part,
+  //     props.searchQuery,
+  //     1,
+  //     1,
+  //     props.category,
+  //   );
+  //   const tempPage = Math.ceil(totalPage.meta.total / 16);
+  //   console.log('temp', tempPage);
+  //   setPage(tempPage);
+  // }, []);
 
   const getSearchPost = useCallback(async () => {
     const result = await SEARCH.searchApi(

@@ -4,9 +4,7 @@ import CustomSelect from '@/components/common/CustomSelect';
 import useModal from '@/hooks/useModal';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
-import { json } from 'stream/consumers';
 import { searchBoardAtom } from '@/recoil/atoms/SearchAtom';
-import { escape } from 'querystring';
 
 export interface searchType {
   searchQuery: string;
