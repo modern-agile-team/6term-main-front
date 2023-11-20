@@ -29,7 +29,7 @@ const PostBoardTemplates = (props: Board): JSX.Element => {
       <div>
         <PostBoardHeader main={props.main as string} />
         <Suspense fallback={<h1>로딩중...</h1>}>
-          {Object.keys(router.query).length < 1 ? (
+          {Object.keys(router.query).length <= 1 ? (
             <PostBoards main={props.main} />
           ) : (
             <PostSearchBoard

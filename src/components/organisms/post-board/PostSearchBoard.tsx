@@ -77,8 +77,11 @@ const PostSearchBoard = (props: searchInfoType) => {
       16,
       props.category,
     ); //api요청 글 목록 불러오기
-    const reverseArr = result.data && [...result.data].reverse();
-    result && setGetList([...reverseArr]);
+    if (result) {
+      const reverseArr = result.data && [...result.data].reverse();
+      result && setGetList([...reverseArr]);
+    } else {
+    }
   }, [props.searchQuery]);
 
   //스크롤 시 로드 함수
@@ -92,8 +95,11 @@ const PostSearchBoard = (props: searchInfoType) => {
         16,
         props.category,
       ); //api요청 글 목록 불러오기
-      const reverseArr = [...result.data].reverse();
-      result && setGetList((prev: any) => [...prev, ...reverseArr]);
+      if (result) {
+        const reverseArr = [...result.data].reverse();
+        result && setGetList((prev: any) => [...prev, ...reverseArr]);
+      } else {
+      }
     }
     setLoad(false);
   }, [page]);

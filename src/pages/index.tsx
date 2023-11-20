@@ -3,7 +3,7 @@ import PostBoardTemplates from '@/components/templates/post-temp/PostTemplates';
 import AllPost from '@/components/veiws/AllPost';
 import { GetServerSideProps, NextPage } from 'next';
 
-interface TotalPageProps {
+export interface TotalPageProps {
   total: number;
 }
 
