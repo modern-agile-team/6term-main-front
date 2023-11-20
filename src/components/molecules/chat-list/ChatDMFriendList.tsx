@@ -8,7 +8,7 @@ import { friendInfoState } from '@/recoil/atoms/FriendsAtom';
 interface DMFriendListProps {}
 
 const DMFriendList = ({}: DMFriendListProps) => {
-  const [friendListCollapse, setFriendListCollapse] = useState(false);
+  const [friendListCollapse, setFriendListCollapse] = useState<boolean>(false);
   const friendsData = useRecoilValue(friendInfoState);
   const router = useRouter();
   const collapsibleRef = useRef<HTMLDivElement>(null);
