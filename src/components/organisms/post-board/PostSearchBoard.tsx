@@ -2,20 +2,22 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import UnitBox from '@/components/molecules/post-board/UnitBox';
 import * as S from './styled';
 import SEARCH from '@/apis/search';
+import { useRouter } from 'next/router';
 
 interface searchInfoType {
   searchQuery: string;
   part: string;
   category: string;
-  total: number;
+  totalPage: number;
 }
 
 const PostSearchBoard = (props: searchInfoType) => {
   const [getList, setGetList] = useState<any>([]);
   const obsRef = useRef<HTMLDivElement>(null); //옵저버 state
-  const [page, setPage] = useState(props.total); // 페이지 state
+  const [page, setPage] = useState(props.totalPage); // 페이지 state
   const [load, setLoad] = useState(false);
   const preventRef = useRef(true); //옵저버 중복 방지
+  const router = useRouter();
 
   //옵저버 생성
   useEffect(() => {
@@ -33,11 +35,11 @@ const PostSearchBoard = (props: searchInfoType) => {
 
   useEffect(() => {
     getSearchPost();
+    setPage(props.totalPage);
   }, [props.searchQuery]);
 
   //무한스크롤 로드
   useEffect(() => {
-    console.log(':::', page);
     loadPost();
   }, [page]);
 
@@ -51,20 +53,23 @@ const PostSearchBoard = (props: searchInfoType) => {
   };
   //페이지 수 로드 함수
   // const getPost = useCallback(async () => {
-  //   console.log('시작');
-  //   const totalPage = await SEARCH.searchApi(
-  //     props.part,
-  //     props.searchQuery,
-  //     1,
-  //     1,
-  //     props.category,
-  //   );
-  //   const tempPage = Math.ceil(totalPage.meta.total / 16);
-  //   console.log('temp', tempPage);
-  //   setPage(tempPage);
+  //   if (router.query.searchQeury !== undefined) {
+  //     console.log('시작');
+  //     const totalPage = await SEARCH.searchApi(
+  //       props.part,
+  //       router.query.searchQuery as string,
+  //       1,
+  //       1,
+  //       props.category,
+  //     );
+  //     const tempPage = Math.ceil(totalPage.meta.total / 16);
+  //     console.log('temp', tempPage);
+  //     setPage(tempPage);
+  //   }
   // }, []);
 
   const getSearchPost = useCallback(async () => {
+    setGetList([]);
     const result = await SEARCH.searchApi(
       props.part,
       props.searchQuery,

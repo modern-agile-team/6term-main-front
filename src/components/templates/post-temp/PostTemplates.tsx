@@ -10,64 +10,39 @@ import { IncomingMessage, ServerResponse } from 'http';
 import SEARCH from '@/apis/search';
 import { GetServerSideProps, NextPage } from 'next';
 
-interface TotalPageProps {
-  total: number;
-}
-
-const PostBoardTemplates: NextPage<TotalPageProps> = (
-  temp: Board,
-  { total },
-): JSX.Element => {
+const PostBoardTemplates = (props: Board): JSX.Element => {
   const router = useRouter();
   const [queryValue, setQueryValue] = useState('');
 
-  console.log('total: ', total);
-
   useEffect(() => {
     if (!router.isReady) return;
-    router.query.searchQuery && setQueryValue(String(router.query.searchQuery));
+    router.query.searchQuery &&
+      setQueryValue(router.query.searchQuery as string);
   }, [router.isReady]);
 
   useEffect(() => {
-    setQueryValue(String(router.query.searchQuery));
+    setQueryValue(router.query.searchQuery as string);
   }, [router.query.searchQuery]);
 
   return (
     <S.postBoardUnit>
       <div>
-        <PostBoardHeader main={temp.main as string} />
+        <PostBoardHeader main={props.main as string} />
         <Suspense fallback={<h1>로딩중...</h1>}>
           {Object.keys(router.query).length < 1 ? (
-            <PostBoards main={temp.main} />
+            <PostBoards main={props.main} />
           ) : (
             <PostSearchBoard
               searchQuery={queryValue as string}
               part={router.query.part as string}
-              category={temp.main as string}
-              total={total}
+              category={props.main as string}
+              totalPage={props.totalPage as number}
             />
           )}
         </Suspense>
       </div>
     </S.postBoardUnit>
   );
-};
-
-/** getServerSideProps */
-export const getServerSideProps: GetServerSideProps<TotalPageProps> = async (
-  context,
-) => {
-  console.log(context);
-  const query = context.query;
-  const totalPage = await SEARCH.searchApi(
-    query.part as string,
-    query.searchQuery as string,
-    1,
-    1,
-    '전체',
-  );
-  const tempPage = Math.ceil(totalPage.meta.total / 16);
-  return { props: { total: tempPage } };
 };
 
 export default PostBoardTemplates;

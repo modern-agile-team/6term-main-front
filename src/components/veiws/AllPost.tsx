@@ -2,6 +2,7 @@ import PostBoardTemplates from '../templates/post-temp/PostTemplates';
 
 export interface Board {
   main?: string;
+  totalPage?: number;
 }
 
 const AllPost = () => {

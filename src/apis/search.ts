@@ -20,7 +20,6 @@ const SEARCH = {
         },
       },
     );
-    console.log(result.data);
     return result.data;
   },
 };
