@@ -87,9 +87,6 @@ const FloatingBar = () => {
           <MdOutlineSearch />
         </S.FriendSearchIcon>
       </div>
-      {/* <div onClick={friendOnClink}>
-        <UserIcon />
-      </div> */}
       <div onClick={handleMypage}>
         <UserIcon />
       </div>
