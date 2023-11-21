@@ -74,7 +74,7 @@ const COMMENTS = {
         },
       },
     );
-    return result;
+    return result.data;
   },
 
   //reComment 삭제 api [delete요청]

@@ -16,6 +16,7 @@ import PostCreateReComment from '@/components/molecules/post-comment/PostCreateR
 
 export interface ReCommentCreateType {
   id: number;
+  commentId: number;
   content: string;
   reCommentowner: boolean;
   user: {
@@ -42,6 +43,7 @@ const PostComments = (commentData: CommentInfo) => {
     useRecoilValue<ReCommentCreateType>(ReCommentLoadAtom);
   const focusOnInput = useRef<HTMLInputElement>(null);
   const [tempDelArr, setTempDelArr] = useState<ReCommentCreateType[]>([]);
+  const [reCommentIdNumber, setReCommenntIdNumber] = useState(0);
 
   //댓글 삭제 핸들러
   const handleDelComment = async () => {
@@ -82,7 +84,7 @@ const PostComments = (commentData: CommentInfo) => {
   useEffect(() => {
     if (
       getCreateReComment.content.length > 0 &&
-      commentData.id === getCreateReComment.id
+      commentData.id === getCreateReComment.commentId
     ) {
       setReCommentList((prev) => [...prev, getCreateReComment]);
     }
@@ -130,7 +132,7 @@ const PostComments = (commentData: CommentInfo) => {
             </form>
           </S.CommentArea>
           {commentData.commentowner && (
-            <div>
+            <div style={{ cursor: 'pointer' }}>
               {isOpenModal && (
                 <Modal show={isOpenModal} hide={handleModal}>
                   <div>

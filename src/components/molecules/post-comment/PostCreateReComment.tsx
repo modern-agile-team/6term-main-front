@@ -28,6 +28,8 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
     useSetRecoilState<ReCommentCreateType>(ReCommentLoadAtom);
   const loginState = useRecoilValue(LoginStateAtom);
 
+  console.log('Com', commentId);
+
   const handleInputReComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     const event = e.target.value;
     setModifyReComment(event);
@@ -42,7 +44,8 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
     setCreateReComment((prev) => {
       return {
         ...prev,
-        id: commentId,
+        id: response.id,
+        commentId: commentId,
         content: modifyReComment,
         user: {
           name: userInfo.userName,
