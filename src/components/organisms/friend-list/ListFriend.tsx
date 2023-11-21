@@ -39,22 +39,27 @@ const ListFriend = () => {
           loginUserId,
           item.requesterId,
         );
+
         let friendInfo = {};
+
         if (loginUserId === item.requesterId) {
           friendInfo = {
-            requesterId: item[`${requester}Id`],
-            requesterName: item[requester]?.name || '',
-            requesterImage: item[requester]?.userImage?.imageUrl || '',
+            requesterId: item[`${respondent}Id`],
+            requesterName: item[respondent]?.name || '',
+            requesterImage: item[respondent]?.userImage?.imageUrl || '',
           };
         } else {
           friendInfo = {
-            respondentId: item[`${respondent}Id`],
-            respondentName: item[respondent]?.name || '',
-            respondentImage: item[respondent]?.userImage?.imageUrl || '',
+            respondentId: item[`${requester}Id`],
+            respondentName: item[requester]?.name || '',
+            respondentImage: item[requester]?.userImage?.imageUrl || '',
           };
         }
+
+        console.log(friendInfo);
         return friendInfo;
       });
+
       setFriendInfo(updatedFriendInfoList);
     } catch (error) {
       console.error('친구 목록을 가져오는 중 오류 발생:', error);
@@ -74,7 +79,7 @@ const ListFriend = () => {
 
     const isConfirmed = window.confirm(
       `${
-        friendToDelete?.respondentId === deletedId
+        friendToDelete?.requesterId === deletedId
           ? friendToDelete?.respondentName
           : friendToDelete?.requesterName
       }님을 친구에서 삭제하시겠습니까?`,
