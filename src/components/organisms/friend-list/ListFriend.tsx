@@ -39,9 +39,7 @@ const ListFriend = () => {
           loginUserId,
           item.requesterId,
         );
-
         let friendInfo = {};
-
         if (loginUserId === item.requesterId) {
           friendInfo = {
             requesterId: item[`${requester}Id`],
@@ -55,10 +53,8 @@ const ListFriend = () => {
             respondentImage: item[respondent]?.userImage?.imageUrl || '',
           };
         }
-
         return friendInfo;
       });
-
       setFriendInfo(updatedFriendInfoList);
     } catch (error) {
       console.error('친구 목록을 가져오는 중 오류 발생:', error);

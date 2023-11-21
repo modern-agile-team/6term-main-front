@@ -90,12 +90,10 @@ const FloatingBar = () => {
       <div onClick={handleMypage}>
         <UserIcon />
       </div>
-
       <S.ChatIcon onClick={handleModal}>
         <IoMdChatbubbles />
       </S.ChatIcon>
       {isOpenModal && <ChatModal show={isOpenModal} hide={handleModal} />}
-
       <S.ScrollButotn>
         <MdKeyboardArrowDown onClick={scrollToBottom} />
       </S.ScrollButotn>
