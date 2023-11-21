@@ -28,6 +28,7 @@ export const ReCommentLoadAtom = atom<ReCommentCreateType>({
   key: 'reCommentLoad',
   default: {
     content: '',
+    commentId: 0,
     reCommentowner: true,
     id: 0,
     user: {
