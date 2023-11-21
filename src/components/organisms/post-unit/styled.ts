@@ -100,11 +100,11 @@ export const CreateCommentBox = styled.div`
   border-radius: 5px;
 `;
 
-export const CommentInputBox = styled.textarea`
+export const CommentInputBox = styled.input`
   width: 715px;
   height: 80px;
-  padding-top: 10px;
   margin: 8px;
+  padding: 0px 0px 0px 10px;
   border: 1px solid rgb(9, 9, 9, 25%);
   outline: none;
   resize: none;
@@ -136,11 +136,6 @@ export const CommentArea = styled.div`
   font-size: 20px;
   font-weight: bold;
   padding: 15px 0px 15px 15px;
-`;
-
-export const Comment = styled.div`
-  width: 570px;
-  padding: 5px 0px 0px 15px;
 `;
 //**콤보박스 컨테이너 */
 export const ComboBox = styled.ul`
@@ -180,6 +175,7 @@ export const Option = styled.div`
   font-size: 14px;
   padding: 6px 8px;
   transition: background-color 0.2s ease-in;
+  cursor: pointer;
   &:hover {
     background-color: #ddd;
   }

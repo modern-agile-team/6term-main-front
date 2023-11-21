@@ -1,12 +1,10 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import * as S from './styled';
 import CustomSelect from '@/components/common/CustomSelect';
 import useModal from '@/hooks/useModal';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
-import { json } from 'stream/consumers';
 import { searchBoardAtom } from '@/recoil/atoms/SearchAtom';
-import { escape } from 'querystring';
 
 export interface searchType {
   searchQuery: string;
@@ -43,6 +41,13 @@ const SearchBox = () => {
           };
         });
         break;
+      case '유저검색':
+        setSearch((prev) => {
+          return {
+            ...prev,
+            part: 'userName',
+          };
+        });
     }
     setSelect(innerText);
   };
@@ -63,6 +68,7 @@ const SearchBox = () => {
 
   const hanldeSearchButton = () => {
     if (router.query.category === undefined) {
+      //전체에서 검색 시
       router.push({
         pathname: `/`,
         query: {
@@ -72,6 +78,7 @@ const SearchBox = () => {
       });
     } else {
       router.push({
+        //카테고리 안에서 검색시
         pathname: `${router.query.category}`,
         query: {
           searchQuery: getSearch.searchQuery,
@@ -93,6 +100,7 @@ const SearchBox = () => {
         <CustomSelect show={isOpenModal} hide={handleModal} title="검색">
           <div onClick={handleOnChangeSelectValue}>제목검색</div>
           <div onClick={handleOnChangeSelectValue}>본문검색</div>
+          <div onClick={handleOnChangeSelectValue}>유저검색</div>
         </CustomSelect>
         <S.SearchInput
           type="text"
