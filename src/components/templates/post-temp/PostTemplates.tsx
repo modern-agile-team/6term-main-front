@@ -1,17 +1,27 @@
 import PostBoardHeader from '../../organisms/post-board/PostBoardHearder';
 import * as S from './styled';
 import PostBoards from '@/components/organisms/post-board/PostBoards';
-import { Suspense, useEffect, useState } from 'react';
+import { ContextType, Suspense, useEffect, useState } from 'react';
 import { Board } from '@/components/veiws/AllPost';
 import { useRouter } from 'next/router';
 import PostSearchBoard from '@/components/organisms/post-board/PostSearchBoard';
+import { ParsedUrlQuery } from 'querystring';
+import { IncomingMessage, ServerResponse } from 'http';
+import SEARCH from '@/apis/search';
+import { GetServerSideProps, NextPage } from 'next';
 
 const PostBoardTemplates = (props: Board): JSX.Element => {
   const router = useRouter();
-  const [queryState, setQueryState] = useState(router.query.searchQuery);
+  const [queryValue, setQueryValue] = useState('');
 
   useEffect(() => {
-    setQueryState(router.query.searchQuery);
+    if (!router.isReady) return;
+    router.query.searchQuery &&
+      setQueryValue(router.query.searchQuery as string);
+  }, [router.isReady]);
+
+  useEffect(() => {
+    setQueryValue(router.query.searchQuery as string);
   }, [router.query.searchQuery]);
 
   return (
@@ -23,9 +33,10 @@ const PostBoardTemplates = (props: Board): JSX.Element => {
             <PostBoards main={props.main} />
           ) : (
             <PostSearchBoard
-              searchQuery={queryState as string}
+              searchQuery={queryValue as string}
               part={router.query.part as string}
               category={props.main as string}
+              totalPage={props.totalPage as number}
             />
           )}
         </Suspense>
