@@ -53,6 +53,7 @@ export const Option = styled.div`
   font-size: 14px;
   padding: 6px 8px;
   transition: background-color 0.2s ease-in;
+  cursor: pointer;
   &:hover {
     background-color: #ddd;
   }
@@ -62,7 +63,7 @@ export const CommentInput = styled.input`
   outline: none;
   border: none;
   width: 250px;
-  margin: 0px 0px 10px 0px;
+  margin: 0px 0px 10px 10px;
 `;
 
 export const CommentSubmitButton = styled.button`

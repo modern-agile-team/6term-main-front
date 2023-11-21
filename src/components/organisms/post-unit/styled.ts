@@ -175,6 +175,7 @@ export const Option = styled.div`
   font-size: 14px;
   padding: 6px 8px;
   transition: background-color 0.2s ease-in;
+  cursor: pointer;
   &:hover {
     background-color: #ddd;
   }

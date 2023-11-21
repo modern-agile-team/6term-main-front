@@ -33,6 +33,8 @@ const PostReComment = ({ reComment }: PostReCommentProps) => {
   );
   const focusOnInput = useRef<HTMLInputElement>(null);
 
+  console.log('Re', reComment);
+
   //대댓글 삭제 핸들러
   const handleDelReComment = async () => {
     handleModal();
