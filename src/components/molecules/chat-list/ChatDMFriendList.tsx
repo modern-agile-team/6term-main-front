@@ -44,7 +44,7 @@ const DMFriendList = ({}: DMFriendListProps) => {
           <S.ListBox
             key={friend.requesterId}
             className={friendListCollapse ? 'hidden' : ''}>
-            {friendListCollapse ? '' : friend.name}
+            {friendListCollapse ? '' : friend.requesterName}
           </S.ListBox>
         ))}
       </S.CollapsibleContainer>
