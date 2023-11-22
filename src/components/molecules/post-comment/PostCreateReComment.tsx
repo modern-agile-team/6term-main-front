@@ -61,7 +61,7 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
 
   //본인 정보 받아오는 api 호출
   const getUserInfo = async () => {
-    const response = await USERS.getUserProfile();
+    const response = await USERS.getMyProfile();
     setUserInfo((prev) => {
       return {
         ...prev,

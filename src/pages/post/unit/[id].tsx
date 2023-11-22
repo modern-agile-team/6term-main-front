@@ -1,11 +1,17 @@
 import PostUnitTemplate from '@/components/templates/post-unit-temp/PostUnitTemplate';
-import UnitPost from '@/components/veiws/UnitPost';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 const PostTitle = () => {
+  const router = useRouter();
   return (
-    <>
-      <UnitPost />
-    </>
+    <div>
+      <React.Suspense fallback={<h1>loading</h1>}>
+        {router.isReady && (
+          <PostUnitTemplate boardId={Number(router.query.boardId)} />
+        )}
+      </React.Suspense>
+    </div>
   );
 };
 

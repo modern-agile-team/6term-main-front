@@ -35,7 +35,7 @@ const FloatingBar = () => {
 
   const handleGetMyId = async () => {
     try {
-      const response = await USERS.getUserProfile();
+      const response = await USERS.getMyProfile();
       console.log(response);
       setMyInfo(response.userId);
     } catch (error: any) {
