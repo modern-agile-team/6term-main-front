@@ -1,10 +1,13 @@
 import Footer from '@/components/organisms/common/Footer';
 import Header from '@/components/organisms/common/Header';
 import type { AppProps } from 'next/app';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useRecoilValue } from 'recoil';
 import React from 'react';
 import FloatingBar from '@/components/organisms/common/floatingbar/FloatingBar';
 import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
+import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
+import { GetServerSideProps } from 'next';
 
 const ComponentsWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할때 interface를 정의해줍니다.
   () => import('@/components/organisms/common/Header'),
@@ -19,6 +22,10 @@ const FloatingBarWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할
 );
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    localStorage.setItem('accessToken', '');
+  }, []);
+
   return (
     <RecoilRoot>
       <React.Suspense fallback={<div>Loading...</div>}>

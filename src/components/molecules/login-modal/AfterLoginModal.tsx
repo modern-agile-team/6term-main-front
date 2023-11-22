@@ -25,8 +25,7 @@ const AfterLoginModal = ({ show, hide }: ModalType) => {
       //logoutAPI요청
       await AUTHS.handleLogout(provider);
       // localStorage에서 토큰값 삭제
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
+      localStorage.setItem('accessToken', '');
       localStorage.removeItem('provider');
       isInitial ? setIsLogin(false) : setIsInitital(false);
     }
