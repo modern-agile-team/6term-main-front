@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import UnitBox from '@/components/molecules/post-board/UnitBox';
 import BOARDS from '@/apis/boards';
-import { Board } from '@/components/veiws/AllPost';
 import * as S from './styled';
+import { Board } from '@/components/templates/post-temp/PostTemplates';
 
 const PostBoards = (props: Board): JSX.Element => {
   const [getList, setGetList] = useState<any>([]);

@@ -1,4 +1,3 @@
-import MeetingPost from '@/components/veiws/MeetingPost';
 import SEARCH from '@/apis/search';
 import PostBoardTemplates from '@/components/templates/post-temp/PostTemplates';
 import { GetServerSideProps, NextPage } from 'next';
@@ -8,7 +7,6 @@ const MeetingBoardPage: NextPage<TotalPageProps> = ({ total }) => {
   return (
     <div>
       <PostBoardTemplates main="만남" totalPage={total} />
-      {/* <MeetingPost /> */}
     </div>
   );
 };

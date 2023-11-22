@@ -15,7 +15,7 @@ const AddFriend = (props: User) => {
   const router = useRouter();
   const handleMypage = async () => {
     try {
-      const userInfo = await USERS.getUserProfile();
+      const userInfo = await USERS.getMyProfile();
       const id = userInfo.userId;
       router.push(`/mypage/${id}`);
     } catch (error) {
@@ -24,7 +24,7 @@ const AddFriend = (props: User) => {
   };
   const handleAddFriend = async () => {
     try {
-      const userInfo = await USERS.getUserProfile();
+      const userInfo = await USERS.getMyProfile();
       const currentUserId = userInfo.userId;
       const friendId = props.id;
       if (currentUserId === friendId) {

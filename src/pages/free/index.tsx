@@ -1,4 +1,3 @@
-import FreePost from '@/components/veiws/FreePost';
 import { TotalPageProps } from '..';
 import { GetServerSideProps, NextPage } from 'next';
 import SEARCH from '@/apis/search';
@@ -8,7 +7,6 @@ const FreeBoardPage: NextPage<TotalPageProps> = ({ total }) => {
   return (
     <div>
       <PostBoardTemplates main="자유" totalPage={total} />
-      {/* <FreePost /> */}
     </div>
   );
 };

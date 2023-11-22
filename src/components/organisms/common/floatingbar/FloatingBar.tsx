@@ -35,7 +35,7 @@ const FloatingBar = () => {
 
   const handleGetMyId = async () => {
     try {
-      const response = await USERS.getUserProfile();
+      const response = await USERS.getMyProfile();
       console.log(response);
       setMyInfo(response.userId);
     } catch (error: any) {
@@ -87,18 +87,13 @@ const FloatingBar = () => {
           <MdOutlineSearch />
         </S.FriendSearchIcon>
       </div>
-      {/* <div onClick={friendOnClink}>
-        <UserIcon />
-      </div> */}
       <div onClick={handleMypage}>
         <UserIcon />
       </div>
-
       <S.ChatIcon onClick={handleModal}>
         <IoMdChatbubbles />
       </S.ChatIcon>
       {isOpenModal && <ChatModal show={isOpenModal} hide={handleModal} />}
-
       <S.ScrollButotn>
         <MdKeyboardArrowDown onClick={scrollToBottom} />
       </S.ScrollButotn>

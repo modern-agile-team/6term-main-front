@@ -15,7 +15,7 @@ const USERS = {
   path: '/user',
 
   //유저정보조회api
-  async getUserProfile(): Promise<UserInfo> {
+  async getMyProfile(): Promise<UserInfo> {
     try {
       const result: AxiosResponse = await instance.get(`${USERS.path}/my-info`);
       return result.data;
