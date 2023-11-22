@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil';
 import React from 'react';
 import FloatingBar from '@/components/organisms/common/floatingbar/FloatingBar';
 import dynamic from 'next/dynamic';
+import ChatIcon from '@/components/molecules/chat-icon/ChatIcon';
 
 const ComponentsWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할때 interface를 정의해줍니다.
   () => import('@/components/organisms/common/Header'),
@@ -32,6 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} style={{ flex: 1 }} />
         </div>
         <FloatingBarWithNoSSR />
+        <ChatIcon />
         <Footer />
       </React.Suspense>
     </RecoilRoot>
