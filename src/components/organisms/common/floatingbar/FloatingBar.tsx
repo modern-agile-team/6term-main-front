@@ -47,6 +47,13 @@ const FloatingBar = () => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem('accessToken') !== '') {
+    } else {
+      localStorage.setItem('accessToken', '');
+    }
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       setFloatingPosition(window.scrollY);
     };

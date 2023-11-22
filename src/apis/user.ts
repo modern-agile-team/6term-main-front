@@ -18,6 +18,7 @@ const USERS = {
   async getUserProfile(): Promise<UserInfo> {
     try {
       const result: AxiosResponse = await instance.get(`${USERS.path}/my-info`);
+      console.log(result.data);
       return result.data;
     } catch (error: any) {
       if (error.response && error.response.status === 403) {

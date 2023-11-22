@@ -6,6 +6,13 @@ interface ModalType {
   hide: () => void;
 }
 
+/**Custom-Modal
+ * @params : show
+ * @params : hide
+ * @returns : show는 modal의 boolean값
+ * @returns : hide는 modal의 show값을 변경시키는 함수
+ *
+ */
 const Modal = ({ show, hide, children }: PropsWithChildren<ModalType>) => {
   return (
     <ModalContainer>
@@ -29,7 +36,7 @@ const ModalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: relative;
 `;
 
 const DialogBox = styled.dialog`

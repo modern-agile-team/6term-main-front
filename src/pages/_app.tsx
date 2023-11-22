@@ -22,10 +22,6 @@ const FloatingBarWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할
 );
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    localStorage.setItem('accessToken', '');
-  }, []);
-
   return (
     <RecoilRoot>
       <React.Suspense fallback={<div>Loading...</div>}>
@@ -38,7 +34,8 @@ export default function App({ Component, pageProps }: AppProps) {
           }}>
           <Component {...pageProps} style={{ flex: 1 }} />
         </div>
-        <FloatingBarWithNoSSR />
+        {/* <FloatingBarWithNoSSR /> */}
+        <FloatingBar />
         <Footer />
       </React.Suspense>
     </RecoilRoot>
