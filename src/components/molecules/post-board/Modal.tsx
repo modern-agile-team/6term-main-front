@@ -36,7 +36,7 @@ const ModalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: absolute;
 `;
 
 const DialogBox = styled.dialog`
