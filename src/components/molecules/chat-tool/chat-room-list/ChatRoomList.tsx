@@ -6,11 +6,13 @@ const ChatRoomList = () => {
     <S.ChatListWrapper>
       <S.ChatListItem>
         <S.ChatListImage />
-        <S.ChatListName>원동건</S.ChatListName>
-        <S.ChatListbottom>
-          <span>안녕</span>
-          <span>14:20</span>
-        </S.ChatListbottom>
+        <S.ChatListRight>
+          <S.ChatListName>원동건</S.ChatListName>
+          <S.ChatListbottom>
+            <span>안녕</span>
+            <span>14:20</span>
+          </S.ChatListbottom>
+        </S.ChatListRight>
       </S.ChatListItem>
     </S.ChatListWrapper>
   );

@@ -34,6 +34,14 @@ export const ChatListName = styled.p`
   text-overflow: ellipsis;
 `;
 
+export const ChatListRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: calc(100% - 40px - 6px);
+  gap: 3px;
+`;
+
 export const ChatListbottom = styled.div`
   display: flex;
   justify-content: space-between;
