@@ -28,16 +28,29 @@ const scrollToBottom = () => {
   });
 };
 
+interface MyType {
+  id: number;
+  img: string;
+}
+
 const FloatingBar = () => {
-  const [myInfo, setMyInfo] = useState(0);
+  const [myInfo, setMyInfo] = useState<MyType>({
+    id: 0,
+    img: '',
+  });
   const [floatingPosition, setFloatingPosition] = useState(200);
   const router = useRouter();
 
   const handleGetMyId = async () => {
     try {
-      const response = await USERS.getUserProfile();
-      console.log(response);
-      setMyInfo(response.userId);
+      const response = await USERS.getMyProfile();
+      setMyInfo((prev) => {
+        return {
+          ...prev,
+          id: response.userId,
+          img: response.userImage,
+        };
+      });
     } catch (error: any) {
       // 에러가 403일 때는 에러를 출력하지 않도록 조건 추가
       if (error.response && error.response.status !== 403) {
@@ -75,9 +88,9 @@ const FloatingBar = () => {
 
   const handleMypage = () => {
     router.push({
-      pathname: `/mypage/${myInfo}`,
+      pathname: `/mypage/${myInfo.id}`,
       query: {
-        id: myInfo,
+        id: myInfo.id,
       },
     });
   };
@@ -94,11 +107,9 @@ const FloatingBar = () => {
           <MdOutlineSearch />
         </S.FriendSearchIcon>
       </div>
-      {/* <div onClick={friendOnClink}>
-        <UserIcon />
-      </div> */}
       <div onClick={handleMypage}>
-        <UserIcon />
+        {/* <UserIcon /> */}
+        <S.MyIconBox src={myInfo.img} alt="사진" />
       </div>
 
       <S.ChatIcon onClick={handleModal}>

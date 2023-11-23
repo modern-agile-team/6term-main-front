@@ -1,24 +1,25 @@
 import { AxiosResponse } from 'axios';
 import instance from './axiosInstance';
+import { rejects } from 'assert';
 
 export interface UserInfo {
-  userId: number;
+  id: number;
   name: string;
   email: string;
   gender: string;
-  admin: string;
+  admin: boolean;
   provider: string;
-  userImage: string;
+  image: string;
+  owner: boolean;
 }
 
 const USERS = {
   path: '/user',
 
-  //유저정보조회api
-  async getUserProfile(): Promise<UserInfo> {
+  //내 정보조회 api
+  async getMyProfile(): Promise<UserInfo> {
     try {
       const result: AxiosResponse = await instance.get(`${USERS.path}/my-info`);
-      console.log(result.data);
       return result.data;
     } catch (error: any) {
       if (error.response && error.response.status === 403) {
@@ -28,6 +29,32 @@ const USERS = {
       // 다른 에러는 그대로 throw
       throw error;
     }
+  },
+
+  //유저정보조회api
+  async getUserProfile(id: number): Promise<any> {
+    try {
+      const result: AxiosResponse = await instance.get(
+        `${USERS.path}/my-info/${id}`,
+      );
+      console.log('::::', result.data);
+      return result.data;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+
+  async modifedUserImage(image: FormData): Promise<any> {
+    const result: AxiosResponse = await instance.patch(
+      `${USERS.path}/image`,
+      image,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return result.data;
   },
 };
 
