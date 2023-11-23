@@ -37,7 +37,7 @@ const FloatingBar = () => {
     try {
       const response = await USERS.getMyProfile();
       console.log(response);
-      setMyInfo(response.userId);
+      setMyInfo(response.id);
     } catch (error: any) {
       // 에러가 403일 때는 에러를 출력하지 않도록 조건 추가
       if (error.response && error.response.status !== 403) {

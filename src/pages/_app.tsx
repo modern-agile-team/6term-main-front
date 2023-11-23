@@ -21,6 +21,11 @@ const FloatingBarWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할
   { ssr: false }, // ssr옵션을 false로 설정해줍니다.
 );
 
+const ChatIconWithNoSSR = dynamic<{}>(
+  () => import('@/components/molecules/chat-icon/ChatIcon'),
+  { ssr: false },
+);
+
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     localStorage.setItem('accessToken', '');
@@ -39,6 +44,8 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} style={{ flex: 1 }} />
         </div>
         <FloatingBarWithNoSSR />
+        <ChatIconWithNoSSR />
+        {/* <ChatIcon /> */}
         <Footer />
       </React.Suspense>
     </RecoilRoot>

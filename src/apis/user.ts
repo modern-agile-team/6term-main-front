@@ -2,11 +2,11 @@ import { AxiosResponse } from 'axios';
 import instance from './axiosInstance';
 
 export interface UserInfo {
-  userId: number;
+  id: number;
   name: string;
   email: string;
   gender: string;
-  admin: string;
+  admin: boolean;
   provider: string;
   userImage: string;
 }

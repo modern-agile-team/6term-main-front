@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import USERS, { UserInfo } from '@/apis/user';
-import { MyProfileAtom } from '@/recoil/atoms/MyProfile';
+import * as S from './styled';
+import { BsChatDots } from 'react-icons/bs';
+import Link from 'next/link';
+import { MyProfileSelector } from '@/recoil/selectors/MyProfileSelector';
+import { UserInfo } from '@/apis/user';
+import { useRouter } from 'next/router';
 
 export const ChatIcon = () => {
-  const [myProfile, setMyprofile] = useRecoilState(MyProfileAtom);
-  const getMyProfile = async () => {
-    const myInfo = await USERS.getMyProfile();
-    setMyprofile(myInfo);
-  };
-  useEffect(() => {
-    getMyProfile();
-  });
+  const myProfile: UserInfo = useRecoilValue(MyProfileSelector);
+  const myId: number = myProfile.id;
 
-  const handleChatPage = () => {
-    const myId = useRecoilValue(MyProfileAtom);
-  };
+  console.log(myProfile);
 
-  return <></>;
+  return (
+    <Link href="/chat/[id]" as={`/chat/${myId}`}>
+      <S.ChatIconButton>
+        <div style={{ textDecoration: 'none', color: 'inherit' }}>
+          <BsChatDots />
+        </div>
+      </S.ChatIconButton>
+    </Link>
+  );
 };
 
 export default ChatIcon;
