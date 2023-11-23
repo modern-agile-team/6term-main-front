@@ -1,11 +1,11 @@
 import React from 'react';
 import * as S from './styled';
 import { useRecoilValue } from 'recoil';
-import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 import Link from 'next/link';
+import { MyProfileSelector } from '@/recoil/selectors/MyProfileSelector';
 
 const ChatRoomTitle = () => {
-  const myProFile = useRecoilValue(MyProfileAtom);
+  const myProFile = useRecoilValue(MyProfileSelector);
   return (
     <S.ChatRoomTitleBox>
       <S.ChatRoomTitleSpan>

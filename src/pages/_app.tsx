@@ -5,7 +5,6 @@ import { RecoilRoot } from 'recoil';
 import React from 'react';
 import FloatingBar from '@/components/organisms/common/floatingbar/FloatingBar';
 import dynamic from 'next/dynamic';
-import ChatIcon from '@/components/molecules/chat-icon/ChatIcon';
 
 const ComponentsWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할때 interface를 정의해줍니다.
   () => import('@/components/organisms/common/Header'),
@@ -17,6 +16,11 @@ const FloatingBarWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할
   () => import('@/components/organisms/common/floatingbar/FloatingBar'),
   // Component로 사용할 항목을 import합니다.
   { ssr: false }, // ssr옵션을 false로 설정해줍니다.
+);
+
+const ChatIconWithNoSSR = dynamic<{}>(
+  () => import('@/components/molecules/chat-icon/ChatIcon'),
+  { ssr: false },
 );
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -33,7 +37,8 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} style={{ flex: 1 }} />
         </div>
         <FloatingBarWithNoSSR />
-        <ChatIcon />
+        <ChatIconWithNoSSR />
+        {/* <ChatIcon /> */}
         <Footer />
       </React.Suspense>
     </RecoilRoot>

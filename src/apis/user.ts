@@ -6,7 +6,7 @@ export interface UserInfo {
   name: string;
   email: string;
   gender: string;
-  admin: string;
+  admin: boolean;
   provider: string;
   userImage: string;
 }
