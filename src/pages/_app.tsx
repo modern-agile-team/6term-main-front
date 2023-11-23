@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import { GetServerSideProps } from 'next';
-import ChatIcon from '@/components/molecules/chat-icon/ChatIcon';
+import ChatIcon from '@/components/organisms/chat-icon/ChatIcon';
 
 const ComponentsWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할때 interface를 정의해줍니다.
   () => import('@/components/organisms/common/Header'),
@@ -23,7 +23,7 @@ const FloatingBarWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할
 );
 
 const ChatIconWithNoSSR = dynamic<{}>(
-  () => import('@/components/molecules/chat-icon/ChatIcon'),
+  () => import('@/components/organisms/chat-icon/ChatIcon'),
   { ssr: false },
 );
 
