@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import { GetServerSideProps } from 'next';
+import ChatIcon from '@/components/molecules/chat-icon/ChatIcon';
 
 const ComponentsWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할때 interface를 정의해줍니다.
   () => import('@/components/organisms/common/Header'),
@@ -27,9 +28,9 @@ const ChatIconWithNoSSR = dynamic<{}>(
 );
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    localStorage.setItem('accessToken', '');
-  }, []);
+  // useEffect(() => {
+  //   localStorage.setItem('accessToken', '');
+  // }, []);
 
   return (
     <RecoilRoot>

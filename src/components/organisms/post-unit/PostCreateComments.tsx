@@ -7,7 +7,7 @@ import COMMENTS from '@/apis/comments';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 
 interface UserType {
-  id: number;
+  userId: number;
   userName: string;
   userImage: string;
 }
@@ -19,7 +19,7 @@ interface BoardId {
 const PostCreateComment = (props: BoardId) => {
   const loginState = useRecoilValue(LoginStateAtom);
   const [userInfo, setUserInfo] = useState<UserType>({
-    id: 0,
+    userId: 0,
     userName: '',
     userImage: '',
   });
@@ -49,7 +49,7 @@ const PostCreateComment = (props: BoardId) => {
               name: userInfo.userName,
               userImage: {
                 id: 0,
-                userId: userInfo.id,
+                userId: userInfo.userId,
                 imageUrl: userInfo.userImage,
               },
             },
@@ -68,7 +68,7 @@ const PostCreateComment = (props: BoardId) => {
     setUserInfo((prev) => {
       return {
         ...prev,
-        userId: response.id,
+        userId: response.userId,
         userName: response.name,
         userImage: response.userImage,
       };

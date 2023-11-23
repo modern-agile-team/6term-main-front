@@ -8,19 +8,20 @@ import { UserInfo } from '@/apis/user';
 import { useRouter } from 'next/router';
 
 export const ChatIcon = () => {
-  const myProfile: UserInfo = useRecoilValue(MyProfileSelector);
-  const myId: number = myProfile.id;
+  const myProfile = useRecoilValue(MyProfileSelector);
 
-  console.log(myProfile);
+  console.log(myProfile.userId);
 
   return (
-    <Link href="/chat/[id]" as={`/chat/${myId}`}>
-      <S.ChatIconButton>
-        <div style={{ textDecoration: 'none', color: 'inherit' }}>
-          <BsChatDots />
-        </div>
-      </S.ChatIconButton>
-    </Link>
+    <>
+      <Link legacyBehavior href="/chat/[id]" as={`/chat/${myProfile.userId}`}>
+        <S.ChatIconButton>
+          <a style={{ textDecoration: 'none', color: 'inherit' }}>
+            <BsChatDots />
+          </a>
+        </S.ChatIconButton>
+      </Link>
+    </>
   );
 };
 

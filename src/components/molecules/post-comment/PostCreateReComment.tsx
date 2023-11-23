@@ -12,7 +12,7 @@ interface PostCreateRCommentProps {
 }
 
 interface UserType {
-  id: number;
+  userId: number;
   userName: string;
   userImage: string;
 }
@@ -20,7 +20,7 @@ interface UserType {
 const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
   const [modifyReComment, setModifyReComment] = useState('');
   const [userInfo, setUserInfo] = useState<UserType>({
-    id: 0,
+    userId: 0,
     userName: '',
     userImage: '',
   });
@@ -50,7 +50,7 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
         user: {
           name: userInfo.userName,
           userImage: {
-            userId: userInfo.id,
+            userId: userInfo.userId,
             imageUrl: userInfo.userImage,
           },
         },
@@ -65,7 +65,7 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
     setUserInfo((prev) => {
       return {
         ...prev,
-        userId: response.id,
+        userId: response.userId,
         userName: response.name,
         userImage: response.userImage,
       };

@@ -5,7 +5,7 @@ import FRIENDS from '@/apis/friend-api/friendList';
 import USERS from '@/apis/user';
 
 interface User {
-  id: number;
+  userId: number;
   name: string;
 }
 
@@ -16,7 +16,7 @@ const AddFriend = (props: User) => {
   const handleMypage = async () => {
     try {
       const userInfo = await USERS.getMyProfile();
-      const id = userInfo.id;
+      const id = userInfo.userId;
       router.push(`/mypage/${id}`);
     } catch (error) {
       console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);
@@ -25,8 +25,8 @@ const AddFriend = (props: User) => {
   const handleAddFriend = async () => {
     try {
       const userInfo = await USERS.getMyProfile();
-      const currentUserId = userInfo.id;
-      const friendId = props.id;
+      const currentUserId = userInfo.userId;
+      const friendId = props.userId;
       if (currentUserId === friendId) {
         alert('본인은 친구로 추가할 수 없습니다.');
       } else {
@@ -34,7 +34,7 @@ const AddFriend = (props: User) => {
           `${props.name}님을 친구로 추가하시겠습니까?`,
         );
         if (isConfirmed) {
-          await FRIENDS.friendRequest(props.id);
+          await FRIENDS.friendRequest(props.userId);
           console.log('친구 추가에 성공했습니다.');
           setIsFriendAdded(true);
           const isConfirmed = window.confirm(

@@ -29,11 +29,11 @@ const reNewToken = async () => {
 //요청 전 인터셉터
 instance.interceptors.request.use(
   (config) => {
-    if (typeof window !== 'undefined') {
-      const accessToken = localStorage.getItem('accessToken');
+    // if (typeof window !== 'undefined') {
+    const accessToken = localStorage.getItem('accessToken');
 
-      config.headers['access_token'] = accessToken;
-    }
+    config.headers['access_token'] = accessToken;
+    // }
 
     return config;
   },
@@ -50,8 +50,12 @@ instance.interceptors.response.use(
     }
     return response;
   },
-  async (error) => {
-    if (error.response.status === 401 || error.response.status === 403) {
+  async (error: any) => {
+    if (
+      error.response.status === 401 ||
+      error.response.status === 403 ||
+      error.response.status === 411
+    ) {
       // reNewToken();
       const accessToken = localStorage.getItem('accessToken');
 
