@@ -5,26 +5,20 @@ import { BsChatDots } from 'react-icons/bs';
 import Link from 'next/link';
 import { MyProfileSelector } from '@/recoil/selectors/MyProfileSelector';
 import { UserInfo } from '@/apis/user';
+import { useRouter } from 'next/router';
 
 export const ChatIcon = () => {
   const myProfile: UserInfo = useRecoilValue(MyProfileSelector);
-  const myId: number = myProfile.userId;
+  const myId: number = myProfile.id;
 
   console.log(myProfile);
 
   return (
-    <Link
-      legacyBehavior
-      href={{
-        pathname: `/chat/[id]`,
-        query: {
-          id: myId,
-        },
-      }}>
+    <Link href="/chat/[id]" as={`/chat/${myId}`}>
       <S.ChatIconButton>
-        <a style={{ textDecoration: 'none', color: 'inherit' }}>
+        <div style={{ textDecoration: 'none', color: 'inherit' }}>
           <BsChatDots />
-        </a>
+        </div>
       </S.ChatIconButton>
     </Link>
   );

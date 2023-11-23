@@ -1,5 +1,5 @@
-import USERS, { UserInfo } from '@/apis/user';
-import { selector, selectorFamily } from 'recoil';
+import USERS from '@/apis/user';
+import { selector } from 'recoil';
 
 export const MyProfileSelector = selector({
   key: 'MyProfile',

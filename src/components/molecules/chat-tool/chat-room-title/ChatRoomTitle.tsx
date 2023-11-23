@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './styled';
 import { useRecoilValue } from 'recoil';
 import Link from 'next/link';
@@ -6,6 +6,10 @@ import { MyProfileSelector } from '@/recoil/selectors/MyProfileSelector';
 
 const ChatRoomTitle = () => {
   const myProFile = useRecoilValue(MyProfileSelector);
+
+  useEffect(() => {
+    console.log(myProFile);
+  });
   return (
     <S.ChatRoomTitleBox>
       <S.ChatRoomTitleSpan>
