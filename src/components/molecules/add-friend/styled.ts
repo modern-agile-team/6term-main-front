@@ -5,4 +5,5 @@ export const AddFriendButton = styled.button`
   justify-content: center;
   border-radius: 7px;
   margin-left: 190px;
+  border: none;
 `;
