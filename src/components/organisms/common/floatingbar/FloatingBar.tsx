@@ -12,6 +12,8 @@ import Link from 'next/link';
 import ChatModal from '@/components/organisms/chats/chat-modal/ChatModal';
 import useModal from '@/hooks/useModal';
 import USERS, { UserInfo } from '@/apis/user';
+import { useRecoilValue } from 'recoil';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -29,22 +31,23 @@ const scrollToBottom = () => {
 };
 
 const FloatingBar = () => {
-  const [myInfo, setMyInfo] = useState(0);
+  const MyProfile = useRecoilValue(MyProfileAtom);
+  // const [MyProfile.userId, setMyProfile.userId] = useState(0);
   const [floatingPosition, setFloatingPosition] = useState(200);
   const router = useRouter();
 
-  const handleGetMyId = async () => {
-    try {
-      const response = await USERS.getMyProfile();
-      console.log(response);
-      setMyInfo(response.userId);
-    } catch (error: any) {
-      // 에러가 403일 때는 에러를 출력하지 않도록 조건 추가
-      if (error.response && error.response.status !== 403) {
-        console.error(error);
-      }
-    }
-  };
+  // const handleGetMyId = async () => {
+  //   try {
+  //     const response = await USERS.getMyProfile();
+  //     console.log(response);
+  //     setMyProfile.userId(response.userId);
+  //   } catch (error: any) {
+  //     // 에러가 403일 때는 에러를 출력하지 않도록 조건 추가
+  //     if (error.response && error.response.status !== 403) {
+  //       console.error(error);
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +61,7 @@ const FloatingBar = () => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
-    handleGetMyId();
+    // handleGetMyId();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -68,9 +71,9 @@ const FloatingBar = () => {
 
   const handleMypage = () => {
     router.push({
-      pathname: `/mypage/${myInfo}`,
+      pathname: `/mypage/${MyProfile.userId}`,
       query: {
-        id: myInfo,
+        id: MyProfile.userId,
       },
     });
   };
