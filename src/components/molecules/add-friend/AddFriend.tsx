@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import * as S from './styled';
 import FRIENDS from '@/apis/friend-api/friendList';
 import USERS from '@/apis/user';
+import { useRecoilValue } from 'recoil';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 interface User {
   userId: number;
@@ -11,21 +13,29 @@ interface User {
 
 // 친구 추가 API
 const AddFriend = (props: User) => {
+  const MyProfile = useRecoilValue(MyProfileAtom);
   const [isFriendAdded, setIsFriendAdded] = useState(false);
   const router = useRouter();
-  const handleMypage = async () => {
-    try {
-      const userInfo = await USERS.getMyProfile();
-      const id = userInfo.userId;
-      router.push(`/mypage/${id}`);
-    } catch (error) {
-      console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);
-    }
+  // const handleMypage = async () => {
+  //   try {
+  //     const userInfo = await USERS.getMyProfile();
+  //     const id = userInfo.userId;
+  //     router.push(`/mypage/${id}`);
+  //   } catch (error) {
+  //     console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);
+  //   }
+  // };
+  const handleMypage = () => {
+    router.push({
+      pathname: `/mypage/${MyProfile.userId}`,
+      query: {
+        id: MyProfile.userId,
+      },
+    });
   };
   const handleAddFriend = async () => {
     try {
-      const userInfo = await USERS.getMyProfile();
-      const currentUserId = userInfo.userId;
+      const currentUserId = MyProfile.userId;
       const friendId = props.userId;
       if (currentUserId === friendId) {
         alert('본인은 친구로 추가할 수 없습니다.');
@@ -59,7 +69,9 @@ const AddFriend = (props: User) => {
     }
   };
   console.log(isFriendAdded);
-  return <div onClick={handleAddFriend}>친구 추가 기능 버튼</div>;
+  return (
+    <S.AddFriendButton onClick={handleAddFriend}>친구 추가</S.AddFriendButton>
+  );
 };
 
 export default AddFriend;

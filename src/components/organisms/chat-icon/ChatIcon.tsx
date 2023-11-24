@@ -30,7 +30,11 @@ export const ChatIcon = () => {
 
   return (
     <>
-      <Link href="/chat/[id]" as={`/chat/${loginProfile?.userId}`}>
+      <Link
+        href={{
+          pathname: `/chat/${loginProfile?.userId}`,
+          query: { id: loginProfile?.userId },
+        }}>
         <S.ChatIconButton>
           <div style={{ textDecoration: 'none', color: 'inherit' }}>
             <BsChatDots />

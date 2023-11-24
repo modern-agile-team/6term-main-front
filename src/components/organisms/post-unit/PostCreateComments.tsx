@@ -5,6 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 import COMMENTS from '@/apis/comments';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 interface UserType {
   userId: number;
@@ -18,11 +19,12 @@ interface BoardId {
 
 const PostCreateComment = (props: BoardId) => {
   const loginState = useRecoilValue(LoginStateAtom);
-  const [userInfo, setUserInfo] = useState<UserType>({
-    userId: 0,
-    userName: '',
-    userImage: '',
-  });
+  const userInfo = useRecoilValue(MyProfileAtom);
+  // const [userInfo, setUserInfo] = useState<UserType>({
+  //   userId: 0,
+  //   userName: '',
+  //   userImage: '',
+  // });
   const [getCreateInput, setCreateInput] = useState('');
   const setCreateComment = useSetRecoilState(CommentLoadAtom);
   //생성값 불러오기
@@ -46,7 +48,7 @@ const PostCreateComment = (props: BoardId) => {
             id: response.id,
             content: getCreateInput,
             user: {
-              name: userInfo.userName,
+              name: userInfo.name,
               userImage: {
                 id: 0,
                 userId: userInfo.userId,
@@ -63,20 +65,20 @@ const PostCreateComment = (props: BoardId) => {
   };
 
   //본인 정보 받아오는 api 호출
-  const getUserInfo = async () => {
-    const response = await USERS.getMyProfile();
-    setUserInfo((prev) => {
-      return {
-        ...prev,
-        userId: response.userId,
-        userName: response.name,
-        userImage: response.userImage,
-      };
-    });
-  };
-  useEffect(() => {
-    getUserInfo();
-  }, []);
+  // const getUserInfo = async () => {
+  //   const response = await USERS.getMyProfile();
+  //   setUserInfo((prev) => {
+  //     return {
+  //       ...prev,
+  //       userId: response.userId,
+  //       userName: response.name,
+  //       userImage: response.userImage,
+  //     };
+  //   });
+  // };
+  // useEffect(() => {
+  //   getUserInfo();
+  // }, []);
 
   return (
     <S.CommentContainer>
@@ -86,7 +88,7 @@ const PostCreateComment = (props: BoardId) => {
           {loginState ? (
             <S.FlexBox>
               <S.CommentUserImage img={userInfo.userImage} />
-              <div>{userInfo.userName}</div>
+              <div>{userInfo.name}</div>
             </S.FlexBox>
           ) : (
             <div>로그인이 필요합니다.</div>

@@ -6,6 +6,7 @@ import { ReCommentLoadAtom } from '@/recoil/atoms/CommentAtom';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import USERS from '@/apis/user';
 import { ReCommentCreateType } from '@/components/organisms/post-unit/PostComments';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 interface PostCreateRCommentProps {
   commentId: number;
@@ -19,11 +20,12 @@ interface UserType {
 
 const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
   const [modifyReComment, setModifyReComment] = useState('');
-  const [userInfo, setUserInfo] = useState<UserType>({
-    userId: 0,
-    userName: '',
-    userImage: '',
-  });
+  const userInfo = useRecoilValue(MyProfileAtom);
+  // const [userInfo, setUserInfo] = useState<UserType>({
+  //   userId: 0,
+  //   userName: '',
+  //   userImage: '',
+  // });
   const setCreateReComment =
     useSetRecoilState<ReCommentCreateType>(ReCommentLoadAtom);
   const loginState = useRecoilValue(LoginStateAtom);
@@ -48,7 +50,7 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
         commentId: commentId,
         content: modifyReComment,
         user: {
-          name: userInfo.userName,
+          name: userInfo.name,
           userImage: {
             userId: userInfo.userId,
             imageUrl: userInfo.userImage,
@@ -60,20 +62,20 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
   };
 
   //본인 정보 받아오는 api 호출
-  const getUserInfo = async () => {
-    const response = await USERS.getMyProfile();
-    setUserInfo((prev) => {
-      return {
-        ...prev,
-        userId: response.userId,
-        userName: response.name,
-        userImage: response.userImage,
-      };
-    });
-  };
-  useEffect(() => {
-    getUserInfo();
-  }, []);
+  // const getUserInfo = async () => {
+  //   const response = await USERS.getMyProfile();
+  //   setUserInfo((prev) => {
+  //     return {
+  //       ...prev,
+  //       userId: response.userId,
+  //       userName: response.name,
+  //       userImage: response.userImage,
+  //     };
+  //   });
+  // };
+  // useEffect(() => {
+  //   getUserInfo();
+  // }, []);
   return (
     <div>
       {loginState ? (
