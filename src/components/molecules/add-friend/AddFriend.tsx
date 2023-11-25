@@ -15,8 +15,8 @@ const AddFriend = (props: User) => {
   const router = useRouter();
   const handleMypage = async () => {
     try {
-      const userInfo = await USERS.getUserProfile();
-      const id = userInfo.userId;
+      const userInfo = await USERS.getMyProfile();
+      const id = userInfo.id;
       router.push(`/mypage/${id}`);
     } catch (error) {
       console.error('유저 정보를 불러오는 중 오류가 발생했습니다.', error);
@@ -24,8 +24,8 @@ const AddFriend = (props: User) => {
   };
   const handleAddFriend = async () => {
     try {
-      const userInfo = await USERS.getUserProfile();
-      const currentUserId = userInfo.userId;
+      const userInfo = await USERS.getMyProfile();
+      const currentUserId = userInfo.id;
       const friendId = props.id;
       if (currentUserId === friendId) {
         alert('본인은 친구로 추가할 수 없습니다.');

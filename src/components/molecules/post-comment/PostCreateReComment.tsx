@@ -12,7 +12,7 @@ interface PostCreateRCommentProps {
 }
 
 interface UserType {
-  userId: number;
+  id: number;
   userName: string;
   userImage: string;
 }
@@ -20,7 +20,7 @@ interface UserType {
 const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
   const [modifyReComment, setModifyReComment] = useState('');
   const [userInfo, setUserInfo] = useState<UserType>({
-    userId: 0,
+    id: 0,
     userName: '',
     userImage: '',
   });
@@ -50,7 +50,7 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
         user: {
           name: userInfo.userName,
           userImage: {
-            userId: userInfo.userId,
+            userId: userInfo.id,
             imageUrl: userInfo.userImage,
           },
         },
@@ -61,11 +61,11 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
 
   //본인 정보 받아오는 api 호출
   const getUserInfo = async () => {
-    const response = await USERS.getUserProfile();
+    const response = await USERS.getMyProfile();
     setUserInfo((prev) => {
       return {
         ...prev,
-        userId: response.userId,
+        userId: response.id,
         userName: response.name,
         userImage: response.userImage,
       };

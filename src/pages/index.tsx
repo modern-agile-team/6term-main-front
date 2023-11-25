@@ -1,6 +1,5 @@
 import SEARCH from '@/apis/search';
 import PostBoardTemplates from '@/components/templates/post-temp/PostTemplates';
-import AllPost from '@/components/veiws/AllPost';
 import { GetServerSideProps, NextPage } from 'next';
 
 export interface TotalPageProps {
@@ -11,7 +10,6 @@ const Home: NextPage<TotalPageProps> = ({ total }) => {
   return (
     <>
       <PostBoardTemplates main="전체" totalPage={total} />
-      {/* <AllPost /> */}
     </>
   );
 };

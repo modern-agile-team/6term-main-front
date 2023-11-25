@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface ButtonContainerProps {
-  collapse: boolean;
+  collapse: Boolean;
   onClick: () => void;
 }
 

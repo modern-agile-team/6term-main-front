@@ -3,7 +3,7 @@ import instance from './axiosInstance';
 import { rejects } from 'assert';
 
 export interface UserInfo {
-  userId: number;
+  id: number;
   name: string;
   email: string;
   gender: string;

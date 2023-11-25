@@ -1,4 +1,3 @@
-import MarketPost from '@/components/veiws/MarketPost';
 import SEARCH from '@/apis/search';
 import PostBoardTemplates from '@/components/templates/post-temp/PostTemplates';
 import { GetServerSideProps, NextPage } from 'next';
@@ -8,7 +7,6 @@ const MarketBoardPage: NextPage<TotalPageProps> = ({ total }) => {
   return (
     <div>
       <PostBoardTemplates main="장터" totalPage={total} />
-      {/* <MarketPost /> */}
     </div>
   );
 };

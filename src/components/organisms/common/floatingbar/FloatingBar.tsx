@@ -50,7 +50,7 @@ const FloatingBar = () => {
       setMyInfo((prev) => {
         return {
           ...prev,
-          id: response.userId,
+          id: response.id,
           img: response.userImage,
         };
       });
@@ -117,12 +117,10 @@ const FloatingBar = () => {
           <S.MyIconBox src={myInfo.img} alt="사진" />
         )}
       </div>
-
       <S.ChatIcon onClick={handleModal}>
         <IoMdChatbubbles />
       </S.ChatIcon>
       {isOpenModal && <ChatModal show={isOpenModal} hide={handleModal} />}
-
       <S.ScrollButotn>
         <MdKeyboardArrowDown onClick={scrollToBottom} />
       </S.ScrollButotn>

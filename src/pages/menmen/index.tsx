@@ -1,5 +1,3 @@
-import MenmenPost from '@/components/veiws/MenmenPost';
-
 import { TotalPageProps } from '..';
 import { GetServerSideProps, NextPage } from 'next';
 import SEARCH from '@/apis/search';
@@ -9,7 +7,6 @@ const MenmenBoardPage: NextPage<TotalPageProps> = ({ total }) => {
   return (
     <div>
       <PostBoardTemplates main="멘토멘티" totalPage={total} />
-      {/* <MenmenPost /> */}
     </div>
   );
 };
