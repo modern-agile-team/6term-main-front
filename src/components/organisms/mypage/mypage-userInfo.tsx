@@ -19,6 +19,11 @@ interface UserInfoType {
   owner: boolean;
 }
 
+interface FormDataType {
+  object: File;
+  url: string;
+}
+
 const MyPageUserInfo = ({ id }: UserType) => {
   const { isOpenModal, handleModal } = useModal();
   const [getUserInfo, setUserInfo] = useState<UserInfoType>({
@@ -30,32 +35,47 @@ const MyPageUserInfo = ({ id }: UserType) => {
     userImage: '',
     owner: false,
   });
-  const [uploadImage, setUploadImage] = useState<FormData>();
+  const [uploadImage, setUploadImage] = useState<FormDataType>({
+    object: {} as File,
+    url: '',
+  });
 
   const userInfoApi = async () => {
-    const response = await USERS.getUserProfile(id);
-    setUserInfo(response);
+    if (id !== 0) {
+      const response = await USERS.getUserProfile(id);
+      setUserInfo(response);
+    }
   };
 
   useEffect(() => {
+    setUploadImage({
+      object: {} as File,
+      url: '',
+    });
     userInfoApi();
-  }, []);
+  }, [id]);
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     if (!e.target.files) {
       return;
     }
-    const formData = new FormData();
-    formData.append('image', e.target.files[0]);
-    setUploadImage(formData);
+    setUploadImage({
+      object: e.target.files[0],
+      url: URL.createObjectURL(e.target.files[0]),
+    });
   };
 
   const modifedMyImage = async () => {
-    for (let key in uploadImage?.keys) {
-      console.log(key);
-    }
-    if (confirm('업로드하시겠습니까?')) {
-      uploadImage && (await USERS.modifedUserImage(uploadImage));
+    const formData = new FormData();
+    formData.append('file', uploadImage.object);
+    if (uploadImage.url !== '') {
+      if (confirm('업로드하시겠습니까?')) {
+        await USERS.modifedUserImage(formData);
+      }
+    } else {
+      alert('이미지 등록이 필요합니다.');
     }
   };
 
@@ -64,19 +84,37 @@ const MyPageUserInfo = ({ id }: UserType) => {
       {getUserInfo.owner ? (
         <div>
           <S.UserImgBox src={getUserInfo.userImage} alt="유저사진" />
-          <div onClick={handleModal}>이미지 업로드</div>
+          <S.ControlBox onClick={handleModal}>이미지 업로드</S.ControlBox>
           {isOpenModal && (
             <Modal show={isOpenModal} hide={handleModal}>
-              <div>이미지 미리보기</div>
+              <div style={{ display: 'flex' }}>
+                <div>이미지 미리보기</div>
+                <div
+                  style={{ paddingLeft: 100, cursor: 'pointer' }}
+                  onClick={handleModal}>
+                  X
+                </div>
+              </div>
+              {uploadImage.url ? (
+                <S.ImageBox>
+                  <img
+                    src={uploadImage.url}
+                    alt="업로드프로필미리보기"
+                    style={{ width: 240, height: 240 }}
+                  />
+                </S.ImageBox>
+              ) : (
+                <S.ImageBox></S.ImageBox>
+              )}
               <form>
                 <input
                   style={{ display: 'none' }}
                   type="file"
                   id="profileImg"
-                  onChange={handleImageUpload}></input>
-                <label htmlFor="profileImg">이미지 선택</label>
+                  onChange={onChangeImageUpload}></input>
+                <S.Imagelabel htmlFor="profileImg">이미지 선택</S.Imagelabel>
               </form>
-              <div onClick={modifedMyImage}>업로드</div>
+              <S.ControlBox onClick={modifedMyImage}>업로드</S.ControlBox>
             </Modal>
           )}
         </div>

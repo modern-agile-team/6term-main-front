@@ -11,27 +11,36 @@ const MyPageTemplate = () => {
   const [getRouterId, setRouterId] = useState(0);
   const router = useRouter();
 
-  console.log(router);
   useEffect(() => {
     if (router.isReady) setRouterId(Number(router.query.id));
-  }, [router.query]);
+  }, [router.isReady]);
 
   return (
     <div>
       <S.MyPageContainer>
         <div>
-          <MyPageUserInfo id={Number(router.query.id)} />
-          <div onClick={handleModal}>친구목록확인</div>
+          <MyPageUserInfo id={getRouterId} />
+          <hr />
+          <S.ControlBox onClick={handleModal}>친구목록확인</S.ControlBox>
+          <hr />
           <div>
-            <div>본인 작성 글 확인</div>
+            <S.ControlBox>본인 작성 글 확인</S.ControlBox>
           </div>
+          {isOpenModal && (
+            <Modal show={isOpenModal} hide={handleModal}>
+              <RelationLists hide={handleModal} />
+            </Modal>
+          )}
         </div>
       </S.MyPageContainer>
-      {isOpenModal && (
-        <Modal show={isOpenModal} hide={handleModal}>
-          <RelationLists />
-        </Modal>
-      )}
+      <S.MyPageContainer>
+        <div>
+          <div>환경설정</div>
+          <hr />
+          <div>다크모드</div>
+          <div>회원탈퇴</div>
+        </div>
+      </S.MyPageContainer>
     </div>
   );
 };

@@ -14,3 +14,9 @@ export const ListBox = styled.div`
   border-radius: 5px;
   width: 300px;
 `;
+
+export const ControlBox = styled.div`
+  cursor: pointer;
+  width: auto;
+  margin-left: auto;
+`;

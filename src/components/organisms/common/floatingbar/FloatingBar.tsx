@@ -12,6 +12,8 @@ import Link from 'next/link';
 import ChatModal from '@/components/organisms/chats/chat-modal/ChatModal';
 import useModal from '@/hooks/useModal';
 import USERS, { UserInfo } from '@/apis/user';
+import { useRecoilValue } from 'recoil';
+import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -40,6 +42,7 @@ const FloatingBar = () => {
   });
   const [floatingPosition, setFloatingPosition] = useState(200);
   const router = useRouter();
+  const loginState = useRecoilValue(LoginStateAtom);
 
   const handleGetMyId = async () => {
     try {
@@ -108,8 +111,11 @@ const FloatingBar = () => {
         </S.FriendSearchIcon>
       </div>
       <div onClick={handleMypage}>
-        {/* <UserIcon /> */}
-        <S.MyIconBox src={myInfo.img} alt="사진" />
+        {!loginState ? (
+          <UserIcon />
+        ) : (
+          <S.MyIconBox src={myInfo.img} alt="사진" />
+        )}
       </div>
 
       <S.ChatIcon onClick={handleModal}>

@@ -3,13 +3,13 @@ import instance from './axiosInstance';
 import { rejects } from 'assert';
 
 export interface UserInfo {
-  id: number;
+  userId: number;
   name: string;
   email: string;
   gender: string;
   admin: boolean;
   provider: string;
-  image: string;
+  userImage: string;
   owner: boolean;
 }
 
@@ -37,7 +37,6 @@ const USERS = {
       const result: AxiosResponse = await instance.get(
         `${USERS.path}/my-info/${id}`,
       );
-      console.log('::::', result.data);
       return result.data;
     } catch (error) {
       return Promise.reject(error);
