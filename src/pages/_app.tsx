@@ -27,10 +27,6 @@ const ChatIconWithNoSSR = dynamic<{}>(
 );
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    localStorage.setItem('accessToken', '');
-  }, []);
-
   return (
     <RecoilRoot>
       <React.Suspense fallback={<div>Loading...</div>}>

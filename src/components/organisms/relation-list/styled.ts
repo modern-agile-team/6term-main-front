@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 80px;
 `;
 
 export const ListBox = styled.div`
@@ -14,4 +13,10 @@ export const ListBox = styled.div`
   border: none;
   border-radius: 5px;
   width: 300px;
+`;
+
+export const ControlBox = styled.div`
+  cursor: pointer;
+  width: auto;
+  margin-left: auto;
 `;

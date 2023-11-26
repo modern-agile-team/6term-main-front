@@ -1,10 +1,11 @@
-import RelationLists from '@/components/templates/relation-list/RelatioinLists';
+import MyPageTemplate from '@/components/templates/mypage/MypageTemplate';
 import React from 'react';
+// import { useRouter } from 'next/router';
 
 const UserPage = () => {
   return (
     <>
-      <RelationLists />
+      <MyPageTemplate />
     </>
   );
 };

@@ -12,6 +12,8 @@ import Link from 'next/link';
 import ChatModal from '@/components/organisms/chats/chat-modal/ChatModal';
 import useModal from '@/hooks/useModal';
 import USERS, { UserInfo } from '@/apis/user';
+import { useRecoilValue } from 'recoil';
+import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -28,16 +30,30 @@ const scrollToBottom = () => {
   });
 };
 
+interface MyType {
+  id: number;
+  img: string;
+}
+
 const FloatingBar = () => {
-  const [myInfo, setMyInfo] = useState(0);
+  const [myInfo, setMyInfo] = useState<MyType>({
+    id: 0,
+    img: '',
+  });
   const [floatingPosition, setFloatingPosition] = useState(200);
   const router = useRouter();
+  const loginState = useRecoilValue(LoginStateAtom);
 
   const handleGetMyId = async () => {
     try {
       const response = await USERS.getMyProfile();
-      console.log(response);
-      setMyInfo(response.id);
+      setMyInfo((prev) => {
+        return {
+          ...prev,
+          id: response.id,
+          img: response.userImage,
+        };
+      });
     } catch (error: any) {
       // 에러가 403일 때는 에러를 출력하지 않도록 조건 추가
       if (error.response && error.response.status !== 403) {
@@ -45,6 +61,13 @@ const FloatingBar = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken') !== '') {
+    } else {
+      localStorage.setItem('accessToken', '');
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,9 +91,9 @@ const FloatingBar = () => {
 
   const handleMypage = () => {
     router.push({
-      pathname: `/mypage/${myInfo}`,
+      pathname: `/mypage/${myInfo.id}`,
       query: {
-        id: myInfo,
+        id: myInfo.id,
       },
     });
   };
@@ -88,7 +111,11 @@ const FloatingBar = () => {
         </S.FriendSearchIcon>
       </div>
       <div onClick={handleMypage}>
-        <UserIcon />
+        {!loginState ? (
+          <UserIcon />
+        ) : (
+          <S.MyIconBox src={myInfo.img} alt="사진" />
+        )}
       </div>
       <S.ChatIcon onClick={handleModal}>
         <IoMdChatbubbles />

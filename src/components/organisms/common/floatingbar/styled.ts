@@ -34,3 +34,10 @@ export const ScrollButotn = styled.div`
 export const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
+export const MyIconBox = styled.img`
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+`;
