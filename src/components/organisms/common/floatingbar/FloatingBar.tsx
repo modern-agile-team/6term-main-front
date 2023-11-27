@@ -14,6 +14,7 @@ import useModal from '@/hooks/useModal';
 import USERS, { UserInfo } from '@/apis/user';
 import { useRecoilValue } from 'recoil';
 import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
+import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -30,11 +31,18 @@ const scrollToBottom = () => {
   });
 };
 
+interface MyType {
+  id: number;
+  img: string;
+}
+
 const FloatingBar = () => {
   const MyProfile = useRecoilValue(MyProfileAtom);
   // const [MyProfile.userId, setMyProfile.userId] = useState(0);
+
   const [floatingPosition, setFloatingPosition] = useState(200);
   const router = useRouter();
+  const loginState = useRecoilValue(LoginStateAtom);
 
   // const handleGetMyId = async () => {
   //   try {
@@ -48,6 +56,13 @@ const FloatingBar = () => {
   //     }
   //   }
   // };
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken') !== '') {
+    } else {
+      localStorage.setItem('accessToken', '');
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,7 +106,11 @@ const FloatingBar = () => {
         </S.FriendSearchIcon>
       </div>
       <div onClick={handleMypage}>
-        <UserIcon />
+        {!loginState ? (
+          <UserIcon />
+        ) : (
+          <S.MyIconBox src={MyProfile.userImage} alt="사진" />
+        )}
       </div>
       <S.ChatIcon onClick={handleModal}>
         <IoMdChatbubbles />
