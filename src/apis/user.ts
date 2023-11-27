@@ -35,7 +35,7 @@ const USERS = {
   async getUserProfile(id: number): Promise<any> {
     try {
       const result: AxiosResponse = await instance.get(
-        `${USERS.path}/my-info/${id}`,
+        `${USERS.path}/info/${id}`,
       );
       return result.data;
     } catch (error) {
