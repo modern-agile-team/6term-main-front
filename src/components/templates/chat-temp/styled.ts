@@ -5,6 +5,7 @@ export const ChatPageContainer = styled.div`
   flex-direction: row;
   height: 800px;
   width: 1300px;
+  min-width: 300px;
   margin: auto;
   align-items: center;
   justify-content: center;
