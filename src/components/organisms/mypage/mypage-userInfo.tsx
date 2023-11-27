@@ -3,20 +3,18 @@ import * as S from './styled';
 import { useEffect, useState } from 'react';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/molecules/post-board/Modal';
-import { IFileTypes } from '../create-post/PostCreate';
-
-interface UserType {
-  id: number;
-}
+import { UserType } from '@/components/templates/mypage/MypageTemplate';
 
 interface UserInfoType {
-  id: number;
-  name: string;
-  email: string;
-  admin: boolean;
-  provider: string;
-  userImage: string;
-  owner: boolean;
+  info: {
+    id: number;
+    name: string;
+    email: string;
+    admin: boolean;
+    provider: string;
+    userImage: string;
+    owner: boolean;
+  };
 }
 
 interface FormDataType {
@@ -24,36 +22,19 @@ interface FormDataType {
   url: string;
 }
 
-const MyPageUserInfo = ({ id }: UserType) => {
+const MyPageUserInfo = ({ info }: UserInfoType) => {
   const { isOpenModal, handleModal } = useModal();
-  const [getUserInfo, setUserInfo] = useState<UserInfoType>({
-    id: 0,
-    name: '',
-    email: '',
-    admin: false,
-    provider: '',
-    userImage: '',
-    owner: false,
-  });
   const [uploadImage, setUploadImage] = useState<FormDataType>({
     object: {} as File,
     url: '',
   });
-
-  const userInfoApi = async () => {
-    if (id !== 0) {
-      const response = await USERS.getUserProfile(id);
-      setUserInfo(response);
-    }
-  };
 
   useEffect(() => {
     setUploadImage({
       object: {} as File,
       url: '',
     });
-    userInfoApi();
-  }, [id]);
+  }, [info.id]);
 
   const onChangeImageUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -81,10 +62,9 @@ const MyPageUserInfo = ({ id }: UserType) => {
 
   return (
     <S.FlexBox>
-      {getUserInfo.owner ? (
+      {info.owner ? (
         <div>
-          <S.UserImgBox src={getUserInfo.userImage} alt="유저사진" />
-          <S.ControlBox onClick={handleModal}>이미지 업로드</S.ControlBox>
+          <S.UserImgBox src={info.userImage} alt="유저사진" />
           {isOpenModal && (
             <Modal show={isOpenModal} hide={handleModal}>
               <div style={{ display: 'flex' }}>
@@ -106,7 +86,7 @@ const MyPageUserInfo = ({ id }: UserType) => {
               ) : (
                 <S.ImageBox></S.ImageBox>
               )}
-              <form>
+              <form style={{ margin: '0px 0px 5px 0px' }}>
                 <input
                   style={{ display: 'none' }}
                   type="file"
@@ -119,12 +99,15 @@ const MyPageUserInfo = ({ id }: UserType) => {
           )}
         </div>
       ) : (
-        <S.UserImgBox src={getUserInfo.userImage} alt="유저사진" />
+        <S.UserImgBox src={info.userImage} alt="유저사진" />
       )}
       <S.UserInfoBox>
-        <div>{getUserInfo.name}</div>
-        <div>{getUserInfo.email}</div>
+        <div>{info.name}</div>
+        <div>{info.email}</div>
       </S.UserInfoBox>
+      <S.UploadImageBox>
+        <S.ControlBox onClick={handleModal}>이미지 업로드</S.ControlBox>
+      </S.UploadImageBox>
     </S.FlexBox>
   );
 };

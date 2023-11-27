@@ -21,13 +21,8 @@ const USERS = {
     try {
       const result: AxiosResponse = await instance.get(`${USERS.path}/my-info`);
       return result.data;
-    } catch (error: any) {
-      // if (error.response && error.response.status === 403) {
-      //   // 403 에러 발생 시 로그인하지 않은 상태로 간주하고 빈 객체 반환
-      //   return {} as UserInfo;
-      // }
-      // 다른 에러는 그대로 throw
-      throw error;
+    } catch (error) {
+      return Promise.reject(error);
     }
   },
 
@@ -35,7 +30,7 @@ const USERS = {
   async getUserProfile(id: number): Promise<any> {
     try {
       const result: AxiosResponse = await instance.get(
-        `${USERS.path}/my-info/${id}`,
+        `${USERS.path}/info/${id}`,
       );
       return result.data;
     } catch (error) {
@@ -43,6 +38,7 @@ const USERS = {
     }
   },
 
+  //유저 이미지 수정 [patch요청]
   async modifedUserImage(image: FormData): Promise<any> {
     const result: AxiosResponse = await instance.patch(
       `${USERS.path}/image`,
@@ -50,6 +46,18 @@ const USERS = {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return result.data;
+  },
+  //유저 게시글 get api
+  async getUserBoardsApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.get(
+      `${USERS.path}/info-board`,
+      {
+        params: {
+          userId: id,
         },
       },
     );
