@@ -22,5 +22,5 @@ export const ChatRoomTextSpan = styled.span`
   margin-left: 15px;
   margin-bottom: 10px;
   font-size: 17px;
-  font-weight: bold;
+  /* font-weight: bold; */
 `;

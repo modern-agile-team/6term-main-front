@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import * as S from './styled';
 import { BsChatDots } from 'react-icons/bs';
@@ -6,6 +6,7 @@ import Link from 'next/link';
 import USERS, { UserInfo } from '@/apis/user';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
+import { useRouter } from 'next/router';
 
 export const ChatIcon = () => {
   const [loginState, setLoginState] = useRecoilState(LoginStateAtom);

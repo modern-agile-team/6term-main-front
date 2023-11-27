@@ -8,6 +8,7 @@ export const ChatPageContainer = styled.div`
   margin: auto;
   align-items: center;
   justify-content: center;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   border-radius: 10px;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
 `;

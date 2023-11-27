@@ -6,7 +6,7 @@ export const ChatRoomArea = styled.div`
   margin-right: auto;
   width: 360px;
   height: inherit;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
   border-radius: 10px 0 0 10px;
 `;
 

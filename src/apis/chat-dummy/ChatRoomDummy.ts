@@ -10,6 +10,7 @@ export interface ChatRoom {
 export const ChatRoomDummy = [
   {
     roomId: '1',
+    hostId: 70,
     guestId: 1,
     guestName: '이재진',
     guestImage:
@@ -19,6 +20,7 @@ export const ChatRoomDummy = [
   },
   {
     roomId: '2',
+    hostId: 70,
     guestId: 2,
     guestName: '이승우',
     guestImage:
@@ -28,6 +30,7 @@ export const ChatRoomDummy = [
   },
   {
     roomId: '3',
+    hostId: 70,
     guestId: 3,
     guestName: '박준혁',
     guestImage:
@@ -37,6 +40,7 @@ export const ChatRoomDummy = [
   },
   {
     roomId: '4',
+    hostId: 70,
     guestId: 4,
     guestName: '정비호',
     guestImage:
@@ -46,6 +50,7 @@ export const ChatRoomDummy = [
   },
   {
     roomId: '5',
+    hostId: 70,
     guestId: 5,
     guestName: '정효준',
     guestImage:
@@ -56,6 +61,7 @@ export const ChatRoomDummy = [
   },
   {
     roomId: '6',
+    hostId: 70,
     guestId: 6,
     guestName: '송치욱',
     guestImage:
@@ -65,6 +71,7 @@ export const ChatRoomDummy = [
   },
   {
     roomId: '7',
+    hostId: 70,
     guestId: 7,
     guestName: '정현민',
     guestImage:
@@ -74,6 +81,7 @@ export const ChatRoomDummy = [
   },
   {
     roomId: '8',
+    hostId: 70,
     guestId: 8,
     guestName: '알수없음',
     guestImage:
@@ -83,6 +91,7 @@ export const ChatRoomDummy = [
   },
   {
     roomId: '9',
+    hostId: 70,
     guestId: 9,
     guestName: '알수있음',
     guestImage:
