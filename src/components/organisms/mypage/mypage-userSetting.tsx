@@ -8,7 +8,6 @@ const MyPageUserSetting = () => {
         <hr />
         <div>다크모드</div>
         <div>회원탈퇴</div>
-        <div>test </div>
       </div>
     </S.SettingContainer>
   );
