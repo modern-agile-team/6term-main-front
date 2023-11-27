@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import * as S from './styled';
 import { useRecoilValue } from 'recoil';
 import Link from 'next/link';
-import { MyProfileSelector } from '@/recoil/selectors/MyProfileSelector';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 const ChatRoomTitle = () => {
-  const myProFile = useRecoilValue(MyProfileSelector);
+  const myProFile = useRecoilValue(MyProfileAtom);
 
   useEffect(() => {
     console.log(myProFile);

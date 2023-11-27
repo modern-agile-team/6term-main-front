@@ -29,7 +29,7 @@ const UserSmaple = (props: User) => {
       )}
       <div>이름 : {props.name}</div>
       <div onClick={handleProfile}>프로필 이동</div>
-      <AddFriend name={props.name} id={props.id} />
+      <AddFriend name={props.name} userId={props.id} />
     </div>
   );
 };

@@ -10,12 +10,17 @@ export const ChatListWrapper = styled.ul`
   overflow-y: auto;
 `;
 
-export const ChatListItem = styled.li`
+export const ChatListItem = styled.li<{ isSelected: boolean }>`
   display: flex;
   margin: 0;
-  padding: 8px;
+  padding: 12px;
   width: auto;
-  border-bottom: 1px soild #999;
+  /* border: 2px solid yellow; */
+  background-color: ${({ isSelected }) => isSelected && '#dde'};
+  &:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
 `;
 
 export const ChatListImage = styled.img`
@@ -32,6 +37,14 @@ export const ChatListName = styled.p`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+export const ChatListRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: calc(100% - 40px - 6px);
+  gap: 5px;
 `;
 
 export const ChatListbottom = styled.div`

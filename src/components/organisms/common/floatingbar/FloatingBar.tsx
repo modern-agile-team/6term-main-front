@@ -13,6 +13,7 @@ import ChatModal from '@/components/organisms/chats/chat-modal/ChatModal';
 import useModal from '@/hooks/useModal';
 import USERS, { UserInfo } from '@/apis/user';
 import { useRecoilValue } from 'recoil';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 
 const scrollToTop = () => {
@@ -36,31 +37,25 @@ interface MyType {
 }
 
 const FloatingBar = () => {
-  const [myInfo, setMyInfo] = useState<MyType>({
-    id: 0,
-    img: '',
-  });
+  const MyProfile = useRecoilValue(MyProfileAtom);
+  // const [MyProfile.userId, setMyProfile.userId] = useState(0);
+
   const [floatingPosition, setFloatingPosition] = useState(200);
   const router = useRouter();
   const loginState = useRecoilValue(LoginStateAtom);
 
-  const handleGetMyId = async () => {
-    try {
-      const response = await USERS.getMyProfile();
-      setMyInfo((prev) => {
-        return {
-          ...prev,
-          id: response.id,
-          img: response.userImage,
-        };
-      });
-    } catch (error: any) {
-      // 에러가 403일 때는 에러를 출력하지 않도록 조건 추가
-      if (error.response && error.response.status !== 403) {
-        console.error(error);
-      }
-    }
-  };
+  // const handleGetMyId = async () => {
+  //   try {
+  //     const response = await USERS.getMyProfile();
+  //     console.log(response);
+  //     setMyProfile.userId(response.userId);
+  //   } catch (error: any) {
+  //     // 에러가 403일 때는 에러를 출력하지 않도록 조건 추가
+  //     if (error.response && error.response.status !== 403) {
+  //       console.error(error);
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     if (localStorage.getItem('accessToken') !== '') {
@@ -81,7 +76,7 @@ const FloatingBar = () => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
-    handleGetMyId();
+    // handleGetMyId();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -91,9 +86,9 @@ const FloatingBar = () => {
 
   const handleMypage = () => {
     router.push({
-      pathname: `/mypage/${myInfo.id}`,
+      pathname: `/mypage/${MyProfile.userId}`,
       query: {
-        id: myInfo.id,
+        id: MyProfile.userId,
       },
     });
   };
@@ -114,7 +109,7 @@ const FloatingBar = () => {
         {!loginState ? (
           <UserIcon />
         ) : (
-          <S.MyIconBox src={myInfo.img} alt="사진" />
+          <S.MyIconBox src={MyProfile.userImage} alt="사진" />
         )}
       </div>
       <S.ChatIcon onClick={handleModal}>

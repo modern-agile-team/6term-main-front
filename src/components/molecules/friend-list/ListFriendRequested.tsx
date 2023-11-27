@@ -32,15 +32,18 @@ const ListRequested = () => {
   }, []);
 
   // 보낸 요청 취소 핸들러
-  const handleCacelRequest = async () => {
+  const handleCancelRequest = async (
+    respondentId: number,
+    respondentName: string,
+  ) => {
     const isConfirmed = window.confirm(
-      `${friendInfo.name}님에게 한 친구 요청을 취소하시겠습니까?`,
+      `${respondentName}님에게 한 친구 요청을 취소하시겠습니까?`,
     );
     if (isConfirmed) {
       try {
-        await FriendREQUEST.cancelRequestFriend(friendInfo.respondentId);
+        await FriendREQUEST.cancelRequestFriend(respondentId);
         setIsCancelRequest(true);
-        alert(`${friendInfo.name}님에게 한 요청을 취소했습니다.`);
+        alert(`${respondentName}님에게 한 요청을 취소했습니다.`);
         router.reload();
       } catch (error) {
         console.log('친구 요청 취소 중 오류 발생');
@@ -62,7 +65,12 @@ const ListRequested = () => {
                   style={{ width: '30px', height: '30px', borderRadius: '50%' }}
                 />
                 <div>{data.respondent.name}</div>
-                <S.Button onClick={handleCacelRequest}>요청 취소</S.Button>
+                <S.Button
+                  onClick={() =>
+                    handleCancelRequest(data.respondentId, data.respondent.name)
+                  }>
+                  요청 취소
+                </S.Button>
               </>
             ) : null}
           </S.UserBox>

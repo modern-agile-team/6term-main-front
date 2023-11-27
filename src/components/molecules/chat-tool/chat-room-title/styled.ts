@@ -5,7 +5,8 @@ export const ChatRoomTitleBox = styled.div`
   flex-direction: column;
   height: 120px;
   width: inherit;
-  border: 2px solid green;
+  border-bottom: 1px solid #d9d9d9;
+  /* border: 2px solid green; */
 `;
 
 export const ChatRoomTitleSpan = styled.span`
@@ -19,6 +20,7 @@ export const ChatRoomTitleSpan = styled.span`
 export const ChatRoomTextSpan = styled.span`
   display: flex;
   margin-left: 15px;
+  margin-bottom: 10px;
   font-size: 17px;
   font-weight: bold;
 `;

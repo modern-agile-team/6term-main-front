@@ -80,8 +80,8 @@ const ListFriend = () => {
     const isConfirmed = window.confirm(
       `${
         friendToDelete?.requesterId === deletedId
-          ? friendToDelete?.respondentName
-          : friendToDelete?.requesterName
+          ? friendToDelete?.requesterName
+          : friendToDelete?.respondentName
       }님을 친구에서 삭제하시겠습니까?`,
     );
     console.log(deletedId);

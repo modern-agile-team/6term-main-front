@@ -32,25 +32,25 @@ const ListResponsed = () => {
 
   useEffect(() => {
     getListResponsed();
-    setFriendInfo((prev) => {
-      return {
-        ...prev,
-        id: friendInfo.requesterId,
-        name: friendInfo.name,
-      };
-    });
+    // setFriendInfo((prev) => {
+    //   return {
+    //     ...prev,
+    //     id: requesterId,
+    //     name: requesterName,
+    //   };
+    // });
   }, []);
 
   //요청 수락 핸들러
-  const handleAccept = async () => {
+  const handleAccept = async (requesterId: number, requesterName: string) => {
     const isConfirmed = window.confirm(
-      `${friendInfo.name}님을 친구로 추가하시겠습니까?`,
+      `${requesterName}님을 친구로 추가하시겠습니까?`,
     );
     if (isConfirmed) {
       try {
-        await FriendRESPONSE.friendAccept(friendInfo.requesterId);
+        await FriendRESPONSE.friendAccept(requesterId);
         setIsAccept(true);
-        alert(`${friendInfo.name}님을 친구로 추가하였습니다.`);
+        alert(`${requesterName}님을 친구로 추가하였습니다.`);
         router.reload();
       } catch (error) {
         console.error('친구 요청 수락 중 오류 발생');
@@ -59,15 +59,15 @@ const ListResponsed = () => {
   };
 
   //요청 거절 핸들러
-  const handleReject = async () => {
+  const handleReject = async (requesterId: number, requesterName: string) => {
     const isConfirmed = window.confirm(
-      `${friendInfo.name}님의 요청을 거절하시겠습니까?`,
+      `${requesterName}님의 요청을 거절하시겠습니까?`,
     );
     if (isConfirmed) {
       try {
-        await FriendRESPONSE.friendReject(friendInfo.requesterId);
+        await FriendRESPONSE.friendReject(requesterId);
         setIsReject(true);
-        alert(`${friendInfo.name}님의 요청을 거절하였습니다.`);
+        alert(`${requesterName}님의 요청을 거절하였습니다.`);
         router.reload();
       } catch (error) {
         console.error('친구 요청 거절 중 오류 발생');
@@ -76,15 +76,18 @@ const ListResponsed = () => {
   };
 
   //영구 거절 핸들러
-  const handleRejectPermanet = async () => {
+  const handleRejectPermanet = async (
+    requesterId: number,
+    requesterName: string,
+  ) => {
     const isConfirmed = window.confirm(
-      `${friendInfo.name}님의 요청을 영구 거절하시겠습니까?`,
+      `${requesterName}님의 요청을 영구 거절하시겠습니까?`,
     );
     if (isConfirmed) {
       try {
-        await FriendRESPONSE.friendRejectPermanent(friendInfo.requesterId);
+        await FriendRESPONSE.friendRejectPermanent(requesterId);
         setIsRejectPermanent(true);
-        alert(`${friendInfo.name}님의 요청을 영구 거절하였습니다.`);
+        alert(`${requesterName}님의 요청을 영구 거절하였습니다.`);
         router.reload();
       } catch (error) {
         console.error('친구 요청 영구 거절 중 오류 발생');
@@ -106,9 +109,24 @@ const ListResponsed = () => {
                   style={{ width: '30px', height: '30px', borderRadius: '50%' }}
                 />
                 <div>{data.requester.name}</div>
-                <S.Button onClick={handleAccept}>수락</S.Button>
-                <S.Button onClick={handleReject}>거절</S.Button>
-                <S.Button onClick={handleRejectPermanet}>영구 거절</S.Button>
+                <S.Button
+                  onClick={() =>
+                    handleAccept(data.requesterId, data.requester.name)
+                  }>
+                  수락
+                </S.Button>
+                <S.Button
+                  onClick={() =>
+                    handleReject(data.requesterId, data.requester.name)
+                  }>
+                  거절
+                </S.Button>
+                <S.Button
+                  onClick={() =>
+                    handleRejectPermanet(data.requesterId, data.requester.name)
+                  }>
+                  영구 거절
+                </S.Button>
               </>
             ) : null}
           </S.UserBox>
