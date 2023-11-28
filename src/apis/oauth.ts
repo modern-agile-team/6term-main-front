@@ -29,6 +29,19 @@ const AUTHS = {
     );
     return result;
   },
+
+  //회원탈퇴 api [post요청]
+  async unlinkMemberApi(provider: string): Promise<any> {
+    const result: AxiosResponse = await instance.post(
+      `${AUTHS.path}/${provider}/unlink`,
+    );
+    return result;
+  },
+
+  //계정 삭제 보고 api [delete 요청 ]
+  async deleteAccountUserApi(): Promise<any> {
+    await instance.delete(`${AUTHS.path}/account`);
+  },
 };
 
 export default AUTHS;

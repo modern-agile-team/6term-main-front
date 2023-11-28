@@ -64,7 +64,7 @@ const MyPageTemplate = () => {
           )}
         </div>
       </S.MyPageContainer>
-      <MyPageUserSetting />
+      {getUserInfo.owner && <MyPageUserSetting />}
     </div>
   );
 };

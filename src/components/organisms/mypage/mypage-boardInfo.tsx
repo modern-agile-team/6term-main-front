@@ -32,6 +32,12 @@ const MyPageBoardInfo = ({ id }: UserType) => {
     });
   };
 
+  const handleCreatePost = () => {
+    router.push({
+      pathname: `/post/create`,
+    });
+  };
+
   useEffect(() => {
     getUserBoards();
   }, [id]);
@@ -41,7 +47,10 @@ const MyPageBoardInfo = ({ id }: UserType) => {
   });
   return (
     <S.UserOwnBoardContainer>
-      <S.TitleBox>게시글 정보</S.TitleBox>
+      <S.TitleBox>
+        <S.TitleChlidren>게시글 정보</S.TitleChlidren>
+        <S.CreatePostBox onClick={handleCreatePost}>글쓰기</S.CreatePostBox>
+      </S.TitleBox>
       <S.UserOwnBoardContainer>
         {boardInfo &&
           boardInfo.map((data) => {
