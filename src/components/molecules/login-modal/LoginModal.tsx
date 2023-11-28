@@ -16,7 +16,7 @@ const LoginModal = ({ show, hide }: ModalType) => {
           <S.Button onClick={hide}>X</S.Button>
         </S.FlexBox>
         <Logo />
-        <S.FlexBox>{/* <S.DivisionLine /> */}</S.FlexBox>
+        <S.FlexBox><S.DivisionLine /></S.FlexBox>
         <div>로그인</div>
         <S.FlexBox direction="column">
           <Naver />
