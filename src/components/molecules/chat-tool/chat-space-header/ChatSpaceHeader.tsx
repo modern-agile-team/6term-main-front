@@ -1,13 +1,14 @@
 import React from 'react';
 import * as S from './styled';
-import { GoHome, GoInfo, GoGear } from 'react-icons/go';
+import { GoHome, GoInfo, GoGear, GoBell } from 'react-icons/go';
 import DropdownMenu from '@/hooks/useDropDown';
 import { useRouter } from 'next/router';
 import CustomSwitch from '@/hooks/useSwitch';
 
 const ChatSpaceHeader = () => {
   const router = useRouter();
-  const dropDownItems = ['설정', '알림 해제', '채팅방 나가기'];
+  const dropDownItems = ['설정', '채팅방 나가기'];
+  const dropDownAlarm = ['알림 해제'];
 
   const handleGoHoom = () => {
     router.push(`/`);
@@ -18,6 +19,9 @@ const ChatSpaceHeader = () => {
       <S.ChatSpaceRoomProfileBox>header</S.ChatSpaceRoomProfileBox>
       <S.ChatSpaceNavbox>
         <GoHome onClick={handleGoHoom} />
+        <DropdownMenu initialItems={dropDownAlarm}>
+          <GoBell />
+        </DropdownMenu>
         <DropdownMenu initialItems={dropDownItems}>
           <GoGear />
         </DropdownMenu>

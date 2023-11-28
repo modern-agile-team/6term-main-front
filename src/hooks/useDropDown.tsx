@@ -13,7 +13,7 @@ const DropdownContainer = styled.div`
 `;
 
 const DropdownIcon = styled.div`
-  margin-top: 5px;
+  margin-top: 4px;
   cursor: pointer;
 `;
 
@@ -21,7 +21,10 @@ const Menu = styled.div<{ isVisible: boolean }>`
   display: ${(props) => (props.isVisible ? 'flex' : 'none')};
   flex-direction: column;
   position: absolute;
+  margin-right: 100px;
   width: 110px;
+  left: 50%;
+  transform: translateX(-50%);
   top: 100%;
   background-color: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);

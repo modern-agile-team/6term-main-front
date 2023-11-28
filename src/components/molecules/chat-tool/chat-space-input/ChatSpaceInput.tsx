@@ -18,6 +18,7 @@ const ChatSpaceInput = () => {
   const handleSend = () => {
     setInputMessage('');
   };
+  console.log(inputMessage);
 
   return (
     <S.ChatSpaceInputArea>
