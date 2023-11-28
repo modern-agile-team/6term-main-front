@@ -147,3 +147,10 @@ export const UserAccountBox = styled.div`
     color: #fff;
   }
 `;
+
+export const DarkModeBtn = styled.div`
+  width: 30px;
+  height: 30px;
+  background-size: 26px 26px;
+  background-repeat: no-repeat;
+`;
