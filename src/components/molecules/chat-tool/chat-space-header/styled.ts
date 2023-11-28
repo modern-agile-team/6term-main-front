@@ -24,6 +24,7 @@ export const ChatSpaceNavbox = styled.div`
   width: auto;
   font-size: 22px;
   border: solid yellow;
+  cursor: pointer;
   & > * {
     margin-right: 15px;
   }
