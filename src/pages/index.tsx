@@ -23,13 +23,12 @@ export const getServerSideProps: GetServerSideProps<TotalPageProps> = async (
       query.part as string,
       query.searchQuery as string,
       1,
-      1,
+      16,
       '전체',
     );
-    const tempPage = Math.ceil(totalPage.meta.total / 16);
-    return { props: { total: tempPage } };
+    const tempTotal = totalPage && totalPage.data.meta.last_page;
+    return { props: { total: tempTotal } };
   } catch (error) {
-    console.error('Error fetching data:', error);
     return {
       props: {
         total: 0,

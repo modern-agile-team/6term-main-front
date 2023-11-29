@@ -12,7 +12,7 @@ interface searchInfoType {
 }
 
 const PostSearchBoard = (props: searchInfoType) => {
-  const [getList, setGetList] = useState<any>([]);
+  const [getList, setList] = useState<any>([]);
   const obsRef = useRef<HTMLDivElement>(null); //옵저버 state
   const [page, setPage] = useState(props.totalPage); // 페이지 state
   const [load, setLoad] = useState(false);
@@ -27,11 +27,6 @@ const PostSearchBoard = (props: searchInfoType) => {
       observer.disconnect();
     };
   }, [obsRef, getList]);
-
-  // 첫 페이지 로드
-  // useEffect(() => {
-  //   getPost();
-  // }, []);
 
   useEffect(() => {
     getSearchPost();
@@ -51,25 +46,9 @@ const PostSearchBoard = (props: searchInfoType) => {
       setPage((prev) => prev - 1); //페이지 값 감소
     }
   };
-  //페이지 수 로드 함수
-  // const getPost = useCallback(async () => {
-  //   if (router.query.searchQeury !== undefined) {
-  //     console.log('시작');
-  //     const totalPage = await SEARCH.searchApi(
-  //       props.part,
-  //       router.query.searchQuery as string,
-  //       1,
-  //       1,
-  //       props.category,
-  //     );
-  //     const tempPage = Math.ceil(totalPage.meta.total / 16);
-  //     console.log('temp', tempPage);
-  //     setPage(tempPage);
-  //   }
-  // }, []);
 
   const getSearchPost = useCallback(async () => {
-    setGetList([]);
+    setList([]);
     const result = await SEARCH.searchApi(
       props.part,
       props.searchQuery,
@@ -77,10 +56,11 @@ const PostSearchBoard = (props: searchInfoType) => {
       16,
       props.category,
     ); //api요청 글 목록 불러오기
-    if (result) {
-      const reverseArr = result.data && [...result.data].reverse();
-      result && setGetList([...reverseArr]);
+    if (result.data.boardResponse) {
+      const reverseArr = [...result.data.boardResponse].reverse();
+      result && setList([...reverseArr]);
     } else {
+      console.log('게시물이 존재하지 않습니다.');
     }
   }, [props.searchQuery]);
 
@@ -95,10 +75,11 @@ const PostSearchBoard = (props: searchInfoType) => {
         16,
         props.category,
       ); //api요청 글 목록 불러오기
-      if (result) {
-        const reverseArr = [...result.data].reverse();
-        result && setGetList((prev: any) => [...prev, ...reverseArr]);
+      if (result.data.boardResponse) {
+        const reverseArr = [...result.data.boardResponse].reverse();
+        result && setList((prev: any) => [...prev, ...reverseArr]);
       } else {
+        console.log('게시물이 존재하지 않습니다.');
       }
     }
     setLoad(false);
