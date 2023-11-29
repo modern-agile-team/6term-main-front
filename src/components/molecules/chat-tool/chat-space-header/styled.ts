@@ -5,15 +5,25 @@ export const ChatSpaceHeaderContainer = styled.div`
   justify-content: space-between;
   width: inherit;
   height: 70px;
-  border: 2px solid green;
+  border-bottom: 1px solid #d9d9d9;
 `;
 
 export const ChatSpaceRoomProfileBox = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin-left: 20px;
   width: 200px;
   height: inherit;
-  border: 2px solid blue;
+  > img {
+    width: 50px;
+    height: 50px;
+  }
+  > span {
+    font-size: 17px;
+    margin-left: 20px;
+    /* opacity: 0.7; */
+  }
 `;
 
 export const ChatSpaceNavbox = styled.div`
@@ -23,7 +33,6 @@ export const ChatSpaceNavbox = styled.div`
   margin-right: 10px;
   width: auto;
   font-size: 22px;
-  /* border: solid yellow; */
   cursor: pointer;
   & > * {
     margin-right: 15px;

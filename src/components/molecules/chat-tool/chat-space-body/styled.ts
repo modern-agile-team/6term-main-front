@@ -5,7 +5,8 @@ export const ChatSpaceBodyContainer = styled.div`
   flex-direction: column;
   margin: 0;
   padding: 0;
-  height: calc(100% - 150px);
+  height: 800px;
+  min-height: 500px;
   width: inherit;
   border: 2px solid brown;
 `;

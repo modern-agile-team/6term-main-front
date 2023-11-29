@@ -1,16 +1,16 @@
-export interface ChatRoom {
+export interface ChatRoomType {
   roomId: string;
   hostId: number;
   guestId: number;
   guestName: string;
   guestImage: string;
-  prevText: string;
+  prevText: string; // 이부분을 아마 Recoil로 따로 관리할듯하다.
   createdAt: string;
-  isSeen: boolean;
-  unReadMessage: number;
+  isSeen: boolean; //이거랑
+  unReadMessage: number; //이거까지 근데 일단 이렇게 하고
 }
 
-export const ChatRoomDummy: ChatRoom[] = [
+export const ChatRoomDummy: ChatRoomType[] = [
   {
     roomId: '1',
     hostId: 70,
@@ -18,7 +18,7 @@ export const ChatRoomDummy: ChatRoom[] = [
     guestName: '이재진',
     guestImage:
       'https://previews.123rf.com/images/blankstock/blankstock2212/blankstock221202347/195565495-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%94%84%EB%A1%9C%ED%95%84-%EC%95%84%EC%9D%B4%EC%BD%98-%EB%B2%A1%ED%84%B0%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%95%84%EB%B0%94%ED%83%80-%EB%98%90%EB%8A%94-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98-%ED%94%84%EB%A1%9C%ED%95%84-%EC%82%AC%EC%A7%84-%EC%84%B8%EB%A1%9C-%EA%B8%B0%ED%98%B8-%EC%A4%91%EB%A6%BD-%EC%84%B1%EB%B3%84-%EC%8B%A4%EB%A3%A8%EC%97%A3-%EC%95%84%EB%B0%94%ED%83%80-%EC%82%AC%EC%A7%84%EC%9D%B4-%EC%9E%88%EB%8A%94-%EC%9B%90-%EB%B2%84%ED%8A%BC-%EB%B9%88-%ED%94%84%EB%A1%9C%ED%95%84.jpg',
-    prevText: '형 뭐해요',
+    prevText: '형 식사하셨습니까',
     createdAt: '12:24',
     isSeen: false,
     unReadMessage: 1,
@@ -31,7 +31,7 @@ export const ChatRoomDummy: ChatRoom[] = [
     guestImage:
       'https://previews.123rf.com/images/blankstock/blankstock2212/blankstock221202347/195565495-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%94%84%EB%A1%9C%ED%95%84-%EC%95%84%EC%9D%B4%EC%BD%98-%EB%B2%A1%ED%84%B0%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%95%84%EB%B0%94%ED%83%80-%EB%98%90%EB%8A%94-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98-%ED%94%84%EB%A1%9C%ED%95%84-%EC%82%AC%EC%A7%84-%EC%84%B8%EB%A1%9C-%EA%B8%B0%ED%98%B8-%EC%A4%91%EB%A6%BD-%EC%84%B1%EB%B3%84-%EC%8B%A4%EB%A3%A8%EC%97%A3-%EC%95%84%EB%B0%94%ED%83%80-%EC%82%AC%EC%A7%84%EC%9D%B4-%EC%9E%88%EB%8A%94-%EC%9B%90-%EB%B2%84%ED%8A%BC-%EB%B9%88-%ED%94%84%EB%A1%9C%ED%95%84.jpg',
     prevText: '담배 한대 피시겠습니까',
-    createdAt: '17:36',
+    createdAt: '17:02',
     isSeen: true,
     unReadMessage: 2,
   },

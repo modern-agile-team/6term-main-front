@@ -10,8 +10,12 @@ const ChatSpaceInput = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
-      e.preventDefault();
-      handleSend();
+      if (!e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+      } else {
+        setInputMessage((prevInput) => prevInput);
+      }
     }
   };
 
@@ -26,7 +30,7 @@ const ChatSpaceInput = () => {
         value={inputMessage}
         onKeyDown={handleKeyDown}
         onChange={handleCangeMessage}
-        placeholder="채팅을 입력해주세요."
+        placeholder="메세지 입력..."
       />
       <S.ChatSpaceInputButton onClick={handleSend}>
         <span>전 송</span>

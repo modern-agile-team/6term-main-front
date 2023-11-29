@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { chatRoomAtom } from '@/recoil/atoms/ChatRoomAtom';
+import { useRouter } from 'next/router';
+import useNavigator from '@/hooks/useNavigator';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 const ChatRoomList = () => {
+  const navigateList = useNavigator();
   const [chatRooms, setChatRooms] = useRecoilState(chatRoomAtom);
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
   const handleListSelected = (roomId: string) => {
+    const queryParams = {
+      roomId: roomId,
+    };
+    navigateList(`/chat/${roomId}`, queryParams);
     setSelectedRoomId(roomId);
   };
 

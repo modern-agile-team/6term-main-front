@@ -11,5 +11,5 @@ export const ChatPageContainer = styled.div`
   justify-content: center;
   /* border: 1px solid #000; */
   border-radius: 10px;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { GoBell } from 'react-icons/go';
 
 export const ChatSpaceInputArea = styled.div`
   display: flex;
@@ -6,20 +7,23 @@ export const ChatSpaceInputArea = styled.div`
   padding: 5px;
   bottom: 0;
   max-width: 940;
-  height: 120px;
+  height: 50px;
   align-items: center;
 `;
 
 export const ChatSpaceInputTextArea = styled.textarea`
   display: flex;
   resize: none;
-  width: 800px;
-  height: 110px;
-  padding: 5px;
-  border-radius: 10px;
+  width: 750px;
+  height: 30px;
+  margin-left: 10px;
+  padding-left: 12px;
+  line-height: 30px;
+  border-radius: 20px;
   border: 0.5px solid #d3d3d3;
   outline: none;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: bold;
 `;
 
 export const ChatSpaceInputButton = styled.button`

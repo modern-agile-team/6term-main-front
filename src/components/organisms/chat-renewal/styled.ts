@@ -6,8 +6,8 @@ export const ChatRoomArea = styled.div`
   margin-right: auto;
   width: 360px;
   height: inherit;
-  /* border: 2px solid blue; */
   border-radius: 10px 0 0 10px;
+  border-right: 1px solid #d9d9d9;
 `;
 
 export const ChatSpaceArea = styled.div`
@@ -15,6 +15,5 @@ export const ChatSpaceArea = styled.div`
   flex-direction: column;
   width: 940px;
   height: inherit;
-  border: 2px solid red;
   border-radius: 0 10px 10px 0;
 `;
