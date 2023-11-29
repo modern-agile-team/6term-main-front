@@ -26,20 +26,31 @@ export const ChatSpaceInputTextArea = styled.textarea`
   font-weight: bold;
 `;
 
-export const ChatSpaceInputButton = styled.button`
+export const ChatSpaceFooterbuttonBox = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
-  margin-left: 14px;
-  border: none;
-  border-radius: 7px;
+  border: 2px solid yellow;
   &:hover {
     cursor: pointer;
-    background-color: #d3d3d3;
-    & > span {
-      color: white;
-    }
   }
 `;
+
+// export const ChatSpaceInputButton = styled.button`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100px;
+//   height: 100px;
+//   margin-left: 14px;
+//   border: none;
+//   border-radius: 7px;
+//   &:hover {
+//     cursor: pointer;
+//     background-color: #d3d3d3;
+//     & > span {
+//       color: white;
+//     }
+//   }
+// `;

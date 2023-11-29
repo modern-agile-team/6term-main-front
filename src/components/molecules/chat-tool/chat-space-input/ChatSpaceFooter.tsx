@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
 
-const ChatSpaceInput = () => {
+const ChatSpaceFooter = () => {
   const [inputMessage, setInputMessage] = useState('');
 
   const handleCangeMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -32,11 +32,12 @@ const ChatSpaceInput = () => {
         onChange={handleCangeMessage}
         placeholder="메세지 입력..."
       />
-      <S.ChatSpaceInputButton onClick={handleSend}>
+      <S.ChatSpaceFooterbuttonBox></S.ChatSpaceFooterbuttonBox>
+      {/* <S.ChatSpaceInputButton onClick={handleSend}>
         <span>전 송</span>
-      </S.ChatSpaceInputButton>
+      </S.ChatSpaceInputButton> */}
     </S.ChatSpaceInputArea>
   );
 };
 
-export default ChatSpaceInput;
+export default ChatSpaceFooter;

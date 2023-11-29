@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from './styled';
 import ChatSpaceHeader from '@/components/molecules/chat-tool/chat-space-header/ChatSpaceHeader';
 import ChatSpaceBody from '@/components/molecules/chat-tool/chat-space-body/ChatSpaceBody';
-import ChatSpaceInput from '@/components/molecules/chat-tool/chat-space-input/ChatSpaceInput';
+import ChatSpaceFooter from '@/components/molecules/chat-tool/chat-space-input/ChatSpaceFooter';
 import { useRecoilValue } from 'recoil';
 import { chatHistoryAtom } from '@/recoil/atoms/ChatHistoryAtom';
 
@@ -11,7 +11,7 @@ const ChatSpace = () => {
     <S.ChatSpaceArea>
       <ChatSpaceHeader />
       <ChatSpaceBody />
-      <ChatSpaceInput />
+      <ChatSpaceFooter />
     </S.ChatSpaceArea>
   );
 };
