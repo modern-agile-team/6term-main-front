@@ -107,9 +107,11 @@ const PostUnitTemplate = (props: BoardType) => {
         />
         <div>
           {getUnitInfo.unitowner && (
-            <div>
-              <div onClick={handleDeleteButton}>삭제버튼</div>
-              <Link
+            <S.ControlButtonContain>
+              <S.ControlButtonBox onClick={handleDeleteButton}>
+                게시물 삭제
+              </S.ControlButtonBox>
+              <S.ControlButtonLink
                 href={{
                   pathname: `/post/modify/[id]`,
                   query: {
@@ -117,9 +119,9 @@ const PostUnitTemplate = (props: BoardType) => {
                     data: JSON.stringify(getUnitInfo),
                   },
                 }}>
-                수정버튼
-              </Link>
-            </div>
+                게시물 수정
+              </S.ControlButtonLink>
+            </S.ControlButtonContain>
           )}
         </div>
         <S.DivisionLine />

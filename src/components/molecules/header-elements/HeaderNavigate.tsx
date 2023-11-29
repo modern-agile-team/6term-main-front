@@ -5,11 +5,11 @@ import { AiFillBell } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import * as S from './styled';
 import LoginModal from '../login-modal/LoginModal';
-import AlarmModal from '../notification/AlarmModal';
 import useModal from '@/hooks/useModal';
 import { useRecoilValue } from 'recoil';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import AfterLoginModal from '../login-modal/AfterLoginModal';
+import UserIcon from '@/components/common/UserIcon';
 
 const NavData = [
   { id: 'menu01', name: '전체', path: '/' },
@@ -22,7 +22,6 @@ const NavData = [
 const HeaderNavigate = (): JSX.Element => {
   const router = useRouter();
   const { isOpenModal: loginState, handleModal: loginHandle } = useModal();
-  const { isOpenModal: alarmState, handleModal: alarmHandle } = useModal();
   const { isOpenModal: afterLoginState, handleModal: afterLoginHandle } =
     useModal();
   const isLogin = useRecoilValue(LoginStateAtom);
@@ -78,7 +77,9 @@ const HeaderNavigate = (): JSX.Element => {
         </nav>
         {isLogin ? (
           <div>
-            <div onClick={afterLoginHandle}>아이콘</div>
+            <div onClick={afterLoginHandle}>
+              <UserIcon />
+            </div>
             {afterLoginState && (
               <AfterLoginModal show={afterLoginState} hide={afterLoginHandle} />
             )}
@@ -87,10 +88,6 @@ const HeaderNavigate = (): JSX.Element => {
           <S.LoginButton onClick={loginHandle}>Login</S.LoginButton>
         )}
         {loginState && <LoginModal show={loginState} hide={loginHandle} />}
-        <S.AlarmIcon onClick={alarmHandle}>
-          <AiFillBell />
-        </S.AlarmIcon>
-        {alarmState && <AlarmModal show={alarmState} hide={alarmHandle} />}
       </S.HeaderNavBox>
     </S.HeaderContainer>
   );

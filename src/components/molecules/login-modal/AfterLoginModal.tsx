@@ -34,12 +34,12 @@ const AfterLoginModal = ({ show, hide }: ModalType) => {
 
   return (
     <div>
-      <S.ModalWrapper>
+      <S.AfterModalContainer>
         <>
-          <div>마이페이지</div>
-          <div onClick={logoutHandle}>로그아웃</div>
+          <S.ControlCancel onClick={hide}>X</S.ControlCancel>
+          <S.ControlBox onClick={logoutHandle}>로그아웃</S.ControlBox>
         </>
-      </S.ModalWrapper>
+      </S.AfterModalContainer>
       <S.Backdrop
         onClick={(e: React.MouseEvent) => {
           e.preventDefault();

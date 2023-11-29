@@ -19,8 +19,8 @@ const PostUnitHeader = (props: UnitInfo) => {
 
   const getLikeApi = async (id: number) => {
     const response = await BOARDS.getBoardLikeApi(id);
-    setLike(response.boardLikesCount);
-    setLikeState(response.isLike);
+    setLike(response.data.boardLikesCount);
+    setLikeState(response.data.isLike);
   };
 
   const hanldeLikeAdd = async () => {
@@ -50,21 +50,21 @@ const PostUnitHeader = (props: UnitInfo) => {
 
   return (
     <S.FlexBox direction="row">
-      <div onClick={handleProfile}>
+      <S.ControlBox onClick={handleProfile}>
         <S.UnitWriterImg
           src={props.userImage as string}
           alt="profile"></S.UnitWriterImg>
         <div>{props.name}</div>
-      </div>
+      </S.ControlBox>
       <S.UnitTitle>{props.head}</S.UnitTitle>
       <S.HeartInfo>
-        <div>
+        <S.HeartBox>
           {likeState ? (
-            <AiFillHeart onClick={handleLikeDel} size={35} />
+            <AiFillHeart color="#f00" onClick={handleLikeDel} size={35} />
           ) : (
-            <AiOutlineHeart onClick={hanldeLikeAdd} size={35} />
+            <AiOutlineHeart color="#f00" onClick={hanldeLikeAdd} size={35} />
           )}
-        </div>
+        </S.HeartBox>
         <div style={{ fontSize: 30 }}>{getLike}</div>
       </S.HeartInfo>
     </S.FlexBox>
