@@ -13,15 +13,11 @@ export const ChatIcon = () => {
   const [loginProfile, setLoginProfile] = useRecoilState(MyProfileAtom);
 
   const getMyProfile = async () => {
-    try {
-      if (loginState) {
-        const myProfile = await USERS.getMyProfile();
-        setLoginProfile(myProfile);
-      } else {
-        console.log('로그인 한 상태가 아닙니다.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
+    if (loginState) {
+      const myProfile = await USERS.getMyProfile();
+      setLoginProfile(myProfile);
+    } else {
+      console.log('로그인 한 상태가 아닙니다.');
     }
   };
 

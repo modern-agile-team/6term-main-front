@@ -38,6 +38,7 @@ const USERS = {
     }
   },
 
+  //유저 이미지 수정 [patch요청]
   async modifedUserImage(image: FormData): Promise<any> {
     const result: AxiosResponse = await instance.patch(
       `${USERS.path}/image`,
@@ -45,6 +46,18 @@ const USERS = {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return result.data;
+  },
+  //유저 게시글 get api
+  async getUserBoardsApi(id: number): Promise<any> {
+    const result: AxiosResponse = await instance.get(
+      `${USERS.path}/info-board`,
+      {
+        params: {
+          userId: id,
         },
       },
     );

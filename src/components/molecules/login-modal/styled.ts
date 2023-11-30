@@ -79,3 +79,28 @@ export const Loading = styled.div`
   height: 300px;
   margin: 0px 0px 300px 0px;
 `;
+
+/* AferLoginModal ---------------- */
+
+export const AfterModalContainer = styled.div`
+  position: absolute;
+  top: 80px;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 150px;
+  padding: 2px 2px 10px 2px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  text-align: center;
+`;
+
+export const ControlBox = styled.div`
+  cursor: pointer;
+`;
+export const ControlCancel = styled.div`
+  cursor: pointer;
+  text-align: end;
+  margin: 0px 10px 0px 0px;
+`;

@@ -5,21 +5,6 @@ const instance = axios.create({
   timeout: 5000,
 });
 
-//토큰 만료 여부 판단
-const isTokenExpired = async () => {
-  const accessToken = localStorage.getItem('accessToken');
-  try {
-    const result = await instance.get(`/auth/status`, {
-      headers: {
-        access_token: accessToken,
-      },
-    });
-    return result.data.success;
-  } catch (err) {
-    Promise.reject(err);
-  }
-};
-
 //토근 갱신
 const reNewToken = async () => {
   const response = await instance.get(`auth/new-access-token`);
@@ -30,8 +15,10 @@ const reNewToken = async () => {
 instance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
 
     config.headers['access_token'] = accessToken;
+    config.headers['refresh_token'] = refreshToken;
 
     return config;
   },
@@ -48,9 +35,9 @@ instance.interceptors.response.use(
     }
     return response;
   },
-  async (error: any) => {
-    if (error.response.status === 401 || error.response.status === 403) {
-      // reNewToken();
+  async (error) => {
+    if (error.response.status == 401 || error.response.status == 403) {
+      reNewToken();
       const accessToken = localStorage.getItem('accessToken');
 
       error.config.headers = {

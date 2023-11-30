@@ -215,3 +215,11 @@ export const CommentUserImage = styled.div<CommentProfileBg>`
   width: 28px;
   height: 28px;
 `;
+export const HeartBox = styled.div`
+  margin: 5px 0px 0px 0px;
+  cursor: pointer;
+`;
+
+export const ControlBox = styled.div`
+  cursor: pointer;
+`;

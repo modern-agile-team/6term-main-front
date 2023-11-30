@@ -21,11 +21,6 @@ interface UserType {
 const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
   const [modifyReComment, setModifyReComment] = useState('');
   const userInfo = useRecoilValue(MyProfileAtom);
-  // const [userInfo, setUserInfo] = useState<UserType>({
-  //   userId: 0,
-  //   userName: '',
-  //   userImage: '',
-  // });
   const setCreateReComment =
     useSetRecoilState<ReCommentCreateType>(ReCommentLoadAtom);
   const loginState = useRecoilValue(LoginStateAtom);
@@ -39,43 +34,31 @@ const PostCreateReComment = ({ commentId }: PostCreateRCommentProps) => {
 
   const handleCreateReComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await COMMENTS.createReCommentApi(
-      commentId,
-      modifyReComment,
-    );
-    setCreateReComment((prev) => {
-      return {
-        ...prev,
-        id: response.id,
-        commentId: commentId,
-        content: modifyReComment,
-        user: {
-          name: userInfo.name,
-          userImage: {
-            userId: userInfo.userId,
-            imageUrl: userInfo.userImage,
+    if (modifyReComment.length > 1) {
+      const response = await COMMENTS.createReCommentApi(
+        commentId,
+        modifyReComment,
+      );
+      setCreateReComment((prev) => {
+        return {
+          ...prev,
+          id: response.id,
+          commentId: commentId,
+          content: modifyReComment,
+          user: {
+            name: userInfo.name,
+            userImage: {
+              userId: userInfo.userId,
+              imageUrl: userInfo.userImage,
+            },
           },
-        },
-      };
-    });
-    setModifyReComment('');
+        };
+      });
+      setModifyReComment('');
+    } else {
+      alert('너무 짧습니다. 다시 입력해 주시길 바랍니다.');
+    }
   };
-
-  //본인 정보 받아오는 api 호출
-  // const getUserInfo = async () => {
-  //   const response = await USERS.getMyProfile();
-  //   setUserInfo((prev) => {
-  //     return {
-  //       ...prev,
-  //       userId: response.userId,
-  //       userName: response.name,
-  //       userImage: response.userImage,
-  //     };
-  //   });
-  // };
-  // useEffect(() => {
-  //   getUserInfo();
-  // }, []);
   return (
     <div>
       {loginState ? (
