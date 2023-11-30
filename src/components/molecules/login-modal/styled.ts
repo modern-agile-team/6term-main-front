@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 export const ModalWrapper = styled.div`
@@ -98,7 +99,15 @@ export const AfterModalContainer = styled.div`
 
 export const ControlBox = styled.div`
   cursor: pointer;
+  text-decoration: none;
+  color: #000;
 `;
+
+export const ControlLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+`;
+
 export const ControlCancel = styled.div`
   cursor: pointer;
   text-align: end;

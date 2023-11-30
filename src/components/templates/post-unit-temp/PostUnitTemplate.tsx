@@ -113,7 +113,7 @@ const PostUnitTemplate = (props: BoardType) => {
               </S.ControlButtonBox>
               <S.ControlButtonLink
                 href={{
-                  pathname: `/post/modify/[id]`,
+                  pathname: `/post/modify/${props.boardId}`,
                   query: {
                     id: props.boardId,
                     data: JSON.stringify(getUnitInfo),
