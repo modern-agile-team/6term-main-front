@@ -52,3 +52,10 @@ export const AlarmIcon = styled.button`
     color: #749bc2;
   }
 `;
+
+export const MyIconBox = styled.img`
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+`;

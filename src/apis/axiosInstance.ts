@@ -14,9 +14,11 @@ const reNewToken = async () => {
 //요청 전 인터셉터
 instance.interceptors.request.use(
   (config) => {
+    if (localStorage.getItem('accessToken') === undefined) {
+      localStorage.setItem('accessToken', '');
+    }
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
-
     config.headers['access_token'] = accessToken;
     config.headers['refresh_token'] = refreshToken;
 

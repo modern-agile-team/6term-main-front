@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Logo from '../../common/Logo';
-import React from 'react';
-import { AiFillBell } from 'react-icons/ai';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as S from './styled';
 import LoginModal from '../login-modal/LoginModal';
@@ -10,6 +9,7 @@ import { useRecoilValue } from 'recoil';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import AfterLoginModal from '../login-modal/AfterLoginModal';
 import UserIcon from '@/components/common/UserIcon';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 const NavData = [
   { id: 'menu01', name: '전체', path: '/' },
@@ -25,6 +25,7 @@ const HeaderNavigate = (): JSX.Element => {
   const { isOpenModal: afterLoginState, handleModal: afterLoginHandle } =
     useModal();
   const isLogin = useRecoilValue(LoginStateAtom);
+  const getMyProfile = useRecoilValue(MyProfileAtom);
 
   const handlePushRouter = (path: string) => {
     if (path === '/') {
@@ -78,7 +79,7 @@ const HeaderNavigate = (): JSX.Element => {
         {isLogin ? (
           <div>
             <div onClick={afterLoginHandle}>
-              <UserIcon />
+              <S.MyIconBox src={getMyProfile.userImage} alt="본인이미지" />
             </div>
             {afterLoginState && (
               <AfterLoginModal show={afterLoginState} hide={afterLoginHandle} />
