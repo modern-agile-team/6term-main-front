@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { LoginStateAtom } from '@/recoil/atoms/LoginStateAtom';
 import AUTHS from '@/apis/oauth';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
+import Link from 'next/link';
 interface ModalType {
   show: boolean;
   hide: () => void;
@@ -11,6 +13,7 @@ interface ModalType {
 const AfterLoginModal = ({ show, hide }: ModalType) => {
   const [isInitial, setIsInitital] = useState(false);
   const setIsLogin = useSetRecoilState(LoginStateAtom);
+  const getMyProfile = useRecoilValue(MyProfileAtom);
 
   //useEffect를 사용해서 ssr확인
   useEffect(() => {
@@ -37,6 +40,16 @@ const AfterLoginModal = ({ show, hide }: ModalType) => {
       <S.AfterModalContainer>
         <>
           <S.ControlCancel onClick={hide}>X</S.ControlCancel>
+          <S.ControlLink
+            href={{
+              pathname: `/mypage/${getMyProfile.userId}`,
+              query: {
+                id: getMyProfile.userId,
+              },
+            }}
+            onClick={hide}>
+            마이페이지
+          </S.ControlLink>
           <S.ControlBox onClick={logoutHandle}>로그아웃</S.ControlBox>
         </>
       </S.AfterModalContainer>
