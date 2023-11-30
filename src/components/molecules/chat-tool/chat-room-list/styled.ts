@@ -16,7 +16,7 @@ export const ChatListItem = styled.li<{ isSelected: boolean }>`
   padding: 12px;
   width: auto;
   /* border: 2px solid yellow; */
-  background-color: ${({ isSelected }) => isSelected && '#dde'};
+  background-color: ${({ isSelected }) => isSelected && '#e1e1e1'};
   &:hover {
     background-color: #eee;
     cursor: pointer;
