@@ -42,13 +42,6 @@ const HeaderNavigate = (): JSX.Element => {
     }
   };
 
-  useEffect(() => {
-    if (localStorage.getItem('accessToken') !== '') {
-    } else {
-      localStorage.setItem('accessToken', '');
-    }
-  }, []);
-
   return (
     <S.HeaderContainer>
       <S.LogoSpace>
