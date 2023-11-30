@@ -165,3 +165,7 @@ export const ThumbnailImg = styled.div<ThumbnailBg>`
   background-repeat: no-repeat;
   background-size: cover;
 `;
+
+export const routeProfile = styled.div`
+  cursor: pointer;
+`;

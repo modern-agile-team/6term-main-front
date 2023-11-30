@@ -28,7 +28,7 @@ const UserSmaple = (props: User) => {
         <S.ThumbnailImg img={`${props.img}`} />
       )}
       <div>이름 : {props.name}</div>
-      <div onClick={handleProfile}>프로필 이동</div>
+      <S.routeProfile onClick={handleProfile}>프로필 이동</S.routeProfile>
       <AddFriend name={props.name} userId={props.id} />
     </div>
   );

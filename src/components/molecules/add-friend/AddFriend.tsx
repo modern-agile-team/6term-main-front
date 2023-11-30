@@ -68,7 +68,6 @@ const AddFriend = (props: User) => {
       }
     }
   };
-  console.log(isFriendAdded);
   return (
     <S.AddFriendButton onClick={handleAddFriend}>친구 추가</S.AddFriendButton>
   );
