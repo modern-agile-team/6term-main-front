@@ -1,26 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styled';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { chatRoomAtom } from '@/recoil/atoms/ChatRoomAtom';
+import { useRouter } from 'next/router';
+import useNavigator from '@/hooks/useNavigator';
+import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 const ChatRoomList = () => {
-  const [listSelected, setListSelected] = useState(false);
-  const handleListSelected = () => {
-    setListSelected(true);
+  const navigateList = useNavigator();
+  const [chatRooms, setChatRooms] = useRecoilState(chatRoomAtom);
+  const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
+  const handleListSelected = (roomId: string) => {
+    const queryParams = {
+      roomId: roomId,
+    };
+    navigateList(`/chat/${roomId}`, queryParams);
+    setSelectedRoomId(roomId);
   };
+
   useEffect(() => {
-    setListSelected(false);
-  }, [listSelected]);
+    setSelectedRoomId(null);
+  }, [chatRooms]);
+
+  const prevText = (text: string, maxLength: number) => {
+    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+  };
+
   return (
     <S.ChatListWrapper>
-      <S.ChatListItem onClick={handleListSelected} isSelected={listSelected}>
-        <S.ChatListImage src="https://previews.123rf.com/images/blankstock/blankstock2212/blankstock221202347/195565495-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%94%84%EB%A1%9C%ED%95%84-%EC%95%84%EC%9D%B4%EC%BD%98-%EB%B2%A1%ED%84%B0%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%95%84%EB%B0%94%ED%83%80-%EB%98%90%EB%8A%94-%EC%82%AC%EB%9E%8C-%EC%95%84%EC%9D%B4%EC%BD%98-%ED%94%84%EB%A1%9C%ED%95%84-%EC%82%AC%EC%A7%84-%EC%84%B8%EB%A1%9C-%EA%B8%B0%ED%98%B8-%EC%A4%91%EB%A6%BD-%EC%84%B1%EB%B3%84-%EC%8B%A4%EB%A3%A8%EC%97%A3-%EC%95%84%EB%B0%94%ED%83%80-%EC%82%AC%EC%A7%84%EC%9D%B4-%EC%9E%88%EB%8A%94-%EC%9B%90-%EB%B2%84%ED%8A%BC-%EB%B9%88-%ED%94%84%EB%A1%9C%ED%95%84.jpg" />
-        <S.ChatListRight>
-          <S.ChatListName>원동건</S.ChatListName>
-          <S.ChatListbottom>
-            <span>안녕</span>
-            <span>14:20</span>
-          </S.ChatListbottom>
-        </S.ChatListRight>
-      </S.ChatListItem>
+      {chatRooms.map((chatRoom) => (
+        <S.ChatListItem
+          key={chatRoom.roomId}
+          onClick={() => handleListSelected(chatRoom.roomId)}
+          isSelected={selectedRoomId === chatRoom.roomId}>
+          <S.ChatListImage src={chatRoom.guestImage} />
+          <S.ChatListRight>
+            <S.ChatListName>{chatRoom.guestName}</S.ChatListName>
+            <S.ChatListbottom>
+              <span>{prevText(chatRoom.prevText, 20)}</span>
+              <span>{chatRoom.createdAt}</span>
+            </S.ChatListbottom>
+          </S.ChatListRight>
+        </S.ChatListItem>
+      ))}
     </S.ChatListWrapper>
   );
 };

@@ -6,10 +6,6 @@ import { MyProfileAtom } from '@/recoil/atoms/MyProfileAtom';
 
 const ChatRoomTitle = () => {
   const myProFile = useRecoilValue(MyProfileAtom);
-
-  useEffect(() => {
-    console.log(myProFile);
-  });
   return (
     <S.ChatRoomTitleBox>
       <S.ChatRoomTitleSpan>

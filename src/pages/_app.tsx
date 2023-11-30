@@ -2,7 +2,7 @@ import Footer from '@/components/organisms/common/Footer';
 import Header from '@/components/organisms/common/Header';
 import type { AppProps } from 'next/app';
 import { RecoilRoot, useRecoilValue } from 'recoil';
-import React from 'react';
+import React, { useState } from 'react';
 import FloatingBar from '@/components/organisms/common/floatingbar/FloatingBar';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
@@ -28,9 +28,6 @@ const ChatIconWithNoSSR = dynamic<{}>(
 );
 
 export default function App({ Component, pageProps }: AppProps) {
-  // useEffect(() => {
-  //   localStorage.setItem('accessToken', '');
-  // }, []);
   return (
     <RecoilRoot>
       <React.Suspense fallback={<div>Loading...</div>}>
@@ -45,7 +42,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
         <FloatingBarWithNoSSR />
         <ChatIconWithNoSSR />
-        {/* <ChatIcon /> */}
         <Footer />
       </React.Suspense>
     </RecoilRoot>
