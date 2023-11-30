@@ -3,6 +3,7 @@ import Header from '@/components/organisms/common/Header';
 import type { AppProps } from 'next/app';
 import { RecoilRoot, useRecoilValue } from 'recoil';
 import React from 'react';
+import dynamic from 'next/dynamic';
 
 const ComponentsWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할때 interface를 정의해줍니다.
   () => import('@/components/organisms/common/Header'),
