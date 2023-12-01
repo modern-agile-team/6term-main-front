@@ -1,3 +1,105 @@
+# Crab
+
+### Crab이란?
+
+![Logo.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/088d1bcc-631e-4ec9-8735-48afeb1b1c46/Logo.png)
+
+> ***“모두가 자유롭게 이용할 수 있는 커뮤니티”
+”커뮤니티 내에서의 1대1 실시간 채팅”***
+> 
+
+---
+
+Crab은 주 타겟층인 20대 대학생들을 위한 자유로운 커뮤니티로, 1대1 실시간 채팅을 바탕으로 
+신나”게” 사용자들과 소통할 수 있는 사이트입니다 😀
+
+## Preview
+
+### 로그인
+
+![Login](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/5828be06-d5f0-42a1-9554-cd0d726258f7/LoginModal.png)
+
+Login
+
+📣저희 Crab에서는 자체적인 로그인 없이, 간편한 소셜로그인을 제공해드리고 있습니다 📣
+이제 회원분들과 함께 “신나게” 커뮤니티를 즐겨봐요🎵
+
+### 메인페이지
+
+![rootPage](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/a732a2f4-7709-48ae-8ca9-27f59c06132c/RootPage.png)
+
+rootPage
+
+전체 게시판은 모든 게시판의 게시물이 게재되는 곳으로, 이곳에서 한눈에 모든 게시물을 열람할 수 있습니다 😄
+여러 카테고리의 게시물들을 함께 살펴보세요!!
+
+- 카드 디자인
+- 무한 스크롤 방식
+
+### 검색
+
+![Search](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/a839719a-bcea-49ae-b9cc-715467fe1feb/Search.png)
+
+Search
+
+모든 게시물들을 하나하나 찾는 사용자분들의 고초를 덜어드리는 검색기능 🔎
+제목과 본문, 유저들을 검색하며 원하는 내용을 찾아보세요😊
+
+### 게시글
+
+![Board](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/55e72d65-246b-44f3-83a9-bdf76795dccc/Board.png)
+
+Board
+
+원하는 이미지와 텍스트로 자기만의 게시글을 꾸며볼까요 💟
+마음에 드는 게시물에는 좋아요도 빼놓을 수 없겠죠? ❤️
+
+### 댓글 & 대댓글
+
+![comment & reComment](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/2b4ab6c4-a127-4680-a853-183793de2f55/Comment__reComment.png)
+
+comment & reComment
+
+게시글에서 회원분의 의견을 담고싶다면 댓글과 대댓글을 남겨주세요!!
+다른 회원분들과의 또다른 소통창구가 될 수 있습니다 😆
+
+### 채팅
+
+![chattingPage(미완성 → 주말 안으로 완성)](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/a8e2f0bc-e376-46d2-81c8-0aaa9d213150/Untitled.png)
+
+chattingPage(미완성 → 주말 안으로 완성)
+
+메인 페이지 우측 하단의 말풍선 아이콘을 클릭했을때의 채팅페이지입니다 💬
+
+이곳에서 사이트의 회원분들과 자유로운 1대1 채팅 서비스를 이용할 수 있어요!!
+
+### 마이페이지
+
+![mypage](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/0753c078-88e9-4bc5-9184-e479ae295ff0/Mypage.png)
+
+mypage
+
+회원분들의 mypage입니다 🪪
+이곳에서 회원의 간단한 정보와 작성한 게시글들을 열람해보세요 🧐
+
+### 한눈에 보기
+
+![페이지 한눈에 보기](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/c230a5ff-a720-4fe7-bd55-123e59a849b1/%ED%95%9C%EB%88%88%EC%97%90_%EB%B3%B4%EA%B8%B0.png)
+
+페이지 한눈에 보기
+
+$\large\color{#d6d6d6}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$
+
+# Development Team
+
+## Technology Stack
+
+## Convention
+
+modern Agile 6기
+
+---
+
 # Funny CRAB
 
 ## 프로젝트 소개
