@@ -107,7 +107,7 @@ $\large\color{#d6d6d6}━━━━━━━━━━━━━━━━━━━�
 ## Technology Stack
 <p align="center">
   <img class="img" src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=black" height="35"/>
-  <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=Next.js&logoColor=black" height="35"/>
+  <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=black" height="35"/>
   <img src="https://img.shields.io/badge/NestJS-E0234E?style=flat&logo=NestJS&logoColor=white" height="35"/>
 </p>
 <a name='convention'></a>
