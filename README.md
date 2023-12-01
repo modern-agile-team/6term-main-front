@@ -109,8 +109,8 @@ $\large\color{#d6d6d6}━━━━━━━━━━━━━━━━━━━�
   <img class="img" src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white" height="30"/>
   <img src="https://img.shields.io/badge/next.js-000000?style=flat&logo=next.js&logoColor=white" height="30"/>
   <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat&logo=Recoil&logoColor=white" height="30"/>
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" height="30"/>
-  <img src="https://img.shields.io/badge/styled-components-DB7093?style=flat&logo=styled-components&logoColor=white" height="30"/>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" height="30"/><br/>
+  <img src="https://img.shields.io/badge/styled-components?style=flat&logo=styled-components&logoColor=white" height="30"/>
   <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=Axios&logoColor=white" height="30"/>
   <img src="https://img.shields.io/badge/socket.io-010101?style=flat&logo=socket.io&logoColor=white" height="30"/>
   <img src="https://img.shields.io/badge/CSS-1572B6?style=flat&logo=CSS&logoColor=white" height="30"/>
