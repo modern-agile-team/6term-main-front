@@ -4,9 +4,9 @@
 
 <img width="317" alt="Logo" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/5852b718-7704-4265-aab7-7301c40b42fa">
 
-> ***“모두가 자유롭게 이용할 수 있는 커뮤니티”
+> ***“모두가 자유롭게 이용할 수 있는 커뮤니티” <br/>
 ”커뮤니티 내에서의 1대1 실시간 채팅”***
-> 
+
 
 ---
 
