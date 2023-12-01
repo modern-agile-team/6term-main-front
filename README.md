@@ -17,8 +17,7 @@ Crab은 주 타겟층인 20대 대학생들을 위한 자유로운 커뮤니티�
 
 ### 로그인
 
-![Login](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/5828be06-d5f0-42a1-9554-cd0d726258f7/LoginModal.png)
-
+<img width="252" alt="LoginModal" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/3276aa97-0c25-4144-b83d-340e7c418dab">
 Login
 
 📣저희 Crab에서는 자체적인 로그인 없이, 간편한 소셜로그인을 제공해드리고 있습니다 📣
@@ -26,7 +25,7 @@ Login
 
 ### 메인페이지
 
-![rootPage](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/a732a2f4-7709-48ae-8ca9-27f59c06132c/RootPage.png)
+<img width="905" alt="RootPage" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/732104af-f4d3-4fb4-9d55-9f56cd4b0fae">
 
 rootPage
 
@@ -38,7 +37,7 @@ rootPage
 
 ### 검색
 
-![Search](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/a839719a-bcea-49ae-b9cc-715467fe1feb/Search.png)
+<img width="986" alt="Search" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/712745f4-febb-47c7-8a49-a763243f0663">
 
 Search
 
@@ -47,7 +46,7 @@ Search
 
 ### 게시글
 
-![Board](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/55e72d65-246b-44f3-83a9-bdf76795dccc/Board.png)
+<img width="692" alt="Board" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/daa1b78c-c5af-4abd-9166-2d84a0cd43b9">
 
 Board
 
@@ -56,7 +55,7 @@ Board
 
 ### 댓글 & 대댓글
 
-![comment & reComment](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/2b4ab6c4-a127-4680-a853-183793de2f55/Comment__reComment.png)
+<img width="668" alt="Comment   reComment" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/0bbe9c1d-2db3-4205-905f-6396a66e5752">
 
 comment & reComment
 
@@ -65,7 +64,7 @@ comment & reComment
 
 ### 채팅
 
-![chattingPage(미완성 → 주말 안으로 완성)](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/a8e2f0bc-e376-46d2-81c8-0aaa9d213150/Untitled.png)
+<img width="995" alt="채팅" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/2f2c9094-2cac-46ca-8a59-c2ec08596c0e">
 
 chattingPage(미완성 → 주말 안으로 완성)
 
@@ -75,7 +74,7 @@ chattingPage(미완성 → 주말 안으로 완성)
 
 ### 마이페이지
 
-![mypage](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/0753c078-88e9-4bc5-9184-e479ae295ff0/Mypage.png)
+<img width="932" alt="Mypage" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/7b4a7db9-a094-40e3-8460-478a0d1d7f72">
 
 mypage
 
@@ -84,7 +83,7 @@ mypage
 
 ### 한눈에 보기
 
-![페이지 한눈에 보기](https://prod-files-secure.s3.us-west-2.amazonaws.com/0b241d7f-6520-4240-ac94-27957e3f3aa5/c230a5ff-a720-4fe7-bd55-123e59a849b1/%ED%95%9C%EB%88%88%EC%97%90_%EB%B3%B4%EA%B8%B0.png)
+<img width="731" alt="한눈에 보기" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/2dc212e3-0816-4948-9842-c9df44fb9bec">
 
 페이지 한눈에 보기
 
