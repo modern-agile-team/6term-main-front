@@ -92,7 +92,11 @@ $\large\color{#d6d6d6}━━━━━━━━━━━━━━━━━━━�
 # Development Team
 
 ## Technology Stack
-<img src="https://img.shields.io/badge/react-#61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white" />
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white" />
+</p>
 ## Convention
 
 modern Agile 6기
