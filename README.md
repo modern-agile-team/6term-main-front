@@ -1,18 +1,18 @@
 # 목차
 * [Crab](#crab)
- * [Crab이란](#crab이란)
- * [Preview](#preview)
-  * [로그인](#로그인)
-  * [메인페이지](#메인페이지)
-  * [검색](#검색)
-  * [게시글](#게시글)
-  * [댓글&대댓글](#댓글-대댓글)
-  * [채팅](#채팅)
-  * [마이페이지](#마이페이지)
-  * [한눈에 보기](#한눈에보기)
+  * [Crab이란](#crab이란)
+  * [Preview](#preview)
+    * [로그인](#로그인)
+    * [메인페이지](#메인페이지)
+    * [검색](#검색)
+    * [게시글](#게시글)
+    * [댓글&대댓글](#댓글-대댓글)
+    * [채팅](#채팅)
+    * [마이페이지](#마이페이지)
+    * [한눈에 보기](#한눈에보기)
 * [Development Team](#development-team)
- * [Technology Stack](#tech-stack)
- * [Convention](#convention)<br>
+  * [Technology Stack](#tech-stack)
+  * [Convention](#convention)<br>
  <a name='crab'></a>
 # Crab
 <a name='crab이란'></a>
@@ -117,7 +117,7 @@ $\large\color{#d6d6d6}━━━━━━━━━━━━━━━━━━━�
   <img src="https://img.shields.io/badge/socket.io-010101?style=flat&logo=socket.io&logoColor=white" height="30"/><br/>
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" height="30"/>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=CSS&logoColor=white" height="30"/>
-  <img src="https://img.shields.io/badge/vercel-000000?style=flat&logo=vercel&logoColor=white" height="30"/><br/>
+  <img src="https://img.shields.io/badge/vercel-000000?style=flat&logo=vercel&logoColor=white" height="30"/>
   <img src="https://img.shields.io/badge/git-F05032?style=flat&logo=git&logoColor=white" height="30"/>
   <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white" height="30"/>
   
