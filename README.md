@@ -9,24 +9,27 @@
 
 ---
 
-Crab은 주 타겟층인 20대 대학생들을 위한 자유로운 커뮤니티로, <br />1대1 실시간 채팅을 바탕으로 
-신나”게” 사용자들과 소통할 수 있는 사이트입니다 😀
+Crab은 주 타겟층인 20대 대학생들을 위한 자유로운 커뮤니티로, <br />
+
+1대1 실시간 채팅을 바탕으로 신나”게” 사용자들과 소통할 수 있는 사이트입니다 😀
 
 ## Preview
 
 ### 로그인
 
-<img width="252" alt="LoginModal" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/3276aa97-0c25-4144-b83d-340e7c418dab">
+<img width="252" alt="LoginModal" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/3276aa97-0c25-4144-b83d-340e7c418dab"><br />
 
 📣저희 Crab에서는 자체적인 로그인 없이, 간편한 소셜로그인을 제공해드리고 있습니다 📣<br />
+
 이제 회원분들과 함께 “신나게” 커뮤니티를 즐겨봐요🎵
 
 ### 메인페이지
 
-<img width="905" alt="RootPage" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/732104af-f4d3-4fb4-9d55-9f56cd4b0fae">
+<img width="905" alt="RootPage" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/732104af-f4d3-4fb4-9d55-9f56cd4b0fae"><br />
 
 
 전체 게시판은 모든 게시판의 게시물이 게재되는 곳으로, 이곳에서 한눈에 모든 게시물을 열람할 수 있습니다 😄<br />
+
 여러 카테고리의 게시물들을 함께 살펴보세요!!
 
 - 카드 디자인
@@ -34,31 +37,34 @@ Crab은 주 타겟층인 20대 대학생들을 위한 자유로운 커뮤니티�
 
 ### 검색
 
-<img width="986" alt="Search" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/712745f4-febb-47c7-8a49-a763243f0663">
+<img width="986" alt="Search" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/712745f4-febb-47c7-8a49-a763243f0663"><br />
 
 
 모든 게시물들을 하나하나 찾는 사용자분들의 고초를 덜어드리는 검색기능 🔎<br />
+
 제목과 본문, 유저들을 검색하며 원하는 내용을 찾아보세요😊
 
 ### 게시글
 
-<img width="692" alt="Board" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/daa1b78c-c5af-4abd-9166-2d84a0cd43b9">
+<img width="692" alt="Board" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/daa1b78c-c5af-4abd-9166-2d84a0cd43b9"><br />
 
 
 원하는 이미지와 텍스트로 자기만의 게시글을 꾸며볼까요 💟<br />
+
 마음에 드는 게시물에는 좋아요도 빼놓을 수 없겠죠? ❤️
 
 ### 댓글 & 대댓글
 
-<img width="668" alt="Comment   reComment" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/0bbe9c1d-2db3-4205-905f-6396a66e5752">
+<img width="668" alt="Comment   reComment" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/0bbe9c1d-2db3-4205-905f-6396a66e5752"><br />
 
 
 게시글에서 회원분의 의견을 담고싶다면 댓글과 대댓글을 남겨주세요!!<br />
+
 다른 회원분들과의 또다른 소통창구가 될 수 있습니다 😆
 
 ### 채팅
 
-<img width="995" alt="채팅" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/2f2c9094-2cac-46ca-8a59-c2ec08596c0e">
+<img width="995" alt="채팅" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/2f2c9094-2cac-46ca-8a59-c2ec08596c0e"><br />
 
 chattingPage(미완성 → 주말 안으로 완성)
 
@@ -68,15 +74,16 @@ chattingPage(미완성 → 주말 안으로 완성)
 
 ### 마이페이지
 
-<img width="932" alt="Mypage" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/7b4a7db9-a094-40e3-8460-478a0d1d7f72">
+<img width="932" alt="Mypage" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/7b4a7db9-a094-40e3-8460-478a0d1d7f72"><br />
 
 
 회원분들의 mypage입니다 🪪<br />
+
 이곳에서 회원의 간단한 정보와 작성한 게시글들을 열람해보세요 🧐
 
 ### 한눈에 보기
 
-<img width="731" alt="한눈에 보기" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/2dc212e3-0816-4948-9842-c9df44fb9bec">
+<img width="731" alt="한눈에 보기" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/2dc212e3-0816-4948-9842-c9df44fb9bec"><br />
 
 
 $\large\color{#d6d6d6}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$
