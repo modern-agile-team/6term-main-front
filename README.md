@@ -92,7 +92,7 @@ $\large\color{#d6d6d6}━━━━━━━━━━━━━━━━━━━�
 # Development Team
 
 ## Technology Stack
-<img src="https://img.shields.io/badge/React-#61DAFB?style=for-the-badge&logo=React&logoColor=white">
+<img src="https://img.shields.io/badge/React-#61DAFB?style=for-the-badge&logo=React&logoColor=black">
 ## Convention
 
 modern Agile 6기
