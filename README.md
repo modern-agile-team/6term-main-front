@@ -100,8 +100,8 @@ chattingPage(미완성 → 주말 안으로 완성)
 
 <img width="731" alt="한눈에 보기" src="https://github.com/modern-agile-team/6term-main-front/assets/117448747/2dc212e3-0816-4948-9842-c9df44fb9bec"><br />
 
-
-:::
+---
+---
 <a name='development-team'></a>
 # Development Team
 <a name='tech-stack'></a>
