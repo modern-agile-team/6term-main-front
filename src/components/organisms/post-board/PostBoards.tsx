@@ -3,6 +3,7 @@ import UnitBox from '@/components/molecules/post-board/UnitBox';
 import BOARDS from '@/apis/boards';
 import * as S from './styled';
 import { Board } from '@/components/templates/post-temp/PostTemplates';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 const PostBoards = (props: Board): JSX.Element => {
   const [getList, setGetList] = useState<any>([]);
@@ -91,7 +92,7 @@ const PostBoards = (props: Board): JSX.Element => {
         </>
       )}
       <div>
-        {load && <div>Loading...</div>}
+        {load && <SkeletonUI />}
         <div ref={obsRef}></div>
       </div>
     </S.HeaderContainer>
