@@ -138,7 +138,7 @@ modern Agile 6기
 
 ## 개발기간
 
-- 23.08.21 ~ 24.03.01
+- 23.08.21 ~ 23.11.30
 
 ### 멤버구성
 
@@ -209,8 +209,7 @@ modern Agile 6기
       │   │        └─ [componentName].tsx
       │   ├─ molecules : 하나의 기능
       │   ├─ organisms : 여러기능 집합
-      │   ├─ templates : 집합이 모여 하나의 페이지구성
-      │   └─ veiws : 페이지에 실제 들어갈 데이터보여줌
+      │   └─ templates : 집합이 모여 하나의 페이지구성
       ├─ hooks
       │  ├─ index.ts
       │  └─ [hookName]
@@ -232,30 +231,29 @@ modern Agile 6기
   ```
 - dependencies
   ```json
+    "@emotion/is-prop-valid": "^1.2.1",
     "@loadable/component": "^5.15.3",
+    "@mui/material": "^5.14.15",
+    "@types/autosize": "^4.0.2",
     "@types/loadable__component": "^5.13.5",
     "@types/node": "20.5.4",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "axios": "^1.5.0",
-    "bootstrap": "^5.3.1",
-    "dompurify": "^3.0.6",
+    "axios": "^1.6.2",
     "dotenv": "^16.3.1",
-    "file-loader": "^6.2.0",
     "loadable": "^1.0.0",
     "next": "13.4.19",
-    "next-navigation": "^1.0.6",
+    "prettier": "^3.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "react-loadable": "^5.5.0",
     "react-quill": "^2.0.0",
-    "react-router-dom": "^6.16.0",
     "react-toastify": "^9.1.3",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
     "socket.io-client": "^4.7.2",
-    "styled-components": "^6.0.7",
+    "styled-components": "^6.1.0",
     "typescript": "5.1.6"
   ```
 - 폴더 :
