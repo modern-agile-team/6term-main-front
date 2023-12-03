@@ -139,16 +139,17 @@ modern Agile 6기
 ## 개발기간
 
 - 23.08.21 ~ 23.11.30
+(개발사이트)[http://13.125.225.229:3000/]
 
 ### 멤버구성
 
 - 백엔드
-  - 이승우
-  - 정비호
-  - 박준혁
+  - [이승우](https://github.com/2swo)
+  - [정비호](https://github.com/hobiJeong)
+  - [박준혁](https://github.com/NicoDora)
 - 프론트엔드
-  - 이재진
-  - 원동건
+  - [이재진](https://github.com/zzzRYT)
+  - [원동건](https://github.com/CBWDG)
 
 ---
 
