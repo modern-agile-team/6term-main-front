@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import { RecoilRoot, useRecoilValue } from 'recoil';
 import React from 'react';
 import dynamic from 'next/dynamic';
+import SkeletonUI from '@/components/common/SkeletonUI';
 
 const ComponentsWithNoSSR = dynamic<{}>( // typescript에서 props를 전달할때 interface를 정의해줍니다.
   () => import('@/components/organisms/common/Header'),
@@ -19,7 +20,7 @@ const ChatIconWithNoSSR = dynamic<{}>(
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<SkeletonUI />}>
         <ComponentsWithNoSSR />
         <div
           style={{
